@@ -10,7 +10,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npx webpack --mode production"
+      "pre-push": "npx webpack --mode production"
     }
   },
   "keywords": [],

@@ -3,7 +3,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
-  mode: "production",
+  mode: "development",
   module: {
     rules: [
       {
@@ -24,7 +24,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, "/docs"),
+    contentBase: path.join(__dirname, "docs/"),
     //Change the port here if you need to
     port: 3000,
     publicPath: "http://localhost:3000/dist/",
