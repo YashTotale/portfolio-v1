@@ -7,6 +7,7 @@ import { NavBar } from "./Components/NavBar";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Projects } from "./Pages/Projects";
 import { Experience } from "./Pages/Experience";
+import { Home } from "./Pages/Home";
 
 const App: React.FC = (props) => {
   return (
@@ -18,6 +19,9 @@ const App: React.FC = (props) => {
         </Route>
         <Route path="/experience">
           <Experience />
+        </Route>
+        <Route path="/">
+          <Home />
         </Route>
       </Switch>
     </Router>
