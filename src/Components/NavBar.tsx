@@ -1,10 +1,10 @@
 //React Imports
-import React, { useState } from "react";
+import React from "react";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { AppBar, Toolbar, Tabs, Tab, TabProps } from "@material-ui/core";
+import { Link, useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -12,22 +12,33 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+const createTab = (tab: string): TabProps => {
+  const upperCase = tab.toUpperCase();
+  return (
+    <Tab
+      key={tab}
+      value={tab}
+      component={Link}
+      to={`/${tab}`}
+      label={upperCase}
+    ></Tab>
+  );
+};
+
 export const NavBar: React.FC = () => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
+  const location = useLocation();
+  const path = location.pathname.split("/")[1];
 
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-    setValue(newValue);
-  };
+  const tabs = ["home", "projects", "experience"];
+
+  const value = tabs.includes(path) ? path : "home";
 
   return (
     <div className={classes.root}>
       <AppBar elevation={2} color="transparent" position="static">
         <Toolbar>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab component={Link} to="/projects" label="Projects"></Tab>
-            <Tab component={Link} to="/experience" label="Experience"></Tab>
-          </Tabs>
+          <Tabs value={value}>{tabs.map(createTab)}</Tabs>
         </Toolbar>
       </AppBar>
     </div>
