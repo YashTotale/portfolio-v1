@@ -6,8 +6,10 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
-export const Experience: React.FC = () => {
+const ExperiencePage: React.FC = () => {
   const classes = useStyles();
 
   return <div>Experience</div>;
 };
+
+export default ExperiencePage;

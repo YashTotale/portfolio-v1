@@ -24,6 +24,15 @@ const getProjects = () => {
   });
 };
 
+const modifyProject = (project) => {
+  const { description, tags } = project;
+  const newProject = { ...project };
+  newProject.description = description ? description.split("; ") : [];
+  newProject.tags = tags ? tags.split(", ") : [];
+  console.log(newProject);
+  return newProject;
+};
+
 const getExperience = () => {
   return new Promise((resolve, reject) => {
     const options = { ...baseOptions, sheetNumber: 2 };
@@ -32,7 +41,7 @@ const getExperience = () => {
 };
 
 getProjects().then((projects) => {
-  write("Projects", projects);
+  write("Projects", projects.map(modifyProject));
 });
 
 getExperience().then((experience) => {

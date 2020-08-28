@@ -5,9 +5,9 @@ import { NavBar } from "./Components/NavBar";
 
 //Router Imports
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import { Projects } from "./Pages/Projects";
-import { Experience } from "./Pages/Experience";
-import { Home } from "./Pages/Home";
+import Projects from "./Pages/Projects";
+import Experience from "./Pages/Experience";
+import Home from "./Pages/Home";
 
 const App: React.FC = (props) => {
   return (

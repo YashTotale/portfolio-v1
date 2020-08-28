@@ -6,8 +6,10 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
-export const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   const classes = useStyles();
 
   return <div>Home</div>;
 };
+
+export default HomePage;

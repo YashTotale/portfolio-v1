@@ -2,18 +2,21 @@
   {
     "id": "1",
     "name": "Terminal All In One",
-    "description": "A Visual Studio Code extension that builds on top of the default integrated terminal with themes, scripts, commands, and keybindings",
+    "description": [
+      "A Visual Studio Code extension that builds on top of the default integrated terminal with themes, scripts, commands, and keybindings",
+      "Created using TypeScript and the VS Code API"
+    ],
     "icon": "https://i.postimg.cc/cH0mL4Q9/terminal-icon.png",
     "sourcecode": "https://github.com/YashTotale/terminal-all-in-one",
-    "tags": "TypeScript, Git, Webpack, Travis, JavaScript"
+    "tags": ["TypeScript", "Git", "Webpack", "Travis", "JavaScript"]
   },
   {
     "id": "2",
     "name": "Time Type",
-    "description": "A website that allows users to test their typing speeds",
-    "tags": "React, Redux, JavaScript"
+    "description": ["A website that allows users to test their typing speeds"],
+    "tags": ["React", "Redux", "JavaScript"]
   },
-  { "id": "3", "name": "To Do List Webapp" },
-  { "id": "4", "name": "Dump" },
-  { "id": "5", "name": "History Game Creator" }
+  { "id": "3", "name": "To Do List Webapp", "description": [], "tags": [] },
+  { "id": "4", "name": "Dump", "description": [], "tags": [] },
+  { "id": "5", "name": "History Game Creator", "description": [], "tags": [] }
 ]
