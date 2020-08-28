@@ -28,7 +28,7 @@ const createTab = (tab: string): TabProps => {
   );
 };
 
-export const NavBar: React.FC = () => {
+export const NavBar: React.FC = (props) => {
   const classes = useStyles();
   const location = useLocation();
   const path = location.pathname.split("/")[1];
