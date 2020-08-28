@@ -21,10 +21,8 @@ const persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* Persists the store */}
     <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
       <ThemeProvider theme={theme}>
-        {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <App />
       </ThemeProvider>

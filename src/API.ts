@@ -1,3 +1,4 @@
+//@ts-expect-error
 import reader from "g-sheets-api";
 
 const baseOptions = {

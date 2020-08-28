@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App = () => {
+const App: React.FC = (props) => {
   getAllData().then((results) => console.log(results));
   const classes = useStyles();
   return (
