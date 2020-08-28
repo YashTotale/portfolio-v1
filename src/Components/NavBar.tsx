@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
+  toolBar: {
+    justifyContent: "center",
+  },
 }));
 
 const createTab = (tab: string): TabProps => {
@@ -37,7 +40,7 @@ export const NavBar: React.FC = () => {
   return (
     <div className={classes.root}>
       <AppBar elevation={2} color="transparent" position="static">
-        <Toolbar>
+        <Toolbar className={classes.toolBar}>
           <Tabs value={value}>{tabs.map(createTab)}</Tabs>
         </Toolbar>
       </AppBar>
