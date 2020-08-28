@@ -4,7 +4,7 @@ import { hot } from "react-hot-loader";
 import { NavBar } from "./Components/NavBar";
 
 //Router Imports
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { Projects } from "./Pages/Projects";
 import { Experience } from "./Pages/Experience";
 import { Home } from "./Pages/Home";
