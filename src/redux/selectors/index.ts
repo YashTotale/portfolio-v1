@@ -1,9 +1,3 @@
-//Redux Selectors
-
-/* 
-
-Example:
-
-export const getTyperReducer = (state) => state.typerReducer;
-
-*/
+export interface State {
+  theme: string;
+}

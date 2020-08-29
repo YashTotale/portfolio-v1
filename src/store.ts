@@ -12,8 +12,13 @@ import thunk from "redux-thunk";
 //Redux Devtools Imports
 import { composeWithDevTools } from "redux-devtools-extension";
 
+//Reducers
+import { theme } from "./redux/reducers";
+
 //The reducers that are imported from the reducers folder will be added to this object
-const reducers = {};
+const reducers = {
+  theme,
+};
 
 //The configuration for the persisted reducer
 const persistConfig = {

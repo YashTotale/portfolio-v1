@@ -1,3 +1,5 @@
+export { theme } from "./theme.reducers";
+
 //Redux Reducers
 
 /* 
