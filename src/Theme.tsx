@@ -2,8 +2,6 @@
 import React from "react";
 
 //Material UI Imports
-import { red } from "@material-ui/core/colors";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 //Redux Imports
