@@ -6,7 +6,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 //Redux Imports
 import { useSelector } from "react-redux";
-import { getIsDarkMode } from "./redux/selectors";
+import { getIsDarkMode } from "./Redux/selectors";
 
 const Theme: React.FC = ({ children }) => {
   const isDarkMode = useSelector(getIsDarkMode);

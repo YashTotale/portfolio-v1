@@ -1,11 +1,12 @@
 //React Imports
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { SOURCE_CODE } from "../Utils/constants";
 
 //Redux Imports
-import { getIsDarkMode } from "../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleDarkMode } from "../redux/actions";
+import { getIsDarkMode } from "../Redux/selectors";
+import { toggleDarkMode } from "../Redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -48,7 +49,7 @@ export const NavBar: React.FC = (props) => {
     {
       title: "GitHub Repository",
       icon: <GitHub />,
-      href: "http://github.com/YashTotale/YashTotale.github.io",
+      href: SOURCE_CODE,
     },
   ];
 
@@ -84,14 +85,19 @@ const createTab = (tab: string): TabProps => {
   );
 };
 
-interface INavButton {
+interface NavButtonProps {
   title: string;
   icon: IconButtonProps;
   onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
   href?: string;
 }
 
-const NavButton: React.FC<INavButton> = ({ title, icon, onClick, href }) => {
+const NavButton: React.FC<NavButtonProps> = ({
+  title,
+  icon,
+  onClick,
+  href,
+}) => {
   return (
     <Tooltip key={title} title={title}>
       {href ? (
