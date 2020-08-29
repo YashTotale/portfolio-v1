@@ -4,7 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 
 //Redux Imports
 import { getIsDarkMode } from "../redux/selectors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleDarkMode } from "../redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -17,8 +18,8 @@ import {
   TabProps,
   Button,
   IconButton,
+  Tooltip,
 } from "@material-ui/core";
-
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
@@ -49,6 +50,7 @@ const createTab = (tab: string): TabProps => {
 
 export const NavBar: React.FC = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const location = useLocation();
   const isDarkMode = useSelector(getIsDarkMode);
   const path = location.pathname.split("/")[1];
@@ -64,9 +66,14 @@ export const NavBar: React.FC = (props) => {
           <Tabs className={classes.tabs} value={currentTab}>
             {tabs.map(createTab)}
           </Tabs>
-          <IconButton onClick={(e) => console.log(e)}>
-            {isDarkMode ? <Brightness4 /> : <Brightness7 />}
-          </IconButton>
+          <Tooltip title={`${isDarkMode ? "Light" : "Dark"} Theme`}>
+            <IconButton
+              title="Toggle Theme"
+              onClick={(e) => dispatch(toggleDarkMode())}
+            >
+              {isDarkMode ? <Brightness7 /> : <Brightness4 />}
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
     </div>
