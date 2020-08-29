@@ -1,4 +1,4 @@
-export { theme } from "./theme.reducers";
+export { isDarkMode } from "./theme.reducers";
 
 //Redux Reducers
 

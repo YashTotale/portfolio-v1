@@ -34,9 +34,9 @@ const ProjectsPage: React.FC = () => {
 
   return (
     <div className={classes.root}>
-      {Projects.map((project) => {
+      {Projects.map((project, i) => {
         return (
-          <Card className={classes.card}>
+          <Card key={i} className={classes.card}>
             <CardActionArea>
               <CardMedia
                 className={classes.media}
@@ -47,9 +47,10 @@ const ProjectsPage: React.FC = () => {
                 <Typography gutterBottom variant="h5" component="h2">
                   {project.name}
                 </Typography>
-                {project.description.map((desc) => {
+                {project.description.map((desc, i) => {
                   return (
                     <Typography
+                      key={i}
                       variant="subtitle2"
                       color="textSecondary"
                       component="p"

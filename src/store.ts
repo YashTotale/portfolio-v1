@@ -13,11 +13,11 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 //Reducers
-import { theme } from "./redux/reducers";
+import { isDarkMode } from "./redux/reducers";
 
 //The reducers that are imported from the reducers folder will be added to this object
 const reducers = {
-  theme,
+  isDarkMode,
 };
 
 //The configuration for the persisted reducer

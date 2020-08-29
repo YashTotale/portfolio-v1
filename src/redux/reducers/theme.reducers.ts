@@ -1,14 +1,13 @@
 import { TOGGLE_DARK_MODE } from "../actions";
 import { AnyAction } from "redux";
 
-const initialState = null;
+const initialState = false;
 
-export const theme = (state = initialState, action: AnyAction) => {
-  const { type, payload } = action;
+export const isDarkMode = (state = initialState, action: AnyAction) => {
+  const { type } = action;
   switch (type) {
     case TOGGLE_DARK_MODE: {
-      const { isDarkMode } = payload;
-      return isDarkMode;
+      return !state;
     }
     default: {
       return state;
