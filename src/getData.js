@@ -25,10 +25,13 @@ const getProjects = () => {
 };
 
 const modifyProject = (project) => {
-  const { description, tags } = project;
+  const { description, tags, icon } = project;
   const newProject = { ...project };
   newProject.description = description ? description.split("; ") : [];
   newProject.tags = tags ? tags.split(", ") : [];
+  newProject.icon = icon
+    ? icon
+    : "https://www.creativefabrica.com/wp-content/uploads/2019/01/Blueprint-icon-by-rudezstudio-580x386.jpg";
   console.log(newProject);
   return newProject;
 };

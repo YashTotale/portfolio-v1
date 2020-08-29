@@ -2,14 +2,27 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 import { NavBar } from "./Components/NavBar";
-
-//Router Imports
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Projects from "./Pages/Projects";
 import Experience from "./Pages/Experience";
 import Home from "./Pages/Home";
 
+//Material UI Imports
+import Theme from "./Theme";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+//Router Imports
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+
 const App: React.FC = (props) => {
+  return (
+    <Theme>
+      <CssBaseline />
+      <Routes />
+    </Theme>
+  );
+};
+
+const Routes: React.FC = (props) => {
   return (
     <Router>
       <NavBar></NavBar>
