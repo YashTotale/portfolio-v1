@@ -60,7 +60,7 @@ export const NavBar: React.FC = (props) => {
   return (
     <div className={classes.root}>
       <AppBar elevation={2} color="transparent" position="static">
-        <Toolbar className={classes.toolBar}>
+        <Toolbar>
           <Tabs className={classes.tabs} value={currentTab}>
             {tabs.map(createTab)}
           </Tabs>
