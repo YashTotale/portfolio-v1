@@ -1,15 +1,16 @@
 language: node_js
-
 os:
   - osx
   - windows
-
+env:
+  global:
+    secure: j6c+2yRKFr4m47BrtKw0h/+ZDep39mbtCnslu2Xi9iRqyilHltMn8Xxo63kleDET4nR80Oq0+nILrxG45G3c9tfYO1M/zt7kS1WQfGQUVEolzxoc+wDhG12dC1t3eY+t6qpfn8GUCbsEA2yjfiqiQ0QozHoh8ZuXLx0dwIm4XEdM7FiO0DL+pz081bg9nkRPTgSSxvvLRBr7jvx/1XA+ueA5c/mTf9ci6ETM9TzDOv4297zkW2lM66haHpEEUh9jod86mALV7jIh+a6N2N1hd1Ngu2NIFBJ5BN5tJmxCXGRriwyDfAfNi4G3qFGsMSm9lsDRuaWPLhM6kFhdEGF7E9kmaNi11uZDD5y+TILwIL4BO6y+8Xl+Rmk6l4VyvAD07+cYsIRUVwzD+rgcAI+9oefXLa73kIYL6qwB/C4WOd32/4Tsezr2dUMCwT/paYZvb7vOCVPaK5C8deXLloR5W0hPbwUYe+OuubATVHo1stEHnwDpXfh+AKEFQZUj3AvhftthZpKC2hf7Ry3Q3bzOc0R5m9zkeTkGmyCOx8wBvANy0l96niQTfG7bmZRkT7K+vXi4oThEl9rhiVOMujave/eHWmsHC7bHlgbhc/kOUg2/1YY71ZdPjd/r6dUnLEZNPyqQDMYn1PU3zcyW0+ZSQnqZXBoTfH+BPKopZpIIdVw=
 node_js:
-  - "node"
-
+  - node
 install:
   - npm install
-
+before_script:
+  - snyk auth $SNYK_TOKEN
 script:
   - npm test
   - npm run deploy
