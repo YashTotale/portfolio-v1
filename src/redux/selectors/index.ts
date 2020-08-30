@@ -1,5 +1,7 @@
 export interface State {
-  isDarkMode: string;
+  display: {
+    isDarkMode: string;
+  };
 }
 
-export { getIsDarkMode } from "./theme.selectors";
+export { getIsDarkMode } from "./display.selectors";

@@ -6,7 +6,12 @@
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest ./__tests__"
+  },
+  "jest": {
+    "verbose": true,
+    "silent": true,
+    "testRegex": "(/__tests__/.js|(\\.|/)(test|spec))\\.js?$"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +20,7 @@
     "@babel/runtime": "^7.10.5",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "jest": "^26.4.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -30,6 +36,7 @@
     "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@types/history": "^4.7.7",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
