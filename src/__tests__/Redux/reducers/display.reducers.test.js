@@ -1,5 +1,5 @@
-import { display } from "../../../Redux/reducers";
-import { TOGGLE_DARK_MODE } from "../../../Redux/actions";
+import { display } from "../../../Redux/reducers/display.reducers";
+import { TOGGLE_DARK_MODE } from "../../../Redux/actions/display.actions";
 
 describe("The display reducer", () => {
   test("Toggles dark mode", () => {
