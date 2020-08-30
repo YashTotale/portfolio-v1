@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: Theme) => {
 const HomePage: React.FC = () => {
   const classes = useStyles();
 
-  return <div>Home</div>;
+  return <div>Still in development..</div>;
 };
 
 export default HomePage;
