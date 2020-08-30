@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -23,12 +24,16 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.html$/,
+        loader: "html-loader",
+      },
     ],
   },
   resolve: { extensions: ["*", ".js", ".jsx", ".ts", ".tsx"] },
   output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
+    path: path.resolve(__dirname, "build/"),
+    publicPath: "",
     filename: "bundle.js",
   },
   devServer: {
@@ -36,8 +41,13 @@ module.exports = {
     contentBase: path.join(__dirname, "public/"),
     //Change the port here if you need to
     port: 3000,
-    publicPath: "http://localhost:3000/dist/",
+    publicPath: "http://localhost:3000/build/",
     hotOnly: true,
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "public/template.html",
+    }),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
 };
