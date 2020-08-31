@@ -3,14 +3,14 @@ import React from "react";
 
 // Material UI Imports
 // import { makeStyles } from "@material-ui/core/styles";
-import { Tooltip, IconButton, IconButtonProps } from "@material-ui/core";
+import { Tooltip, IconButton } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
 // const useStyles = makeStyles((theme) => ({}));
 
 interface NavButtonProps {
   title: string;
-  icon: IconButtonProps;
+  icon: JSX.Element;
   component: string;
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
   href?: string;

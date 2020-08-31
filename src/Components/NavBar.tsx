@@ -1,6 +1,7 @@
 //React Imports
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import TooltipBtn from "./TooltipBtn";
 import { SOURCE_CODE } from "../Utils/constants";
 
 //Redux Imports
@@ -11,17 +12,7 @@ import { toggleDarkMode } from "../Redux/actions";
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Brightness7, Brightness4, GitHub } from "@material-ui/icons";
-import {
-  AppBar,
-  Toolbar,
-  Tabs,
-  Tab,
-  TabProps,
-  IconButton,
-  Tooltip,
-  IconButtonProps,
-} from "@material-ui/core";
-import TooltipBtn from "./TooltipBtn";
+import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -66,7 +57,9 @@ export const NavBar: React.FC = (props) => {
       <AppBar elevation={2} color="transparent" position="static">
         <Toolbar>
           <Tabs className={classes.tabs} value={currentTab}>
-            {tabs.map(createTab)}
+            {tabs.map((tab) => (
+              <LinkedTab tab={tab} />
+            ))}
           </Tabs>
           {btns.map((props) => (
             <TooltipBtn {...props} />
@@ -77,7 +70,11 @@ export const NavBar: React.FC = (props) => {
   );
 };
 
-const createTab = (tab: string): TabProps => {
+interface ILinkedTab {
+  tab: string;
+}
+
+const LinkedTab: React.FC<ILinkedTab> = ({ tab }) => {
   const upperCase = tab.toUpperCase();
   return (
     <Tab
