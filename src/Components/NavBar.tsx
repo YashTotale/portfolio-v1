@@ -21,6 +21,7 @@ import {
   Tooltip,
   IconButtonProps,
 } from "@material-ui/core";
+import TooltipBtn from "./TooltipBtn";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -44,11 +45,13 @@ export const NavBar: React.FC = (props) => {
     {
       title: `${isDarkMode ? "Light" : "Dark"} Theme`,
       onClick: () => dispatch(toggleDarkMode()),
+      component: "btn",
       icon: isDarkMode ? <Brightness7 /> : <Brightness4 />,
     },
     {
       title: "GitHub Repository",
       icon: <GitHub />,
+      component: "a",
       href: SOURCE_CODE,
     },
   ];
@@ -65,7 +68,9 @@ export const NavBar: React.FC = (props) => {
           <Tabs className={classes.tabs} value={currentTab}>
             {tabs.map(createTab)}
           </Tabs>
-          {btns.map(NavButton)}
+          {btns.map((props) => (
+            <TooltipBtn {...props} />
+          ))}
         </Toolbar>
       </AppBar>
     </div>
@@ -82,36 +87,5 @@ const createTab = (tab: string): TabProps => {
       to={`/${tab}`}
       label={upperCase}
     ></Tab>
-  );
-};
-
-interface NavButtonProps {
-  title: string;
-  icon: IconButtonProps;
-  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
-  href?: string;
-}
-
-const NavButton: React.FC<NavButtonProps> = ({
-  title,
-  icon,
-  onClick,
-  href,
-}) => {
-  return (
-    <Tooltip key={title} title={title}>
-      {href ? (
-        <IconButton
-          component="a"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={href}
-        >
-          {icon}
-        </IconButton>
-      ) : (
-        <IconButton onClick={onClick}>{icon}</IconButton>
-      )}
-    </Tooltip>
   );
 };
