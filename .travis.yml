@@ -17,5 +17,10 @@ before_script:
 script:
   - npm test
 
-after_success:
-  - npm run deploy
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  on:
+    branch: master
