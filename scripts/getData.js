@@ -1,5 +1,6 @@
 const reader = require("g-sheets-api");
 const fs = require("fs");
+const path = require("path");
 
 const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
@@ -7,14 +8,16 @@ const baseOptions = {
 };
 
 const write = (fileName, data) => {
-  fs.writeFile(
-    `${__dirname}/Data/${fileName}.json`,
-    JSON.stringify(data),
-    "utf8",
-    (err) => {
-      if (err) return console.log(err);
-    }
+  const location = path.join(
+    __dirname,
+    "..",
+    "src",
+    "Data",
+    `${fileName}.json`
   );
+  fs.writeFile(location, JSON.stringify(data), "utf8", (err) => {
+    if (err) return console.log(err);
+  });
 };
 
 const getProjects = () => {
@@ -24,7 +27,7 @@ const getProjects = () => {
   });
 };
 
-const modifyProject = (project) => {
+const cleanProjectData = (project) => {
   const { description, tags, icon } = project;
   const newProject = { ...project };
   newProject.description = description ? description.split("; ") : [];
@@ -44,7 +47,7 @@ const getExperience = () => {
 };
 
 getProjects().then((projects) => {
-  write("Projects", projects.map(modifyProject));
+  write("Projects", projects.map(cleanProjectData));
 });
 
 getExperience().then((experience) => {
