@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode production",
-    "test": "snyk test && jest ./__tests__",
+    "test": "jest ./__tests__",
+    "snyk": "snyk test",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },

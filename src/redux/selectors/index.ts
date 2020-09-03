@@ -1,8 +1,8 @@
 export interface State {
   display: {
     isDarkMode: boolean;
-    IsNavBtnsMenuOpen: boolean;
+    isNavBtnsMenuOpen: boolean;
   };
 }
 
-export { getIsDarkMode } from "./display.selectors";
+export { getIsDarkMode, getIsNavBtnsMenuOpen } from "./display.selectors";
