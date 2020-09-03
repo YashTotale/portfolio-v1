@@ -1,7 +1,7 @@
 //React Imports
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import TooltipBtn from "./TooltipBtn";
+import TooltipBtn, { TooltipBtnProps } from "./TooltipBtn";
 import { SOURCE_CODE } from "../Utils/constants";
 
 //Redux Imports
@@ -11,8 +11,22 @@ import { toggleDarkMode } from "../Redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Brightness7, Brightness4, GitHub } from "@material-ui/icons";
-import { AppBar, Toolbar, Tabs, Tab } from "@material-ui/core";
+import {
+  Brightness7,
+  Brightness4,
+  GitHub,
+  Menu as MenuButton,
+} from "@material-ui/icons";
+import {
+  AppBar,
+  Toolbar,
+  Tabs,
+  Tab,
+  TabProps,
+  Menu,
+  useTheme,
+  useMediaQuery,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -29,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const NavBar: React.FC = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const theme = useTheme();
+  const isSizeSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
   const isDarkMode = useSelector(getIsDarkMode);
 
@@ -57,24 +74,26 @@ export const NavBar: React.FC = (props) => {
       <AppBar elevation={2} color="transparent" position="static">
         <Toolbar>
           <Tabs className={classes.tabs} value={currentTab}>
-            {tabs.map((tab) => (
-              <LinkedTab tab={tab} />
-            ))}
+            {tabs.map(LinkedTab)}
           </Tabs>
-          {btns.map((props) => (
-            <TooltipBtn {...props} />
-          ))}
+          <NavButtons isSizeSmall={isSizeSmall} btns={btns} />
         </Toolbar>
       </AppBar>
     </div>
   );
 };
 
-interface ILinkedTab {
-  tab: string;
+interface NavButtonsProps {
+  btns: TooltipBtnProps[];
+  isSizeSmall: boolean;
 }
 
-const LinkedTab: React.FC<ILinkedTab> = ({ tab }) => {
+const NavButtons: React.FC<NavButtonsProps> = ({ btns, isSizeSmall }) => {
+  const tooltipBtns = btns.map((props, i) => <TooltipBtn key={i} {...props} />);
+  return <div>{tooltipBtns}</div>;
+};
+
+const LinkedTab = (tab: string): TabProps => {
   const upperCase = tab.toUpperCase();
   return (
     <Tab

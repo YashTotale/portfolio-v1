@@ -8,3 +8,14 @@ export const toggleDarkMode = (): ItoggleDarkMode => ({
   type: TOGGLE_DARK_MODE,
   payload: {},
 });
+
+interface ItoggleNavBtnsMenu {
+  type: string;
+  payload: {};
+}
+
+export const TOGGLE_NAV_BTNS_MENU = "TOGGLE_NAV_BTNS_MENU";
+export const toggleNavBtnsMenu = (): ItoggleNavBtnsMenu => ({
+  type: TOGGLE_NAV_BTNS_MENU,
+  payload: {},
+});

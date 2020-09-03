@@ -8,7 +8,7 @@ import {} from "@material-ui/icons";
 
 // const useStyles = makeStyles((theme) => ({}));
 
-interface NavButtonProps {
+export interface TooltipBtnProps {
   title: string;
   icon: JSX.Element;
   component: string;
@@ -16,7 +16,7 @@ interface NavButtonProps {
   href?: string;
 }
 
-const TooltipBtn: React.FC<NavButtonProps> = ({
+const TooltipBtn: React.FC<TooltipBtnProps> = ({
   title,
   icon,
   onClick,

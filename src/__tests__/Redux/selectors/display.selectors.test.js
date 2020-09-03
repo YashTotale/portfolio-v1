@@ -3,6 +3,7 @@ import { getIsDarkMode } from "../../../Redux/selectors/display.selectors";
 const sampleState = {
   display: {
     isDarkMode: true,
+    isNavBtnsMenuOpen: true,
   },
 };
 

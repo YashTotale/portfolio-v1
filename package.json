@@ -12,7 +12,9 @@
     "deploy": "gh-pages -d build"
   },
   "husky": {
-    "hooks": {}
+    "hooks": {
+      "pre-push": "npm run deploy"
+    }
   },
   "jest": {
     "verbose": true,

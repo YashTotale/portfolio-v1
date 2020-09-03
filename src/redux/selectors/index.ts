@@ -1,6 +1,7 @@
 export interface State {
   display: {
-    isDarkMode: string;
+    isDarkMode: boolean;
+    IsNavBtnsMenuOpen: boolean;
   };
 }
 

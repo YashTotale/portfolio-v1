@@ -1,1 +1,6 @@
-export { TOGGLE_DARK_MODE, toggleDarkMode } from "./display.actions";
+export {
+  TOGGLE_DARK_MODE,
+  toggleDarkMode,
+  TOGGLE_NAV_BTNS_MENU,
+  toggleNavBtnsMenu,
+} from "./display.actions";
