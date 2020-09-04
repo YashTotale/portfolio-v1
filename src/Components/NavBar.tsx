@@ -1,13 +1,13 @@
 //React Imports
-import React from "react";
+import React, { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import TooltipBtn, { TooltipBtnProps } from "./TooltipBtn";
 import { SOURCE_CODE } from "../Utils/constants";
 
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
-import { getIsDarkMode } from "../Redux/selectors";
-import { toggleDarkMode } from "../Redux/actions";
+import { getIsDarkMode, getIsNavBtnsMenuOpen } from "../Redux/selectors";
+import { toggleDarkMode, toggleNavBtnsMenu } from "../Redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -26,6 +26,8 @@ import {
   Menu,
   useTheme,
   useMediaQuery,
+  MenuItem,
+  RootRef,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -89,8 +91,34 @@ interface NavButtonsProps {
 }
 
 const NavButtons: React.FC<NavButtonsProps> = ({ btns, isSizeSmall }) => {
+  const dispatch = useDispatch();
+  const menuBtnEl = useRef(null);
+  const isMenuOpen = useSelector(getIsNavBtnsMenuOpen);
+
   const tooltipBtns = btns.map((props, i) => <TooltipBtn key={i} {...props} />);
-  return <div>{tooltipBtns}</div>;
+  return !isSizeSmall ? (
+    <div>{tooltipBtns}</div>
+  ) : (
+    <>
+      <RootRef rootRef={menuBtnEl}>
+        <TooltipBtn
+          title="Menu"
+          icon={<MenuButton />}
+          component="btn"
+          onClick={() => dispatch(toggleNavBtnsMenu())}
+        />
+      </RootRef>
+      <Menu
+        onClose={() => dispatch(toggleNavBtnsMenu())}
+        anchorEl={menuBtnEl.current}
+        open={isMenuOpen}
+      >
+        {tooltipBtns.map((btn, i) => (
+          <MenuItem key={i}>{btn}</MenuItem>
+        ))}
+      </Menu>
+    </>
+  );
 };
 
 const LinkedTab = (tab: string): TabProps => {
