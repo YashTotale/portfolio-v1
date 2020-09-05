@@ -19,3 +19,17 @@ export const toggleNavBtnsMenu = (isOpen?: boolean): ItoggleNavBtnsMenu => ({
   type: TOGGLE_NAV_BTNS_MENU,
   payload: { isOpen },
 });
+
+interface IchangeColors {
+  type: string;
+  payload: {};
+}
+
+export const CHANGE_COLORS = "CHANGE_COLORS";
+export const changeColors = (
+  scheme: "primary" | "secondary",
+  color: string
+): IchangeColors => ({
+  type: CHANGE_COLORS,
+  payload: { scheme, color },
+});

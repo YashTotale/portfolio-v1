@@ -3,4 +3,6 @@ export {
   toggleDarkMode,
   TOGGLE_NAV_BTNS_MENU,
   toggleNavBtnsMenu,
+  CHANGE_COLORS,
+  changeColors,
 } from "./display.actions";

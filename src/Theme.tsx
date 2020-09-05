@@ -16,6 +16,12 @@ const Theme: React.FC = ({ children }) => {
       createMuiTheme({
         palette: {
           type: isDarkMode ? "dark" : "light",
+          primary: {
+            main: "#4fc3f7",
+          },
+          secondary: {
+            main: "#fdd835",
+          },
         },
       }),
     [isDarkMode]

@@ -1,9 +1,15 @@
-import { TOGGLE_DARK_MODE, TOGGLE_NAV_BTNS_MENU } from "../actions";
+import {
+  TOGGLE_DARK_MODE,
+  TOGGLE_NAV_BTNS_MENU,
+  CHANGE_COLORS,
+} from "../actions";
 import { AnyAction } from "redux";
+import { defaultColors } from "../../Utils/colors";
 
 const initialState = {
   isDarkMode: false,
   isNavBtnsMenuOpen: false,
+  colors: defaultColors,
 };
 
 export const display = (state = initialState, action: AnyAction) => {
@@ -18,6 +24,10 @@ export const display = (state = initialState, action: AnyAction) => {
         ...state,
         isNavBtnsMenuOpen: isOpen ?? !state.isNavBtnsMenuOpen,
       };
+    }
+    case CHANGE_COLORS: {
+      const { scheme, color } = payload;
+      return { ...state, colors: { ...state.colors, [scheme]: color } };
     }
     default: {
       return state;
