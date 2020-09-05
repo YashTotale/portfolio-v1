@@ -1,15 +1,16 @@
 //React Imports
 import React from "react";
+import { mainColors, toCssColor } from "../Utils/colors";
+import { splitCamelCase } from "../Utils/funcs";
 
 //Redux Imports
 import { useSelector } from "react-redux";
 import { getPrimaryColor, getSecondaryColor } from "../Redux/selectors";
 
 //Material UI Imports
-import { makeStyles, Theme, ColorObject } from "@material-ui/core/styles";
-import { TextField, capitalize } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { TextField, capitalize, Tooltip, IconButton } from "@material-ui/core";
 import * as colorsObject from "@material-ui/core/colors";
-import { splitCamelCase } from "../Utils/funcs";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -26,6 +27,25 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   colorPicker: {
     marginTop: "5px",
+  },
+  colorInput: {
+    top: "0px",
+    left: "0px",
+    width: "100%",
+    cursor: "inherit",
+    height: "100%",
+    margin: "0px",
+    opacity: "0",
+    padding: "0px",
+    zIndex: 1,
+    position: "absolute",
+  },
+  colorBtn: {
+    padding: "0px",
+  },
+  colorDiv: {
+    width: "48px",
+    height: "48px",
   },
 }));
 
@@ -57,22 +77,23 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
   return (
     <div className={classes.scheme}>
       <TextField size="medium" label={upperCase} value={color}></TextField>
-      <ColorPicker colors={Object.keys(colorsObject)} />
+      <ColorPicker scheme={scheme} colors={mainColors} />
     </div>
   );
 };
 
 interface ColorPickerProps {
   colors: Array<string>;
+  scheme: "primary" | "secondary";
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({ colors }) => {
+const ColorPicker: React.FC<ColorPickerProps> = ({ colors, scheme }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.colorPicker}>
       {colors.map((color) => {
-        return <ColorBtn key={color} color={color}></ColorBtn>;
+        return <ColorBtn scheme={scheme} key={color} color={color}></ColorBtn>;
       })}
     </div>
   );
@@ -80,11 +101,26 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ colors }) => {
 
 interface ColorBtnProps {
   color: string;
+  scheme: "primary" | "secondary";
 }
 
-const ColorBtn: React.FC<ColorBtnProps> = ({ color }) => {
-  const readableName = splitCamelCase(color, true);
-  return <div>{readableName}</div>;
+const ColorBtn: React.FC<ColorBtnProps> = ({ color, scheme }) => {
+  const classes = useStyles();
+  const cssColor = toCssColor(color);
+
+  return (
+    <Tooltip title={color}>
+      <IconButton className={classes.colorBtn}>
+        <input
+          className={classes.colorInput}
+          name={scheme}
+          type="radio"
+          value={cssColor}
+        ></input>
+        <div className={classes.colorDiv}></div>
+      </IconButton>
+    </Tooltip>
+  );
 };
 
 export default Colors;
