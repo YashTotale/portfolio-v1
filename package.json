@@ -7,13 +7,15 @@
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode production",
-    "test": "jest ./__tests__",
+    "test": "jest",
     "snyk": "snyk test",
+    "data": "node ./scripts/getData",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run data",
       "pre-push": "npm run deploy"
     }
   },

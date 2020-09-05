@@ -1,6 +1,7 @@
 const reader = require("g-sheets-api");
 const fs = require("fs");
 const path = require("path");
+const { exec } = require("child_process");
 
 const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
@@ -17,6 +18,9 @@ const write = (fileName, data) => {
   );
   fs.writeFile(location, JSON.stringify(data), "utf8", (err) => {
     if (err) return console.log(err);
+    console.log(`${fileName}: `);
+    console.log(data);
+    gitAdd(location);
   });
 };
 
@@ -35,7 +39,6 @@ const cleanProjectData = (project) => {
   newProject.icon = icon
     ? icon
     : "https://www.creativefabrica.com/wp-content/uploads/2019/01/Blueprint-icon-by-rudezstudio-580x386.jpg";
-  console.log(newProject);
   return newProject;
 };
 
@@ -43,6 +46,13 @@ const getExperience = () => {
   return new Promise((resolve, reject) => {
     const options = { ...baseOptions, sheetNumber: 2 };
     reader(options, resolve);
+  });
+};
+
+const gitAdd = (location) => {
+  exec(`git add ${location} --verbose`, (err, stdout) => {
+    if (err) return console.log(err);
+    console.log(stdout);
   });
 };
 
