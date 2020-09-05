@@ -13,12 +13,6 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -m Auto-Deploy"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run data",
-      "pre-push": "npm run deploy"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
