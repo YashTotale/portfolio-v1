@@ -11,7 +11,7 @@
     "snyk": "snyk test",
     "data": "node ./scripts/getData",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build -m Auto-Deploy"
   },
   "husky": {
     "hooks": {

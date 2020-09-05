@@ -16,7 +16,6 @@ const Theme: React.FC = ({ children }) => {
   const isDarkMode = useSelector(getIsDarkMode);
   const primaryColor = useSelector(getPrimaryColor);
   const secondaryColor = useSelector(getSecondaryColor);
-  console.log(secondaryColor);
 
   const theme = React.useMemo(
     () =>
