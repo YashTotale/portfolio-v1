@@ -19,7 +19,7 @@ export interface TooltipBtnProps {
 
 const TooltipBtn: React.FC<TooltipBtnProps> = (props) => {
   const { title } = props;
-  const tooltipComponent = <TooltipComponent {...props} />;
+  const tooltipComponent = TooltipComponent(props);
   return (
     <Tooltip key={title} title={title}>
       {tooltipComponent}
@@ -27,13 +27,13 @@ const TooltipBtn: React.FC<TooltipBtnProps> = (props) => {
   );
 };
 
-const TooltipComponent: React.FC<TooltipBtnProps> = ({
+const TooltipComponent = ({
   component,
   href,
   icon,
   onClick,
   to,
-}) => {
+}: TooltipBtnProps) => {
   switch (component) {
     case "a": {
       return (
@@ -58,7 +58,7 @@ const TooltipComponent: React.FC<TooltipBtnProps> = ({
       );
     }
     default: {
-      return null;
+      return <div></div>;
     }
   }
 };
