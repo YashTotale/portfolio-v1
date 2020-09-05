@@ -15,7 +15,7 @@ interface ItoggleNavBtnsMenu {
 }
 
 export const TOGGLE_NAV_BTNS_MENU = "TOGGLE_NAV_BTNS_MENU";
-export const toggleNavBtnsMenu = (): ItoggleNavBtnsMenu => ({
+export const toggleNavBtnsMenu = (isOpen?: boolean): ItoggleNavBtnsMenu => ({
   type: TOGGLE_NAV_BTNS_MENU,
-  payload: {},
+  payload: { isOpen },
 });

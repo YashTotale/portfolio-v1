@@ -121,7 +121,7 @@ const NavButtons: React.FC<NavButtonsProps> = ({ btns, isSizeSmall }) => {
         />
       </RootRef>
       <Menu
-        onClose={() => dispatch(toggleNavBtnsMenu())}
+        onClose={() => dispatch(toggleNavBtnsMenu(false))}
         anchorEl={menuBtnEl.current}
         open={isMenuOpen}
       >

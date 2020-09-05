@@ -7,13 +7,17 @@ const initialState = {
 };
 
 export const display = (state = initialState, action: AnyAction) => {
-  const { type } = action;
+  const { type, payload } = action;
   switch (type) {
     case TOGGLE_DARK_MODE: {
       return { ...state, isDarkMode: !state.isDarkMode };
     }
     case TOGGLE_NAV_BTNS_MENU: {
-      return { ...state, isNavBtnsMenuOpen: !state.isNavBtnsMenuOpen };
+      const { isOpen } = payload;
+      return {
+        ...state,
+        isNavBtnsMenuOpen: isOpen ?? !state.isNavBtnsMenuOpen,
+      };
     }
     default: {
       return state;
