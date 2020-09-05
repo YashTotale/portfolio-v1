@@ -5,13 +5,21 @@ import React from "react";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    alignContent: "center",
+  },
 }));
 
 const Colors: React.FC = (props) => {
   const classes = useStyles();
 
-  return <div className={classes.root}>Colors</div>;
+  return (
+    <div className={classes.root}>
+      <h1>Customize Website Colors</h1>
+    </div>
+  );
 };
 
 export default Colors;

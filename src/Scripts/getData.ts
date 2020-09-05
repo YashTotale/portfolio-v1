@@ -3,7 +3,7 @@ import { join } from "path";
 import { exec } from "child_process";
 
 import { getProjects, ProjectObject } from "./getProjects";
-import { getExperience, ExperienceObject } from "./getExperience";
+import { getExperiences, ExperienceObject } from "./getExperiences";
 
 export const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
@@ -35,4 +35,4 @@ export const gitAdd = (location: string) => {
 
 //Get Data
 getProjects();
-getExperience();
+getExperiences();

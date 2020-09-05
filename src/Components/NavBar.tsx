@@ -17,6 +17,7 @@ import {
   GitHub,
   Menu as MenuButton,
   Palette,
+  CallMissedSharp,
 } from "@material-ui/icons";
 import {
   AppBar,
@@ -32,14 +33,15 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
-  },
   tabs: {
     "& div": {
       justifyContent: "center",
     },
     flexGrow: 1,
+  },
+  navBtns: {
+    position: "absolute",
+    right: `${theme.spacing() * 3}px`,
   },
 }));
 
@@ -84,7 +86,7 @@ export const NavBar: React.FC = (props) => {
     : "home";
 
   return (
-    <div className={classes.root}>
+    <div>
       <AppBar elevation={2} color="transparent" position="static">
         <Toolbar>
           <Tabs className={classes.tabs} value={currentTab}>
@@ -103,33 +105,38 @@ interface NavButtonsProps {
 }
 
 const NavButtons: React.FC<NavButtonsProps> = ({ btns, isSizeSmall }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const menuBtnEl = useRef(null);
   const isMenuOpen = useSelector(getIsNavBtnsMenuOpen);
 
   const tooltipBtns = btns.map((props, i) => <TooltipBtn key={i} {...props} />);
-  return !isSizeSmall ? (
-    <div>{tooltipBtns}</div>
-  ) : (
-    <>
-      <RootRef rootRef={menuBtnEl}>
-        <TooltipBtn
-          title="Menu"
-          icon={<MenuButton />}
-          component="btn"
-          onClick={() => dispatch(toggleNavBtnsMenu())}
-        />
-      </RootRef>
-      <Menu
-        onClose={() => dispatch(toggleNavBtnsMenu(false))}
-        anchorEl={menuBtnEl.current}
-        open={isMenuOpen}
-      >
-        {tooltipBtns.map((btn, i) => (
-          <MenuItem key={i}>{btn}</MenuItem>
-        ))}
-      </Menu>
-    </>
+  return (
+    <div className={classes.navBtns}>
+      {!isSizeSmall ? (
+        <div>{tooltipBtns}</div>
+      ) : (
+        <>
+          <RootRef rootRef={menuBtnEl}>
+            <TooltipBtn
+              title="Menu"
+              icon={<MenuButton />}
+              component="btn"
+              onClick={() => dispatch(toggleNavBtnsMenu())}
+            />
+          </RootRef>
+          <Menu
+            onClose={() => dispatch(toggleNavBtnsMenu(false))}
+            anchorEl={menuBtnEl.current}
+            open={isMenuOpen}
+          >
+            {tooltipBtns.map((btn, i) => (
+              <MenuItem key={i}>{btn}</MenuItem>
+            ))}
+          </Menu>
+        </>
+      )}
+    </div>
   );
 };
 
