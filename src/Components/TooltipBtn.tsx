@@ -16,16 +16,25 @@ export interface TooltipBtnProps {
   href?: string;
 }
 
-const TooltipBtn: React.FC<TooltipBtnProps> = ({
-  title,
-  icon,
-  onClick,
-  href,
-  component,
-}) => {
+const TooltipBtn: React.FC<TooltipBtnProps> = (props) => {
+  const { title } = props;
+  const tooltipComponent = <TooltipComponent {...props} />;
   return (
     <Tooltip key={title} title={title}>
-      {component === "a" ? (
+      {tooltipComponent}
+    </Tooltip>
+  );
+};
+
+const TooltipComponent: React.FC<TooltipBtnProps> = ({
+  component,
+  href,
+  icon,
+  onClick,
+}) => {
+  switch (component) {
+    case "a": {
+      return (
         <IconButton
           component="a"
           target="_blank"
@@ -34,11 +43,15 @@ const TooltipBtn: React.FC<TooltipBtnProps> = ({
         >
           {icon}
         </IconButton>
-      ) : (
-        <IconButton onClick={onClick}>{icon}</IconButton>
-      )}
-    </Tooltip>
-  );
+      );
+    }
+    case "btn": {
+      return <IconButton onClick={onClick}>{icon}</IconButton>;
+    }
+    default: {
+      return null;
+    }
+  }
 };
 
 export default TooltipBtn;

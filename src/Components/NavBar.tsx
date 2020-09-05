@@ -16,6 +16,7 @@ import {
   Brightness4,
   GitHub,
   Menu as MenuButton,
+  Palette,
 } from "@material-ui/icons";
 import {
   AppBar,
@@ -57,6 +58,12 @@ export const NavBar: React.FC = (props) => {
       onClick: () => dispatch(toggleDarkMode()),
       component: "btn",
       icon: isDarkMode ? <Brightness7 /> : <Brightness4 />,
+    },
+    {
+      title: "Edit Website Colors",
+      onClick: () => console.log("clicked"),
+      component: "btn",
+      icon: <Palette />,
     },
     {
       title: "GitHub Repository",
