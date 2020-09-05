@@ -6,10 +6,17 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 //Redux Imports
 import { useSelector } from "react-redux";
-import { getIsDarkMode } from "./Redux/selectors";
+import {
+  getIsDarkMode,
+  getPrimaryColor,
+  getSecondaryColor,
+} from "./Redux/selectors";
 
 const Theme: React.FC = ({ children }) => {
   const isDarkMode = useSelector(getIsDarkMode);
+  const primaryColor = useSelector(getPrimaryColor);
+  const secondaryColor = useSelector(getSecondaryColor);
+  console.log(secondaryColor);
 
   const theme = React.useMemo(
     () =>
@@ -17,10 +24,10 @@ const Theme: React.FC = ({ children }) => {
         palette: {
           type: isDarkMode ? "dark" : "light",
           primary: {
-            main: "#4fc3f7",
+            main: primaryColor,
           },
           secondary: {
-            main: "#fdd835",
+            main: secondaryColor,
           },
         },
       }),
