@@ -61,8 +61,8 @@ export const NavBar: React.FC = (props) => {
     },
     {
       title: "Edit Website Colors",
-      onClick: () => console.log("clicked"),
-      component: "btn",
+      to: "colors",
+      component: "link",
       icon: <Palette />,
     },
     {

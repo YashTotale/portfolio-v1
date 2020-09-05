@@ -1,10 +1,10 @@
 // React Imports
 import React from "react";
+import { Link } from "react-router-dom";
 
 // Material UI Imports
 // import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip, IconButton } from "@material-ui/core";
-import {} from "@material-ui/icons";
 
 // const useStyles = makeStyles((theme) => ({}));
 
@@ -14,6 +14,7 @@ export interface TooltipBtnProps {
   component: string;
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
   href?: string;
+  to?: string;
 }
 
 const TooltipBtn: React.FC<TooltipBtnProps> = (props) => {
@@ -31,6 +32,7 @@ const TooltipComponent: React.FC<TooltipBtnProps> = ({
   href,
   icon,
   onClick,
+  to,
 }) => {
   switch (component) {
     case "a": {
@@ -47,6 +49,13 @@ const TooltipComponent: React.FC<TooltipBtnProps> = ({
     }
     case "btn": {
       return <IconButton onClick={onClick}>{icon}</IconButton>;
+    }
+    case "link": {
+      return (
+        <IconButton component={Link} to={`/${to}`}>
+          {icon}
+        </IconButton>
+      );
     }
     default: {
       return null;
