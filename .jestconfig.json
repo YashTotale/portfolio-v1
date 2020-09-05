@@ -1,0 +1,5 @@
+{
+  "verbose": true,
+  "silent": true,
+  "testRegex": "(/__tests__/.(ts|js)|(\\.|/)(test|spec))\\.(js|ts)?$"
+}

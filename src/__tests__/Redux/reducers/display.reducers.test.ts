@@ -6,15 +6,22 @@ import {
 } from "../../../Redux/actions/display.actions";
 
 describe("The display reducer", () => {
+  const originalState = {
+    isDarkMode: false,
+    isNavBtnsMenuOpen: false,
+    colors: {
+      primary: "#fdd835",
+      secondary: "#000000",
+    },
+  };
+
   test("Toggles dark mode", () => {
     const fakeAction = {
       type: TOGGLE_DARK_MODE,
       payload: {},
     };
 
-    const originalState = { isDarkMode: false };
-
-    const expected = { isDarkMode: true };
+    const expected = { ...originalState, isDarkMode: true };
 
     const actual = display(originalState, fakeAction);
 
@@ -27,9 +34,7 @@ describe("The display reducer", () => {
       payload: {},
     };
 
-    const originalState = { isNavBtnsMenuOpen: false };
-
-    const expected = { isNavBtnsMenuOpen: true };
+    const expected = { ...originalState, isNavBtnsMenuOpen: true };
 
     const actual = display(originalState, fakeAction);
 
@@ -45,14 +50,8 @@ describe("The display reducer", () => {
       },
     };
 
-    const originalState = {
-      colors: {
-        primary: "#fdd835",
-        secondary: "#000000",
-      },
-    };
-
     const expected = {
+      ...originalState,
       colors: {
         primary: "#fdd835",
         secondary: "#ffffff",
