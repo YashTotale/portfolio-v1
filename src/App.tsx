@@ -5,6 +5,7 @@ import { NavBar } from "./Components/NavBar";
 import Projects from "./Pages/Projects";
 import Experience from "./Pages/Experience";
 import Home from "./Pages/Home";
+import Colors from "./Pages/Colors";
 
 //Material UI Imports
 import Theme from "./Theme";
@@ -32,6 +33,9 @@ const Routes: React.FC = (props) => {
         </Route>
         <Route path="/experience">
           <Experience />
+        </Route>
+        <Route path="/colors">
+          <Colors />
         </Route>
         <Route path="/">
           <Home />

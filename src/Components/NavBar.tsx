@@ -69,7 +69,12 @@ export const NavBar: React.FC = (props) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const tabs = ["home", "projects", "experience"];
-  const currentTab = tabs.includes(path) ? path : "home";
+  const excludedTabs = ["colors"];
+  const currentTab = tabs.includes(path)
+    ? path
+    : excludedTabs.includes(path)
+    ? false
+    : "home";
 
   return (
     <div className={classes.root}>
