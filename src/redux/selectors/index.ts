@@ -2,7 +2,10 @@ export interface State {
   display: {
     isDarkMode: boolean;
     isNavBtnsMenuOpen: boolean;
-    shade: string;
+    shades: {
+      primary: string;
+      secondary: string;
+    };
     colors: {
       primary: string;
       secondary: string;
@@ -15,5 +18,6 @@ export {
   getIsNavBtnsMenuOpen,
   getPrimaryColor,
   getSecondaryColor,
-  getShade,
+  getPrimaryShade,
+  getSecondaryShade,
 } from "./display.selectors";

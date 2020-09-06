@@ -10,4 +10,7 @@ export const getPrimaryColor = (state: State) => state.display.colors.primary;
 export const getSecondaryColor = (state: State) =>
   state.display.colors.secondary;
 
-export const getShade = (state: State) => state.display.shade;
+export const getPrimaryShade = (state: State) => state.display.shades.primary;
+
+export const getSecondaryShade = (state: State) =>
+  state.display.shades.secondary;

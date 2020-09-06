@@ -3,7 +3,8 @@ import {
   getIsNavBtnsMenuOpen,
   getPrimaryColor,
   getSecondaryColor,
-  getShade,
+  getPrimaryShade,
+  getSecondaryShade,
 } from "../../../Redux/selectors/display.selectors";
 import sampleState from "../sampleStore";
 
@@ -32,9 +33,15 @@ describe("The display selectors", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("The getShade selector", () => {
-    const expected = sampleState.display.shade;
-    const actual = getShade(sampleState);
+  test("The getPrimaryShade selector", () => {
+    const expected = sampleState.display.shades.primary;
+    const actual = getPrimaryShade(sampleState);
+    expect(actual).toEqual(expected);
+  });
+
+  test("The getSecondaryShade selector", () => {
+    const expected = sampleState.display.shades.secondary;
+    const actual = getSecondaryShade(sampleState);
     expect(actual).toEqual(expected);
   });
 });

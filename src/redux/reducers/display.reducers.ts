@@ -5,13 +5,13 @@ import {
   CHANGE_SHADE,
 } from "../actions";
 import { AnyAction } from "redux";
-import { defaultColors, defaultShade } from "../../Utils/colors";
+import { defaultColors, defaultShades } from "../../Utils/colors";
 
 const initialState = {
   isDarkMode: false,
   isNavBtnsMenuOpen: false,
   colors: defaultColors,
-  shade: defaultShade,
+  shades: defaultShades,
 };
 
 export const display = (state = initialState, action: AnyAction) => {
@@ -32,8 +32,8 @@ export const display = (state = initialState, action: AnyAction) => {
       return { ...state, colors: { ...state.colors, [scheme]: color } };
     }
     case CHANGE_SHADE: {
-      const { shade } = payload;
-      return { ...state, shade };
+      const { shade, scheme } = payload;
+      return { ...state, shades: { ...state.shades, [scheme]: shade } };
     }
     default: {
       return state;

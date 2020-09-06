@@ -1,11 +1,16 @@
 //React Imports
 import React from "react";
 import { mainColors, toCssColor } from "../Utils/colors";
-import { splitCamelCase } from "../Utils/funcs";
+import { splitCamelCase, stringToInteger } from "../Utils/funcs";
 
 //Redux Imports
 import { useSelector } from "react-redux";
-import { getPrimaryColor, getSecondaryColor } from "../Redux/selectors";
+import {
+  getPrimaryColor,
+  getSecondaryColor,
+  getPrimaryShade,
+  getSecondaryShade,
+} from "../Redux/selectors";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -116,8 +121,11 @@ interface ColorBtnProps {
 
 const ColorBtn: React.FC<ColorBtnProps> = ({ color, scheme }) => {
   const cssColor = toCssColor(color);
+  const shade = stringToInteger(
+    useSelector(scheme === "primary" ? getPrimaryShade : getSecondaryShade)
+  );
   //@ts-ignore
-  const classes = useStyles({ color: colorsObject[cssColor]["A400"] });
+  const classes = useStyles({ color: colorsObject[cssColor][shade] });
 
   return (
     <Tooltip title={color}>

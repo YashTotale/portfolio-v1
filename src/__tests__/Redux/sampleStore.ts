@@ -1,7 +1,10 @@
 export const display = {
   isDarkMode: false,
   isNavBtnsMenuOpen: true,
-  shade: "200",
+  shades: {
+    primary: "200",
+    secondary: "A400",
+  },
   colors: {
     primary: "#fdd835",
     secondary: "#000000",

@@ -43,9 +43,9 @@ describe("The display actions", () => {
   test("The changeShade action", () => {
     const expected = {
       type: CHANGE_SHADE,
-      payload: { shade: "200" },
+      payload: { shade: "200", scheme: "primary" },
     };
-    const actual = changeShade("200");
+    const actual = changeShade("primary", "200");
 
     expect(actual).toEqual(expected);
   });

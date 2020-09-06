@@ -36,11 +36,14 @@ export const changeColors = (
 
 interface IchangeShade {
   type: string;
-  payload: { shade: string };
+  payload: { shade: string; scheme: string };
 }
 
 export const CHANGE_SHADE = "CHANGE_SHADE";
-export const changeShade = (shade: string): IchangeShade => ({
+export const changeShade = (
+  scheme: "primary" | "secondary",
+  shade: string
+): IchangeShade => ({
   type: CHANGE_SHADE,
-  payload: { shade },
+  payload: { scheme, shade },
 });

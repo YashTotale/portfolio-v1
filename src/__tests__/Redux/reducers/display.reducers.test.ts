@@ -59,12 +59,15 @@ describe("The display reducer", () => {
   test("Changes shade", () => {
     const fakeAction = {
       type: CHANGE_SHADE,
-      payload: { shade: "A200" },
+      payload: { shade: "A200", scheme: "secondary" },
     };
 
     const expected = {
       ...originalState,
-      shade: "A200",
+      shades: {
+        primary: "200",
+        secondary: "A200",
+      },
     };
 
     const actual = display(originalState, fakeAction);

@@ -3,7 +3,10 @@ export const defaultColors = {
   secondary: "#fdd835",
 };
 
-export const defaultShade = "500";
+export const defaultShades = {
+  primary: "500",
+  secondary: "500",
+};
 
 export const mainColors = [
   "Red",
@@ -22,6 +25,23 @@ export const mainColors = [
   "Amber",
   "Orange",
   "Deep Orange",
+];
+
+export const shades = [
+  "50",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900",
+  "A100",
+  "A200",
+  "A400",
+  "A700",
 ];
 
 export const toCssColor = (color: string): string =>
