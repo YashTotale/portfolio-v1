@@ -25,13 +25,20 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   schemes: {
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
   },
   scheme: {
     margin: "5px",
-    maxWidth: "200px",
+    width: "208px",
   },
   colorPicker: {
     marginTop: "5px",
+  },
+  colorBtn: {
+    padding: "0px",
+    margin: "2px",
   },
   colorInput: {
     top: "0px",
@@ -44,9 +51,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: "0px",
     zIndex: 1,
     position: "absolute",
-  },
-  colorBtn: {
-    padding: "0px",
   },
   colorDiv: {
     width: "48px",
