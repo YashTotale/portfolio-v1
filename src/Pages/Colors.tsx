@@ -7,7 +7,6 @@ import {
   defaultColors,
   defaultShades,
 } from "../Utils/colors";
-import { stringToInteger } from "../Utils/funcs";
 
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
@@ -25,12 +24,13 @@ import {
   TextField,
   capitalize,
   Tooltip,
-  IconButton,
   Slider,
   Typography,
   Button,
+  Radio,
 } from "@material-ui/core";
 import * as colorsObject from "@material-ui/core/colors";
+import { Check } from "@material-ui/icons";
 
 interface styleProps {
   isCurrentColor?: boolean;
@@ -68,30 +68,28 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     margin: "20px 0px",
   },
-  colorBtn: {
+  radio: {
     padding: "0px",
     margin: "2px",
   },
-  colorInput: {
-    top: "0px",
-    left: "0px",
-    width: "100%",
-    cursor: "inherit",
-    height: "100%",
-    margin: "0px",
-    opacity: "0",
-    padding: "0px",
-    zIndex: 1,
-    position: "absolute",
+  radioIcon: {
+    width: 48,
+    height: 48,
+    backgroundColor: ({ color }: styleProps) => color,
   },
-  colorDiv: {
-    width: "48px",
-    height: "48px",
+  radioIconSelected: {
     border: ({ isCurrentColor }: styleProps) =>
       isCurrentColor
         ? `4px solid ${theme.palette.type === "dark" ? "white" : "black"}`
         : "none",
-    backgroundColor: ({ color }: styleProps) => color,
+    color: theme.palette.common.white,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  checkIcon: {
+    fontSize: 30,
+    color: theme.palette.type === "dark" ? "white" : "black",
   },
   resetDiv: {
     display: "flex",
@@ -100,22 +98,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+type scheme = "primary" | "secondary";
+
 const Colors: React.FC = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const schemes: scheme[] = ["primary", "secondary"];
   const handleReset = () => {
-    dispatch(changeColors("primary", defaultColors["primary"]));
-    dispatch(changeColors("secondary", defaultColors["secondary"]));
-    dispatch(changeShade("primary", defaultShades["primary"]));
-    dispatch(changeShade("secondary", defaultShades["secondary"]));
+    schemes.map((scheme: scheme) => {
+      dispatch(changeColors(scheme, defaultColors[scheme]));
+      dispatch(changeShade(scheme, defaultShades[scheme]));
+    });
   };
 
   return (
     <div className={classes.root}>
       <h1>Customize Website Colors</h1>
       <div className={classes.schemes}>
-        <ColorScheme scheme="primary" />
-        <ColorScheme scheme="secondary" />
+        {schemes.map((scheme) => (
+          <ColorScheme scheme={scheme} />
+        ))}
       </div>
       <div className={classes.resetDiv}>
         <Button onClick={handleReset} variant="contained" color="secondary">
@@ -127,7 +129,7 @@ const Colors: React.FC = (props) => {
 };
 
 interface ColorSchemeProps {
-  scheme: "primary" | "secondary";
+  scheme: scheme;
 }
 
 const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
@@ -178,7 +180,7 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
 
 interface ColorPickerProps {
   colors: Array<string>;
-  scheme: "primary" | "secondary";
+  scheme: scheme;
   shade: string;
   currentColor: string;
 }
@@ -210,7 +212,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 
 interface ColorBtnProps {
   color: string;
-  scheme: "primary" | "secondary";
+  scheme: scheme;
   shade: string;
   currentColor: string;
 }
@@ -231,21 +233,26 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
     isCurrentColor: cssColor === currentColor,
   });
 
-  const handleClick = () => {
-    dispatch(changeColors(scheme, cssColor));
+  const handleClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    dispatch(changeColors(scheme, event.target.value));
   };
 
   return (
     <Tooltip title={color}>
-      <IconButton onClick={handleClick} className={classes.colorBtn}>
-        <input
-          className={classes.colorInput}
-          name={scheme}
-          type="radio"
-          value={cssColor}
-        ></input>
-        <div className={classes.colorDiv}></div>
-      </IconButton>
+      <Radio
+        className={classes.radio}
+        color="default"
+        checked={cssColor === currentColor}
+        onChange={handleClick}
+        value={cssColor}
+        name={scheme}
+        icon={<div className={classes.radioIcon} />}
+        checkedIcon={
+          <div className={`${classes.radioIcon} ${classes.radioIconSelected}`}>
+            <Check className={classes.checkIcon} />
+          </div>
+        }
+      />
     </Tooltip>
   );
 };
