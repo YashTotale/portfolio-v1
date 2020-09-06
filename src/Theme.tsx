@@ -10,12 +10,16 @@ import {
   getIsDarkMode,
   getPrimaryColor,
   getSecondaryColor,
+  getShade,
 } from "./Redux/selectors";
+import { isHex } from "./Utils/colors";
+import { colors } from "@material-ui/core";
 
 const Theme: React.FC = ({ children }) => {
   const isDarkMode = useSelector(getIsDarkMode);
   const primaryColor = useSelector(getPrimaryColor);
   const secondaryColor = useSelector(getSecondaryColor);
+  const shade = useSelector(getShade);
 
   const theme = React.useMemo(
     () =>
@@ -23,10 +27,16 @@ const Theme: React.FC = ({ children }) => {
         palette: {
           type: isDarkMode ? "dark" : "light",
           primary: {
-            main: primaryColor,
+            main: isHex(primaryColor)
+              ? primaryColor
+              : //@ts-ignore
+                colors[primaryColor][shade],
           },
           secondary: {
-            main: secondaryColor,
+            main: isHex(secondaryColor)
+              ? secondaryColor
+              : //@ts-ignore
+                colors[secondaryColor][shade],
           },
         },
       }),

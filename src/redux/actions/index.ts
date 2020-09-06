@@ -5,4 +5,6 @@ export {
   toggleNavBtnsMenu,
   CHANGE_COLORS,
   changeColors,
+  CHANGE_SHADE,
+  changeShade,
 } from "./display.actions";

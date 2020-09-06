@@ -5,6 +5,8 @@ import {
   toggleNavBtnsMenu,
   CHANGE_COLORS,
   changeColors,
+  CHANGE_SHADE,
+  changeShade,
 } from "../../../Redux/actions/display.actions";
 
 describe("The display actions", () => {
@@ -34,6 +36,16 @@ describe("The display actions", () => {
       payload: { scheme: "primary", color: "#fdd835" },
     };
     const actual = changeColors("primary", "#fdd835");
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("The changeShade action", () => {
+    const expected = {
+      type: CHANGE_SHADE,
+      payload: { shade: "200" },
+    };
+    const actual = changeShade("200");
 
     expect(actual).toEqual(expected);
   });

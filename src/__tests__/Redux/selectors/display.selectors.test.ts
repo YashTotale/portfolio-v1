@@ -3,18 +3,9 @@ import {
   getIsNavBtnsMenuOpen,
   getPrimaryColor,
   getSecondaryColor,
+  getShade,
 } from "../../../Redux/selectors/display.selectors";
-
-const sampleState = {
-  display: {
-    isDarkMode: true,
-    isNavBtnsMenuOpen: true,
-    colors: {
-      primary: "#fdd835",
-      secondary: "#000000",
-    },
-  },
-};
+import sampleState from "../sampleStore";
 
 describe("The display selectors", () => {
   test("The getIsDarkMode selector", () => {
@@ -35,9 +26,15 @@ describe("The display selectors", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("The getPrimaryColor selector", () => {
+  test("The getSecondaryColor selector", () => {
     const expected = sampleState.display.colors.secondary;
     const actual = getSecondaryColor(sampleState);
+    expect(actual).toEqual(expected);
+  });
+
+  test("The getShade selector", () => {
+    const expected = sampleState.display.shade;
+    const actual = getShade(sampleState);
     expect(actual).toEqual(expected);
   });
 });

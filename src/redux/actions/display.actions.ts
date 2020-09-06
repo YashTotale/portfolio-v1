@@ -33,3 +33,14 @@ export const changeColors = (
   type: CHANGE_COLORS,
   payload: { scheme, color },
 });
+
+interface IchangeShade {
+  type: string;
+  payload: { shade: string };
+}
+
+export const CHANGE_SHADE = "CHANGE_SHADE";
+export const changeShade = (shade: string): IchangeShade => ({
+  type: CHANGE_SHADE,
+  payload: { shade },
+});

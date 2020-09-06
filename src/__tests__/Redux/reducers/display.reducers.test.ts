@@ -3,18 +3,11 @@ import {
   TOGGLE_DARK_MODE,
   TOGGLE_NAV_BTNS_MENU,
   CHANGE_COLORS,
+  CHANGE_SHADE,
 } from "../../../Redux/actions/display.actions";
+import { display as originalState } from "../sampleStore";
 
 describe("The display reducer", () => {
-  const originalState = {
-    isDarkMode: false,
-    isNavBtnsMenuOpen: false,
-    colors: {
-      primary: "#fdd835",
-      secondary: "#000000",
-    },
-  };
-
   test("Toggles dark mode", () => {
     const fakeAction = {
       type: TOGGLE_DARK_MODE,
@@ -28,13 +21,13 @@ describe("The display reducer", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("Toggles dark mode", () => {
+  test("Toggles Nav Btn Menu Open", () => {
     const fakeAction = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: {},
     };
 
-    const expected = { ...originalState, isNavBtnsMenuOpen: true };
+    const expected = { ...originalState, isNavBtnsMenuOpen: false };
 
     const actual = display(originalState, fakeAction);
 
@@ -56,6 +49,22 @@ describe("The display reducer", () => {
         primary: "#fdd835",
         secondary: "#ffffff",
       },
+    };
+
+    const actual = display(originalState, fakeAction);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("Changes shade", () => {
+    const fakeAction = {
+      type: CHANGE_SHADE,
+      payload: { shade: "A200" },
+    };
+
+    const expected = {
+      ...originalState,
+      shade: "A200",
     };
 
     const actual = display(originalState, fakeAction);
