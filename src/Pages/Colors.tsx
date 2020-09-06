@@ -1,6 +1,6 @@
 //React Imports
 import React from "react";
-import { mainColors, toCssColor, shades } from "../Utils/colors";
+import { mainColors, toCssColor, shades, defaultColors } from "../Utils/colors";
 import { stringToInteger } from "../Utils/funcs";
 
 //Redux Imports
@@ -11,7 +11,7 @@ import {
   getPrimaryShade,
   getSecondaryShade,
 } from "../Redux/selectors";
-import { changeShade } from "../Redux/actions";
+import { changeShade, changeColors } from "../Redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -27,6 +27,7 @@ import {
 import * as colorsObject from "@material-ui/core/colors";
 
 interface styleProps {
+  isCurrentColor?: boolean;
   color?: string;
 }
 
@@ -49,13 +50,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   sliderDiv: {
     display: "flex",
+    marginTop: "10px",
   },
   slider: {
     margin: "0px 10px",
     flexGrow: 1,
   },
   colorPicker: {
-    marginTop: "5px",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    margin: "20px 0px",
   },
   colorBtn: {
     padding: "0px",
@@ -76,16 +81,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   colorDiv: {
     width: "48px",
     height: "48px",
-    backgroundColor: (props: styleProps) => props.color,
+    border: ({ isCurrentColor }: styleProps) =>
+      isCurrentColor
+        ? `4px solid ${theme.palette.type === "dark" ? "white" : "black"}`
+        : "none",
+    backgroundColor: ({ color }: styleProps) => color,
   },
-  reset: {
-    alignSelf: "center",
-    justifySelf: "center",
+  resetDiv: {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
   },
 }));
 
 const Colors: React.FC = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const handleReset = () => {
+    dispatch(changeColors("primary", defaultColors["primary"]));
+    dispatch(changeColors("secondary", defaultColors["secondary"]));
+  };
 
   return (
     <div className={classes.root}>
@@ -93,6 +108,11 @@ const Colors: React.FC = (props) => {
       <div className={classes.schemes}>
         <ColorScheme scheme="primary" />
         <ColorScheme scheme="secondary" />
+      </div>
+      <div className={classes.resetDiv}>
+        <Button onClick={handleReset} variant="contained" color="secondary">
+          Reset Default Colors
+        </Button>
       </div>
     </div>
   );
@@ -106,7 +126,7 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const upperCase = capitalize(scheme);
-  const color = useSelector(
+  const currentColor = useSelector(
     scheme === "primary" ? getPrimaryColor : getSecondaryColor
   );
   const shade = useSelector(
@@ -120,7 +140,11 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
 
   return (
     <div className={classes.scheme}>
-      <TextField size="medium" label={upperCase} value={color}></TextField>
+      <TextField
+        size="medium"
+        label={upperCase}
+        value={currentColor}
+      ></TextField>
       <div className={classes.sliderDiv}>
         <Typography id="shade">Shade: </Typography>
         <Slider
@@ -133,7 +157,12 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
         />
         <Typography>{shade}</Typography>
       </div>
-      <ColorPicker shade={shade} scheme={scheme} colors={mainColors} />
+      <ColorPicker
+        currentColor={currentColor}
+        shade={shade}
+        scheme={scheme}
+        colors={mainColors}
+      />
     </div>
   );
 };
@@ -142,9 +171,15 @@ interface ColorPickerProps {
   colors: Array<string>;
   scheme: "primary" | "secondary";
   shade: string;
+  currentColor: string;
 }
 
-const ColorPicker: React.FC<ColorPickerProps> = ({ colors, scheme, shade }) => {
+const ColorPicker: React.FC<ColorPickerProps> = ({
+  colors,
+  scheme,
+  shade,
+  currentColor,
+}) => {
   const classes = useStyles();
 
   return (
@@ -156,6 +191,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ colors, scheme, shade }) => {
             scheme={scheme}
             key={color}
             color={color}
+            currentColor={currentColor}
           ></ColorBtn>
         );
       })}
@@ -167,16 +203,35 @@ interface ColorBtnProps {
   color: string;
   scheme: "primary" | "secondary";
   shade: string;
+  currentColor: string;
 }
 
-const ColorBtn: React.FC<ColorBtnProps> = ({ color, scheme, shade }) => {
+const ColorBtn: React.FC<ColorBtnProps> = ({
+  color,
+  scheme,
+  shade,
+  currentColor,
+}) => {
+  const dispatch = useDispatch();
   const cssColor = toCssColor(color);
+
   //@ts-ignore
-  const classes = useStyles({ color: colorsObject[cssColor][shade] });
+  const colorHex = colorsObject[cssColor][shade];
+  const classes = useStyles({
+    color: colorHex,
+    //@ts-ignore
+    isCurrentColor: Object.values(colorsObject[cssColor]).includes(
+      currentColor
+    ),
+  });
+
+  const handleClick = () => {
+    dispatch(changeColors(scheme, colorHex));
+  };
 
   return (
     <Tooltip title={color}>
-      <IconButton className={classes.colorBtn}>
+      <IconButton onClick={handleClick} className={classes.colorBtn}>
         <input
           className={classes.colorInput}
           name={scheme}
