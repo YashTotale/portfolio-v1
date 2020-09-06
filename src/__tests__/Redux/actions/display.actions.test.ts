@@ -21,13 +21,24 @@ describe("The display actions", () => {
   });
 
   test("The toggleNavBtnsMenu action", () => {
-    const expected = {
+    const expected1 = {
+      type: TOGGLE_NAV_BTNS_MENU,
+      payload: {
+        isOpen: true,
+      },
+    };
+    const actual1 = toggleNavBtnsMenu(true);
+
+    expect(actual1).toEqual(expected1);
+
+    const expected2 = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: {},
     };
-    const actual = toggleNavBtnsMenu();
 
-    expect(actual).toEqual(expected);
+    const actual2 = toggleNavBtnsMenu();
+
+    expect(actual2).toEqual(expected2);
   });
 
   test("The changeColors action", () => {

@@ -46,7 +46,7 @@ describe("The display reducer", () => {
     const expected = {
       ...originalState,
       colors: {
-        primary: "#fdd835",
+        primary: originalState.colors.primary,
         secondary: "#ffffff",
       },
     };
@@ -59,14 +59,14 @@ describe("The display reducer", () => {
   test("Changes shade", () => {
     const fakeAction = {
       type: CHANGE_SHADE,
-      payload: { shade: "A200", scheme: "secondary" },
+      payload: { shade: "A200", scheme: "primary" },
     };
 
     const expected = {
       ...originalState,
       shades: {
-        primary: "200",
-        secondary: "A200",
+        primary: "A200",
+        secondary: originalState.shades.secondary,
       },
     };
 

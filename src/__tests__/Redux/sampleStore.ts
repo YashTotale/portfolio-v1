@@ -6,8 +6,8 @@ export const display = {
     secondary: "A400",
   },
   colors: {
-    primary: "#fdd835",
-    secondary: "#000000",
+    primary: "red",
+    secondary: "pink",
   },
 };
 

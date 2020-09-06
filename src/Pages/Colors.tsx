@@ -1,6 +1,12 @@
 //React Imports
 import React from "react";
-import { mainColors, toCssColor, shades, defaultColors } from "../Utils/colors";
+import {
+  mainColors,
+  toCssColor,
+  shades,
+  defaultColors,
+  defaultShades,
+} from "../Utils/colors";
 import { stringToInteger } from "../Utils/funcs";
 
 //Redux Imports
@@ -100,6 +106,8 @@ const Colors: React.FC = (props) => {
   const handleReset = () => {
     dispatch(changeColors("primary", defaultColors["primary"]));
     dispatch(changeColors("secondary", defaultColors["secondary"]));
+    dispatch(changeShade("primary", defaultShades["primary"]));
+    dispatch(changeShade("secondary", defaultShades["secondary"]));
   };
 
   return (
@@ -143,7 +151,8 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
       <TextField
         size="medium"
         label={upperCase}
-        value={currentColor}
+        //@ts-ignore
+        value={colorsObject[currentColor][shade]}
       ></TextField>
       <div className={classes.sliderDiv}>
         <Typography id="shade">Shade: </Typography>
@@ -187,9 +196,9 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
       {colors.map((color) => {
         return (
           <ColorBtn
+            key={color}
             shade={shade}
             scheme={scheme}
-            key={color}
             color={color}
             currentColor={currentColor}
           ></ColorBtn>
@@ -219,14 +228,11 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   const colorHex = colorsObject[cssColor][shade];
   const classes = useStyles({
     color: colorHex,
-    //@ts-ignore
-    isCurrentColor: Object.values(colorsObject[cssColor]).includes(
-      currentColor
-    ),
+    isCurrentColor: cssColor === currentColor,
   });
 
   const handleClick = () => {
-    dispatch(changeColors(scheme, colorHex));
+    dispatch(changeColors(scheme, cssColor));
   };
 
   return (
