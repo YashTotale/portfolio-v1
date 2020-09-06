@@ -1,11 +1,12 @@
 //React Imports
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { hot } from "react-hot-loader";
 import { NavBar } from "./Components/NavBar";
-import Projects from "./Pages/Projects";
-import Experience from "./Pages/Experience";
-import Home from "./Pages/Home";
-import Colors from "./Pages/Colors";
+
+const Home = lazy(() => import("./Pages/Home"));
+const Projects = lazy(() => import("./Pages/Projects"));
+const Experience = lazy(() => import("./Pages/Experience"));
+const Colors = lazy(() => import("./Pages/Colors"));
 
 //Material UI Imports
 import Theme from "./Theme";
@@ -28,18 +29,23 @@ const Routes: React.FC = (props) => {
     <Router>
       <NavBar></NavBar>
       <Switch>
-        <Route path="/projects">
-          <Projects />
-        </Route>
-        <Route path="/experience">
-          <Experience />
-        </Route>
-        <Route path="/colors">
-          <Colors />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Route path="/projects">
+            <Projects />
+          </Route>
+          <Route path="/experience">
+            <Experience />
+          </Route>
+          <Route path="/colors">
+            <Colors />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Suspense>
       </Switch>
     </Router>
   );
