@@ -19,35 +19,35 @@ const App: React.FC = (props) => {
   return (
     <Theme>
       <CssBaseline />
-      <Routes />
+      <Router>
+        <NavBar></NavBar>
+        <Switch>
+          <Routes />
+        </Switch>
+      </Router>
     </Theme>
   );
 };
 
 const Routes: React.FC = (props) => {
   return (
-    <Router>
-      <NavBar></NavBar>
-      <Switch>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Route path="/projects">
-            <Projects />
-          </Route>
-          <Route path="/experience">
-            <Experience />
-          </Route>
-          <Route path="/colors">
-            <Colors />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-        </Suspense>
-      </Switch>
-    </Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Route path="/projects">
+        <Projects />
+      </Route>
+      <Route path="/experience">
+        <Experience />
+      </Route>
+      <Route path="/colors">
+        <Colors />
+      </Route>
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route exact path="/">
+        <Home />
+      </Route>
+    </Suspense>
   );
 };
 
