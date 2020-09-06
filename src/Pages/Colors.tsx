@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   slider: {
     margin: "0px 10px",
-    flexGrow: 1,
   },
   colorPicker: {
     display: "flex",
@@ -80,16 +79,22 @@ const useStyles = makeStyles((theme: Theme) => ({
   radioIconSelected: {
     border: ({ isCurrentColor }: styleProps) =>
       isCurrentColor
-        ? `4px solid ${theme.palette.type === "dark" ? "white" : "black"}`
+        ? `4px solid ${
+            theme.palette.type === "dark"
+              ? theme.palette.common.white
+              : theme.palette.common.black
+          }`
         : "none",
-    color: theme.palette.common.white,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   checkIcon: {
     fontSize: 30,
-    color: theme.palette.type === "dark" ? "white" : "black",
+    color:
+      theme.palette.type === "dark"
+        ? theme.palette.common.white
+        : theme.palette.common.black,
   },
   resetDiv: {
     display: "flex",
