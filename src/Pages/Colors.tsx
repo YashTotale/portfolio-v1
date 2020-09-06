@@ -12,6 +12,10 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { TextField, capitalize, Tooltip, IconButton } from "@material-ui/core";
 import * as colorsObject from "@material-ui/core/colors";
 
+interface styleProps {
+  color?: string;
+}
+
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
@@ -24,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   scheme: {
     margin: "5px",
+    maxWidth: "200px",
   },
   colorPicker: {
     marginTop: "5px",
@@ -46,6 +51,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   colorDiv: {
     width: "48px",
     height: "48px",
+    backgroundColor: (props: styleProps) => props.color,
   },
 }));
 
@@ -105,8 +111,9 @@ interface ColorBtnProps {
 }
 
 const ColorBtn: React.FC<ColorBtnProps> = ({ color, scheme }) => {
-  const classes = useStyles();
   const cssColor = toCssColor(color);
+  //@ts-ignore
+  const classes = useStyles({ color: colorsObject[cssColor]["A400"] });
 
   return (
     <Tooltip title={color}>
