@@ -72,3 +72,16 @@ export const setSnackbarMessage = (
   type: SET_SNACKBAR_MESSAGE,
   payload: { message, severity },
 });
+
+//Handle Snackbar close
+
+interface IhandleSnackbarClose {
+  type: string;
+  payload: {};
+}
+
+export const HANDLE_SNACKBAR_CLOSE = "HANDLE_SNACKBAR_CLOSE";
+export const handleSnackbarClose = (): IhandleSnackbarClose => ({
+  type: HANDLE_SNACKBAR_CLOSE,
+  payload: {},
+});

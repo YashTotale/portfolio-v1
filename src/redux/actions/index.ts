@@ -9,4 +9,6 @@ export {
   changeShade,
   SET_SNACKBAR_MESSAGE,
   setSnackbarMessage,
+  HANDLE_SNACKBAR_CLOSE,
+  handleSnackbarClose,
 } from "./display.actions";

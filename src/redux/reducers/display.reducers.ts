@@ -4,6 +4,7 @@ import {
   CHANGE_COLORS,
   CHANGE_SHADE,
   SET_SNACKBAR_MESSAGE,
+  HANDLE_SNACKBAR_CLOSE,
 } from "../actions";
 import { AnyAction } from "redux";
 import { defaultColors, defaultShades } from "../../Utils/colors";
@@ -45,6 +46,9 @@ export const display = (state = displayState, action: AnyAction) => {
     case SET_SNACKBAR_MESSAGE: {
       const { message, severity } = payload;
       return { ...state, snackBar: { message, severity, isOpen: true } };
+    }
+    case HANDLE_SNACKBAR_CLOSE: {
+      return { ...state, snackBar: { isOpen: false } };
     }
     default: {
       return state;
