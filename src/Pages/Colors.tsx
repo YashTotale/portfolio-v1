@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  header: {
+    margin: "15px 0px",
+  },
   schemes: {
     display: "flex",
     justifyContent: "center",
@@ -53,6 +56,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   scheme: {
     margin: "0px 20px",
     width: "220px",
+  },
+  schemeTitle: {
+    textAlign: "center",
   },
   sliderDiv: {
     display: "flex",
@@ -118,10 +124,12 @@ const Colors: React.FC = (props) => {
 
   return (
     <div className={classes.root}>
-      <h1>Customize Website Colors</h1>
+      <Typography className={classes.header} variant="h4">
+        Customize Website Colors
+      </Typography>
       <div className={classes.schemes}>
         {schemes.map((scheme) => (
-          <ColorScheme scheme={scheme} />
+          <ColorScheme key={scheme} scheme={scheme} />
         ))}
       </div>
       <div className={classes.resetDiv}>
@@ -155,12 +163,9 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
 
   return (
     <div className={classes.scheme}>
-      <TextField
-        size="medium"
-        label={upperCase}
-        //@ts-ignore
-        value={colorsObject[currentColor][shade]}
-      ></TextField>
+      <Typography className={classes.schemeTitle} variant="h6">
+        {upperCase}
+      </Typography>
       <div className={classes.sliderDiv}>
         <Typography id="shade">Shade: </Typography>
         <Slider
