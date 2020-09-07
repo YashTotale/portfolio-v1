@@ -7,6 +7,7 @@ import {
 } from "../actions";
 import { AnyAction } from "redux";
 import { defaultColors, defaultShades } from "../../Utils/colors";
+import { Color } from "@material-ui/lab";
 
 export const displayState = {
   isDarkMode: false,
@@ -16,6 +17,7 @@ export const displayState = {
   snackBar: {
     isOpen: false,
     message: "",
+    severity: <Color>"info",
   },
 };
 
@@ -41,8 +43,8 @@ export const display = (state = displayState, action: AnyAction) => {
       return { ...state, shades: { ...state.shades, [scheme]: shade } };
     }
     case SET_SNACKBAR_MESSAGE: {
-      const { message } = payload;
-      return { ...state, snackBar: { message, isOpen: true } };
+      const { message, severity } = payload;
+      return { ...state, snackBar: { message, severity, isOpen: true } };
     }
     default: {
       return state;

@@ -1,3 +1,5 @@
+import { Color } from "@material-ui/lab";
+
 //Toggle Dark Mode
 interface ItoggleDarkMode {
   type: string;
@@ -59,13 +61,14 @@ export const changeShade = (
 
 interface IsetSnackbarMessage {
   type: string;
-  payload: { message: string };
+  payload: { message: string; severity: Color };
 }
 
 export const SET_SNACKBAR_MESSAGE = "SET_SNACKBAR_MESSAGE";
 export const setSnackbarMessage = (
-  message: string = ""
+  message: string = "",
+  severity: Color
 ): IsetSnackbarMessage => ({
   type: SET_SNACKBAR_MESSAGE,
-  payload: { message },
+  payload: { message, severity },
 });

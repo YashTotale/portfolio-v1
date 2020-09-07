@@ -20,3 +20,6 @@ export const getSnackbarMessage = (state: State) =>
 
 export const getIsSnackbarOpen = (state: State) =>
   state.display.snackBar.isOpen;
+
+export const getSnackbarSeverity = (state: State) =>
+  state.display.snackBar.severity;
