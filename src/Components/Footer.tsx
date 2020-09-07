@@ -1,7 +1,12 @@
 // React Imports
 import React from "react";
 import TooltipBtn, { TooltipBtnProps } from "./TooltipBtn";
-import { LINKEDIN_URL, GITHUB_URL, EMAIL_URL } from "../Utils/constants";
+import {
+  LINKEDIN_URL,
+  GITHUB_URL,
+  EMAIL_URL,
+  FOOTER_HEIGHT,
+} from "../Utils/constants";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +18,10 @@ import { LinkedIn, GitHub, Email } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    marginTop: "auto",
+    bottom: 0,
+    top: "auto",
+    width: "100%",
+    height: FOOTER_HEIGHT,
   },
   footerDiv: {
     display: "flex",
@@ -59,7 +67,7 @@ const Footer: React.FC = (props) => {
   return (
     <AppBar
       elevation={2}
-      position="relative"
+      position="absolute"
       color="transparent"
       className={classes.footer}
     >

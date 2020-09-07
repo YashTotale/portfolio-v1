@@ -1,6 +1,7 @@
 //React Imports
 import React, { lazy, Suspense } from "react";
 import { hot } from "react-hot-loader";
+import { FOOTER_HEIGHT } from "./Utils/constants";
 const SnackBar = lazy(() => import("./Components/SnackBar"));
 const NavBar = lazy(() => import("./Components/NavBar"));
 const Footer = lazy(() => import("./Components/Footer"));
@@ -21,6 +22,9 @@ import { makeStyles, Theme as ThemeProps } from "@material-ui/core";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles((theme: ThemeProps) => ({
+  pageContainer: {
+    paddingBottom: FOOTER_HEIGHT,
+  },
   loadingSkeleton: {
     display: "flex",
     flexDirection: "column",
@@ -40,14 +44,17 @@ const useStyles = makeStyles((theme: ThemeProps) => ({
 }));
 
 const App: React.FC = (props) => {
+  const classes = useStyles();
   return (
     <Theme>
       <CssBaseline />
       <Suspense fallback={<Loading />}>
         <Router>
-          <NavBar />
-          <Routes />
-          <SnackBar />
+          <div className={classes.pageContainer}>
+            <NavBar />
+            <Routes />
+            <SnackBar />
+          </div>
           <Footer />
         </Router>
       </Suspense>
