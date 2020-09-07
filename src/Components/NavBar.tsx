@@ -59,7 +59,7 @@ const NavBar: React.FC = (props) => {
 
   const oppositeTheme = `${isDarkMode ? "Light" : "Dark"} Theme`;
 
-  const btns = [
+  const btns: TooltipBtnProps[] = [
     {
       title: oppositeTheme,
       onClick: () => {

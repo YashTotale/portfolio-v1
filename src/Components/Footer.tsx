@@ -8,17 +8,26 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar } from "@material-ui/core";
+import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { LinkedIn, GitHub, Email } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
     marginTop: "auto",
   },
+  footerDiv: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
   footerBtns: {
     display: "flex",
     justifyContent: "center",
-    width: "100%",
+  },
+  copyright: {
+    marginBottom: "10px",
   },
 }));
 
@@ -55,10 +64,15 @@ const Footer: React.FC = (props) => {
       className={classes.footer}
     >
       <Toolbar>
-        <div className={classes.footerBtns}>
-          {footerBtns.map((props) => (
-            <TooltipBtn {...props} />
-          ))}
+        <div className={classes.footerDiv}>
+          <div className={classes.footerBtns}>
+            {footerBtns.map((props) => (
+              <TooltipBtn {...props} />
+            ))}
+          </div>
+          <Typography className={classes.copyright} variant="body2">
+            © {new Date().getFullYear()} Yash Totale
+          </Typography>
         </div>
       </Toolbar>
     </AppBar>
