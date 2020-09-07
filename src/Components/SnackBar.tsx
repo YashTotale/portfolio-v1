@@ -11,7 +11,7 @@ import {
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { Snackbar } from "@material-ui/core";
+import { Snackbar, SnackbarCloseReason } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import {} from "@material-ui/icons";
 import { handleSnackbarClose } from "../Redux/actions";
@@ -24,7 +24,12 @@ const SnackBar: React.FC<SnackBarProps> = ({}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const handleClose = () => dispatch(handleSnackbarClose());
+  const handleClose = (
+    event: React.SyntheticEvent<any, Event>,
+    reason?: SnackbarCloseReason
+  ) => {
+    if (reason !== "clickaway") dispatch(handleSnackbarClose());
+  };
 
   const isOpen = useSelector(getIsSnackbarOpen);
   const message = useSelector(getSnackbarMessage);
@@ -33,6 +38,7 @@ const SnackBar: React.FC<SnackBarProps> = ({}) => {
   return (
     <Snackbar
       autoHideDuration={3000}
+      key={message}
       onClose={handleClose}
       open={isOpen}
       message={message}

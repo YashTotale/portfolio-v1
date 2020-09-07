@@ -152,7 +152,7 @@ interface ColorSchemeProps {
 const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const upperCase = capitalize(scheme);
+  const upperCaseScheme = capitalize(scheme);
   const currentColor = useSelector(
     scheme === "primary" ? getPrimaryColor : getSecondaryColor
   );
@@ -163,12 +163,18 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
   const handleSlide = (e: React.ChangeEvent<{}>, index: number | number[]) => {
     const i = typeof index === "number" ? index : index[0];
     dispatch(changeShade(scheme, shades[i]));
+    dispatch(
+      setSnackbarMessage(
+        `${upperCaseScheme} Shade is now ${shades[i]}`,
+        "success"
+      )
+    );
   };
 
   return (
     <div className={classes.scheme}>
       <Typography className={classes.schemeTitle} variant="h6">
-        {upperCase}
+        {upperCaseScheme}
       </Typography>
       <div className={classes.sliderDiv}>
         <Typography id="shade">Shade: </Typography>
@@ -187,6 +193,7 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
         shade={shade}
         scheme={scheme}
         colors={mainColors}
+        upperCaseScheme={upperCaseScheme}
       />
     </div>
   );
@@ -197,6 +204,7 @@ interface ColorPickerProps {
   scheme: scheme;
   shade: string;
   currentColor: string;
+  upperCaseScheme: string;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
@@ -204,6 +212,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   scheme,
   shade,
   currentColor,
+  upperCaseScheme,
 }) => {
   const classes = useStyles();
 
@@ -217,6 +226,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
             scheme={scheme}
             color={color}
             currentColor={currentColor}
+            upperCaseScheme={upperCaseScheme}
           ></ColorBtn>
         );
       })}
@@ -229,6 +239,7 @@ interface ColorBtnProps {
   scheme: scheme;
   shade: string;
   currentColor: string;
+  upperCaseScheme: string;
 }
 
 const ColorBtn: React.FC<ColorBtnProps> = ({
@@ -236,6 +247,7 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   scheme,
   shade,
   currentColor,
+  upperCaseScheme,
 }) => {
   const dispatch = useDispatch();
   const cssColor = toCssColor(color);
@@ -249,7 +261,9 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
     dispatch(changeColors(scheme, event.target.value));
-    dispatch(setSnackbarMessage("test", "success"));
+    dispatch(
+      setSnackbarMessage(`${upperCaseScheme} Hue is now ${color}`, "success")
+    );
   };
 
   return (
