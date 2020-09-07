@@ -14,6 +14,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 //Router Imports
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import SnackBar from "./Components/SnackBar";
 
 const App: React.FC = (props) => {
   return (
@@ -24,6 +25,7 @@ const App: React.FC = (props) => {
         <Switch>
           <Routes />
         </Switch>
+        <SnackBar />
       </Router>
     </Theme>
   );

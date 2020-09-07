@@ -4,7 +4,7 @@ import {
   TOGGLE_NAV_BTNS_MENU,
   CHANGE_COLORS,
   CHANGE_SHADE,
-  TOGGLE_SNACKBAR,
+  SET_SNACKBAR_MESSAGE,
 } from "../../../Redux/actions/display.actions";
 import { display as originalState } from "../sampleStore";
 
@@ -100,7 +100,7 @@ describe("The display reducer", () => {
     const message = "test";
 
     const fakeAction = {
-      type: TOGGLE_SNACKBAR,
+      type: SET_SNACKBAR_MESSAGE,
       payload: { isOpen: true, message },
     };
 

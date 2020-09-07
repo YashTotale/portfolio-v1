@@ -7,8 +7,8 @@ import {
   changeColors,
   CHANGE_SHADE,
   changeShade,
-  TOGGLE_SNACKBAR,
-  toggleSnackbar,
+  SET_SNACKBAR_MESSAGE,
+  setSnackbarMessage,
 } from "../../../Redux/actions/display.actions";
 
 describe("The display actions", () => {
@@ -63,15 +63,15 @@ describe("The display actions", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("The toggleSnackbar action", () => {
+  test("The setSnackbarMessage action", () => {
     const message = "test message";
 
     const expected = {
-      type: TOGGLE_SNACKBAR,
+      type: SET_SNACKBAR_MESSAGE,
       payload: { isOpen: true, message },
     };
 
-    const actual = toggleSnackbar(true, message);
+    const actual = setSnackbarMessage(true, message);
 
     expect(actual).toEqual(expected);
   });

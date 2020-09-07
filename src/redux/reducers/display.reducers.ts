@@ -3,10 +3,10 @@ import {
   TOGGLE_NAV_BTNS_MENU,
   CHANGE_COLORS,
   CHANGE_SHADE,
+  SET_SNACKBAR_MESSAGE,
 } from "../actions";
 import { AnyAction } from "redux";
 import { defaultColors, defaultShades } from "../../Utils/colors";
-import { TOGGLE_SNACKBAR } from "../actions/display.actions";
 
 export const displayState = {
   isDarkMode: false,
@@ -40,7 +40,7 @@ export const display = (state = displayState, action: AnyAction) => {
       const { shade, scheme } = payload;
       return { ...state, shades: { ...state.shades, [scheme]: shade } };
     }
-    case TOGGLE_SNACKBAR: {
+    case SET_SNACKBAR_MESSAGE: {
       const { isOpen, message } = payload;
       return { ...state, snackBar: { isOpen, message } };
     }

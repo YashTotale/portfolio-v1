@@ -3,6 +3,10 @@ import React from "react";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
+import {
+  getIsSnackbarOpen,
+  getSnackbarMessage,
+} from "../Redux/selectors/display.selectors";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,14 +15,15 @@ import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({}));
 
-interface SnackBarProps {
-  message: string;
-}
+interface SnackBarProps {}
 
-const SnackBar: React.FC<SnackBarProps> = ({ message }) => {
+const SnackBar: React.FC<SnackBarProps> = ({}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  return <Snackbar />;
+
+  const isOpen = useSelector(getIsSnackbarOpen);
+  const message = useSelector(getSnackbarMessage);
+  return <Snackbar open={isOpen} message={message} />;
 };
 
 export default SnackBar;

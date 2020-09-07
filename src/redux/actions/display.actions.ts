@@ -57,16 +57,16 @@ export const changeShade = (
 
 //Toggle Snackbar
 
-interface ItoggleSnackbar {
+interface IsetSnackbarMessage {
   type: string;
   payload: { isOpen: boolean; message: string };
 }
 
-export const TOGGLE_SNACKBAR = "TOGGLE_SNACKBAR";
-export const toggleSnackbar = (
+export const SET_SNACKBAR_MESSAGE = "SET_SNACKBAR_MESSAGE";
+export const setSnackbarMessage = (
   isOpen: boolean,
   message: string = ""
-): ItoggleSnackbar => ({
-  type: TOGGLE_SNACKBAR,
+): IsetSnackbarMessage => ({
+  type: SET_SNACKBAR_MESSAGE,
   payload: { isOpen, message },
 });
