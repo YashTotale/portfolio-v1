@@ -25,7 +25,6 @@ import {
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import {
-  TextField,
   capitalize,
   Tooltip,
   Slider,

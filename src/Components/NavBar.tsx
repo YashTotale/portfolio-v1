@@ -21,7 +21,6 @@ import {
   GitHub,
   Menu as MenuButton,
   Palette,
-  CallMissedSharp,
 } from "@material-ui/icons";
 import {
   AppBar,
