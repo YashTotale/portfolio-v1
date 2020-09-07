@@ -10,18 +10,18 @@ import {
 } from "../Redux/selectors/display.selectors";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { Snackbar, SnackbarCloseReason } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import {} from "@material-ui/icons";
 import { handleSnackbarClose } from "../Redux/actions";
 
-const useStyles = makeStyles((theme) => ({}));
+// const useStyles = makeStyles((theme) => ({}));
 
 interface SnackBarProps {}
 
 const SnackBar: React.FC<SnackBarProps> = ({}) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
 
   const handleClose = (
