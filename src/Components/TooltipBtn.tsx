@@ -11,7 +11,7 @@ import { Tooltip, IconButton } from "@material-ui/core";
 export interface TooltipBtnProps {
   title: string;
   icon: JSX.Element;
-  component: string;
+  component: "a" | "btn" | "link";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
   href?: string;
   to?: string;
@@ -56,9 +56,6 @@ const TooltipComponent = ({
           {icon}
         </IconButton>
       );
-    }
-    default: {
-      return <div></div>;
     }
   }
 };

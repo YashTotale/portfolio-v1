@@ -3,6 +3,7 @@ import React, { lazy, Suspense } from "react";
 import { hot } from "react-hot-loader";
 const SnackBar = lazy(() => import("./Components/SnackBar"));
 const NavBar = lazy(() => import("./Components/NavBar"));
+const Footer = lazy(() => import("./Components/Footer"));
 
 //Pages
 const Home = lazy(() => import("./Pages/Home"));
@@ -47,6 +48,7 @@ const App: React.FC = (props) => {
           <NavBar />
           <Routes />
           <SnackBar />
+          <Footer />
         </Router>
       </Suspense>
     </Theme>
