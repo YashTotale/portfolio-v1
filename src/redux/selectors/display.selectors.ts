@@ -14,3 +14,9 @@ export const getPrimaryShade = (state: State) => state.display.shades.primary;
 
 export const getSecondaryShade = (state: State) =>
   state.display.shades.secondary;
+
+export const getSnackbarMessage = (state: State) =>
+  state.display.snackBar.message;
+
+export const getIsSnackbarOpen = (state: State) =>
+  state.display.snackBar.isOpen;

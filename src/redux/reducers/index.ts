@@ -1,4 +1,4 @@
-export { display } from "./display.reducers";
+export { display, displayState } from "./display.reducers";
 
 //Redux Reducers
 

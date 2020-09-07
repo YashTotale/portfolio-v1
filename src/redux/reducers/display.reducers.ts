@@ -6,15 +6,20 @@ import {
 } from "../actions";
 import { AnyAction } from "redux";
 import { defaultColors, defaultShades } from "../../Utils/colors";
+import { TOGGLE_SNACKBAR } from "../actions/display.actions";
 
-const initialState = {
+export const displayState = {
   isDarkMode: false,
   isNavBtnsMenuOpen: false,
   colors: defaultColors,
   shades: defaultShades,
+  snackBar: {
+    isOpen: false,
+    message: "",
+  },
 };
 
-export const display = (state = initialState, action: AnyAction) => {
+export const display = (state = displayState, action: AnyAction) => {
   const { type, payload } = action;
   switch (type) {
     case TOGGLE_DARK_MODE: {
@@ -34,6 +39,10 @@ export const display = (state = initialState, action: AnyAction) => {
     case CHANGE_SHADE: {
       const { shade, scheme } = payload;
       return { ...state, shades: { ...state.shades, [scheme]: shade } };
+    }
+    case TOGGLE_SNACKBAR: {
+      const { isOpen, message } = payload;
+      return { ...state, snackBar: { isOpen, message } };
     }
     default: {
       return state;

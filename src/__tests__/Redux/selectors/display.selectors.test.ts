@@ -5,6 +5,8 @@ import {
   getSecondaryColor,
   getPrimaryShade,
   getSecondaryShade,
+  getSnackbarMessage,
+  getIsSnackbarOpen,
 } from "../../../Redux/selectors/display.selectors";
 import sampleState from "../sampleStore";
 
@@ -42,6 +44,18 @@ describe("The display selectors", () => {
   test("The getSecondaryShade selector", () => {
     const expected = sampleState.display.shades.secondary;
     const actual = getSecondaryShade(sampleState);
+    expect(actual).toEqual(expected);
+  });
+
+  test("The getSnackbarMessage selector", () => {
+    const expected = sampleState.display.snackBar.message;
+    const actual = getSnackbarMessage(sampleState);
+    expect(actual).toEqual(expected);
+  });
+
+  test("The getIsSnackbarOpen selector", () => {
+    const expected = sampleState.display.snackBar.isOpen;
+    const actual = getIsSnackbarOpen(sampleState);
     expect(actual).toEqual(expected);
   });
 });

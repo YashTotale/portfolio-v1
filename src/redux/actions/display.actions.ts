@@ -1,3 +1,4 @@
+//Toggle Dark Mode
 interface ItoggleDarkMode {
   type: string;
   payload: {};
@@ -9,9 +10,11 @@ export const toggleDarkMode = (): ItoggleDarkMode => ({
   payload: {},
 });
 
+//Toggle Nav Btns Menu
+
 interface ItoggleNavBtnsMenu {
   type: string;
-  payload: {};
+  payload: { isOpen?: boolean };
 }
 
 export const TOGGLE_NAV_BTNS_MENU = "TOGGLE_NAV_BTNS_MENU";
@@ -19,6 +22,8 @@ export const toggleNavBtnsMenu = (isOpen?: boolean): ItoggleNavBtnsMenu => ({
   type: TOGGLE_NAV_BTNS_MENU,
   payload: { isOpen },
 });
+
+//Change colors
 
 interface IchangeColors {
   type: string;
@@ -34,6 +39,8 @@ export const changeColors = (
   payload: { scheme, color },
 });
 
+//Change shade
+
 interface IchangeShade {
   type: string;
   payload: { shade: string; scheme: string };
@@ -46,4 +53,20 @@ export const changeShade = (
 ): IchangeShade => ({
   type: CHANGE_SHADE,
   payload: { scheme, shade },
+});
+
+//Toggle Snackbar
+
+interface ItoggleSnackbar {
+  type: string;
+  payload: { isOpen: boolean; message: string };
+}
+
+export const TOGGLE_SNACKBAR = "TOGGLE_SNACKBAR";
+export const toggleSnackbar = (
+  isOpen: boolean,
+  message: string = ""
+): ItoggleSnackbar => ({
+  type: TOGGLE_SNACKBAR,
+  payload: { isOpen, message },
 });

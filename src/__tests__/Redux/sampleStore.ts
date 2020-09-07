@@ -1,14 +1,7 @@
+import { displayState } from "../../Redux/reducers";
+
 export const display = {
-  isDarkMode: false,
-  isNavBtnsMenuOpen: true,
-  shades: {
-    primary: "200",
-    secondary: "A400",
-  },
-  colors: {
-    primary: "red",
-    secondary: "pink",
-  },
+  ...displayState,
 };
 
 const sampleState = { display };

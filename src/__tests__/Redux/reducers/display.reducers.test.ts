@@ -4,6 +4,7 @@ import {
   TOGGLE_NAV_BTNS_MENU,
   CHANGE_COLORS,
   CHANGE_SHADE,
+  TOGGLE_SNACKBAR,
 } from "../../../Redux/actions/display.actions";
 import { display as originalState } from "../sampleStore";
 
@@ -14,7 +15,10 @@ describe("The display reducer", () => {
       payload: {},
     };
 
-    const expected = { ...originalState, isDarkMode: true };
+    const expected = {
+      ...originalState,
+      isDarkMode: !originalState.isDarkMode,
+    };
 
     const actual = display(originalState, fakeAction);
 
@@ -22,16 +26,33 @@ describe("The display reducer", () => {
   });
 
   test("Toggles Nav Btn Menu Open", () => {
-    const fakeAction = {
+    const fakeAction1 = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: {},
     };
 
-    const expected = { ...originalState, isNavBtnsMenuOpen: false };
+    const expected1 = {
+      ...originalState,
+      isNavBtnsMenuOpen: !originalState.isNavBtnsMenuOpen,
+    };
 
-    const actual = display(originalState, fakeAction);
+    const actual1 = display(originalState, fakeAction1);
 
-    expect(actual).toEqual(expected);
+    expect(actual1).toEqual(expected1);
+
+    const fakeAction2 = {
+      type: TOGGLE_NAV_BTNS_MENU,
+      payload: { isOpen: true },
+    };
+
+    const expected2 = {
+      ...originalState,
+      isNavBtnsMenuOpen: true,
+    };
+
+    const actual2 = display(originalState, fakeAction2);
+
+    expect(actual2).toEqual(expected2);
   });
 
   test("Changes color", () => {
@@ -67,6 +88,27 @@ describe("The display reducer", () => {
       shades: {
         primary: "A200",
         secondary: originalState.shades.secondary,
+      },
+    };
+
+    const actual = display(originalState, fakeAction);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("Toggles Snackbar and changes message", () => {
+    const message = "test";
+
+    const fakeAction = {
+      type: TOGGLE_SNACKBAR,
+      payload: { isOpen: true, message },
+    };
+
+    const expected = {
+      ...originalState,
+      snackBar: {
+        isOpen: true,
+        message,
       },
     };
 

@@ -7,4 +7,6 @@ export {
   changeColors,
   CHANGE_SHADE,
   changeShade,
+  TOGGLE_SNACKBAR,
+  toggleSnackbar,
 } from "./display.actions";
