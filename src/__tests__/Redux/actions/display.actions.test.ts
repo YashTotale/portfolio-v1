@@ -9,6 +9,8 @@ import {
   changeShade,
   SET_SNACKBAR_MESSAGE,
   setSnackbarMessage,
+  handleSnackbarClose,
+  HANDLE_SNACKBAR_CLOSE,
 } from "../../../Redux/actions/display.actions";
 
 describe("The display actions", () => {
@@ -73,6 +75,17 @@ describe("The display actions", () => {
     };
 
     const actual = setSnackbarMessage(message, severity);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("The handleSnackbarClose action", () => {
+    const expected = {
+      type: HANDLE_SNACKBAR_CLOSE,
+      payload: {},
+    };
+
+    const actual = handleSnackbarClose();
 
     expect(actual).toEqual(expected);
   });

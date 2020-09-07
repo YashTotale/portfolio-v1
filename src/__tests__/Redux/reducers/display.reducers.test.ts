@@ -5,6 +5,7 @@ import {
   CHANGE_COLORS,
   CHANGE_SHADE,
   SET_SNACKBAR_MESSAGE,
+  HANDLE_SNACKBAR_CLOSE,
 } from "../../../Redux/actions/display.actions";
 import { display as originalState } from "../sampleStore";
 
@@ -112,6 +113,22 @@ describe("The display reducer", () => {
         severity,
         message,
       },
+    };
+
+    const actual = display(originalState, fakeAction);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("Closes the Snackbar", () => {
+    const fakeAction = {
+      type: HANDLE_SNACKBAR_CLOSE,
+      payload: {},
+    };
+
+    const expected = {
+      ...originalState,
+      snackBar: { ...originalState.snackBar, isOpen: false },
     };
 
     const actual = display(originalState, fakeAction);

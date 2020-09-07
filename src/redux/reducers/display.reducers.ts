@@ -48,7 +48,7 @@ export const display = (state = displayState, action: AnyAction) => {
       return { ...state, snackBar: { message, severity, isOpen: true } };
     }
     case HANDLE_SNACKBAR_CLOSE: {
-      return { ...state, snackBar: { isOpen: false } };
+      return { ...state, snackBar: { ...state.snackBar, isOpen: false } };
     }
     default: {
       return state;
