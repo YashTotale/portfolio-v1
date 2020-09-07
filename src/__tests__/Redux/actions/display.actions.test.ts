@@ -9,8 +9,8 @@ import {
   changeShade,
   SET_SNACKBAR_MESSAGE,
   setSnackbarMessage,
-  handleSnackbarClose,
   HANDLE_SNACKBAR_CLOSE,
+  handleSnackbarClose,
 } from "../../../Redux/actions/display.actions";
 
 describe("The display actions", () => {
