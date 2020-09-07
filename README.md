@@ -12,3 +12,5 @@
     <a href="https://lgtm.com/projects/g/YashTotale/YashTotale.github.io/alerts/?mode=list"><img src="https://img.shields.io/lgtm/alerts/github/YashTotale/YashTotale.github.io?style=for-the-badge&labelColor=000000&logo=lgtm" alt="Alerts"></a>&nbsp;
     <a href="https://lgtm.com/projects/g/YashTotale/YashTotale.github.io/context:javascript"><img src="https://img.shields.io/lgtm/grade/javascript/github/YashTotale/YashTotale.github.io?style=for-the-badge&labelColor=000000&logo=lgtm" alt="Code Quality"></a>&nbsp;
 </p>
+
+---
