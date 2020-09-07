@@ -123,6 +123,7 @@ const Colors: React.FC = (props) => {
     schemes.map((scheme: scheme) => {
       dispatch(changeColors(scheme, defaultColors[scheme]));
       dispatch(changeShade(scheme, defaultShades[scheme]));
+      dispatch(setSnackbarMessage("Colors have been reset", "success"));
     });
   };
 
