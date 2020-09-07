@@ -1,2 +1,2 @@
 queries:
-  - exclude: [js/shell-command-injection-from-environment]
+  - exclude: js/shell-command-injection-from-environment
