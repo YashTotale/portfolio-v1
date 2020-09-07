@@ -68,10 +68,10 @@ describe("The display actions", () => {
 
     const expected = {
       type: SET_SNACKBAR_MESSAGE,
-      payload: { isOpen: true, message },
+      payload: { message },
     };
 
-    const actual = setSnackbarMessage(true, message);
+    const actual = setSnackbarMessage(message);
 
     expect(actual).toEqual(expected);
   });

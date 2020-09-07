@@ -96,12 +96,12 @@ describe("The display reducer", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("Toggles Snackbar and changes message", () => {
+  test("Sets Snackbar message", () => {
     const message = "test";
 
     const fakeAction = {
       type: SET_SNACKBAR_MESSAGE,
-      payload: { isOpen: true, message },
+      payload: { message },
     };
 
     const expected = {

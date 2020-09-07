@@ -59,14 +59,13 @@ export const changeShade = (
 
 interface IsetSnackbarMessage {
   type: string;
-  payload: { isOpen: boolean; message: string };
+  payload: { message: string };
 }
 
 export const SET_SNACKBAR_MESSAGE = "SET_SNACKBAR_MESSAGE";
 export const setSnackbarMessage = (
-  isOpen: boolean,
   message: string = ""
 ): IsetSnackbarMessage => ({
   type: SET_SNACKBAR_MESSAGE,
-  payload: { isOpen, message },
+  payload: { message },
 });

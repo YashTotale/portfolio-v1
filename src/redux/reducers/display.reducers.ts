@@ -41,8 +41,8 @@ export const display = (state = displayState, action: AnyAction) => {
       return { ...state, shades: { ...state.shades, [scheme]: shade } };
     }
     case SET_SNACKBAR_MESSAGE: {
-      const { isOpen, message } = payload;
-      return { ...state, snackBar: { isOpen, message } };
+      const { message } = payload;
+      return { ...state, snackBar: { message, isOpen: true } };
     }
     default: {
       return state;
