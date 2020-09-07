@@ -20,7 +20,7 @@ import { handleSnackbarClose } from "../Redux/actions";
 
 interface SnackBarProps {}
 
-export const SnackBar: React.FC<SnackBarProps> = ({}) => {
+const SnackBar: React.FC<SnackBarProps> = ({}) => {
   // const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -49,3 +49,5 @@ export const SnackBar: React.FC<SnackBarProps> = ({}) => {
     </Snackbar>
   );
 };
+
+export default SnackBar;

@@ -1,9 +1,10 @@
 //React Imports
 import React, { lazy, Suspense } from "react";
 import { hot } from "react-hot-loader";
-import { NavBar } from "./Components/NavBar";
-import { SnackBar } from "./Components/SnackBar";
+const SnackBar = lazy(() => import("./Components/SnackBar"));
+const NavBar = lazy(() => import("./Components/NavBar"));
 
+//Pages
 const Home = lazy(() => import("./Pages/Home"));
 const Projects = lazy(() => import("./Pages/Projects"));
 const Experience = lazy(() => import("./Pages/Experience"));
@@ -41,20 +42,20 @@ const App: React.FC = (props) => {
   return (
     <Theme>
       <CssBaseline />
-      <Router>
-        <NavBar></NavBar>
-        <Switch>
+      <Suspense fallback={<Loading />}>
+        <Router>
+          <NavBar />
           <Routes />
-        </Switch>
-        <SnackBar />
-      </Router>
+          <SnackBar />
+        </Router>
+      </Suspense>
     </Theme>
   );
 };
 
 const Routes: React.FC = (props) => {
   return (
-    <Suspense fallback={<Loading />}>
+    <Switch>
       <Route path="/projects">
         <Projects />
       </Route>
@@ -70,7 +71,7 @@ const Routes: React.FC = (props) => {
       <Route exact path="/">
         <Home />
       </Route>
-    </Suspense>
+    </Switch>
   );
 };
 

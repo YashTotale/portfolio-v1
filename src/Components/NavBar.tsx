@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const NavBar: React.FC = (props) => {
+const NavBar: React.FC = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -106,6 +106,8 @@ export const NavBar: React.FC = (props) => {
     </div>
   );
 };
+
+export default NavBar;
 
 interface NavButtonsProps {
   btns: TooltipBtnProps[];
