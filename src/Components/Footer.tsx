@@ -74,8 +74,8 @@ const Footer: React.FC = (props) => {
       <Toolbar>
         <div className={classes.footerDiv}>
           <div className={classes.footerBtns}>
-            {footerBtns.map((props) => (
-              <TooltipBtn {...props} />
+            {footerBtns.map((props, i) => (
+              <TooltipBtn key={i} {...props} />
             ))}
           </div>
           <Typography className={classes.copyright} variant="body2">

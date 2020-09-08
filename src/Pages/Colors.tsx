@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   header: {
     margin: "15px 0px",
+    textAlign: "center",
   },
   schemes: {
     display: "flex",
