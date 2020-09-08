@@ -10,19 +10,31 @@ const projectsRequest = () => {
   });
 };
 
-const cleanProjectData = (project: ProjectObject) => {
-  const { description, tags, icon } = project;
-  const newProject = { ...project };
-  newProject.description =
-    typeof description === "string" ? description.split("; ") : [];
-  newProject.tags = typeof tags === "string" ? tags.split(", ") : [];
-  newProject.icon = icon ? icon : DEFAULT_ICON;
-  return newProject;
+const cleanProjectData = (projects: ProjectObject[]): ProjectObject[] => {
+  const cleanedProjects: ProjectObject[] = [];
+  projects.forEach((project: ProjectObject, i) => {
+    if (!project.id) {
+      const prevProject = cleanedProjects[i - 1];
+      for (const key in project) {
+        //@ts-ignore
+        prevProject[key].push(project[key]);
+      }
+    } else {
+      const { description, tags, icon } = project;
+      project.description =
+        typeof description === "string" ? description.split("; ") : [];
+      project.tags = typeof tags === "string" ? tags.split(", ") : [];
+      project.icon = icon ? icon : DEFAULT_ICON;
+      cleanedProjects.push(project);
+    }
+  });
+  return cleanedProjects;
 };
 
 export const getProjects = () => {
   projectsRequest().then((projects: any) => {
-    write("Projects", projects.map(cleanProjectData));
+    const cleanedProjects = cleanProjectData(projects);
+    write("Projects", cleanedProjects);
   });
 };
 

@@ -4,6 +4,7 @@ import { exec } from "child_process";
 
 import { getProjects, ProjectObject } from "./getProjects";
 import { getExperiences, ExperienceObject } from "./getExperiences";
+import { closeGithubIssue } from "./closeGithubIssue";
 
 export const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
@@ -33,6 +34,10 @@ export const gitAdd = (location: string) => {
   });
 };
 
-//Get Data
-getProjects();
-getExperiences();
+try {
+  getProjects();
+  getExperiences();
+  closeGithubIssue();
+} catch (e) {
+  console.log(e);
+}
