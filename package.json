@@ -10,6 +10,7 @@
     "test": "jest --config .jestconfig.json",
     "snyk": "snyk test",
     "data": "ts-node ./src/Scripts/getData",
+    "closeIssue": "ts-node ./src/Scripts/closeGithubIssue",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build -m Auto-Deploy"
   },

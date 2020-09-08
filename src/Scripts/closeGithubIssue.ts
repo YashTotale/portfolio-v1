@@ -1,27 +1,34 @@
 import fetch from "node-fetch";
 
-export const closeGithubIssue = async () => {
-  const issueData = await getIssueData();
+const args = process.argv;
+
+if (args.length < 3) {
+  console.log("Please provide a GitHub OAuth Token");
+  process.exit(1);
+}
+
+export const closeGithubIssue = async (githubToken: string) => {
+  const issueData = await getIssueData(githubToken);
   if (issueData.state === "open") {
-    changeIssueToClosed();
+    changeIssueToClosed(githubToken);
   }
 };
 
-async function getIssueData() {
+async function getIssueData(githubToken: string) {
   const response = await fetch(
     "https://api.github.com/repos/YashTotale/YashTotale.github.io/issues/4",
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "token 4a8fc32f0e02c0961414e8f1f443b46d42f1f383",
+        Authorization: `token ${githubToken}`,
       },
     }
   );
   return response.json();
 }
 
-async function changeIssueToClosed() {
+async function changeIssueToClosed(githubToken: string) {
   const body = {
     state: "closed",
   };
@@ -32,8 +39,10 @@ async function changeIssueToClosed() {
       method: "PATCH",
       body: JSON.stringify(body),
       headers: {
-        Authorization: "token 4a8fc32f0e02c0961414e8f1f443b46d42f1f383",
+        Authorization: `token ${githubToken}`,
       },
     }
   );
 }
+
+closeGithubIssue(args[2]);

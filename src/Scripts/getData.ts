@@ -34,10 +34,5 @@ export const gitAdd = (location: string) => {
   });
 };
 
-try {
-  getProjects();
-  getExperiences();
-  closeGithubIssue();
-} catch (e) {
-  console.log(e);
-}
+getProjects();
+getExperiences();
