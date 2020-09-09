@@ -9,7 +9,6 @@ import {
 } from "../Utils/constants";
 
 // Redux Imports
-import { useDispatch, useSelector } from "react-redux";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -41,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Footer: React.FC = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
 
   const footerBtns: TooltipBtnProps[] = [
     {
