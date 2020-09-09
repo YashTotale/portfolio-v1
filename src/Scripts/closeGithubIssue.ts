@@ -2,15 +2,21 @@ import fetch from "node-fetch";
 
 const args = process.argv;
 
-if (args.length < 3) {
-  console.log("Please provide a GitHub OAuth Token");
-  process.exit(1);
-}
-
 export const closeGithubIssue = async (githubToken: string) => {
-  const issueData = await getIssueData(githubToken);
+  const issueResponse = await getIssueData(githubToken);
+  if (!issueResponse.ok) process.exit(1);
+
+  const issueData = await issueResponse.json();
+
   if (issueData.state === "open") {
-    changeIssueToClosed(githubToken);
+    const changeSuccess = await changeIssueToClosed(githubToken);
+    if (changeSuccess) {
+      console.log("Issue has been closed");
+      process.exit(0);
+    }
+    process.exit(1);
+  } else {
+    console.log("Issue is already closed");
   }
 };
 
@@ -25,7 +31,7 @@ async function getIssueData(githubToken: string) {
       },
     }
   );
-  return response.json();
+  return response;
 }
 
 async function changeIssueToClosed(githubToken: string) {
@@ -33,7 +39,7 @@ async function changeIssueToClosed(githubToken: string) {
     state: "closed",
   };
 
-  fetch(
+  const response = await fetch(
     "https://api.github.com/repos/YashTotale/YashTotale.github.io/issues/4",
     {
       method: "PATCH",
@@ -43,6 +49,12 @@ async function changeIssueToClosed(githubToken: string) {
       },
     }
   );
+  return response.status;
+}
+
+if (args.length < 3) {
+  console.log("Please provide a GitHub OAuth Token");
+  process.exit(1);
 }
 
 closeGithubIssue(args[2]);
