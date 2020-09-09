@@ -10,22 +10,23 @@ const projectsRequest = () => {
   });
 };
 
-const cleanProjectData = (projects: ProjectObject[]): ProjectObject[] => {
-  const cleanedProjects: ProjectObject[] = [];
-  projects.forEach((project: ProjectObject, i) => {
+const cleanProjectData = (projects: ProjectObject[]): CleanProjectData[] => {
+  const cleanedProjects: CleanProjectData[] = [];
+  projects.forEach((project, i) => {
     if (!project.id) {
-      const prevProject = cleanedProjects[i - 1];
+      const [prevProject] = cleanedProjects.slice(-1);
       for (const key in project) {
         //@ts-ignore
         prevProject[key].push(project[key]);
       }
     } else {
-      const { description, tags, icon } = project;
-      project.description =
-        typeof description === "string" ? description.split("; ") : [];
-      project.tags = typeof tags === "string" ? tags.split(", ") : [];
-      project.icon = icon ? icon : DEFAULT_ICON;
-      cleanedProjects.push(project);
+      const newProject: CleanProjectData = {
+        ...project,
+        description: [project.description],
+        icon: project.icon ? project.icon : DEFAULT_ICON,
+        tags: [project.tags],
+      };
+      cleanedProjects.push(newProject);
     }
   });
   return cleanedProjects;
@@ -38,11 +39,20 @@ export const getProjects = () => {
   });
 };
 
+export interface CleanProjectData {
+  id: string;
+  name: string;
+  description: string[];
+  icon: string;
+  sourcecode?: string;
+  tags: string[];
+}
+
 export interface ProjectObject {
-  id?: string;
-  name?: string;
-  description?: string | string[];
+  id: string;
+  name: string;
+  description: string;
   icon?: string;
   sourcecode?: string;
-  tags?: string | string[];
+  tags: string;
 }
