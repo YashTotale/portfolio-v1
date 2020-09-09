@@ -10,15 +10,19 @@ const projectsRequest = () => {
   });
 };
 
-const cleanProjectData = (projects: ProjectObject[]): CleanProjectData[] => {
+const cleanProjectData = (
+  projects: ProjectObject[]
+): [CleanProjectData[], string[]] => {
   const cleanedProjects: CleanProjectData[] = [];
-  projects.forEach((project, i) => {
+  let tags: string[] = [];
+  projects.forEach((project) => {
     if (!project.id) {
       const [prevProject] = cleanedProjects.slice(-1);
       for (const key in project) {
         //@ts-ignore
         prevProject[key].push(project[key]);
       }
+      tags = tags.concat(prevProject.tags);
     } else {
       const newProject: CleanProjectData = {
         ...project,
@@ -27,15 +31,18 @@ const cleanProjectData = (projects: ProjectObject[]): CleanProjectData[] => {
         tags: [project.tags],
       };
       cleanedProjects.push(newProject);
+      tags = tags.concat(newProject.tags);
     }
   });
-  return cleanedProjects;
+  return [cleanedProjects, tags];
 };
 
 export const getProjects = () => {
-  projectsRequest().then((projects: any) => {
-    const cleanedProjects = cleanProjectData(projects);
+  return new Promise(async (resolve, reject) => {
+    const projects: any = await projectsRequest();
+    const [cleanedProjects, tags] = cleanProjectData(projects);
     write("Projects", cleanedProjects);
+    resolve(tags);
   });
 };
 

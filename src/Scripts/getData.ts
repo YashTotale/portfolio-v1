@@ -4,6 +4,7 @@ import { exec } from "child_process";
 
 import { getProjects, CleanProjectData } from "./getProjects";
 import { getExperiences, ExperienceObject } from "./getExperiences";
+import { addTags } from "./addTags";
 
 export const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
@@ -12,8 +13,10 @@ export const baseOptions = {
 
 export const dataFolder = join(__dirname, "..", "Data");
 
+export type files = "Experience" | "Projects" | "Tags";
+
 export const write = (
-  fileName: "Experience" | "Projects",
+  fileName: files,
   data: CleanProjectData[] | ExperienceObject[]
 ) => {
   const location = join(dataFolder, `${fileName}.json`);
@@ -33,5 +36,6 @@ export const gitAdd = (location: string) => {
   });
 };
 
-getProjects();
+//@ts-ignore
+getProjects().then(addTags);
 getExperiences();
