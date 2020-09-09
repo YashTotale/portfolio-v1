@@ -23,7 +23,7 @@ export const write = (
 
   writeFile(location, JSON.stringify(data), "utf8", (err) => {
     if (err) return console.log(err);
-    console.log(`${fileName}:`);
+    console.log(`\n${fileName}:`);
     console.log(data);
     gitAdd(location);
   });

@@ -4,7 +4,7 @@ const createTags = (tags: string[]): any => {
   const tagsObj: any = {};
   tags.forEach((tag) => {
     const tagObj = {
-      url: tag.toLowerCase().replace(" ", "-"),
+      url: tag.toLowerCase().replace(/\s/g, "-"),
     };
     tagsObj[tag] = tagObj;
   });

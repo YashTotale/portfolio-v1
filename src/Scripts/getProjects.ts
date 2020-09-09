@@ -15,6 +15,7 @@ const cleanProjectData = (
 ): [CleanProjectData[], string[]] => {
   const cleanedProjects: CleanProjectData[] = [];
   let tags: string[] = [];
+
   projects.forEach((project) => {
     if (!project.id) {
       const [prevProject] = cleanedProjects.slice(-1);
@@ -22,6 +23,7 @@ const cleanProjectData = (
         //@ts-ignore
         prevProject[key].push(project[key]);
       }
+
       tags = tags.concat(prevProject.tags);
     } else {
       const newProject: CleanProjectData = {
@@ -31,6 +33,7 @@ const cleanProjectData = (
         tags: [project.tags],
       };
       cleanedProjects.push(newProject);
+
       tags = tags.concat(newProject.tags);
     }
   });
@@ -52,6 +55,7 @@ export interface CleanProjectData {
   description: string[];
   icon: string;
   sourcecode?: string;
+  link?: string;
   tags: string[];
 }
 
@@ -61,5 +65,6 @@ export interface ProjectObject {
   description: string;
   icon?: string;
   sourcecode?: string;
+  link?: string;
   tags: string;
 }
