@@ -9,3 +9,12 @@ export const splitCamelCase = (str: string, toUpperCase: boolean): string => {
 export const stringToInteger = (str: string): string | number => {
   return /^\d+$/.test(str) ? parseInt(str) : str;
 };
+
+export const findClosestInteger = (num: number, nums: number[]) => {
+  const closestReducer = (g: number) => (a: number, b: number) =>
+    Math.abs(g - a) < Math.abs(g - b) ? a : b;
+
+  const closest = nums.reduce(closestReducer(num));
+
+  return nums.indexOf(closest);
+};

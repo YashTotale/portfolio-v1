@@ -26,5 +26,6 @@ deploy:
   github_token: $GITHUB_TOKEN
   local_dir: ./build/
   committer_from_gh: true
+  keep_history: true
   on:
     branch: master
