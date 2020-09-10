@@ -10,8 +10,7 @@
     "test": "jest --config .jestconfig.json",
     "snyk": "snyk test",
     "data": "ts-node ./src/Scripts/getData",
-    "closeIssue": "ts-node ./src/Scripts/closeGithubIssue",
-    "deploy": "ts-node ./src/Scripts/deploy"
+    "closeIssue": "ts-node ./src/Scripts/closeGithubIssue"
   },
   "keywords": [],
   "author": "",
@@ -39,7 +38,6 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
-    "@types/gh-pages": "^3.0.0",
     "@types/history": "^4.7.7",
     "@types/jest": "^26.0.13",
     "@types/node-fetch": "^2.5.7",
@@ -49,7 +47,6 @@
     "@types/react-router-dom": "^5.1.5",
     "babel-loader": "^8.1.0",
     "g-sheets-api": "^1.3.0",
-    "gh-pages": "^3.1.0",
     "html-loader": "^1.3.0",
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
