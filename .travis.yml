@@ -24,7 +24,7 @@ before_deploy:
 deploy:
   provider: pages
   github_token: $GITHUB_TOKEN
-  keep_history: true
-  local_dir: ./build
+  local_dir: ./build/
+  committer_from_gh: true
   on:
     branch: master
