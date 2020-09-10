@@ -11,8 +11,7 @@
     "snyk": "snyk test",
     "data": "ts-node ./src/Scripts/getData",
     "closeIssue": "ts-node ./src/Scripts/closeGithubIssue",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -m Auto-Deploy"
+    "deploy": "ts-node ./src/Scripts/deploy"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +39,7 @@
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@types/gh-pages": "^3.0.0",
     "@types/history": "^4.7.7",
     "@types/jest": "^26.0.13",
     "@types/node-fetch": "^2.5.7",
