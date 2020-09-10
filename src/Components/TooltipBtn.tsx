@@ -1,12 +1,10 @@
 // React Imports
 import React from "react";
 import { Link } from "react-router-dom";
+import ModifiedA from "./ModifiedA";
 
 // Material UI Imports
-// import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip, IconButton } from "@material-ui/core";
-
-// const useStyles = makeStyles((theme) => ({}));
 
 export interface TooltipBtnProps {
   title: string;
@@ -37,12 +35,7 @@ const TooltipComponent = ({
   switch (component) {
     case "a": {
       return (
-        <IconButton
-          component="a"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={href}
-        >
+        <IconButton component={ModifiedA} href={href}>
           {icon}
         </IconButton>
       );
