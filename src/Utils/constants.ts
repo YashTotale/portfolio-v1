@@ -11,3 +11,8 @@ export const GITHUB_URL = "https://github.com/YashTotale";
 export const EMAIL_URL = "mailto:totaleyash@gmail.com";
 
 export const FOOTER_HEIGHT = "5rem";
+
+export const PROFILE_PIC_RATIO = 1.2776;
+
+export const PROFILE_PIC =
+  "https://drive.google.com/uc?export=view&id=13_ogdHkakqTPNH-NVnhu1_IPGwymiaZW";

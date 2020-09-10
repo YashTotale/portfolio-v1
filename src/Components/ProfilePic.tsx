@@ -4,8 +4,9 @@ import ModifiedA from "../Components/ModifiedA";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { useMediaQuery, useTheme } from "@material-ui/core";
+import { useMediaQuery, Theme } from "@material-ui/core";
 import {} from "@material-ui/icons";
+import { PROFILE_PIC, PROFILE_PIC_RATIO } from "../Utils/constants";
 
 interface styleProps {
   width?: string;
@@ -25,22 +26,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ProfilePic = ({}) => {
-  const aspectRatio = 1.2776;
-  const theme = useTheme();
-  const isXS = useMediaQuery(theme.breakpoints.only("xs"));
-  const isSmall = useMediaQuery(theme.breakpoints.only("sm"));
-  const isMedium = useMediaQuery(theme.breakpoints.only("md"));
+  const isXS = useMediaQuery((theme: Theme) => theme.breakpoints.only("xs"));
+  const isSmall = useMediaQuery((theme: Theme) => theme.breakpoints.only("sm"));
+  const isMedium = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.only("md")
+  );
 
   const width = isXS ? 180 : isSmall ? 210 : isMedium ? 300 : 350;
 
-  const classes = useStyles({ width, height: Math.round(width * aspectRatio) });
+  const classes = useStyles({
+    width,
+    height: Math.round(width * PROFILE_PIC_RATIO),
+  });
   return (
     <div className={classes.imgDiv}>
-      <ModifiedA href="https://drive.google.com/uc?export=view&id=13_ogdHkakqTPNH-NVnhu1_IPGwymiaZW">
-        <img
-          className={classes.img}
-          src="https://drive.google.com/uc?export=view&id=13_ogdHkakqTPNH-NVnhu1_IPGwymiaZW"
-        ></img>
+      <ModifiedA href={PROFILE_PIC}>
+        <img className={classes.img} src={PROFILE_PIC}></img>
       </ModifiedA>
     </div>
   );
