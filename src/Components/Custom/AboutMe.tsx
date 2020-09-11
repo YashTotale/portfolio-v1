@@ -3,9 +3,13 @@ import React, { useState } from "react";
 import ProfilePic from "./ProfilePic";
 import { BACKGROUND_PIC } from "../../Utils/constants";
 
+//Redux Imports
+import { toggleDarkModeWMessage } from "../../Redux/thunks";
+
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Paper, Typography } from "@material-ui/core";
+import { useDispatch } from "react-redux";
 
 interface styleProps {
   hovering?: boolean;
@@ -67,10 +71,15 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: "1rem",
     },
   },
+  clickable: {
+    textDecoration: "underline",
+    cursor: "pointer",
+  },
 }));
 
 const AboutMe: React.FC = () => {
   const [hovering, setHovering] = useState(false);
+  const dispatch = useDispatch();
 
   const classes = useStyles({ hovering });
   return (
@@ -102,7 +111,21 @@ const AboutMe: React.FC = () => {
           </Typography>
           <Typography className={`${classes.text} ${classes.p}`} variant="h6">
             You can check out my personal projects, work experience, and some
-            cool features (like changing the theme and colors) on this website.
+            cool features (like changing the&nbsp;
+            <span
+              className={classes.clickable}
+              onClick={() => dispatch(toggleDarkModeWMessage())}
+            >
+              theme
+            </span>
+            &nbsp;and{" "}
+            <span
+              className={classes.clickable}
+              onClick={() => alert("clicked")}
+            >
+              colors
+            </span>
+            ) on this website.
           </Typography>
         </div>
       </div>

@@ -7,11 +7,8 @@ import { SOURCE_CODE } from "../../Utils/constants";
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
 import { getIsDarkMode, getIsNavBtnsMenuOpen } from "../../Redux/selectors";
-import {
-  toggleDarkMode,
-  toggleNavBtnsMenu,
-  setSnackbarMessage,
-} from "../../Redux/actions";
+import { toggleDarkModeWMessage } from "../../Redux/thunks";
+import { toggleNavBtnsMenu } from "../../Redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -65,8 +62,7 @@ const NavBar: React.FC = (props) => {
     {
       title: oppositeTheme,
       onClick: () => {
-        dispatch(toggleDarkMode());
-        dispatch(setSnackbarMessage(`${oppositeTheme} set`, "success"));
+        dispatch(toggleDarkModeWMessage());
       },
       component: "btn",
       icon: isDarkMode ? <Brightness7 /> : <Brightness4 />,

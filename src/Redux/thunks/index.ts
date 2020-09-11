@@ -1,5 +1,7 @@
 //Redux Thunks
 
+export { toggleDarkModeWMessage } from "./display.thunks";
+
 /* 
 
 Example:
