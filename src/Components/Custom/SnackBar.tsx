@@ -7,14 +7,14 @@ import {
   getIsSnackbarOpen,
   getSnackbarMessage,
   getSnackbarSeverity,
-} from "../Redux/selectors/display.selectors";
+} from "../../Redux/selectors/display.selectors";
 
 // Material UI Imports
 // import { makeStyles } from "@material-ui/core/styles";
 import { Snackbar, SnackbarCloseReason } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import {} from "@material-ui/icons";
-import { handleSnackbarClose } from "../Redux/actions";
+import { handleSnackbarClose } from "../../Redux/actions";
 
 // const useStyles = makeStyles((theme) => ({}));
 

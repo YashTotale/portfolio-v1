@@ -1,17 +1,17 @@
 //React Imports
 import React, { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import TooltipBtn, { TooltipBtnProps } from "./TooltipBtn";
-import { SOURCE_CODE } from "../Utils/constants";
+import TooltipBtn, { TooltipBtnProps } from "../Reusable/TooltipBtn";
+import { SOURCE_CODE } from "../../Utils/constants";
 
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
-import { getIsDarkMode, getIsNavBtnsMenuOpen } from "../Redux/selectors";
+import { getIsDarkMode, getIsNavBtnsMenuOpen } from "../../Redux/selectors";
 import {
   toggleDarkMode,
   toggleNavBtnsMenu,
   setSnackbarMessage,
-} from "../Redux/actions";
+} from "../../Redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";

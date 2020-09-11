@@ -2,9 +2,9 @@
 import React, { lazy, Suspense } from "react";
 import { hot } from "react-hot-loader";
 import { FOOTER_HEIGHT } from "./Utils/constants";
-const SnackBar = lazy(() => import("./Components/SnackBar"));
-const NavBar = lazy(() => import("./Components/NavBar"));
-const Footer = lazy(() => import("./Components/Footer"));
+const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
+const NavBar = lazy(() => import("./Components/Custom/NavBar"));
+const Footer = lazy(() => import("./Components/Custom/Footer"));
 
 //Pages
 const Home = lazy(() => import("./Pages/Home"));

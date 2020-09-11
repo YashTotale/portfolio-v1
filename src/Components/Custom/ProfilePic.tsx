@@ -1,7 +1,7 @@
 // React Imports
 import React from "react";
-import ModifiedA from "../Components/ModifiedA";
-import { PROFILE_PIC, PROFILE_PIC_RATIO } from "../Utils/constants";
+import ModifiedA from "../Reusable/ModifiedA";
+import { PROFILE_PIC, PROFILE_PIC_RATIO } from "../../Utils/constants";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";

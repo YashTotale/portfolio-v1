@@ -25,6 +25,9 @@ const Theme: React.FC = ({ children }) => {
   const theme = React.useMemo(
     () =>
       createMuiTheme({
+        typography: {
+          fontFamily: "Palatino, Georgia, Helvetica",
+        },
         palette: {
           type: isDarkMode ? "dark" : "light",
           primary: {

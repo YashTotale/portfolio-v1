@@ -1,12 +1,12 @@
 // React Imports
 import React from "react";
-import TooltipBtn, { TooltipBtnProps } from "./TooltipBtn";
+import TooltipBtn, { TooltipBtnProps } from "../Reusable/TooltipBtn";
 import {
   LINKEDIN_URL,
   GITHUB_URL,
   EMAIL_URL,
   FOOTER_HEIGHT,
-} from "../Utils/constants";
+} from "../../Utils/constants";
 
 // Redux Imports
 
