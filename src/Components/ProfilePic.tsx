@@ -1,12 +1,12 @@
 // React Imports
 import React from "react";
 import ModifiedA from "../Components/ModifiedA";
+import { PROFILE_PIC, PROFILE_PIC_RATIO } from "../Utils/constants";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import { useMediaQuery, Theme } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import { PROFILE_PIC, PROFILE_PIC_RATIO } from "../Utils/constants";
 
 interface styleProps {
   width?: string;
@@ -15,7 +15,7 @@ interface styleProps {
 
 const useStyles = makeStyles((theme) => ({
   imgDiv: {
-    margin: "30px",
+    margin: "20px 10px",
     overflow: "hidden",
     justifySelf: "flex-start",
   },
@@ -32,7 +32,7 @@ const ProfilePic = ({}) => {
     theme.breakpoints.only("md")
   );
 
-  const width = isXS ? 180 : isSmall ? 210 : isMedium ? 300 : 350;
+  const width = isXS ? 140 : isSmall ? 160 : isMedium ? 180 : 200;
 
   const classes = useStyles({
     width,

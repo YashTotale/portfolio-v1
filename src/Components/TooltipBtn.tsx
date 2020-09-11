@@ -1,7 +1,6 @@
 // React Imports
 import React from "react";
 import { Link } from "react-router-dom";
-import ModifiedA from "./ModifiedA";
 
 // Material UI Imports
 import { Tooltip, IconButton } from "@material-ui/core";
@@ -35,7 +34,12 @@ const TooltipComponent = ({
   switch (component) {
     case "a": {
       return (
-        <IconButton component={ModifiedA} href={href}>
+        <IconButton
+          component="a"
+          target="_blank"
+          rel="noopener noreferrer"
+          href={href}
+        >
           {icon}
         </IconButton>
       );

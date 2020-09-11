@@ -22,5 +22,6 @@ export const getExperiences = () => {
 };
 
 export interface ExperienceObject {
+  id: string;
   name: string;
 }
