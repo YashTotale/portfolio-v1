@@ -1,15 +1,16 @@
 //React Imports
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import ProfilePic from "./ProfilePic";
 import { BACKGROUND_PIC } from "../../Utils/constants";
 
 //Redux Imports
 import { toggleDarkModeWMessage } from "../../Redux/thunks";
+import { useDispatch } from "react-redux";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Paper, Typography } from "@material-ui/core";
-import { useDispatch } from "react-redux";
 
 interface styleProps {
   hovering?: boolean;
@@ -118,12 +119,11 @@ const AboutMe: React.FC = () => {
             >
               theme
             </span>
-            &nbsp;and{" "}
-            <span
-              className={classes.clickable}
-              onClick={() => alert("clicked")}
-            >
-              colors
+            &nbsp;and&nbsp;
+            <span className={classes.clickable}>
+              <Link style={{ color: "inherit" }} to="/colors">
+                colors
+              </Link>
             </span>
             ) on this website.
           </Typography>
