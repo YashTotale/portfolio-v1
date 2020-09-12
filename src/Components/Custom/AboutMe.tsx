@@ -107,22 +107,23 @@ const AboutMe: React.FC = () => {
           </Typography>
           <Typography className={`${classes.text} ${classes.p}`} variant="h6">
             You can check out my
-            <Clickable type="link">
-              <Link to="/projects">personal projects</Link>
+            <Clickable type="link" to="/projects">
+              personal projects
             </Clickable>
             ,
-            <Clickable type="link">
-              <Link to="/experience">work experience</Link>
+            <Clickable type="link" to="/experience">
+              work experience
             </Clickable>
             , and some cool features, like changing the
-            <Clickable type="btn">
-              <span onClick={() => dispatch(toggleDarkModeWMessage())}>
-                theme
-              </span>
+            <Clickable
+              type="btn"
+              onClick={() => dispatch(toggleDarkModeWMessage())}
+            >
+              theme
             </Clickable>
             and
-            <Clickable type="link">
-              <Link to="/colors">colors</Link>
+            <Clickable type="link" to="/colors">
+              colors
             </Clickable>
           </Typography>
         </div>
@@ -158,22 +159,36 @@ const useClickableStyles = makeStyles((theme: Theme) => ({
 
 interface ClickableProps {
   type: "btn" | "link";
+  to?: string;
+  onClick?: (e: any) => any;
 }
 
-const Clickable: React.FC<ClickableProps> = ({ children, type }) => {
+const Clickable: React.FC<ClickableProps> = ({
+  children,
+  type,
+  to,
+  onClick,
+}) => {
   const [hovering, setHovering] = useState<boolean>(false);
   const classes = useClickableStyles({ type, hovering });
+  const renderChildren =
+    type === "link" ? (
+      <Link to={to ? to : "#/"}>{children}</Link>
+    ) : (
+      <span>{children}</span>
+    );
 
   return (
     <>
       &nbsp;
       {React.cloneElement(
         //@ts-ignore
-        children,
+        renderChildren,
         {
           className: classes.clickable,
           onMouseOver: () => setHovering(true),
           onMouseLeave: () => setHovering(false),
+          onClick: onClick,
         }
       )}
       &nbsp;
