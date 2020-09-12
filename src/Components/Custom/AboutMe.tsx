@@ -106,15 +106,22 @@ const AboutMe: React.FC = () => {
             topics, especially finance.
           </Typography>
           <Typography className={`${classes.text} ${classes.p}`} variant="h6">
-            You can check out my personal projects, work experience, and some
-            cool features, like changing the&nbsp;
-            <Clickable>
+            You can check out my
+            <Clickable type="link">
+              <Link to="/projects">personal projects</Link>
+            </Clickable>
+            ,
+            <Clickable type="link">
+              <Link to="/experience">work experience</Link>
+            </Clickable>
+            , and some cool features, like changing the
+            <Clickable type="btn">
               <span onClick={() => dispatch(toggleDarkModeWMessage())}>
                 theme
               </span>
             </Clickable>
-            &nbsp;and&nbsp;
-            <Clickable>
+            and
+            <Clickable type="link">
               <Link to="/colors">colors</Link>
             </Clickable>
           </Typography>
@@ -124,14 +131,24 @@ const AboutMe: React.FC = () => {
   );
 };
 
+interface clickableStyleProps {
+  hovering: boolean;
+  type: "btn" | "link";
+}
+
 const useClickableStyles = makeStyles((theme: Theme) => ({
-  clickable: (hovering: boolean) => ({
-    padding: "2px",
-    textDecoration: "none",
-    border: "2px solid wheat",
-    borderRadius: "4px",
+  clickable: ({ hovering, type }: clickableStyleProps) => ({
+    //Border
+    border: type === "btn" ? "2px solid wheat" : "none",
+    borderRadius: type === "btn" ? "4px" : "initial",
+    //User interaction
     cursor: "pointer",
-    transition: "color 0.2s, background-color 0.2s",
+    userSelect: type === "btn" ? "none" : "auto",
+    //Misc
+    padding: "2px",
+    textDecoration: type === "btn" ? "none" : "underline",
+    //Colors
+    transition: "background-color 0.2s",
     color: "inherit",
     backgroundColor: hovering
       ? "rgb(245,222,179, 0.4)"
@@ -139,16 +156,29 @@ const useClickableStyles = makeStyles((theme: Theme) => ({
   }),
 }));
 
-const Clickable: React.FC = (props) => {
-  const [hovering, setHovering] = useState<boolean>(false);
-  const classes = useClickableStyles(hovering);
+interface ClickableProps {
+  type: "btn" | "link";
+}
 
-  //@ts-ignore
-  return React.cloneElement(props.children, {
-    className: classes.clickable,
-    onMouseOver: () => setHovering(true),
-    onMouseLeave: () => setHovering(false),
-  });
+const Clickable: React.FC<ClickableProps> = ({ children, type }) => {
+  const [hovering, setHovering] = useState<boolean>(false);
+  const classes = useClickableStyles({ type, hovering });
+
+  return (
+    <>
+      &nbsp;
+      {React.cloneElement(
+        //@ts-ignore
+        children,
+        {
+          className: classes.clickable,
+          onMouseOver: () => setHovering(true),
+          onMouseLeave: () => setHovering(false),
+        }
+      )}
+      &nbsp;
+    </>
+  );
 };
 
 export default AboutMe;
