@@ -72,10 +72,6 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: "1rem",
     },
   },
-  clickable: {
-    textDecoration: "underline",
-    cursor: "pointer",
-  },
 }));
 
 const AboutMe: React.FC = () => {
@@ -101,10 +97,9 @@ const AboutMe: React.FC = () => {
           </Typography>
           <Typography className={`${classes.text} ${classes.p}`} variant="h6">
             I am a high school Junior in the Bay Area with an interest in
-            Computer Science. By creating personal projects and leading high
-            school clubs, I have been exposed to Web Development and
-            Programming. I'm looking to work on interesting projects and expand
-            my skillset.
+            Computer Science. Most of my Web Development and Programming
+            experience comes from creating personal projects and leading high
+            school clubs.
           </Typography>
           <Typography className={`${classes.text} ${classes.p}`} variant="h6">
             Other than coding, I like reading, running, and learning about other
@@ -112,25 +107,48 @@ const AboutMe: React.FC = () => {
           </Typography>
           <Typography className={`${classes.text} ${classes.p}`} variant="h6">
             You can check out my personal projects, work experience, and some
-            cool features (like changing the&nbsp;
-            <span
-              className={classes.clickable}
-              onClick={() => dispatch(toggleDarkModeWMessage())}
-            >
-              theme
-            </span>
+            cool features, like changing the&nbsp;
+            <Clickable>
+              <span onClick={() => dispatch(toggleDarkModeWMessage())}>
+                theme
+              </span>
+            </Clickable>
             &nbsp;and&nbsp;
-            <span className={classes.clickable}>
-              <Link style={{ color: "inherit" }} to="/colors">
-                colors
-              </Link>
-            </span>
-            ) on this website.
+            <Clickable>
+              <Link to="/colors">colors</Link>
+            </Clickable>
           </Typography>
         </div>
       </div>
     </Paper>
   );
+};
+
+const useClickableStyles = makeStyles((theme: Theme) => ({
+  clickable: (hovering: boolean) => ({
+    padding: "2px",
+    textDecoration: "none",
+    border: "2px solid wheat",
+    borderRadius: "4px",
+    cursor: "pointer",
+    transition: "color 0.2s, background-color 0.2s",
+    color: "inherit",
+    backgroundColor: hovering
+      ? "rgb(245,222,179, 0.4)"
+      : "rgb(245,222,179, 0.2)",
+  }),
+}));
+
+const Clickable: React.FC = (props) => {
+  const [hovering, setHovering] = useState<boolean>(false);
+  const classes = useClickableStyles(hovering);
+
+  //@ts-ignore
+  return React.cloneElement(props.children, {
+    className: classes.clickable,
+    onMouseOver: () => setHovering(true),
+    onMouseLeave: () => setHovering(false),
+  });
 };
 
 export default AboutMe;
