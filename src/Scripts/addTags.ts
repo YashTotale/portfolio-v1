@@ -1,4 +1,4 @@
-import { write } from "./getData";
+import { write } from "./index";
 
 const createTags = (tags: string[]): any => {
   const tagsObj: any = {};

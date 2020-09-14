@@ -1,6 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { write, baseOptions } from "./getData";
+import { write, baseOptions } from "./index";
 import { DEFAULT_ICON } from "../Utils/constants";
 
 const projectsRequest = () => {

@@ -1,6 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { write, baseOptions } from "./getData";
+import { write, baseOptions } from "./index";
 
 const experiencesRequest = (): Promise<ExperienceObject[]> => {
   return new Promise((resolve, reject) => {

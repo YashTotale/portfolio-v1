@@ -181,16 +181,12 @@ const Clickable: React.FC<ClickableProps> = ({
   return (
     <>
       &nbsp;
-      {React.cloneElement(
-        //@ts-ignore
-        renderChildren,
-        {
-          className: classes.clickable,
-          onMouseOver: () => setHovering(true),
-          onMouseLeave: () => setHovering(false),
-          onClick: onClick,
-        }
-      )}
+      {React.cloneElement(renderChildren, {
+        className: classes.clickable,
+        onMouseOver: () => setHovering(true),
+        onMouseLeave: () => setHovering(false),
+        onClick: onClick,
+      })}
       &nbsp;
     </>
   );
