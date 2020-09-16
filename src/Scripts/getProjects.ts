@@ -1,7 +1,7 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { write, baseOptions } from "./index";
-import { DEFAULT_ICON } from "../Utils/constants";
+import { DEFAULT_ICON_DARK, DEFAULT_ICON_LIGHT } from "../Utils/constants";
 
 const projectsRequest = () => {
   return new Promise((resolve, reject) => {
@@ -24,12 +24,18 @@ const cleanProjectData = (
         prevProject[key].push(project[key]);
       }
 
+      if (prevProject.icons.length < 2) {
+        prevProject.icons.push(prevProject.icons[0]);
+      }
+
       tags = tags.concat(prevProject.tags);
     } else {
       const newProject: CleanProjectData = {
         ...project,
         description: [project.description],
-        icon: project.icon ? project.icon : DEFAULT_ICON,
+        icons: project.icons
+          ? [project.icons]
+          : [DEFAULT_ICON_LIGHT, DEFAULT_ICON_DARK],
         tags: [project.tags],
       };
       cleanedProjects.push(newProject);
@@ -53,7 +59,7 @@ export interface CleanProjectData {
   id: string;
   name: string;
   description: string[];
-  icon: string;
+  icons: string[];
   sourcecode?: string;
   link?: string;
   tags: string[];
@@ -63,7 +69,7 @@ export interface ProjectObject {
   id: string;
   name: string;
   description: string;
-  icon?: string;
+  icons?: string;
   sourcecode?: string;
   link?: string;
   tags: string;

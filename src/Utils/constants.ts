@@ -1,8 +1,11 @@
 export const SOURCE_CODE =
   "http://github.com/YashTotale/YashTotale.github.io.git";
 
-export const DEFAULT_ICON =
-  "https://www.creativefabrica.com/wp-content/uploads/2019/01/Blueprint-icon-by-rudezstudio-580x386.jpg";
+export const DEFAULT_ICON_LIGHT =
+  "https://i.ibb.co/wYhy5Zf/Default-Project.jpg";
+
+export const DEFAULT_ICON_DARK =
+  "https://i.ibb.co/RyMxJsV/Default-Project-Dark.jpg";
 
 export const LINKEDIN_URL = "https://linkedin.com/in/yash-totale";
 

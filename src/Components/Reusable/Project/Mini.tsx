@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 //Material UI Imports
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography, useTheme } from "@material-ui/core";
 
 interface styleProps {
   hovering: boolean;
@@ -60,13 +60,14 @@ interface MiniProps {
   name: string;
   description: string[];
   link?: string;
-  icon: string;
+  icons: string[];
   sourcecode?: string;
   tags: string[];
 }
 
 const Mini: React.FC<MiniProps> = (props) => {
   const [hovering, setHovering] = useState<boolean>(false);
+  const theme = useTheme();
   const classes = useStyles({ hovering });
   return (
     <div
@@ -78,7 +79,10 @@ const Mini: React.FC<MiniProps> = (props) => {
       <Typography className={classes.name} variant="h5">
         {props.name}
       </Typography>
-      <img className={classes.img} src={props.icon}></img>
+      <img
+        className={classes.img}
+        src={theme.palette.type === "light" ? props.icons[0] : props.icons[1]}
+      ></img>
     </div>
   );
 };
