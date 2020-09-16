@@ -1,16 +1,54 @@
-import { makeStyles } from "@material-ui/core";
 //React Imports
 import React from "react";
 import AboutMe from "../Components/Custom/AboutMe";
+import ProjectMini from "../Components/Reusable/Project/Mini";
+import Projects from "../Data/Projects.json";
 
-const useStyles = makeStyles((theme) => {
-  console.log(theme.typography);
-  return {};
-});
+//Material UI Imports
+import {
+  makeStyles,
+  Theme,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  home: {
+    margin: "0px 20px",
+  },
+  projects: {
+    margin: "10px 0px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+}));
 
 const HomePage: React.FC = () => {
   const classes = useStyles();
-  return <AboutMe />;
+  const isSizeSmall = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.only("xs")
+  );
+  const isSizeXL = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.only("xl")
+  );
+  return (
+    <div className={classes.home}>
+      <AboutMe />
+      <div>
+        <Typography variant="h4">Projects</Typography>
+        <hr />
+        <div className={classes.projects}>
+          {Projects.slice(0, isSizeSmall ? 3 : isSizeXL ? 7 : 5).map(
+            (project, i) => {
+              return <ProjectMini {...project} key={i} />;
+            }
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default HomePage;

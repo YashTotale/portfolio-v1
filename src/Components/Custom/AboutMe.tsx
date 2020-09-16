@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
     padding: "20px",
-    margin: "20px",
+    margin: "20px 0px",
     position: "relative",
     //Background
     backgroundImage: `url(${BACKGROUND_PIC})`,
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: 0,
     left: 0,
     right: 0,
-    //opacity transition
+    //fade in/out
     transition: "opacity 0.4s",
     opacity: ({ hovering }: styleProps) => (hovering ? 0.5 : 0.8),
   },

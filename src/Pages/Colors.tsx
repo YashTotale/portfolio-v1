@@ -110,6 +110,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: "flex",
     justifyContent: "center",
     width: "100%",
+    marginBottom: "10px",
   },
 }));
 
