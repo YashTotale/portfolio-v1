@@ -16,7 +16,7 @@ const Colors = lazy(() => import("./Pages/Colors"));
 import Theme from "./Theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Skeleton } from "@material-ui/lab";
-import { makeStyles, Theme as ThemeProps } from "@material-ui/core";
+import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
 
 //Router Imports
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
@@ -63,6 +63,12 @@ const App: React.FC = (props) => {
 };
 
 const Routes: React.FC = (props) => {
+  const theme = useTheme();
+  const icon = document.getElementById("icon") as HTMLLinkElement;
+  icon.href =
+    theme.palette.type === "dark"
+      ? "https://i.ibb.co/pJpLQfd/image.png"
+      : "https://i.ibb.co/dgN5wcv/Logo-Light.png";
   return (
     <Switch>
       <Route path="/projects">
