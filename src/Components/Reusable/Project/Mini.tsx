@@ -1,5 +1,6 @@
 //React Imports
 import React, { useState } from "react";
+import { ProjectProps } from "../../../Utils/constants";
 
 //Material UI Imports
 import { makeStyles, Typography, useTheme } from "@material-ui/core";
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   overlay: {
     position: "absolute",
-    borderRadius: "50%",
+    borderRadius: "5px",
     top: 0,
     right: 0,
     left: 0,
@@ -48,24 +49,14 @@ const useStyles = makeStyles((theme) => ({
   img: {
     width: 150,
     height: 150,
-    border: `7px solid ${
+    border: `4px solid ${
       theme.palette.common[theme.palette.type === "dark" ? "white" : "black"]
     }`,
-    borderRadius: "50%",
+    borderRadius: "5px",
   },
 }));
 
-interface MiniProps {
-  id: string;
-  name: string;
-  description: string[];
-  link?: string;
-  icons: string[];
-  sourcecode?: string;
-  tags: string[];
-}
-
-const Mini: React.FC<MiniProps> = (props) => {
+const Mini: React.FC<ProjectProps> = (props) => {
   const [hovering, setHovering] = useState<boolean>(false);
   const theme = useTheme();
   const classes = useStyles({ hovering });
@@ -82,6 +73,7 @@ const Mini: React.FC<MiniProps> = (props) => {
       <img
         className={classes.img}
         src={theme.palette.type === "light" ? props.icons[0] : props.icons[1]}
+        alt={props.name}
       ></img>
     </div>
   );

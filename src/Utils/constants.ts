@@ -22,3 +22,13 @@ export const PROFILE_PIC =
 
 export const BACKGROUND_PIC =
   "https://i.ibb.co/G3j8ZQD/68cacd73-8dc9-43fb-bb22-be6fd2f3ea18.jpg";
+
+export interface ProjectProps {
+  id: string;
+  name: string;
+  description: string[];
+  icons: string[];
+  sourcecode?: string;
+  link?: string;
+  tags: string[];
+}

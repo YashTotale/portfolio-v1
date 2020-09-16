@@ -1,7 +1,11 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { write, baseOptions } from "./index";
-import { DEFAULT_ICON_DARK, DEFAULT_ICON_LIGHT } from "../Utils/constants";
+import {
+  DEFAULT_ICON_DARK,
+  DEFAULT_ICON_LIGHT,
+  ProjectProps,
+} from "../Utils/constants";
 
 const projectsRequest = () => {
   return new Promise((resolve, reject) => {
@@ -12,8 +16,8 @@ const projectsRequest = () => {
 
 const cleanProjectData = (
   projects: ProjectObject[]
-): [CleanProjectData[], string[]] => {
-  const cleanedProjects: CleanProjectData[] = [];
+): [ProjectProps[], string[]] => {
+  const cleanedProjects: ProjectProps[] = [];
   let tags: string[] = [];
 
   projects.forEach((project) => {
@@ -30,7 +34,7 @@ const cleanProjectData = (
 
       tags = tags.concat(prevProject.tags);
     } else {
-      const newProject: CleanProjectData = {
+      const newProject: ProjectProps = {
         ...project,
         description: [project.description],
         icons: project.icons
@@ -54,16 +58,6 @@ export const getProjects = () => {
     resolve(tags);
   });
 };
-
-export interface CleanProjectData {
-  id: string;
-  name: string;
-  description: string[];
-  icons: string[];
-  sourcecode?: string;
-  link?: string;
-  tags: string[];
-}
 
 export interface ProjectObject {
   id: string;

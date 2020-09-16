@@ -107,14 +107,14 @@ const AboutMe: React.FC = () => {
           </Typography>
           <Typography className={`${classes.text} ${classes.p}`} variant="h6">
             You can check out my
-            <Clickable type="link" to="/projects">
+            <Clickable noSpaceAfter type="link" to="/projects">
               personal projects
             </Clickable>
             ,
-            <Clickable type="link" to="/experience">
+            <Clickable noSpaceAfter type="link" to="/experience">
               work experience
             </Clickable>
-            , and some cool features, like changing the
+            , and some cool features like changing this website's
             <Clickable
               type="btn"
               onClick={() => dispatch(toggleDarkModeWMessage())}
@@ -122,9 +122,10 @@ const AboutMe: React.FC = () => {
               theme
             </Clickable>
             and
-            <Clickable type="link" to="/colors">
+            <Clickable noSpaceAfter type="link" to="/colors">
               colors
             </Clickable>
+            .
           </Typography>
         </div>
       </div>
@@ -161,6 +162,7 @@ interface ClickableProps {
   type: "btn" | "link";
   to?: string;
   onClick?: (e: any) => any;
+  noSpaceAfter?: boolean;
 }
 
 const Clickable: React.FC<ClickableProps> = ({
@@ -168,6 +170,7 @@ const Clickable: React.FC<ClickableProps> = ({
   type,
   to,
   onClick,
+  noSpaceAfter,
 }) => {
   const [hovering, setHovering] = useState<boolean>(false);
   const classes = useClickableStyles({ type, hovering });
@@ -187,7 +190,7 @@ const Clickable: React.FC<ClickableProps> = ({
         onMouseLeave: () => setHovering(false),
         onClick: onClick,
       })}
-      &nbsp;
+      {noSpaceAfter ? null : "\u00A0"}
     </>
   );
 };
