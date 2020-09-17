@@ -7,9 +7,11 @@ interface ItoggleDarkMode {
 }
 
 export const TOGGLE_DARK_MODE = "TOGGLE_DARK_MODE";
-export const toggleDarkMode = (): ItoggleDarkMode => ({
+export const toggleDarkMode = (isDarkMode?: boolean): ItoggleDarkMode => ({
   type: TOGGLE_DARK_MODE,
-  payload: {},
+  payload: {
+    isDarkMode,
+  },
 });
 
 //Toggle Nav Btns Menu

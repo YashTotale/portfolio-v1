@@ -11,7 +11,7 @@ import { defaultColors, defaultShades } from "../../Utils/colors";
 import { Color } from "@material-ui/lab";
 
 export const displayState = {
-  isDarkMode: false,
+  isDarkMode: null,
   isNavBtnsMenuOpen: false,
   colors: defaultColors,
   shades: defaultShades,
@@ -26,7 +26,8 @@ export const display = (state = displayState, action: AnyAction) => {
   const { type, payload } = action;
   switch (type) {
     case TOGGLE_DARK_MODE: {
-      return { ...state, isDarkMode: !state.isDarkMode };
+      const { isDarkMode } = payload;
+      return { ...state, isDarkMode: isDarkMode ?? !state.isDarkMode };
     }
     case TOGGLE_NAV_BTNS_MENU: {
       const { isOpen } = payload;

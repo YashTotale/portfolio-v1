@@ -1,9 +1,12 @@
 language: node_js
+
 os:
   - osx
+
 env:
   global:
     secure: iIzV4NWC6lGtXpFZGbsIuVCETywR+4qcdFEMAbhYQr/WgjOfy73o28uF+umwLBNn0/ku6tTWmZjW7ywbe64umjiJ9o1a1aGiwdaYfOhcMJUNlPuKs1UDnLWRM6djoHeflahWFYC6qFzN7lgMHYH42U/g9ZhoSx59j+S4b3VCiTuQ73Ve1A4IWt7X23GaH3ml2CUPFa8HdaZZa1Bg2RTBbkCT6hwq82SHH2lktY4lLwRzFuHpofZMXxMS9meS0O+r4OsIhY9xpxD2pWK+b4cUlx7TBYNMtHcqkWbh/fCPFG/wXaKpY48wd8v346rh43Abzm4rWcm9YVEtvfPfyaw5SWH0Y5kO89sHyDYuI8+eOFKkLEV/akNBVSAOEyFBzZNw1xuDTdYsecMuFmApSjjlg2HnMce7EFAa5xXohlaknX0F4FLSswAW4CeYMV3QVwPEtxyQTLrxB2xQfKcjZjq6nD8CmN4xSomvHHQ6geJiYkpFTDdrWirdlONgAFa9BX6ErqstG/N34BLbSzOIegqPfr7L8g4ESQAKO8rqN6SmT7rq5fwP1zsekRx9g3CjEeNE/y2IN+o5VF+JWIZ78SwNwhBP/yk2/Jmzou7867nUFVWLST6OlYssS3Nzc6UdWiNEYLwLdAQyfJlbW5djjupdvmQbhqNaPdhH0ApzdELvV54=
+
 node_js:
   - node
 
@@ -16,7 +19,6 @@ before_script:
 script:
   - npm test
   - npm run snyk
-  - npm run closeIssue -- $GITHUB_TOKEN
 
 before_deploy:
   - npm run build
@@ -30,3 +32,6 @@ deploy:
   keep_history: true
   on:
     branch: master
+
+after_deploy:
+  - npm run closeIssue -- $GITHUB_TOKEN
