@@ -10,7 +10,7 @@ export const stringToInteger = (str: string): string | number => {
   return /^\d+$/.test(str) ? parseInt(str) : str;
 };
 
-export const findClosestInteger = (num: number, nums: number[]) => {
+export const findClosestInteger = (num: number, nums: number[]): number => {
   const closestReducer = (g: number) => (a: number, b: number) =>
     Math.abs(g - a) < Math.abs(g - b) ? a : b;
 

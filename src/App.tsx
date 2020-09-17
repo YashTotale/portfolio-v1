@@ -1,10 +1,11 @@
 //React Imports
 import React, { lazy, Suspense } from "react";
 import { hot } from "react-hot-loader";
-import { FOOTER_HEIGHT } from "./Utils/constants";
+import Loading from "./Components/Reusable/Loading";
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
 const NavBar = lazy(() => import("./Components/Custom/NavBar"));
 const Footer = lazy(() => import("./Components/Custom/Footer"));
+import { FOOTER_HEIGHT, DARK_LOGO, LIGHT_LOGO } from "./Utils/constants";
 
 //Pages
 const Home = lazy(() => import("./Pages/Home"));
@@ -15,7 +16,6 @@ const Colors = lazy(() => import("./Pages/Colors"));
 //Material UI Imports
 import Theme from "./Theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { Skeleton } from "@material-ui/lab";
 import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
 
 //Router Imports
@@ -24,22 +24,6 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 const useStyles = makeStyles((theme: ThemeProps) => ({
   pageContainer: {
     paddingBottom: FOOTER_HEIGHT,
-  },
-  loadingSkeleton: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "50px 0px",
-  },
-  rectSkeleton: {
-    width: "60%",
-    height: 0,
-    paddingBottom: "20%",
-  },
-  textSkeleton: {
-    width: "60%",
-    margin: "10px 0px",
   },
 }));
 
@@ -65,10 +49,7 @@ const App: React.FC = (props) => {
 const Routes: React.FC = (props) => {
   const theme = useTheme();
   const icon = document.getElementById("icon") as HTMLLinkElement;
-  icon.href =
-    theme.palette.type === "dark"
-      ? "https://i.ibb.co/pJpLQfd/image.png"
-      : "https://i.ibb.co/dgN5wcv/Logo-Light.png";
+  icon.href = theme.palette.type === "dark" ? DARK_LOGO : LIGHT_LOGO;
   return (
     <Switch>
       <Route path="/projects">
@@ -87,22 +68,6 @@ const Routes: React.FC = (props) => {
         <Home />
       </Route>
     </Switch>
-  );
-};
-
-const Loading: React.FC = (props) => {
-  const classes = useStyles();
-  return (
-    <div className={classes.loadingSkeleton}>
-      <Skeleton className={classes.rectSkeleton} variant="rect"></Skeleton>
-      {[...Array(5)].map((x, i) => (
-        <Skeleton
-          key={i}
-          className={classes.textSkeleton}
-          variant="text"
-        ></Skeleton>
-      ))}
-    </div>
   );
 };
 

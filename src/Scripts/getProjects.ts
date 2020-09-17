@@ -2,8 +2,8 @@
 import reader from "g-sheets-api";
 import { write, baseOptions } from "./index";
 import {
-  DEFAULT_ICON_DARK,
-  DEFAULT_ICON_LIGHT,
+  DEFAULT_PROJECT_DARK,
+  DEFAULT_PROJECT_LIGHT,
   ProjectProps,
 } from "../Utils/constants";
 
@@ -39,7 +39,7 @@ const cleanProjectData = (
         description: [project.description],
         icons: project.icons
           ? [project.icons]
-          : [DEFAULT_ICON_LIGHT, DEFAULT_ICON_DARK],
+          : [DEFAULT_PROJECT_LIGHT, DEFAULT_PROJECT_DARK],
         tags: [project.tags],
       };
       cleanedProjects.push(newProject);

@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import Loading from "./Components/Reusable/Loading";
 
 // Redux Imports
 import { Provider } from "react-redux";
@@ -16,7 +17,7 @@ const persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+    <PersistGate loading={<Loading />} persistor={persistor}>
       <App />
     </PersistGate>
   </Provider>,
