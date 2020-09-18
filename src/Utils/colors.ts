@@ -1,6 +1,6 @@
 export const defaultColors = {
-  primary: <color>"lightBlue",
-  secondary: <color>"amber",
+  primary: <cssColor>"lightBlue",
+  secondary: <cssColor>"amber",
 };
 
 export const defaultShades = {
@@ -81,6 +81,24 @@ export type color =
   | "Amber"
   | "Orange"
   | "Deep Orange";
+
+export type cssColor =
+  | "red"
+  | "pink"
+  | "purple"
+  | "deepPurple"
+  | "indigo"
+  | "blue"
+  | "lightBlue"
+  | "cyan"
+  | "teal"
+  | "green"
+  | "lightGreen"
+  | "lime"
+  | "yellow"
+  | "amber"
+  | "orange"
+  | "deepOrange";
 
 export const resetMessage = "Colors have been reset";
 

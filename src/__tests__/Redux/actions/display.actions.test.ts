@@ -54,9 +54,9 @@ describe("The display actions", () => {
   test("The changeColors action", () => {
     const expected: IchangeColors = {
       type: CHANGE_COLORS,
-      payload: { scheme: "primary", color: "Teal" },
+      payload: { scheme: "primary", color: "teal" },
     };
-    const actual = changeColors("primary", "Teal");
+    const actual = changeColors("primary", "teal");
 
     expect(actual).toEqual(expected);
   });

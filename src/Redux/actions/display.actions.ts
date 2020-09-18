@@ -1,5 +1,5 @@
 import { Color } from "@material-ui/lab";
-import { color, scheme, shade } from "../../Utils/colors";
+import { cssColor, scheme, shade } from "../../Utils/colors";
 
 //Toggle Dark Mode
 
@@ -40,7 +40,10 @@ export interface IchangeColors {
 }
 
 export const CHANGE_COLORS = "CHANGE_COLORS";
-export const changeColors = (scheme: scheme, color: color): IchangeColors => ({
+export const changeColors = (
+  scheme: scheme,
+  color: cssColor
+): IchangeColors => ({
   type: CHANGE_COLORS,
   payload: { scheme, color },
 });

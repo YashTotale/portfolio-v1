@@ -245,7 +245,7 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   });
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(changeColors(scheme, event.target.value));
+    dispatch(changeColors(scheme, cssColor));
     dispatch(
       setSnackbarMessage(`${upperCaseScheme} Color is now ${color}`, "success")
     );
