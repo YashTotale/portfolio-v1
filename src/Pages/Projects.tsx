@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 
 const ProjectsPage: React.FC = () => {
   const classes = useStyles();
-
+  console.log("rerendering");
   return (
     <div className={classes.root}>
       {Projects.map((props) => (

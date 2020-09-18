@@ -4,11 +4,11 @@ export const defaultColors = {
 };
 
 export const defaultShades = {
-  primary: "500",
-  secondary: "500",
+  primary: <shade>"500",
+  secondary: <shade>"500",
 };
 
-export const mainColors = [
+export const colors: color[] = [
   "Red",
   "Pink",
   "Purple",
@@ -27,7 +27,7 @@ export const mainColors = [
   "Deep Orange",
 ];
 
-export const shades = [
+export const shades: shade[] = [
   "50",
   "100",
   "200",
@@ -43,6 +43,42 @@ export const shades = [
   "A400",
   "A700",
 ];
+
+export type scheme = "primary" | "secondary";
+
+export type shade =
+  | "50"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900"
+  | "A100"
+  | "A200"
+  | "A400"
+  | "A700";
+
+export type color =
+  | "Red"
+  | "Pink"
+  | "Purple"
+  | "Deep Purple"
+  | "Indigo"
+  | "Blue"
+  | "Light Blue"
+  | "Cyan"
+  | "Teal"
+  | "Green"
+  | "Light Green"
+  | "Lime"
+  | "Yellow"
+  | "Amber"
+  | "Orange"
+  | "Deep Orange";
 
 export const toCssColor = (color: string): string =>
   color

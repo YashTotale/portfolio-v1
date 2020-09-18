@@ -1,6 +1,10 @@
 //Redux Thunks
 
-export { toggleDarkModeWMessage } from "./display.thunks";
+export {
+  toggleDarkModeWMessage,
+  changeShadeWMessage,
+  resetColors,
+} from "./display.thunks";
 
 /* 
 

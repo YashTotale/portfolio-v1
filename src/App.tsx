@@ -49,7 +49,10 @@ const App: React.FC = (props) => {
 const Routes: React.FC = (props) => {
   const theme = useTheme();
   const icon = document.getElementById("icon") as HTMLLinkElement;
-  icon.href = theme.palette.type === "dark" ? DARK_LOGO : LIGHT_LOGO;
+  icon.href = React.useMemo(
+    () => (theme.palette.type === "dark" ? DARK_LOGO : LIGHT_LOGO),
+    [theme.palette.type, icon]
+  );
   return (
     <Switch>
       <Route path="/projects">

@@ -1,12 +1,6 @@
 //React Imports
 import React from "react";
-import {
-  mainColors,
-  toCssColor,
-  shades,
-  defaultColors,
-  defaultShades,
-} from "../Utils/colors";
+import { colors, toCssColor, shades, scheme, shade } from "../Utils/colors";
 
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
@@ -16,11 +10,8 @@ import {
   getPrimaryShade,
   getSecondaryShade,
 } from "../Redux/selectors";
-import {
-  changeShade,
-  changeColors,
-  setSnackbarMessage,
-} from "../Redux/actions";
+import { changeColors, setSnackbarMessage } from "../Redux/actions";
+import { changeShadeWMessage, resetColors } from "../Redux/thunks";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -114,19 +105,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-type scheme = "primary" | "secondary";
-
 const Colors: React.FC = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const schemes: scheme[] = ["primary", "secondary"];
-  const handleReset = () => {
-    schemes.map((scheme: scheme) => {
-      dispatch(changeColors(scheme, defaultColors[scheme]));
-      dispatch(changeShade(scheme, defaultShades[scheme]));
-      dispatch(setSnackbarMessage("Colors have been reset", "success"));
-    });
-  };
 
   return (
     <div className={classes.root}>
@@ -139,7 +121,11 @@ const Colors: React.FC = (props) => {
         ))}
       </div>
       <div className={classes.resetDiv}>
-        <Button onClick={handleReset} variant="contained" color="secondary">
+        <Button
+          onClick={() => dispatch(resetColors())}
+          variant="contained"
+          color="secondary"
+        >
           Reset Default Colors
         </Button>
       </div>
@@ -158,19 +144,13 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
   const currentColor = useSelector(
     scheme === "primary" ? getPrimaryColor : getSecondaryColor
   );
-  const shade = useSelector(
+  const shade: shade = useSelector(
     scheme === "primary" ? getPrimaryShade : getSecondaryShade
   );
 
   const handleSlide = (e: React.ChangeEvent<{}>, index: number | number[]) => {
     const i = typeof index === "number" ? index : index[0];
-    dispatch(changeShade(scheme, shades[i]));
-    dispatch(
-      setSnackbarMessage(
-        `${upperCaseScheme} Shade is now ${shades[i]}`,
-        "success"
-      )
-    );
+    dispatch(changeShadeWMessage(scheme, shades[i]));
   };
 
   return (
@@ -194,7 +174,6 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
         currentColor={currentColor}
         shade={shade}
         scheme={scheme}
-        colors={mainColors}
         upperCaseScheme={upperCaseScheme}
       />
     </div>
@@ -202,7 +181,6 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
 };
 
 interface ColorPickerProps {
-  colors: Array<string>;
   scheme: scheme;
   shade: string;
   currentColor: string;
@@ -210,7 +188,6 @@ interface ColorPickerProps {
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
-  colors,
   scheme,
   shade,
   currentColor,
