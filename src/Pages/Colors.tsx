@@ -7,6 +7,8 @@ import {
   scheme,
   shade,
   schemes,
+  cssColor,
+  color,
 } from "../Utils/colors";
 
 //Redux Imports
@@ -220,7 +222,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 };
 
 interface ColorBtnProps {
-  color: string;
+  color: color;
   scheme: scheme;
   shade: string;
   currentColor: string;
@@ -235,7 +237,7 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   upperCaseScheme,
 }) => {
   const dispatch = useDispatch();
-  const cssColor = toCssColor(color);
+  const cssColor = toCssColor(color) as cssColor;
 
   //@ts-ignore
   const colorHex = colorsObject[cssColor][shade];

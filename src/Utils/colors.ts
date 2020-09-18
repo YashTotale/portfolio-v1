@@ -102,7 +102,7 @@ export type cssColor =
 
 export const resetMessage = "Colors have been reset";
 
-export const toCssColor = (color: string): string =>
+export const toCssColor = (color: color): string =>
   color
     .replace(" ", "")
     .replace(color.charAt(0), color.charAt(0).toLowerCase());
