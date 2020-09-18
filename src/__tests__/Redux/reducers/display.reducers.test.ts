@@ -6,12 +6,18 @@ import {
   CHANGE_SHADE,
   SET_SNACKBAR_MESSAGE,
   HANDLE_SNACKBAR_CLOSE,
+  ItoggleDarkMode,
+  ItoggleNavBtnsMenu,
+  IchangeColors,
+  IchangeShade,
+  IsetSnackbarMessage,
+  IhandleSnackbarClose,
 } from "../../../Redux/actions/display.actions";
 import { display as originalState } from "../sampleStore";
 
 describe("The display reducer", () => {
   test("Toggles dark mode", () => {
-    const fakeAction = {
+    const fakeAction: ItoggleDarkMode = {
       type: TOGGLE_DARK_MODE,
       payload: {},
     };
@@ -27,7 +33,7 @@ describe("The display reducer", () => {
   });
 
   test("Toggles Nav Btn Menu Open", () => {
-    const fakeAction1 = {
+    const fakeAction1: ItoggleNavBtnsMenu = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: {},
     };
@@ -41,7 +47,7 @@ describe("The display reducer", () => {
 
     expect(actual1).toEqual(expected1);
 
-    const fakeAction2 = {
+    const fakeAction2: ItoggleNavBtnsMenu = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: { isOpen: true },
     };
@@ -57,7 +63,7 @@ describe("The display reducer", () => {
   });
 
   test("Changes color", () => {
-    const fakeAction = {
+    const fakeAction: IchangeColors = {
       type: CHANGE_COLORS,
       payload: {
         scheme: "secondary",
@@ -79,7 +85,7 @@ describe("The display reducer", () => {
   });
 
   test("Changes shade", () => {
-    const fakeAction = {
+    const fakeAction: IchangeShade = {
       type: CHANGE_SHADE,
       payload: { shade: "A200", scheme: "primary" },
     };
@@ -101,7 +107,7 @@ describe("The display reducer", () => {
     const message = "test";
     const severity = "error";
 
-    const fakeAction = {
+    const fakeAction: IsetSnackbarMessage = {
       type: SET_SNACKBAR_MESSAGE,
       payload: { message, severity },
     };
@@ -121,7 +127,7 @@ describe("The display reducer", () => {
   });
 
   test("Closes the Snackbar", () => {
-    const fakeAction = {
+    const fakeAction: IhandleSnackbarClose = {
       type: HANDLE_SNACKBAR_CLOSE,
       payload: {},
     };

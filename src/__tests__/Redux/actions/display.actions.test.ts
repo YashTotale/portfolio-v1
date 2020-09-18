@@ -11,11 +11,17 @@ import {
   setSnackbarMessage,
   HANDLE_SNACKBAR_CLOSE,
   handleSnackbarClose,
+  ItoggleDarkMode,
+  ItoggleNavBtnsMenu,
+  IchangeColors,
+  IchangeShade,
+  IsetSnackbarMessage,
+  IhandleSnackbarClose,
 } from "../../../Redux/actions/display.actions";
 
 describe("The display actions", () => {
   test("The toggleDarkMode action", () => {
-    const expected = {
+    const expected: ItoggleDarkMode = {
       type: TOGGLE_DARK_MODE,
       payload: {},
     };
@@ -25,7 +31,7 @@ describe("The display actions", () => {
   });
 
   test("The toggleNavBtnsMenu action", () => {
-    const expected1 = {
+    const expected1: ItoggleNavBtnsMenu = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: {
         isOpen: true,
@@ -35,7 +41,7 @@ describe("The display actions", () => {
 
     expect(actual1).toEqual(expected1);
 
-    const expected2 = {
+    const expected2: ItoggleNavBtnsMenu = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: {},
     };
@@ -46,17 +52,17 @@ describe("The display actions", () => {
   });
 
   test("The changeColors action", () => {
-    const expected = {
+    const expected: IchangeColors = {
       type: CHANGE_COLORS,
-      payload: { scheme: "primary", color: "#fdd835" },
+      payload: { scheme: "primary", color: "Teal" },
     };
-    const actual = changeColors("primary", "#fdd835");
+    const actual = changeColors("primary", "Teal");
 
     expect(actual).toEqual(expected);
   });
 
   test("The changeShade action", () => {
-    const expected = {
+    const expected: IchangeShade = {
       type: CHANGE_SHADE,
       payload: { shade: "200", scheme: "primary" },
     };
@@ -69,7 +75,7 @@ describe("The display actions", () => {
     const message = "test message";
     const severity = "success";
 
-    const expected = {
+    const expected: IsetSnackbarMessage = {
       type: SET_SNACKBAR_MESSAGE,
       payload: { message, severity },
     };
@@ -80,7 +86,7 @@ describe("The display actions", () => {
   });
 
   test("The handleSnackbarClose action", () => {
-    const expected = {
+    const expected: IhandleSnackbarClose = {
       type: HANDLE_SNACKBAR_CLOSE,
       payload: {},
     };

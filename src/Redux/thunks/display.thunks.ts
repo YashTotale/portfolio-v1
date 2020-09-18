@@ -5,6 +5,8 @@ import {
   shade,
   defaultColors,
   defaultShades,
+  schemes,
+  resetMessage,
 } from "../../Utils/colors";
 
 //Redux Imports
@@ -43,10 +45,9 @@ export const resetColors = () => (
   dispatch: Dispatch<any>,
   getState: () => RootStateOrAny
 ) => {
-  const schemes: scheme[] = ["primary", "secondary"];
-  schemes.forEach((scheme: scheme) => {
+  schemes.forEach((scheme) => {
     dispatch(changeColors(scheme, defaultColors[scheme]));
     dispatch(changeShade(scheme, defaultShades[scheme]));
-    dispatch(setSnackbarMessage("Colors have been reset", "success"));
+    dispatch(setSnackbarMessage(resetMessage, "success"));
   });
 };

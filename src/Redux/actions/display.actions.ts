@@ -1,8 +1,10 @@
 import { Color } from "@material-ui/lab";
+import { color, scheme, shade } from "../../Utils/colors";
 
 //Toggle Dark Mode
-interface ItoggleDarkMode {
-  type: string;
+
+export interface ItoggleDarkMode {
+  type: typeof TOGGLE_DARK_MODE;
   payload: {};
 }
 
@@ -16,8 +18,8 @@ export const toggleDarkMode = (isDarkMode?: boolean): ItoggleDarkMode => ({
 
 //Toggle Nav Btns Menu
 
-interface ItoggleNavBtnsMenu {
-  type: string;
+export interface ItoggleNavBtnsMenu {
+  type: typeof TOGGLE_NAV_BTNS_MENU;
   payload: { isOpen?: boolean };
 }
 
@@ -29,39 +31,36 @@ export const toggleNavBtnsMenu = (isOpen?: boolean): ItoggleNavBtnsMenu => ({
 
 //Change colors
 
-interface IchangeColors {
+export interface IchangeColors {
   type: string;
-  payload: {};
+  payload: {
+    scheme: scheme;
+    color: string;
+  };
 }
 
 export const CHANGE_COLORS = "CHANGE_COLORS";
-export const changeColors = (
-  scheme: "primary" | "secondary",
-  color: string
-): IchangeColors => ({
+export const changeColors = (scheme: scheme, color: color): IchangeColors => ({
   type: CHANGE_COLORS,
   payload: { scheme, color },
 });
 
 //Change shade
 
-interface IchangeShade {
+export interface IchangeShade {
   type: string;
-  payload: { shade: string; scheme: string };
+  payload: { shade: shade; scheme: scheme };
 }
 
 export const CHANGE_SHADE = "CHANGE_SHADE";
-export const changeShade = (
-  scheme: "primary" | "secondary",
-  shade: string
-): IchangeShade => ({
+export const changeShade = (scheme: scheme, shade: shade): IchangeShade => ({
   type: CHANGE_SHADE,
   payload: { scheme, shade },
 });
 
 //Toggle Snackbar
 
-interface IsetSnackbarMessage {
+export interface IsetSnackbarMessage {
   type: string;
   payload: { message: string; severity: Color };
 }
@@ -77,7 +76,7 @@ export const setSnackbarMessage = (
 
 //Handle Snackbar close
 
-interface IhandleSnackbarClose {
+export interface IhandleSnackbarClose {
   type: string;
   payload: {};
 }

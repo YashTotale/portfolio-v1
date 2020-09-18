@@ -1,6 +1,6 @@
 export const defaultColors = {
-  primary: "lightBlue",
-  secondary: "amber",
+  primary: <color>"lightBlue",
+  secondary: <color>"amber",
 };
 
 export const defaultShades = {
@@ -46,6 +46,8 @@ export const shades: shade[] = [
 
 export type scheme = "primary" | "secondary";
 
+export const schemes: scheme[] = ["primary", "secondary"];
+
 export type shade =
   | "50"
   | "100"
@@ -79,6 +81,8 @@ export type color =
   | "Amber"
   | "Orange"
   | "Deep Orange";
+
+export const resetMessage = "Colors have been reset";
 
 export const toCssColor = (color: string): string =>
   color

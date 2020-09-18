@@ -1,6 +1,13 @@
 //React Imports
 import React from "react";
-import { colors, toCssColor, shades, scheme, shade } from "../Utils/colors";
+import {
+  colors,
+  toCssColor,
+  shades,
+  scheme,
+  shade,
+  schemes,
+} from "../Utils/colors";
 
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
@@ -108,7 +115,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Colors: React.FC = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const schemes: scheme[] = ["primary", "secondary"];
 
   return (
     <div className={classes.root}>
