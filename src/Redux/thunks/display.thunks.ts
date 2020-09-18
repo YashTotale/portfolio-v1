@@ -7,6 +7,9 @@ import {
   defaultShades,
   schemes,
   resetMessage,
+  cssColor,
+  toCssColor,
+  color,
 } from "../../Utils/colors";
 
 //Redux Imports
@@ -29,6 +32,17 @@ export const toggleDarkModeWMessage = () => (
   dispatch(toggleDarkMode());
   const theme = getIsDarkMode(getState()) ? "Dark" : "Light";
   dispatch(setSnackbarMessage(`${theme} Theme set`, "success"));
+};
+
+export const changeColorWMessage = (scheme: scheme, color: color) => (
+  dispatch: Dispatch<any>,
+  getState: () => RootStateOrAny
+) => {
+  const cssColor = toCssColor(color) as cssColor;
+  dispatch(changeColors(scheme, cssColor));
+  dispatch(
+    setSnackbarMessage(`${capitalize(scheme)} Color is now ${color}`, "success")
+  );
 };
 
 export const changeShadeWMessage = (scheme: scheme, shade: shade) => (

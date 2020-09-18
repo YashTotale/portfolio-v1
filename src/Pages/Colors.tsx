@@ -19,8 +19,11 @@ import {
   getPrimaryShade,
   getSecondaryShade,
 } from "../Redux/selectors";
-import { changeColors, setSnackbarMessage } from "../Redux/actions";
-import { changeShadeWMessage, resetColors } from "../Redux/thunks";
+import {
+  changeColorWMessage,
+  changeShadeWMessage,
+  resetColors,
+} from "../Redux/thunks";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -247,10 +250,7 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   });
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(changeColors(scheme, cssColor));
-    dispatch(
-      setSnackbarMessage(`${upperCaseScheme} Color is now ${color}`, "success")
-    );
+    dispatch(changeColorWMessage(scheme, color));
   };
 
   return (

@@ -14,13 +14,18 @@ import {
   toggleDarkModeWMessage,
   changeShadeWMessage,
   resetColors,
+  changeColorWMessage,
 } from "../../../Redux/thunks/display.thunks";
 import { getIsDarkMode } from "../../../Redux/selectors";
 import {
+  color,
   defaultColors,
   defaultShades,
   resetMessage,
+  scheme,
   schemes,
+  shade,
+  toCssColor,
 } from "../../../Utils/colors";
 
 describe("The display thunks", () => {
@@ -47,11 +52,39 @@ describe("The display thunks", () => {
     expect(fakeDispatch.getCall(1).args[0]).toEqual(snackbarAction);
   });
 
+  test("The changeColorWMessage thunk", () => {
+    const fakeDispatch = sinon.spy();
+
+    const scheme: scheme = "primary";
+    const color: color = "Deep Purple";
+
+    const colorAction: IchangeColors = {
+      type: CHANGE_COLORS,
+      payload: {
+        color: toCssColor(color),
+        scheme,
+      },
+    };
+
+    const snackbarAction: IsetSnackbarMessage = {
+      type: SET_SNACKBAR_MESSAGE,
+      payload: {
+        message: "Primary Color is now Deep Purple",
+        severity: "success",
+      },
+    };
+
+    changeColorWMessage(scheme, color)(fakeDispatch, () => sampleState);
+
+    expect(fakeDispatch.getCall(0).args[0]).toEqual(colorAction);
+    expect(fakeDispatch.getCall(1).args[0]).toEqual(snackbarAction);
+  });
+
   test("The changeShadeWMessage thunk", () => {
     const fakeDispatch = sinon.spy();
 
-    const scheme = "secondary";
-    const shade = "A200";
+    const scheme: scheme = "secondary";
+    const shade: shade = "A200";
 
     const shadeAction: IchangeShade = {
       type: CHANGE_SHADE,
