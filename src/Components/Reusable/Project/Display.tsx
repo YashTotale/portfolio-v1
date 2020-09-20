@@ -1,5 +1,6 @@
 //React Imports
 import React from "react";
+import { Link } from "react-router-dom";
 import Tags from "../../../Data/Tags.json";
 import { ProjectProps } from "../../../Utils/constants";
 
@@ -10,8 +11,8 @@ import {
   Paper,
   Typography,
   useTheme,
+  Divider,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   projectDiv: {
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     height: 200,
   },
   projectTitle: {
+    textAlign: "center",
     marginTop: 5,
   },
   projectInfo: {
@@ -58,6 +60,9 @@ const useStyles = makeStyles((theme) => ({
   },
   projectDescription: {
     margin: 4,
+  },
+  projectInfoDivider: {
+    marginTop: 9,
   },
   projectTags: {
     marginTop: 8,
@@ -90,6 +95,7 @@ const Display: React.FC<ProjectProps> = (props) => {
             variant="body1"
           ></Typography>
         ))}
+        <Divider className={classes.projectInfoDivider} />
         <div className={classes.projectTags}>
           {props.tags.map((tag) => (
             <Chip
