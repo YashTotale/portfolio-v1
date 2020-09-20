@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 8,
   },
   projectTag: {
-    margin: 1,
+    margin: 2,
   },
 }));
 

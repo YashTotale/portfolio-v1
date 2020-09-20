@@ -1,5 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
+import { ExperienceProps } from "../Utils/constants";
 import { write, baseOptions } from "./index";
 
 const experiencesRequest = (): Promise<ExperienceObject[]> => {
@@ -10,18 +11,45 @@ const experiencesRequest = (): Promise<ExperienceObject[]> => {
 };
 
 const cleanExperienceData = (
-  experience: ExperienceObject
-): ExperienceObject => {
-  return experience;
+  experiences: ExperienceObject[]
+): [ExperienceProps[], string[]] => {
+  const cleanedExperiences: ExperienceProps[] = [];
+  let tags: string[] = [];
+
+  experiences.forEach((experience) => {
+    if (!experience.id) {
+      const [prevExperience] = cleanedExperiences.slice(-1);
+
+      for (const key in experience) {
+        //@ts-ignore
+        prevExperience[key].push(experience[key]);
+      }
+
+      tags = tags.concat(prevExperience.tags);
+    } else {
+      const newExperience: ExperienceProps = {
+        ...experience,
+        tags: [experience.tags],
+      };
+
+      cleanedExperiences.push(newExperience);
+    }
+  });
+
+  return [cleanedExperiences, tags];
 };
 
 export const getExperiences = () => {
-  experiencesRequest().then((experiences: ExperienceObject[]) => {
-    write("Experience", experiences.map(cleanExperienceData));
+  return new Promise<string[]>(async (resolve, reject) => {
+    const experiences = await experiencesRequest();
+    const [cleanExperiences, tags] = cleanExperienceData(experiences);
+    write("Experience", cleanExperiences);
+    resolve(tags);
   });
 };
 
 export interface ExperienceObject {
   id: string;
   name: string;
+  tags: string;
 }

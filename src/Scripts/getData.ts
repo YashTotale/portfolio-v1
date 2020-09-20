@@ -1,7 +1,11 @@
 import { getProjects } from "./getProjects";
 import { getExperiences } from "./getExperiences";
-import { addTags } from "./addTags";
+import { getTags } from "./getTags";
 
-//@ts-ignore
-getProjects().then(addTags);
-getExperiences();
+const projectsAndExperience = async () => {
+  const projectTags = await getProjects();
+  const experienceTags = await getExperiences();
+  return projectTags.concat(experienceTags);
+};
+
+projectsAndExperience().then(getTags);

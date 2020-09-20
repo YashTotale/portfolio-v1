@@ -51,7 +51,7 @@ const cleanProjectData = (
 };
 
 export const getProjects = () => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise<string[]>(async (resolve, reject) => {
     const projects: any = await projectsRequest();
     const [cleanedProjects, tags] = cleanProjectData(projects);
     write("Projects", cleanedProjects);

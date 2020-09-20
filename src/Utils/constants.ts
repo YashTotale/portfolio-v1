@@ -36,3 +36,9 @@ export interface ProjectProps {
   link?: string;
   tags: string[];
 }
+
+export interface ExperienceProps {
+  id: string;
+  name: string;
+  tags: string[];
+}
