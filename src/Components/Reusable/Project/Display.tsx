@@ -1,7 +1,7 @@
 //React Imports
 import React from "react";
-import { Link } from "react-router-dom";
 import Tags from "../../../Data/Tags.json";
+import MiniTag from "../Tag/Mini";
 import { ProjectProps } from "../../../Utils/constants";
 
 //Material UI Imports
@@ -14,10 +14,13 @@ import {
   Divider,
   Avatar,
 } from "@material-ui/core";
+import TooltipBtn from "../TooltipBtn";
+import { GitHub } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   projectDiv: {
     margin: 15,
+    position: "relative",
     width: "60%",
     [theme.breakpoints.only("xs")]: {
       width: "80%",
@@ -48,6 +51,11 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginTop: 5,
   },
+  projectSourceCode: {
+    position: "absolute",
+    top: 2,
+    right: 2,
+  },
   projectInfo: {
     width: "100%",
     padding: 10,
@@ -68,12 +76,15 @@ const useStyles = makeStyles((theme) => ({
   projectTags: {
     marginTop: 8,
   },
-  projectTag: {
-    margin: 2,
-  },
 }));
 
-const Display: React.FC<ProjectProps> = (props) => {
+const Display: React.FC<ProjectProps> = ({
+  name,
+  icons,
+  description,
+  tags,
+  sourcecode,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
   return (
@@ -81,14 +92,23 @@ const Display: React.FC<ProjectProps> = (props) => {
       <Paper elevation={24} className={classes.projectImgDiv}>
         <img
           className={classes.projectImg}
-          src={theme.palette.type === "light" ? props.icons[0] : props.icons[1]}
+          src={theme.palette.type === "light" ? icons[0] : icons[1]}
         ></img>
         <Typography className={classes.projectTitle} variant="h4">
-          {props.name}
+          {name}
         </Typography>
+        {sourcecode ? (
+          <TooltipBtn
+            className={classes.projectSourceCode}
+            title="Github Repository"
+            icon={<GitHub />}
+            component="a"
+            href={sourcecode}
+          ></TooltipBtn>
+        ) : null}
       </Paper>
       <Paper elevation={10} className={classes.projectInfo}>
-        {props.description.map((desc, i) => (
+        {description.map((desc, i) => (
           <Typography
             key={i}
             dangerouslySetInnerHTML={{ __html: parseDescription(desc) }}
@@ -98,28 +118,9 @@ const Display: React.FC<ProjectProps> = (props) => {
         ))}
         <Divider className={classes.projectInfoDivider} />
         <div className={classes.projectTags}>
-          {props.tags.map((tag) => (
-            <Chip
-              avatar={
-                //@ts-ignore
-                Tags[tag].icons ? (
-                  <Avatar
-                    style={{ backgroundColor: "inherit" }}
-                    src={
-                      //@ts-ignore
-                      Tags[tag].icons[theme.palette.type === "light" ? 0 : 1]
-                    }
-                  ></Avatar>
-                ) : undefined
-              }
-              className={classes.projectTag}
-              component={Link}
-              color="primary"
-              clickable
-              to="/"
-              label={tag}
-              variant="outlined"
-            />
+          {tags.map((tag) => (
+            //@ts-ignore
+            <MiniTag {...Tags[tag]} />
           ))}
         </div>
       </Paper>

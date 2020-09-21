@@ -12,13 +12,14 @@ export interface TooltipBtnProps {
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
   href?: string;
   to?: string;
+  className?: string;
 }
 
 const TooltipBtn: React.FC<TooltipBtnProps> = (props) => {
   const { title } = props;
   const tooltipComponent = TooltipComponent(props);
   return (
-    <Tooltip key={title} title={title}>
+    <Tooltip className={props.className} key={title} title={title}>
       {tooltipComponent}
     </Tooltip>
   );
