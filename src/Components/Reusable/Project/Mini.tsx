@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
   img: {
     width: 150,
     height: 150,
+    padding: 5,
     border: `4px solid ${
       theme.palette.common[theme.palette.type === "dark" ? "white" : "black"]
     }`,

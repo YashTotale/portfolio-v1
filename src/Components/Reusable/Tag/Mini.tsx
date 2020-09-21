@@ -4,13 +4,7 @@ import { Link } from "react-router-dom";
 import { TagProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
-import {
-  Avatar,
-  Chip,
-  makeStyles,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { Avatar, Chip, makeStyles, useTheme } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   tag: {
@@ -26,12 +20,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Mini: React.FC<TagProps> = ({ name, url, icons }) => {
   const theme = useTheme();
-  const isSizeSmall = useMediaQuery(theme.breakpoints.only("xs"));
   const classes = useStyles();
   return (
     <Chip
       clickable
-      size={isSizeSmall ? "small" : "medium"}
+      size="medium"
       label={name}
       className={classes.tag}
       avatar={

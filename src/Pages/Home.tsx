@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
 
 const HomePage: React.FC = () => {
   const classes = useStyles();
-  const isSizeSmall = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.only("xs")
-  );
   const isSizeXL = useMediaQuery((theme: Theme) =>
     theme.breakpoints.only("xl")
   );
@@ -40,11 +37,9 @@ const HomePage: React.FC = () => {
         <Typography variant="h4">Projects</Typography>
         <hr />
         <div className={classes.projects}>
-          {Projects.slice(0, isSizeSmall ? 3 : isSizeXL ? 7 : 5).map(
-            (project, i) => {
-              return <ProjectMini {...project} key={i} />;
-            }
-          )}
+          {Projects.slice(0, isSizeXL ? 7 : 5).map((project, i) => {
+            return <ProjectMini {...project} key={i} />;
+          })}
         </div>
       </div>
     </div>

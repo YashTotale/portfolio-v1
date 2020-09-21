@@ -1,11 +1,8 @@
 export const SOURCE_CODE =
   "http://github.com/YashTotale/YashTotale.github.io.git";
 
-export const DEFAULT_PROJECT_LIGHT =
-  "https://i.ibb.co/wYhy5Zf/Default-Project.jpg";
-
-export const DEFAULT_PROJECT_DARK =
-  "https://i.ibb.co/RyMxJsV/Default-Project-Dark.jpg";
+export const DEFAULT_PROJECT_ICON =
+  "https://i.ibb.co/rcz3kRx/Default-Project.png";
 
 export const LINKEDIN_URL = "https://linkedin.com/in/yash-totale";
 

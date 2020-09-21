@@ -1,7 +1,7 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { write, baseOptions } from "./index";
-import { DEFAULT_PROJECT_DARK, DEFAULT_PROJECT_LIGHT } from "../Utils/links";
+import { DEFAULT_PROJECT_ICON } from "../Utils/links";
 import { ProjectProps } from "../Utils/interfaces";
 
 const projectsRequest = () => {
@@ -35,9 +35,7 @@ const cleanProjectData = (
         ...project,
         description: [project.description],
         start: [project.start],
-        icons: project.icons
-          ? [project.icons]
-          : [DEFAULT_PROJECT_LIGHT, DEFAULT_PROJECT_DARK],
+        icons: project.icons ? [project.icons] : [DEFAULT_PROJECT_ICON],
         tags: [project.tags],
       };
       cleanedProjects.push(newProject);
