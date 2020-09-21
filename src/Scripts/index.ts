@@ -2,7 +2,7 @@ import { writeFile } from "fs";
 import { join } from "path";
 import { exec } from "child_process";
 
-import { ExperienceProps, ProjectProps } from "../Utils/constants";
+import { ExperienceProps, ProjectProps, TagProps } from "../Utils/constants";
 
 export const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
@@ -15,7 +15,7 @@ export type files = "Experience" | "Projects" | "Tags" | "LinkedIn";
 
 export const write = (
   fileName: files,
-  data: ProjectProps[] | ExperienceProps[]
+  data: ProjectProps[] | ExperienceProps[] | TagProps[]
 ) => {
   return new Promise((resolve, reject) => {
     const location = join(dataFolder, `${fileName}.json`);

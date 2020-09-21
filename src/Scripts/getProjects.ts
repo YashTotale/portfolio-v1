@@ -8,7 +8,7 @@ import {
 } from "../Utils/constants";
 
 const projectsRequest = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise<ProjectObject[]>((resolve, reject) => {
     const options = { ...baseOptions, sheetNumber: 1 };
     reader(options, resolve);
   });
@@ -52,7 +52,7 @@ const cleanProjectData = (
 
 export const getProjects = () => {
   return new Promise<string[]>(async (resolve, reject) => {
-    const projects: any = await projectsRequest();
+    const projects: ProjectObject[] = await projectsRequest();
     const [cleanedProjects, tags] = cleanProjectData(projects);
     write("Projects", cleanedProjects);
     resolve(tags);

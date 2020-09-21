@@ -42,3 +42,10 @@ export interface ExperienceProps {
   name: string;
   tags: string[];
 }
+
+export interface TagProps {
+  id: string;
+  name: string;
+  icons: string[] | undefined;
+  url: string;
+}
