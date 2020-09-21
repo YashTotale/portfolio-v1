@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ProfilePic from "./ProfilePic";
-import { ABOUT_ME_BACKGROUND } from "../../Utils/constants";
+import { ABOUT_ME_BACKGROUND } from "../../Utils/links";
 
 //Redux Imports
 import { toggleDarkModeWMessage } from "../../Redux/thunks";

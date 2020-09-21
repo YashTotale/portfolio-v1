@@ -1,6 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { ExperienceProps } from "../Utils/constants";
+import { ExperienceProps } from "../Utils/interfaces";
 import { write, baseOptions } from "./index";
 
 const experiencesRequest = () => {

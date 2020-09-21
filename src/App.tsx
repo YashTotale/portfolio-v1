@@ -5,7 +5,8 @@ import Loading from "./Components/Reusable/Loading";
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
 const NavBar = lazy(() => import("./Components/Custom/NavBar"));
 const Footer = lazy(() => import("./Components/Custom/Footer"));
-import { FOOTER_HEIGHT, DARK_LOGO, LIGHT_LOGO } from "./Utils/constants";
+import { DARK_LOGO, LIGHT_LOGO } from "./Utils/links";
+import { FOOTER_HEIGHT } from "./Utils/constants";
 
 //Pages
 const Home = lazy(() => import("./Pages/Home"));

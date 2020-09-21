@@ -1,5 +1,4 @@
 import capitalize from "@material-ui/core/utils/capitalize";
-import { match } from "sinon";
 
 export const splitCamelCase = (str: string, toUpperCase: boolean): string => {
   const split = str.replace(/([a-z])([A-Z])/g, "$1 $2");

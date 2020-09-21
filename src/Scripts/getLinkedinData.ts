@@ -1,7 +1,7 @@
 //@ts-ignore
 import scrapedin from "scrapedin";
 import { write } from "./index";
-import { LINKEDIN_URL } from "../Utils/constants";
+import { LINKEDIN_URL } from "../Utils/links";
 
 const args = process.argv;
 

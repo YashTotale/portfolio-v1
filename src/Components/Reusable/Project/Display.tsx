@@ -2,17 +2,16 @@
 import React from "react";
 import Tags from "../../../Data/Tags.json";
 import MiniTag from "../Tag/Mini";
-import { ProjectProps } from "../../../Utils/constants";
+import { ProjectProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
 import {
-  Chip,
   makeStyles,
   Paper,
   Typography,
   useTheme,
   Divider,
-  Avatar,
+  useMediaQuery,
 } from "@material-ui/core";
 import TooltipBtn from "../TooltipBtn";
 import { GitHub } from "@material-ui/icons";
@@ -33,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
   projectImgDiv: {
     width: "100%",
-    padding: 10,
+    padding: "10px 24px",
     // Flex
     display: "flex",
     flexDirection: "column",
@@ -44,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
     borderBottomRightRadius: 0,
   },
   projectImg: {
+    [theme.breakpoints.only("xs")]: {
+      width: 150,
+      height: 150,
+    },
     width: 200,
     height: 200,
   },
@@ -87,6 +90,7 @@ const Display: React.FC<ProjectProps> = ({
 }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const isSizeSmall = useMediaQuery(theme.breakpoints.only("xs"));
   return (
     <div className={classes.projectDiv}>
       <Paper elevation={24} className={classes.projectImgDiv}>
@@ -94,7 +98,10 @@ const Display: React.FC<ProjectProps> = ({
           className={classes.projectImg}
           src={theme.palette.type === "light" ? icons[0] : icons[1]}
         ></img>
-        <Typography className={classes.projectTitle} variant="h4">
+        <Typography
+          className={classes.projectTitle}
+          variant={isSizeSmall ? "h5" : "h4"}
+        >
           {name}
         </Typography>
         {sourcecode ? (
@@ -113,14 +120,14 @@ const Display: React.FC<ProjectProps> = ({
             key={i}
             dangerouslySetInnerHTML={{ __html: parseDescription(desc) }}
             className={classes.projectDescription}
-            variant="body1"
+            variant={isSizeSmall ? "body2" : "body1"}
           ></Typography>
         ))}
         <Divider className={classes.projectInfoDivider} />
         <div className={classes.projectTags}>
-          {tags.map((tag) => (
+          {tags.map((tag, i) => (
             //@ts-ignore
-            <MiniTag {...Tags[tag]} />
+            <MiniTag key={i} {...Tags[tag]} />
           ))}
         </div>
       </Paper>

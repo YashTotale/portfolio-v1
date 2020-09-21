@@ -1,11 +1,8 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { write, baseOptions } from "./index";
-import {
-  DEFAULT_PROJECT_DARK,
-  DEFAULT_PROJECT_LIGHT,
-  ProjectProps,
-} from "../Utils/constants";
+import { DEFAULT_PROJECT_DARK, DEFAULT_PROJECT_LIGHT } from "../Utils/links";
+import { ProjectProps } from "../Utils/interfaces";
 
 const projectsRequest = () => {
   return new Promise<ProjectObject[]>((resolve, reject) => {
@@ -37,6 +34,7 @@ const cleanProjectData = (
       const newProject: ProjectProps = {
         ...project,
         description: [project.description],
+        start: [project.start],
         icons: project.icons
           ? [project.icons]
           : [DEFAULT_PROJECT_LIGHT, DEFAULT_PROJECT_DARK],
@@ -66,5 +64,6 @@ export interface ProjectObject {
   icons?: string;
   sourcecode?: string;
   link?: string;
+  start: string;
   tags: string;
 }

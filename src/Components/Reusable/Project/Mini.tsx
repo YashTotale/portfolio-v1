@@ -1,6 +1,6 @@
 //React Imports
 import React, { useState } from "react";
-import { ProjectProps } from "../../../Utils/constants";
+import { ProjectProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
 import { makeStyles, Typography, useTheme } from "@material-ui/core";

@@ -2,7 +2,7 @@ import { writeFile } from "fs";
 import { join } from "path";
 import { exec } from "child_process";
 
-import { ExperienceProps, ProjectProps, TagProps } from "../Utils/constants";
+import { ExperienceProps, ProjectProps, TagProps } from "../Utils/interfaces";
 
 export const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
