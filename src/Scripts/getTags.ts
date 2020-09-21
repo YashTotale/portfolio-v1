@@ -20,22 +20,24 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): any => {
     }) ?? {
       icons: undefined,
     };
-    const nextTagInfo =
-      tagInfoIndex && tagInfoIndex < tagInfos.length - 1
-        ? tagInfos[tagInfoIndex + 1]
-        : undefined;
-    if (nextTagInfo && typeof parseInt(nextTagInfo.id) !== "number") {
-      for (const key in nextTagInfo) {
-        //@ts-ignore
-        tagInfo[key].push(nextTagInfo[key]);
-      }
-    }
 
     const tagObj = {
       ...tagInfo,
       icons: tagInfo.icons ? [tagInfo.icons] : undefined,
       url: tag.toLowerCase().replace(/\s/g, "-"),
     };
+
+    const nextTagInfo =
+      tagInfoIndex && tagInfoIndex < tagInfos.length - 1
+        ? tagInfos[tagInfoIndex + 1]
+        : undefined;
+
+    if (nextTagInfo && typeof nextTagInfo.id !== "string") {
+      for (const key in nextTagInfo) {
+        //@ts-ignore
+        tagObj[key].push(nextTagInfo[key]);
+      }
+    }
     if (tagObj.icons?.length === 1) {
       tagObj.icons.push(tagObj.icons[0]);
     }

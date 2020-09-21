@@ -12,6 +12,7 @@ import {
   Typography,
   useTheme,
   Divider,
+  Avatar,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -99,6 +100,18 @@ const Display: React.FC<ProjectProps> = (props) => {
         <div className={classes.projectTags}>
           {props.tags.map((tag) => (
             <Chip
+              avatar={
+                //@ts-ignore
+                Tags[tag].icons ? (
+                  <Avatar
+                    style={{ backgroundColor: "inherit" }}
+                    src={
+                      //@ts-ignore
+                      Tags[tag].icons[theme.palette.type === "light" ? 0 : 1]
+                    }
+                  ></Avatar>
+                ) : undefined
+              }
               className={classes.projectTag}
               component={Link}
               color="primary"
