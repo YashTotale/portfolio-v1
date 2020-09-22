@@ -1,6 +1,5 @@
 //React Imports
 import React, { useState } from "react";
-import { ProjectProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
 import { makeStyles, Typography, useTheme } from "@material-ui/core";
@@ -57,7 +56,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Mini: React.FC<ProjectProps> = (props) => {
+interface MiniProps {
+  name: string;
+  icons: string[];
+}
+
+const Mini: React.FC<MiniProps> = (props) => {
   const [hovering, setHovering] = useState<boolean>(false);
   const theme = useTheme();
   const classes = useStyles({ hovering });

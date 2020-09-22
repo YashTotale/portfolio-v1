@@ -1,5 +1,7 @@
 //React Imports
 import React from "react";
+import { Link } from "react-router-dom";
+import TooltipBtn from "../TooltipBtn";
 import Tags from "../../../Data/Tags.json";
 import MiniTag from "../Tag/Mini";
 import { ProjectProps } from "../../../Utils/interfaces";
@@ -14,7 +16,6 @@ import {
   useMediaQuery,
   Link as StyledLink,
 } from "@material-ui/core";
-import TooltipBtn from "../TooltipBtn";
 import { GitHub } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,8 +80,12 @@ const useStyles = makeStyles((theme) => ({
   },
   projectTags: {
     marginTop: 8,
+    alignSelf: "center",
   },
-  projectTime: { alignSelf: "center", marginTop: 4 },
+  projectTime: {
+    alignSelf: "center",
+    marginTop: 4,
+  },
 }));
 
 const Display: React.FC<ProjectProps> = ({
@@ -156,29 +161,33 @@ const parseDescription = (description: string) => {
     ...tags.map(
       (tag): Regex => [
         new RegExp(`(?<![a-zA-Z])(${tag})(?![a-zA-Z])`, "gi"),
-        (match: string) => <em>{match}</em>,
+        (match: string) => (
+          <StyledLink color="secondary" to="/" component={Link}>
+            {match}
+          </StyledLink>
+        ),
       ]
     ),
   ];
 
   const newDescription: any[] = [];
 
-  type matchWithFunc = [RegExpExecArray, (match: string) => any];
+  type matchWithFunc = [RegExpExecArray, any];
 
   const matchArrays: matchWithFunc[] = [];
   regexes.forEach((regex) => {
     let matchArray;
     while ((matchArray = regex[0].exec(description)) !== null) {
-      matchArrays.push([matchArray, regex[1]]);
+      matchArrays.push([matchArray, regex[1](matchArray[1])]);
     }
   });
   matchArrays.sort((a, b) => {
     return a[0].index - b[0].index;
   });
   let lastIndex = 0;
-  matchArrays.forEach(([matchArray, elementFunc]) => {
+  matchArrays.forEach(([matchArray, element]) => {
     newDescription.push(description.substring(lastIndex, matchArray.index));
-    newDescription.push(elementFunc(matchArray[1]));
+    newDescription.push(element);
     lastIndex = matchArray.index + matchArray[0].length;
   });
   newDescription.push(description.substring(lastIndex));

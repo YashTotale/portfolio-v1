@@ -11,6 +11,7 @@ import { FOOTER_HEIGHT } from "./Utils/constants";
 //Pages
 const Home = lazy(() => import("./Pages/Home"));
 const Projects = lazy(() => import("./Pages/Projects"));
+const Tags = lazy(() => import("./Pages/Tags"));
 const Experience = lazy(() => import("./Pages/Experience"));
 const Colors = lazy(() => import("./Pages/Colors"));
 
@@ -61,6 +62,9 @@ const Routes: React.FC = (props) => {
       </Route>
       <Route path="/experience">
         <Experience />
+      </Route>
+      <Route path="/tags">
+        <Tags />
       </Route>
       <Route path="/colors">
         <Colors />

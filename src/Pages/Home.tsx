@@ -1,7 +1,7 @@
 //React Imports
 import React from "react";
 import AboutMe from "../Components/Custom/AboutMe";
-import ProjectMini from "../Components/Reusable/Project/Mini";
+import ProjectMini from "../Components/Reusable/Overlay";
 import Projects from "../Data/Projects.json";
 
 //Material UI Imports
