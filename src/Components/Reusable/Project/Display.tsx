@@ -12,6 +12,7 @@ import {
   useTheme,
   Divider,
   useMediaQuery,
+  Link as StyledLink,
 } from "@material-ui/core";
 import TooltipBtn from "../TooltipBtn";
 import { GitHub } from "@material-ui/icons";
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
   projectInfo: {
     width: "100%",
-    padding: 10,
+    padding: "10px 10px 3px",
     // Flex
     display: "flex",
     flexDirection: "column",
@@ -73,12 +74,13 @@ const useStyles = makeStyles((theme) => ({
   projectDescription: {
     margin: 4,
   },
-  projectInfoDivider: {
+  projectDivider: {
     marginTop: 9,
   },
   projectTags: {
     marginTop: 8,
   },
+  projectTime: { alignSelf: "center", marginTop: 4 },
 }));
 
 const Display: React.FC<ProjectProps> = ({
@@ -87,6 +89,8 @@ const Display: React.FC<ProjectProps> = ({
   description,
   tags,
   sourcecode,
+  start,
+  end,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -118,42 +122,66 @@ const Display: React.FC<ProjectProps> = ({
         {description.map((desc, i) => (
           <Typography
             key={i}
-            dangerouslySetInnerHTML={{ __html: parseDescription(desc) }}
             className={classes.projectDescription}
             variant={isSizeSmall ? "body2" : "body1"}
-          ></Typography>
+          >
+            {parseDescription(desc).map((element, i) => (
+              <React.Fragment key={i}>{element}</React.Fragment>
+            ))}
+          </Typography>
         ))}
-        <Divider className={classes.projectInfoDivider} />
+        <Divider className={classes.projectDivider} />
         <div className={classes.projectTags}>
           {tags.map((tag, i) => (
             //@ts-ignore
             <MiniTag key={i} {...Tags[tag]} />
           ))}
         </div>
+        <Divider className={classes.projectDivider} />
+        <Typography className={classes.projectTime} variant="subtitle1">
+          {start} - {end ?? "Present"}
+        </Typography>
       </Paper>
     </div>
   );
 };
 
-const parseDescription = (description: string): string => {
+const parseDescription = (description: string) => {
   const tags = Object.keys(Tags);
 
-  const regexes = [
-    [/\*\*(.*?)\*\*/gi, "strong"],
-    [/\*(.*?)\*/gi, "em"],
-    ...tags.map((tag) => [new RegExp(`(${tag})`, "gi"), "em"]),
+  type Regex = [RegExp, (match: string) => any];
+
+  const regexes: Regex[] = [
+    [/\*\*(.*?)\*\*/gi, (match: string) => <strong>{match}</strong>],
+    ...tags.map(
+      (tag): Regex => [
+        new RegExp(`(?<![a-zA-Z])(${tag})(?![a-zA-Z])`, "gi"),
+        (match: string) => <em>{match}</em>,
+      ]
+    ),
   ];
 
-  let newDescription = description;
+  const newDescription: any[] = [];
 
+  type matchWithFunc = [RegExpExecArray, (match: string) => any];
+
+  const matchArrays: matchWithFunc[] = [];
   regexes.forEach((regex) => {
-    const htmlTag = regex[1];
-
-    newDescription = newDescription.replace(
-      regex[0],
-      (match, captured) => `<${htmlTag}>${captured}</${htmlTag}>`
-    );
+    let matchArray;
+    while ((matchArray = regex[0].exec(description)) !== null) {
+      matchArrays.push([matchArray, regex[1]]);
+    }
   });
+  matchArrays.sort((a, b) => {
+    return a[0].index - b[0].index;
+  });
+  let lastIndex = 0;
+  matchArrays.forEach(([matchArray, elementFunc]) => {
+    newDescription.push(description.substring(lastIndex, matchArray.index));
+    newDescription.push(elementFunc(matchArray[1]));
+    lastIndex = matchArray.index + matchArray[0].length;
+  });
+  newDescription.push(description.substring(lastIndex));
 
   return newDescription;
 };

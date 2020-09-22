@@ -34,7 +34,8 @@ const cleanProjectData = (
       const newProject: ProjectProps = {
         ...project,
         description: [project.description],
-        start: [project.start],
+        start: project.start,
+        end: project.end,
         icons: project.icons ? [project.icons] : [DEFAULT_PROJECT_ICON],
         tags: [project.tags],
       };
@@ -59,9 +60,10 @@ export interface ProjectObject {
   id: string;
   name: string;
   description: string;
-  icons?: string;
-  sourcecode?: string;
-  link?: string;
-  start: string;
   tags: string;
+  start: string;
+  end?: string;
+  icons?: string;
+  link?: string;
+  sourcecode?: string;
 }

@@ -6,7 +6,8 @@ export interface ProjectProps {
   sourcecode?: string;
   link?: string;
   tags: string[];
-  start: string[];
+  start: string;
+  end?: string;
 }
 
 export interface ExperienceProps {
