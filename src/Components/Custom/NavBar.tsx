@@ -21,6 +21,7 @@ import {
   Home,
   DeviceHub,
   BusinessCenter,
+  Label,
 } from "@material-ui/icons";
 import {
   AppBar,
@@ -58,12 +59,18 @@ const NavBar: React.FC = (props) => {
 
   const btns: TooltipBtnProps[] = [
     {
-      title: `${isDarkMode ? "Light" : "Dark"} Theme`,
+      title: `Toggle ${isDarkMode ? "Light" : "Dark"} Theme`,
       onClick: () => {
         dispatch(toggleDarkModeWMessage());
       },
       component: "btn",
       icon: isDarkMode ? <Brightness7 /> : <Brightness4 />,
+    },
+    {
+      title: "Browse Tags",
+      component: "link",
+      to: "tags",
+      icon: <Label />,
     },
     {
       title: "Edit Website Colors",
@@ -83,7 +90,7 @@ const NavBar: React.FC = (props) => {
   const path = location.pathname.split("/")[1];
   const tabs = ["home", "projects", "experience"];
   const tabIcons = [<Home />, <DeviceHub />, <BusinessCenter />];
-  const excludedTabs = ["colors"];
+  const excludedTabs = ["colors", "tags"];
   const currentTab = tabs.includes(path)
     ? path
     : excludedTabs.includes(path)
@@ -95,19 +102,23 @@ const NavBar: React.FC = (props) => {
       <AppBar elevation={2} color="transparent" position="static">
         <Toolbar>
           <Tabs className={classes.tabs} value={currentTab}>
-            {tabs.map((tab, i) => {
-              const upperCase = tab.toUpperCase();
-              return (
-                <Tab
-                  key={tab}
-                  icon={isSizeSmall ? tabIcons[i] : undefined}
-                  value={tab}
-                  component={Link}
-                  to={`/${tab}`}
-                  label={isSizeSmall ? null : upperCase}
-                ></Tab>
-              );
-            })}
+            {React.useMemo(
+              () =>
+                tabs.map((tab, i) => {
+                  const upperCase = tab.toUpperCase();
+                  return (
+                    <Tab
+                      key={tab}
+                      icon={isSizeSmall ? tabIcons[i] : undefined}
+                      value={tab}
+                      component={Link}
+                      to={`/${tab}`}
+                      label={isSizeSmall ? null : upperCase}
+                    ></Tab>
+                  );
+                }),
+              [isSizeSmall]
+            )}
           </Tabs>
           <NavButtons isSizeSmall={isSizeSmall} btns={btns} />
         </Toolbar>

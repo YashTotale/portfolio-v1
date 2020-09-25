@@ -31,8 +31,23 @@ const Theme: React.FC = ({ children }) => {
   const theme = React.useMemo(
     () =>
       createMuiTheme({
+        overrides: {
+          MuiTooltip: {
+            tooltip: {
+              fontFamily: "Roboto, Arial, sans-serif",
+              fontSize: "0.72rem",
+              fontWeight: 600,
+              backgroundColor: "rgb(0, 0, 0, 0.76)",
+            },
+          },
+          MuiTab: {
+            wrapper: {
+              fontFamily: "Roboto, Arial, sans-serif",
+            },
+          },
+        },
         typography: {
-          fontFamily: "Palatino, Georgia, Helvetica",
+          fontFamily: "Palatino, Georgia, Serif",
         },
         palette: {
           type: isDarkMode ? "dark" : "light",

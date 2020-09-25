@@ -1,9 +1,14 @@
 {
   "name": "yash-totale",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "homepage": "http://YashTotale.github.io",
+  "version": "0.0.1",
+  "description": "Portfolio Website built with React, Redux, TypeScript, and Material UI",
+  "main": "index.tsx",
+  "homepage": "https://yashtotale.github.io",
+  "bugs": {
+    "url": "https://github.com/YashTotale/YashTotale.github.io/issues",
+    "email": "totaleyash@gmail.com"
+  },
+  "license": "MIT",
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode production",
@@ -12,9 +17,17 @@
     "data": "ts-node ./src/Scripts/getData",
     "closeIssue": "ts-node ./src/Scripts/closeGithubIssue"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "React",
+    "Redux",
+    "TypeScript",
+    "Material UI"
+  ],
+  "author": {
+    "name": "Yash Totale",
+    "email": "totaleyash@gmail.com",
+    "url": "https://github.com/YashTotale"
+  },
   "repository": {
     "url": "https://github.com/YashTotale/YashTotale.github.io",
     "type": "git"
