@@ -139,7 +139,7 @@ const Display: React.FC<ProjectProps> = ({
         <div className={classes.projectTags}>
           {tags.map((tag, i) => (
             //@ts-ignore
-            <MiniTag key={i} {...Tags[tag]} />
+            <MiniTag key={i} {...Tags.find(({ name }) => tag === name)} />
           ))}
         </div>
         <Divider className={classes.projectDivider} />
@@ -152,20 +152,17 @@ const Display: React.FC<ProjectProps> = ({
 };
 
 const parseDescription = (description: string) => {
-  const tags = Object.keys(Tags);
-
   type Regex = [RegExp, (match: string) => any];
 
   const regexes: Regex[] = [
     [/\*\*(.*?)\*\*/gi, (match: string) => <strong>{match}</strong>],
-    ...tags.map(
+    ...Tags.map(
       (tag): Regex => [
-        new RegExp(`(?<![a-zA-Z])(${tag})(?![a-zA-Z])`, "gi"),
+        new RegExp(`(?<![a-zA-Z])(${tag.name})(?![a-zA-Z])`, "gi"),
         (match: string) => (
           <StyledLink
             color="secondary"
-            //@ts-ignore
-            to={`/tags/${Tags[match].url}`}
+            to={`/tags/${tag.url}`}
             component={Link}
           >
             {match}

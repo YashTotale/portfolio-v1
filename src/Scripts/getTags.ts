@@ -1,6 +1,7 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { write, baseOptions, createURL } from "./index";
+import { TagProps } from "../Utils/interfaces";
 
 const tagsRequest = () => {
   return new Promise<TagInfo[]>((resolve, reject) => {
@@ -9,8 +10,8 @@ const tagsRequest = () => {
   });
 };
 
-const createTags = (tags: string[], tagInfos: TagInfo[]): any => {
-  const tagsObj: any = {};
+const createTags = (tags: string[], tagInfos: TagInfo[]): TagProps[] => {
+  const tagsObj: TagProps[] = [];
 
   tags.forEach((tag) => {
     let tagInfoIndex;
@@ -22,6 +23,8 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): any => {
     };
 
     const tagObj = {
+      name: tag,
+      id: "0",
       ...tagInfo,
       icons: tagInfo.icons ? [tagInfo.icons] : undefined,
       url: createURL(tag),
@@ -41,7 +44,7 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): any => {
     if (tagObj.icons?.length === 1) {
       tagObj.icons.push(tagObj.icons[0]);
     }
-    tagsObj[tag] = tagObj;
+    tagsObj.push(tagObj);
   });
   return tagsObj;
 };
@@ -50,8 +53,8 @@ export const getTags = (tags: string[]) => {
   return new Promise(async (resolve, reject) => {
     const tagInfos: TagInfo[] = await tagsRequest();
     const allTags = [...new Set(tags)];
-    const tagJson = createTags(allTags, tagInfos);
-    write("Tags", tagJson);
+    const tagsArray = createTags(allTags, tagInfos);
+    write("Tags", tagsArray);
   });
 };
 

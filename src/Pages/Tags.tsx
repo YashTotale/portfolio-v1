@@ -25,17 +25,14 @@ interface Params {
 const TagsPage: React.FC = () => {
   const classes = useStyles();
   const params = useParams<Params>();
-  const tags = React.useMemo(() => Object.keys(Tags), [Tags]);
   //@ts-ignore
-  const urls = React.useMemo(() => tags.map((tag) => Tags[tag].url), [tags]);
+  const urls = React.useMemo(() => Tags.map(({ url }) => url), [Tags]);
 
   return urls.includes(params.id) ? (
     <TagPage />
   ) : (
     <div className={classes.tags}>
-      {tags.map((tag, i) => {
-        // @ts-ignore
-        const { url, name, icons } = Tags[tag];
+      {Tags.map(({ url, name, icons }, i) => {
         return (
           <TagMini
             key={i}
