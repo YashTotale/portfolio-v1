@@ -18,13 +18,9 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): TagProps[] => {
     const tagInfo = tagInfos.find((info, i) => {
       tagInfoIndex = i;
       return info.name === tag;
-    }) ?? {
-      icons: undefined,
-    };
+    }) as TagInfo;
 
     const tagObj = {
-      name: tag,
-      id: "0",
       ...tagInfo,
       icons: tagInfo.icons ? [tagInfo.icons] : undefined,
       url: createURL(tag),
