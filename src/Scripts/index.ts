@@ -37,3 +37,7 @@ export const gitAdd = (location: string) => {
     });
   });
 };
+
+export const createURL = (value: string): string => {
+  return value.toLowerCase().replace(/\s/g, "-");
+};

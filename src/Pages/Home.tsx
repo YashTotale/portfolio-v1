@@ -38,7 +38,13 @@ const HomePage: React.FC = () => {
         <hr />
         <div className={classes.projects}>
           {Projects.slice(0, isSizeXL ? 7 : 5).map((project, i) => {
-            return <ProjectMini {...project} key={i} />;
+            return (
+              <ProjectMini
+                {...project}
+                url={`/projects/${project.url}`}
+                key={i}
+              />
+            );
           })}
         </div>
       </div>

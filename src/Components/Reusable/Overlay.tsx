@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 //Material UI Imports
 import { makeStyles, Typography, useTheme } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 interface styleProps {
   hovering: boolean;
@@ -59,28 +60,31 @@ const useStyles = makeStyles((theme) => ({
 interface MiniProps {
   name: string;
   icons: string[];
+  url: string;
 }
 
-const Mini: React.FC<MiniProps> = (props) => {
+const Mini: React.FC<MiniProps> = ({ name, icons, url }) => {
   const [hovering, setHovering] = useState<boolean>(false);
   const theme = useTheme();
   const classes = useStyles({ hovering });
   return (
-    <div
-      onMouseOver={() => setHovering(true)}
-      onMouseLeave={() => setHovering(false)}
-      className={classes.mini}
-    >
-      <div className={classes.overlay}></div>
-      <Typography className={classes.name} variant="h5">
-        {props.name}
-      </Typography>
-      <img
-        className={classes.img}
-        src={theme.palette.type === "light" ? props.icons[0] : props.icons[1]}
-        alt={props.name}
-      ></img>
-    </div>
+    <Link to={url}>
+      <div
+        onMouseOver={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        className={classes.mini}
+      >
+        <div className={classes.overlay}></div>
+        <Typography className={classes.name} variant="h5">
+          {name}
+        </Typography>
+        <img
+          className={classes.img}
+          src={theme.palette.type === "light" ? icons[0] : icons[1]}
+          alt={name}
+        ></img>
+      </div>
+    </Link>
   );
 };
 

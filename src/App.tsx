@@ -1,10 +1,12 @@
 //React Imports
-import React, { lazy, Suspense } from "react";
 import { hot } from "react-hot-loader";
+import React, { lazy, Suspense } from "react";
 import Loading from "./Components/Reusable/Loading";
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
 const NavBar = lazy(() => import("./Components/Custom/NavBar"));
 const Footer = lazy(() => import("./Components/Custom/Footer"));
+
+//Utils
 import { DARK_LOGO, LIGHT_LOGO } from "./Utils/links";
 import { FOOTER_HEIGHT } from "./Utils/constants";
 
@@ -57,13 +59,13 @@ const Routes: React.FC = (props) => {
   );
   return (
     <Switch>
-      <Route path="/projects">
+      <Route path="/projects/:id?">
         <Projects />
       </Route>
       <Route path="/experience">
         <Experience />
       </Route>
-      <Route path="/tags">
+      <Route path="/tags/:id?">
         <Tags />
       </Route>
       <Route path="/colors">

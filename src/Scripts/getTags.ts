@@ -1,6 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { write, baseOptions } from "./index";
+import { write, baseOptions, createURL } from "./index";
 
 const tagsRequest = () => {
   return new Promise<TagInfo[]>((resolve, reject) => {
@@ -24,7 +24,7 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): any => {
     const tagObj = {
       ...tagInfo,
       icons: tagInfo.icons ? [tagInfo.icons] : undefined,
-      url: tag.toLowerCase().replace(/\s/g, "-"),
+      url: createURL(tag),
     };
 
     const nextTagInfo =

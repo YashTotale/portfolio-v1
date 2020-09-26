@@ -162,7 +162,12 @@ const parseDescription = (description: string) => {
       (tag): Regex => [
         new RegExp(`(?<![a-zA-Z])(${tag})(?![a-zA-Z])`, "gi"),
         (match: string) => (
-          <StyledLink color="secondary" to="/" component={Link}>
+          <StyledLink
+            color="secondary"
+            //@ts-ignore
+            to={`/tags/${Tags[match].url}`}
+            component={Link}
+          >
             {match}
           </StyledLink>
         ),

@@ -8,6 +8,7 @@ export interface ProjectProps {
   tags: string[];
   start: string;
   end?: string;
+  url: string;
 }
 
 export interface ExperienceProps {

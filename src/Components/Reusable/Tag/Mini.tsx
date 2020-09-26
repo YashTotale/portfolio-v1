@@ -33,7 +33,7 @@ const Mini: React.FC<TagProps> = ({ name, url, icons }) => {
         ) : undefined
       }
       component={Link}
-      to="/"
+      to={`/tags/${url}`}
       color="primary"
       variant="outlined"
     />

@@ -6,6 +6,7 @@ import ProjectDisplay from "../Components/Reusable/Project/Display";
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -21,15 +22,33 @@ const useStyles = makeStyles({
   },
 });
 
+interface Params {
+  id: string;
+}
+
 const ProjectsPage: React.FC = () => {
   const classes = useStyles();
+  const { id } = useParams<Params>();
+  const projectURLs = React.useMemo(
+    () => Projects.map((project) => project.url),
+    [Projects]
+  );
   const isSizeSmall = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
   );
-  const half = Math.ceil(Projects.length / 2);
-  const col1 = Projects.slice(0, isSizeSmall ? Projects.length : half);
-  const col2 = isSizeSmall ? [] : Projects.slice(half);
-  return (
+  const half = React.useMemo(() => Math.ceil(Projects.length / 2), [Projects]);
+  const col1 = React.useMemo(
+    () => Projects.slice(0, isSizeSmall ? Projects.length : half),
+    [isSizeSmall, Projects]
+  );
+  const col2 = React.useMemo(() => (isSizeSmall ? [] : Projects.slice(half)), [
+    isSizeSmall,
+    Projects,
+  ]);
+
+  return projectURLs.includes(id) ? (
+    <h1>Hello</h1>
+  ) : (
     <div className={classes.root}>
       {[...Array(isSizeSmall ? 1 : 2)].map((x, i) => (
         <div key={i} className={classes.col}>

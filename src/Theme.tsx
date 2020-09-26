@@ -43,6 +43,8 @@ const Theme: React.FC = ({ children }) => {
           MuiTab: {
             wrapper: {
               fontFamily: "Roboto, Arial, sans-serif",
+              fontWeight: 600,
+              fontSize: "0.9rem",
             },
           },
         },

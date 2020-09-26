@@ -1,6 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { write, baseOptions } from "./index";
+import { write, baseOptions, createURL } from "./index";
 import { DEFAULT_PROJECT_ICON } from "../Utils/links";
 import { ProjectProps } from "../Utils/interfaces";
 
@@ -15,10 +15,11 @@ const cleanProjectData = (
   projects: ProjectObject[]
 ): [ProjectProps[], string[]] => {
   const cleanedProjects: ProjectProps[] = [];
-  let tags: string[] = [];
+  let allTags: string[] = [];
 
   projects.forEach((project) => {
-    if (!project.id) {
+    const { id, description, start, end, icons, tags, name } = project;
+    if (!id) {
       const [prevProject] = cleanedProjects.slice(-1);
       for (const key in project) {
         //@ts-ignore
@@ -29,22 +30,23 @@ const cleanProjectData = (
         prevProject.icons.push(prevProject.icons[0]);
       }
 
-      tags = tags.concat(prevProject.tags);
+      allTags = allTags.concat(prevProject.tags);
     } else {
       const newProject: ProjectProps = {
         ...project,
-        description: [project.description],
-        start: project.start,
-        end: project.end,
-        icons: project.icons ? [project.icons] : [DEFAULT_PROJECT_ICON],
-        tags: [project.tags],
+        description: [description],
+        start,
+        end,
+        icons: icons ? [icons] : [DEFAULT_PROJECT_ICON],
+        tags: [tags],
+        url: createURL(name),
       };
       cleanedProjects.push(newProject);
 
-      tags = tags.concat(newProject.tags);
+      allTags = allTags.concat(newProject.tags);
     }
   });
-  return [cleanedProjects, tags];
+  return [cleanedProjects, allTags];
 };
 
 export const getProjects = () => {
