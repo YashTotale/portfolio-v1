@@ -13,6 +13,7 @@ import {
   getSecondaryColor,
   getPrimaryShade,
   getSecondaryShade,
+  getPalette,
 } from "./Redux/selectors";
 import { toggleDarkMode } from "./Redux/actions";
 
@@ -23,10 +24,13 @@ const Theme: React.FC = ({ children }) => {
   if (prefersDarkMode !== (isDarkMode ?? false) && isDarkMode === null) {
     dispatch(toggleDarkMode(prefersDarkMode));
   }
-  const primaryColor = useSelector(getPrimaryColor);
-  const secondaryColor = useSelector(getSecondaryColor);
-  const primaryShade = useSelector(getPrimaryShade);
-  const secondaryShade = useSelector(getSecondaryShade);
+
+  const [
+    primaryColor,
+    secondaryColor,
+    primaryShade,
+    secondaryShade,
+  ] = useSelector(getPalette);
 
   const theme = React.useMemo(
     () =>

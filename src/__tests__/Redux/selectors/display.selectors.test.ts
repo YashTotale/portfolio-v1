@@ -3,12 +3,16 @@ import {
   getIsNavBtnsMenuOpen,
   getPrimaryColor,
   getSecondaryColor,
+  getColors,
   getPrimaryShade,
   getSecondaryShade,
+  getShades,
+  getPalette,
   getSnackbarMessage,
   getIsSnackbarOpen,
   getSnackbarSeverity,
 } from "../../../Redux/selectors/display.selectors";
+import { cssColor, shade } from "../../../Utils/colors";
 import sampleState from "../sampleStore";
 
 describe("The display selectors", () => {
@@ -36,6 +40,14 @@ describe("The display selectors", () => {
     expect(actual).toEqual(expected);
   });
 
+  test("The getColors selector", () => {
+    const fakePrimary = "amber";
+    const fakeSecondary = "yellow";
+    const expected = [fakePrimary, fakeSecondary];
+    const actual = getColors.resultFunc(fakePrimary, fakeSecondary);
+    expect(actual).toEqual(expected);
+  });
+
   test("The getPrimaryShade selector", () => {
     const expected = sampleState.display.shades.primary;
     const actual = getPrimaryShade(sampleState);
@@ -45,6 +57,22 @@ describe("The display selectors", () => {
   test("The getSecondaryShade selector", () => {
     const expected = sampleState.display.shades.secondary;
     const actual = getSecondaryShade(sampleState);
+    expect(actual).toEqual(expected);
+  });
+
+  test("The getShades selector", () => {
+    const fakePrimary = "50";
+    const fakeSecondary = "A700";
+    const expected = [fakePrimary, fakeSecondary];
+    const actual = getShades.resultFunc(fakePrimary, fakeSecondary);
+    expect(actual).toEqual(expected);
+  });
+
+  test("The getPalette selector", () => {
+    const fakeColors: cssColor[] = ["deepPurple", "deepOrange"];
+    const fakeShades: shade[] = ["300", "A400"];
+    const expected = [...fakeColors, ...fakeShades];
+    const actual = getPalette.resultFunc(fakeColors, fakeShades);
     expect(actual).toEqual(expected);
   });
 
