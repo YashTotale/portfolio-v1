@@ -6,13 +6,13 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
-interface StyleAttributes {
+interface StyleProps {
   width: number;
   height: number;
 }
 
 const useStyles = makeStyles((theme) => ({
-  img: ({ width, height }: StyleAttributes) => ({
+  img: ({ width, height }: StyleProps) => ({
     width,
     height,
   }),

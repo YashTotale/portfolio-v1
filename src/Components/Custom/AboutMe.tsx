@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Paper, Typography } from "@material-ui/core";
 
-interface styleProps {
+interface StyleProps {
   hovering?: boolean;
 }
 
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 0,
     //fade in/out
     transition: "opacity 0.4s",
-    opacity: ({ hovering }: styleProps) => (hovering ? 0.5 : 0.8),
+    opacity: ({ hovering }: StyleProps) => (hovering ? 0.5 : 0.8),
   },
   content: {
     zIndex: 1,
@@ -133,13 +133,13 @@ const AboutMe: React.FC = () => {
   );
 };
 
-interface clickableStyleProps {
+interface ClickableStyleProps {
   hovering: boolean;
   type: "btn" | "link";
 }
 
 const useClickableStyles = makeStyles((theme: Theme) => ({
-  clickable: ({ hovering, type }: clickableStyleProps) => ({
+  clickable: ({ hovering, type }: ClickableStyleProps) => ({
     //Border
     border: type === "btn" ? "2px solid wheat" : "none",
     borderRadius: type === "btn" ? "4px" : "initial",

@@ -35,8 +35,8 @@ const Theme: React.FC = ({ children }) => {
           MuiTooltip: {
             tooltip: {
               fontFamily: "Roboto, Arial, sans-serif",
-              fontSize: "0.72rem",
               fontWeight: 600,
+              fontSize: "0.72rem",
               backgroundColor: "rgb(0, 0, 0, 0.76)",
             },
           },
@@ -45,6 +45,12 @@ const Theme: React.FC = ({ children }) => {
               fontFamily: "Roboto, Arial, sans-serif",
               fontWeight: 600,
               fontSize: "0.9rem",
+            },
+          },
+          MuiButton: {
+            label: {
+              fontFamily: "Roboto, Arial, sans-serif",
+              fontWeight: 600,
             },
           },
         },
