@@ -2,6 +2,7 @@
 import reader from "g-sheets-api";
 import { write, baseOptions, createURL } from "./index";
 import { TagProps } from "../Utils/interfaces";
+import { DEFAULT_TAG_ICON } from "../Utils/links";
 
 const tagsRequest = () => {
   return new Promise<TagInfo[]>((resolve, reject) => {
@@ -22,7 +23,9 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): TagProps[] => {
 
     const tagObj = {
       ...tagInfo,
-      icons: tagInfo.icons ? [tagInfo.icons] : undefined,
+      icons: tagInfo.icons
+        ? [tagInfo.icons]
+        : [DEFAULT_TAG_ICON, DEFAULT_TAG_ICON],
       url: createURL(tag),
     };
 

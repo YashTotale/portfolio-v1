@@ -34,19 +34,19 @@ const useStyles = makeStyles((theme: ThemeProps) => ({
 const App: React.FC = (props) => {
   const classes = useStyles();
   return (
-    <Theme>
-      <CssBaseline />
-      <Suspense fallback={<Loading />}>
-        <Router>
+    <Router>
+      <Theme>
+        <CssBaseline />
+        <Suspense fallback={<Loading />}>
           <div className={classes.pageContainer}>
             <NavBar />
             <Routes />
             <SnackBar />
           </div>
           <Footer />
-        </Router>
-      </Suspense>
-    </Theme>
+        </Suspense>
+      </Theme>
+    </Router>
   );
 };
 

@@ -24,12 +24,12 @@ interface Params {
 
 const TagsPage: React.FC = () => {
   const classes = useStyles();
-  const params = useParams<Params>();
-  //@ts-ignore
+  const { id } = useParams<Params>();
   const urls = React.useMemo(() => Tags.map(({ url }) => url), [Tags]);
 
-  return urls.includes(params.id) ? (
-    <TagPage />
+  return urls.includes(id) ? (
+    //@ts-ignore
+    <TagPage {...Tags.find((tag) => tag.url === id)} />
   ) : (
     <div className={classes.tags}>
       {Tags.map(({ url, name, icons }, i) => {

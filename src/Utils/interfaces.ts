@@ -20,6 +20,6 @@ export interface ExperienceProps {
 export interface TagProps {
   id: string;
   name: string;
-  icons?: string[];
+  icons: string[];
   url: string;
 }
