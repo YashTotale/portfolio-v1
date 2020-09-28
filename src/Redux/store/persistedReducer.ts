@@ -12,7 +12,6 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
 };
 
-//@ts-ignore
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer<any>(persistConfig, rootReducer);
 
 export default persistedReducer;

@@ -4,7 +4,7 @@ import TooltipBtn from "../TooltipBtn";
 import Tags from "../../../Data/Tags.json";
 import MiniTag from "../Tag/Mini";
 import Parser from "../Parser";
-import { ProjectProps } from "../../../Utils/interfaces";
+import { ProjectProps, TagProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
 import {
@@ -21,10 +21,7 @@ const useStyles = makeStyles((theme) => ({
   projectDiv: {
     margin: 15,
     position: "relative",
-    width: "60%",
-    [theme.breakpoints.only("xs")]: {
-      width: "80%",
-    },
+    maxWidth: "500px",
     // Flex
     display: "flex",
     flexDirection: "column",
@@ -135,8 +132,10 @@ const Display: React.FC<ProjectProps> = ({
         <Divider className={classes.projectDivider} />
         <div className={classes.projectTags}>
           {tags.map((tag, i) => (
-            //@ts-ignore
-            <MiniTag key={i} {...Tags.find(({ name }) => tag === name)} />
+            <MiniTag
+              key={i}
+              {...(Tags.find(({ name }) => tag === name) as TagProps)}
+            />
           ))}
         </div>
         <Divider className={classes.projectDivider} />

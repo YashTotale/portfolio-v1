@@ -7,21 +7,14 @@ import { colors, useMediaQuery } from "@material-ui/core";
 
 //Redux Imports
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getIsDarkMode,
-  getPrimaryColor,
-  getSecondaryColor,
-  getPrimaryShade,
-  getSecondaryShade,
-  getPalette,
-} from "./Redux/selectors";
+import { getIsDarkMode, getPalette } from "./Redux/selectors";
 import { toggleDarkMode } from "./Redux/actions";
 
 const Theme: React.FC = ({ children }) => {
   const dispatch = useDispatch();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const isDarkMode = useSelector(getIsDarkMode);
-  if (prefersDarkMode !== (isDarkMode ?? false) && isDarkMode === null) {
+  if (isDarkMode === null && prefersDarkMode) {
     dispatch(toggleDarkMode(prefersDarkMode));
   }
 

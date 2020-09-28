@@ -2,25 +2,29 @@
 import React from "react";
 import Projects from "../Data/Projects.json";
 import ProjectDisplay from "../Components/Reusable/Project/Display";
+import ProjectPage from "../Components/Reusable/Project/Page";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { useMediaQuery } from "@material-ui/core";
 import { useParams } from "react-router-dom";
+import { ProjectProps } from "../Utils/interfaces";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    margin: "15px 40px",
+    [theme.breakpoints.only("xs")]: {
+      margin: "15px 30px",
+    },
   },
   col: {
-    margin: "15px",
     display: "flex",
-    flex: 1,
     flexDirection: "column",
     alignItems: "center",
   },
-});
+}));
 
 interface Params {
   id: string;
@@ -47,7 +51,9 @@ const ProjectsPage: React.FC = () => {
   ]);
 
   return projectURLs.includes(id) ? (
-    <h1>Hello</h1>
+    <ProjectPage
+      {...(Projects.find((project) => project.url === id) as ProjectProps)}
+    />
   ) : (
     <div className={classes.root}>
       {[...Array(isSizeSmall ? 1 : 2)].map((x, i) => (

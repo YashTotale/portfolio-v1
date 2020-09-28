@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 //Material UI Imports
 import { makeStyles } from "@material-ui/core";
+import { TagProps } from "../Utils/interfaces";
 
 const useStyles = makeStyles((theme) => ({
   tags: {
@@ -25,11 +26,10 @@ interface Params {
 const TagsPage: React.FC = () => {
   const classes = useStyles();
   const { id } = useParams<Params>();
-  const urls = React.useMemo(() => Tags.map(({ url }) => url), [Tags]);
+  const tagURLs = React.useMemo(() => Tags.map(({ url }) => url), [Tags]);
 
-  return urls.includes(id) ? (
-    //@ts-ignore
-    <TagPage {...Tags.find((tag) => tag.url === id)} />
+  return tagURLs.includes(id) ? (
+    <TagPage {...(Tags.find((tag) => tag.url === id) as TagProps)} />
   ) : (
     <div className={classes.tags}>
       {Tags.map(({ url, name, icons }, i) => {

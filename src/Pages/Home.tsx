@@ -37,7 +37,7 @@ const HomePage: React.FC = () => {
         <Typography variant="h4">Projects</Typography>
         <hr />
         <div className={classes.projects}>
-          {Projects.slice(0, isSizeXL ? 7 : 5).map((project, i) => {
+          {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
             return (
               <ProjectMini
                 {...project}

@@ -38,7 +38,7 @@ import {
 import * as colorsObject from "@material-ui/core/colors";
 import { Check } from "@material-ui/icons";
 
-interface styleProps {
+interface StyleProps {
   isCurrentColor?: boolean;
   color?: string;
 }
@@ -87,10 +87,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   radioIcon: {
     width: 48,
     height: 48,
-    backgroundColor: ({ color }: styleProps) => color,
+    backgroundColor: ({ color }: StyleProps) => color,
   },
   radioIconSelected: {
-    border: ({ isCurrentColor }: styleProps) =>
+    border: ({ isCurrentColor }: StyleProps) =>
       isCurrentColor
         ? `4px solid ${
             theme.palette.type === "dark"
