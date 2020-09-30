@@ -4,6 +4,7 @@ import React from "react";
 //Material UI Imports
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { colors, useMediaQuery } from "@material-ui/core";
+import types from "@material-ui/lab/themeAugmentation";
 
 //Redux Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -46,6 +47,12 @@ const Theme: React.FC = ({ children }) => {
           },
           MuiButton: {
             label: {
+              fontFamily: "Roboto, Arial, sans-serif",
+              fontWeight: 600,
+            },
+          },
+          MuiAlert: {
+            message: {
               fontFamily: "Roboto, Arial, sans-serif",
               fontWeight: 600,
             },

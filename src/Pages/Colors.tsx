@@ -34,14 +34,10 @@ import {
   Typography,
   Button,
   Radio,
+  colors as colorsObject,
+  getContrastRatio,
 } from "@material-ui/core";
-import * as colorsObject from "@material-ui/core/colors";
 import { Check } from "@material-ui/icons";
-
-interface StyleProps {
-  isCurrentColor?: boolean;
-  color?: string;
-}
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -79,35 +75,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexWrap: "wrap",
     justifyContent: "center",
     margin: "20px 0px",
-  },
-  radio: {
-    padding: "0px",
-    margin: "2px",
-  },
-  radioIcon: {
-    width: 48,
-    height: 48,
-    backgroundColor: ({ color }: StyleProps) => color,
-  },
-  radioIconSelected: {
-    border: ({ isCurrentColor }: StyleProps) =>
-      isCurrentColor
-        ? `4px solid ${
-            theme.palette.type === "dark"
-              ? theme.palette.common.white
-              : theme.palette.common.black
-          }`
-        : "none",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  checkIcon: {
-    fontSize: 30,
-    color:
-      theme.palette.type === "dark"
-        ? theme.palette.common.white
-        : theme.palette.common.black,
   },
   resetDiv: {
     display: "flex",
@@ -181,12 +148,7 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
         />
         <Typography>{shade}</Typography>
       </div>
-      <ColorPicker
-        currentColor={currentColor}
-        shade={shade}
-        scheme={scheme}
-        upperCaseScheme={upperCaseScheme}
-      />
+      <ColorPicker currentColor={currentColor} shade={shade} scheme={scheme} />
     </div>
   );
 };
@@ -195,14 +157,12 @@ interface ColorPickerProps {
   scheme: scheme;
   shade: string;
   currentColor: string;
-  upperCaseScheme: string;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
   scheme,
   shade,
   currentColor,
-  upperCaseScheme,
 }) => {
   const classes = useStyles();
 
@@ -216,7 +176,6 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
             scheme={scheme}
             color={color}
             currentColor={currentColor}
-            upperCaseScheme={upperCaseScheme}
           ></ColorBtn>
         );
       })}
@@ -224,12 +183,48 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   );
 };
 
+interface ColorBtnStyleProps {
+  isCurrentColor: boolean;
+  color: string;
+}
+
+const useColorBtnStyles = makeStyles<Theme, ColorBtnStyleProps>((theme) => {
+  const white = theme.palette.common.white;
+  const black = theme.palette.common.black;
+  return {
+    radio: {
+      padding: "0px",
+      margin: "2px",
+    },
+    radioIcon: {
+      width: 48,
+      height: 48,
+      backgroundColor: ({ color }) => color,
+    },
+    radioIconSelected: {
+      border: ({ isCurrentColor }) =>
+        isCurrentColor
+          ? `4px solid ${theme.palette.type === "dark" ? white : black}`
+          : "none",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    checkIcon: {
+      fontSize: 30,
+      color: ({ color }) =>
+        getContrastRatio(white, color) > getContrastRatio(black, color)
+          ? white
+          : black,
+    },
+  };
+});
+
 interface ColorBtnProps {
   color: color;
   scheme: scheme;
   shade: string;
   currentColor: string;
-  upperCaseScheme: string;
 }
 
 const ColorBtn: React.FC<ColorBtnProps> = ({
@@ -237,14 +232,13 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   scheme,
   shade,
   currentColor,
-  upperCaseScheme,
 }) => {
   const dispatch = useDispatch();
   const cssColor = toCssColor(color) as cssColor;
 
   //@ts-ignore
   const colorHex = colorsObject[cssColor][shade];
-  const classes = useStyles({
+  const classes = useColorBtnStyles({
     color: colorHex,
     isCurrentColor: cssColor === currentColor,
   });

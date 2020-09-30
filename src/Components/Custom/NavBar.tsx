@@ -97,30 +97,27 @@ const NavBar: React.FC = (props) => {
     ? false
     : "home";
 
-  return React.useMemo(
-    () => (
-      <AppBar elevation={2} color="transparent" position="static">
-        <Toolbar>
-          <Tabs className={classes.tabs} value={currentTab}>
-            {tabs.map((tab, i) => {
-              const upperCase = tab.toUpperCase();
-              return (
-                <Tab
-                  key={tab}
-                  icon={isSizeSmall ? tabIcons[i] : undefined}
-                  value={tab}
-                  component={Link}
-                  to={`/${tab}`}
-                  label={isSizeSmall ? null : upperCase}
-                ></Tab>
-              );
-            })}
-          </Tabs>
-          <NavButtons isSizeSmall={isSizeSmall} btns={btns} />
-        </Toolbar>
-      </AppBar>
-    ),
-    [isSizeSmall, currentTab, btns]
+  return (
+    <AppBar elevation={2} color="transparent" position="static">
+      <Toolbar>
+        <Tabs className={classes.tabs} value={currentTab}>
+          {tabs.map((tab, i) => {
+            const upperCase = tab.toUpperCase();
+            return (
+              <Tab
+                key={tab}
+                icon={isSizeSmall ? tabIcons[i] : undefined}
+                value={tab}
+                component={Link}
+                to={`/${tab}`}
+                label={isSizeSmall ? null : upperCase}
+              ></Tab>
+            );
+          })}
+        </Tabs>
+        <NavButtons isSizeSmall={isSizeSmall} btns={btns} />
+      </Toolbar>
+    </AppBar>
   );
 };
 
