@@ -5,7 +5,7 @@ export const defaultColors = {
 
 export const defaultShades = {
   primary: <shade>"500",
-  secondary: <shade>"500",
+  secondary: <shade>"700",
 };
 
 export const colors: color[] = [
