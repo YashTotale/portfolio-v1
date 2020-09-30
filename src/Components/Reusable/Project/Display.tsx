@@ -1,9 +1,10 @@
 //React Imports
 import React from "react";
 import TooltipBtn from "../TooltipBtn";
-import Tags from "../../../Data/Tags.json";
 import MiniTag from "../Tag/Mini";
 import Parser from "../Parser";
+import StyledLink from "../StyledLink";
+import Tags from "../../../Data/Tags.json";
 import { ProjectProps, TagProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
@@ -15,7 +16,7 @@ import {
   Divider,
   useMediaQuery,
 } from "@material-ui/core";
-import { GitHub } from "@material-ui/icons";
+import { GitHub, Launch } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   projectDiv: {
@@ -57,6 +58,11 @@ const useStyles = makeStyles((theme) => ({
     top: 2,
     right: 2,
   },
+  projectLink: {
+    position: "absolute",
+    top: 52,
+    right: 2,
+  },
   projectInfo: {
     width: "100%",
     padding: "10px 10px 3px",
@@ -92,6 +98,8 @@ const Display: React.FC<ProjectProps> = ({
   sourcecode,
   start,
   end,
+  link,
+  url,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -107,15 +115,26 @@ const Display: React.FC<ProjectProps> = ({
           className={classes.projectTitle}
           variant={isSizeSmall ? "h5" : "h4"}
         >
-          {name}
+          <StyledLink to={`/projects/${url}`} color="primary">
+            {name}
+          </StyledLink>
         </Typography>
         {sourcecode ? (
           <TooltipBtn
             className={classes.projectSourceCode}
-            title="Github Repository"
+            title={`Source code for ${name}`}
             icon={<GitHub />}
             component="a"
             href={sourcecode}
+          ></TooltipBtn>
+        ) : null}
+        {link ? (
+          <TooltipBtn
+            className={classes.projectLink}
+            title={`View ${name}`}
+            icon={<Launch />}
+            component="a"
+            href={link}
           ></TooltipBtn>
         ) : null}
       </Paper>
@@ -146,7 +165,5 @@ const Display: React.FC<ProjectProps> = ({
     </div>
   );
 };
-
-const parse = (original: string) => {};
 
 export default Display;

@@ -9,10 +9,7 @@ import { Avatar, Chip, makeStyles, useTheme } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   tag: {
     margin: 2,
-    "& .MuiChip-label": {
-      fontSize: "0.875rem",
-    },
-    "& .MuiChip-avatarColorPrimary": {
+    "& .MuiChip-avatarColorSecondary": {
       backgroundColor: "inherit",
     },
   },
@@ -34,7 +31,7 @@ const Mini: React.FC<TagProps> = ({ name, url, icons }) => {
       }
       component={Link}
       to={`/tags/${url}`}
-      color="primary"
+      color="secondary"
       variant="outlined"
     />
   );

@@ -1,11 +1,9 @@
 // React Imports
 import React, { ReactElement } from "react";
-import { Link } from "react-router-dom";
 import Tags from "../../Data/Tags.json";
+import StyledLink from "./StyledLink";
 
 // Material UI Imports
-import { Link as StyledLink } from "@material-ui/core";
-
 interface ParserProps {
   original: string;
 }
@@ -19,11 +17,7 @@ const Parser: React.FC<ParserProps> = ({ original }) => {
       (tag): Regex => [
         new RegExp(`(?<![a-zA-Z])(${tag.name})(?![a-zA-Z])`, "gi"),
         (match: string) => (
-          <StyledLink
-            color="secondary"
-            to={`/tags/${tag.url}`}
-            component={Link}
-          >
+          <StyledLink color="primary" to={`/tags/${tag.url}`}>
             {match}
           </StyledLink>
         ),

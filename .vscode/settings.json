@@ -4,5 +4,8 @@
       "name": "Get Data",
       "script": "npm run data"
     }
+  ],
+  "cSpell.words": [
+    "sourcecode"
   ]
 }

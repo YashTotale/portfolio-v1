@@ -57,6 +57,14 @@ const Theme: React.FC = ({ children }) => {
               fontWeight: 600,
             },
           },
+          MuiChip: {
+            label: {
+              fontSize: "0.875rem",
+            },
+            avatarColorSecondary: {
+              backgroundColor: "inherit",
+            },
+          },
         },
         typography: {
           fontFamily: "Palatino, Georgia, Serif",
