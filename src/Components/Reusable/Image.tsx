@@ -11,8 +11,8 @@ interface StyleProps {
   height: number;
 }
 
-const useStyles = makeStyles((theme) => ({
-  img: ({ width, height }: StyleProps) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
+  img: ({ width, height }) => ({
     width,
     height,
   }),

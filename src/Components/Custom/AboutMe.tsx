@@ -13,10 +13,10 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Paper, Typography } from "@material-ui/core";
 
 interface StyleProps {
-  hovering?: boolean;
+  hovering: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   root: {
     display: "flex",
     padding: "20px",
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     right: 0,
     //fade in/out
     transition: "opacity 0.4s",
-    opacity: ({ hovering }: StyleProps) => (hovering ? 0.5 : 0.8),
+    opacity: ({ hovering }) => (hovering ? 0.5 : 0.8),
   },
   content: {
     zIndex: 1,
@@ -79,6 +79,7 @@ const AboutMe: React.FC = () => {
   const dispatch = useDispatch();
 
   const classes = useStyles({ hovering });
+
   return (
     <Paper
       onMouseOver={() => setHovering(true)}

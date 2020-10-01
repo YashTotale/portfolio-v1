@@ -16,10 +16,10 @@ export interface TooltipBtnProps {
 }
 
 const TooltipBtn: React.FC<TooltipBtnProps> = (props) => {
-  const { title } = props;
   const tooltipComponent = TooltipComponent(props);
+  const { title, className } = props;
   return (
-    <Tooltip className={props.className} key={title} title={title}>
+    <Tooltip className={className} key={title} title={title}>
       {tooltipComponent}
     </Tooltip>
   );

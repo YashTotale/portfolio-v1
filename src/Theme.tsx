@@ -64,6 +64,9 @@ const Theme: React.FC = ({ children }) => {
             avatarColorSecondary: {
               backgroundColor: "inherit",
             },
+            avatarColorPrimary: {
+              backgroundColor: "inherit",
+            },
           },
           MuiSlider: {
             root: {

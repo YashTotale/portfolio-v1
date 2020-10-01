@@ -36,8 +36,6 @@ import {
   Typography,
   Button,
   Radio,
-  colors as colorsObject,
-  getContrastRatio,
 } from "@material-ui/core";
 import { Check } from "@material-ui/icons";
 

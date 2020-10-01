@@ -2,14 +2,14 @@
 import React, { useState } from "react";
 
 //Material UI Imports
-import { makeStyles, Typography, useTheme } from "@material-ui/core";
+import { makeStyles, Theme, Typography, useTheme } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-interface styleProps {
+interface StyleProps {
   hovering: boolean;
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   mini: {
     display: "flex",
     position: "relative",
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
     left: 0,
     bottom: 0,
     backgroundColor: "#1d1c1c",
-    visibility: ({ hovering }: styleProps) => (hovering ? "visible" : "hidden"),
-    opacity: ({ hovering }: styleProps) => (hovering ? 0.7 : 0),
+    visibility: ({ hovering }) => (hovering ? "visible" : "hidden"),
+    opacity: ({ hovering }) => (hovering ? 0.7 : 0),
     transition: "visibility 0.4s, opacity 0.4s",
   },
   name: {
@@ -42,8 +42,8 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.common.white,
     fontWeight: 900,
     //Transition
-    visibility: ({ hovering }: styleProps) => (hovering ? "visible" : "hidden"),
-    opacity: ({ hovering }: styleProps) => (hovering ? 1 : 0),
+    visibility: ({ hovering }) => (hovering ? "visible" : "hidden"),
+    opacity: ({ hovering }) => (hovering ? 1 : 0),
     transition: "visibility 0.4s, opacity 0.4s",
   },
   img: {
