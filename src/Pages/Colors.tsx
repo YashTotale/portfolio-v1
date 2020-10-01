@@ -9,6 +9,8 @@ import {
   schemes,
   cssColor,
   color,
+  getMuiColor,
+  getTextColor,
 } from "../Utils/colors";
 
 //Redux Imports
@@ -155,7 +157,7 @@ const ColorScheme: React.FC<ColorSchemeProps> = ({ scheme }) => {
 
 interface ColorPickerProps {
   scheme: scheme;
-  shade: string;
+  shade: shade;
   currentColor: string;
 }
 
@@ -212,10 +214,7 @@ const useColorBtnStyles = makeStyles<Theme, ColorBtnStyleProps>((theme) => {
     },
     checkIcon: {
       fontSize: 30,
-      color: ({ color }) =>
-        getContrastRatio(white, color) > getContrastRatio(black, color)
-          ? white
-          : black,
+      color: ({ color }) => getTextColor(theme, color),
     },
   };
 });
@@ -223,7 +222,7 @@ const useColorBtnStyles = makeStyles<Theme, ColorBtnStyleProps>((theme) => {
 interface ColorBtnProps {
   color: color;
   scheme: scheme;
-  shade: string;
+  shade: shade;
   currentColor: string;
 }
 
@@ -236,15 +235,14 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   const dispatch = useDispatch();
   const cssColor = toCssColor(color) as cssColor;
 
-  //@ts-ignore
-  const colorHex = colorsObject[cssColor][shade];
+  const colorHex = getMuiColor(cssColor, shade);
   const classes = useColorBtnStyles({
     color: colorHex,
     isCurrentColor: cssColor === currentColor,
   });
 
   const handleClick = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    dispatch(changeColorWMessage(scheme, color));
+    dispatch(changeColorWMessage(scheme, cssColor));
   };
 
   return (

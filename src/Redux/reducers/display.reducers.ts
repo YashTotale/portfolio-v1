@@ -19,6 +19,7 @@ export const displayState = {
     isOpen: false,
     message: "",
     severity: <Color>"info",
+    color: null,
   },
 };
 
@@ -45,8 +46,8 @@ export const display = (state = displayState, action: AnyAction) => {
       return { ...state, shades: { ...state.shades, [scheme]: shade } };
     }
     case SET_SNACKBAR_MESSAGE: {
-      const { message, severity } = payload;
-      return { ...state, snackBar: { message, severity, isOpen: true } };
+      const { message, severity, color } = payload;
+      return { ...state, snackBar: { message, severity, color, isOpen: true } };
     }
     case HANDLE_SNACKBAR_CLOSE: {
       return { ...state, snackBar: { ...state.snackBar, isOpen: false } };

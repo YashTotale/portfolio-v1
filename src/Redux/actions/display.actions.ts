@@ -65,16 +65,17 @@ export const changeShade = (scheme: scheme, shade: shade): IchangeShade => ({
 
 export interface IsetSnackbarMessage {
   type: string;
-  payload: { message: string; severity: Color };
+  payload: { message: string; severity: Color; color: string | null };
 }
 
 export const SET_SNACKBAR_MESSAGE = "SET_SNACKBAR_MESSAGE";
 export const setSnackbarMessage = (
   message: string = "",
-  severity: Color
+  severity: Color,
+  color: string | null
 ): IsetSnackbarMessage => ({
   type: SET_SNACKBAR_MESSAGE,
-  payload: { message, severity },
+  payload: { message, severity, color },
 });
 
 //Handle Snackbar close

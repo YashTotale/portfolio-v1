@@ -106,10 +106,11 @@ describe("The display reducer", () => {
   test("Sets Snackbar message", () => {
     const message = "test";
     const severity = "error";
+    const color = null;
 
     const fakeAction: IsetSnackbarMessage = {
       type: SET_SNACKBAR_MESSAGE,
-      payload: { message, severity },
+      payload: { message, severity, color },
     };
 
     const expected = {
@@ -118,6 +119,7 @@ describe("The display reducer", () => {
         isOpen: true,
         severity,
         message,
+        color,
       },
     };
 

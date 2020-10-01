@@ -4,7 +4,7 @@ import React from "react";
 //Material UI Imports
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { colors, useMediaQuery } from "@material-ui/core";
-import types from "@material-ui/lab/themeAugmentation";
+import type from "@material-ui/lab/themeAugmentation";
 
 //Redux Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -63,6 +63,13 @@ const Theme: React.FC = ({ children }) => {
             },
             avatarColorSecondary: {
               backgroundColor: "inherit",
+            },
+          },
+          MuiSlider: {
+            root: {
+              ["@media (pointer: coarse)"]: {
+                padding: "auto",
+              },
             },
           },
         },

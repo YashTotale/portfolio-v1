@@ -1,3 +1,9 @@
+import {
+  colors as colorsObject,
+  getContrastRatio,
+  Theme,
+} from "@material-ui/core";
+
 export const defaultColors = {
   primary: <cssColor>"lightBlue",
   secondary: <cssColor>"amber",
@@ -107,8 +113,26 @@ export const toCssColor = (color: color): string =>
     .replace(" ", "")
     .replace(color.charAt(0), color.charAt(0).toLowerCase());
 
+export const toColor = (cssColor: cssColor): string =>
+  cssColor.replace(/([A-Z])/g, " $1").replace(/^./, function (str) {
+    return str.toUpperCase();
+  });
+
 export const isRgb = (string: string): boolean =>
   /rgb\([0-9]{1,3}\s*,\s*[0-9]{1,3}\s*,\s*[0-9]{1,3}\)/i.test(string);
 
 export const isHex = (string: string): boolean =>
   /^#?([0-9a-f]{3})$|^#?([0-9a-f]){6}$/i.test(string);
+
+export const getMuiColor = (color: cssColor, shade: shade): string => {
+  return colorsObject[color][shade];
+};
+
+export const getTextColor = (theme: Theme, color: string) => {
+  const white = theme.palette.common.white;
+  const black = theme.palette.common.black;
+
+  return getContrastRatio(white, color) > getContrastRatio(black, color)
+    ? white
+    : black;
+};

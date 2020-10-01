@@ -16,16 +16,20 @@ import {
   resetColors,
   changeColorWMessage,
 } from "../../../Redux/thunks/display.thunks";
-import { getIsDarkMode } from "../../../Redux/selectors";
 import {
-  color,
+  getIsDarkMode,
+  getPrimaryShade,
+  getSecondaryColor,
+} from "../../../Redux/selectors";
+import {
+  cssColor,
   defaultColors,
   defaultShades,
+  getMuiColor,
   resetMessage,
   scheme,
   schemes,
   shade,
-  toCssColor,
 } from "../../../Utils/colors";
 
 describe("The display thunks", () => {
@@ -43,6 +47,7 @@ describe("The display thunks", () => {
       payload: {
         message: `${theme} Theme set`,
         severity: "success",
+        color: null,
       },
     };
 
@@ -56,12 +61,12 @@ describe("The display thunks", () => {
     const fakeDispatch = sinon.spy();
 
     const scheme: scheme = "primary";
-    const color: color = "Deep Purple";
+    const cssColor: cssColor = "deepPurple";
 
     const colorAction: IchangeColors = {
       type: CHANGE_COLORS,
       payload: {
-        color: toCssColor(color),
+        color: cssColor,
         scheme,
       },
     };
@@ -71,10 +76,11 @@ describe("The display thunks", () => {
       payload: {
         message: "Primary Color is now Deep Purple",
         severity: "success",
+        color: getMuiColor(cssColor, getPrimaryShade(sampleState)),
       },
     };
 
-    changeColorWMessage(scheme, color)(fakeDispatch, () => sampleState);
+    changeColorWMessage(scheme, cssColor)(fakeDispatch, () => sampleState);
 
     expect(fakeDispatch.getCall(0).args[0]).toEqual(colorAction);
     expect(fakeDispatch.getCall(1).args[0]).toEqual(snackbarAction);
@@ -96,6 +102,7 @@ describe("The display thunks", () => {
       payload: {
         message: "Secondary Shade is now A200",
         severity: "success",
+        color: getMuiColor(getSecondaryColor(sampleState), shade),
       },
     };
 
@@ -133,6 +140,7 @@ describe("The display thunks", () => {
         payload: {
           message: resetMessage,
           severity: "success",
+          color: null,
         },
       };
 

@@ -1,27 +1,40 @@
 // React Imports
 import React from "react";
+import { getTextColor } from "../../Utils/colors";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 import {
   getIsSnackbarOpen,
+  getSnackbarColor,
   getSnackbarMessage,
   getSnackbarSeverity,
 } from "../../Redux/selectors/display.selectors";
-
-// Material UI Imports
-// import { makeStyles } from "@material-ui/core/styles";
-import { Snackbar, SnackbarCloseReason } from "@material-ui/core";
-import { Alert } from "@material-ui/lab";
-import {} from "@material-ui/icons";
 import { handleSnackbarClose } from "../../Redux/actions";
 
-// const useStyles = makeStyles((theme) => ({}));
+// Material UI Imports
+import {
+  Snackbar,
+  SnackbarCloseReason,
+  makeStyles,
+  Theme,
+} from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
+
+interface StyleProps {
+  color: string | null;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
+  alert: {
+    backgroundColor: ({ color }) => (color ? color : "auto"),
+    color: ({ color }) => (color ? getTextColor(theme, color) : "auto"),
+  },
+}));
 
 interface SnackBarProps {}
 
 const SnackBar: React.FC<SnackBarProps> = ({}) => {
-  // const classes = useStyles();
   const dispatch = useDispatch();
 
   const handleClose = (
@@ -34,6 +47,11 @@ const SnackBar: React.FC<SnackBarProps> = ({}) => {
   const isOpen = useSelector(getIsSnackbarOpen);
   const message = useSelector(getSnackbarMessage);
   const severity = useSelector(getSnackbarSeverity);
+  const color = useSelector(getSnackbarColor);
+
+  const classes = useStyles({
+    color,
+  });
 
   return (
     <Snackbar
@@ -43,7 +61,12 @@ const SnackBar: React.FC<SnackBarProps> = ({}) => {
       open={isOpen}
       message={message}
     >
-      <Alert variant="filled" severity={severity} onClose={handleClose}>
+      <Alert
+        className={classes.alert}
+        variant="filled"
+        severity={severity}
+        onClose={handleClose}
+      >
         {message}
       </Alert>
     </Snackbar>

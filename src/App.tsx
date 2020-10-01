@@ -52,6 +52,7 @@ const App: React.FC = (props) => {
 
 const Routes: React.FC = (props) => {
   const theme = useTheme();
+  console.log(theme, theme.breakpoints.down("xs"));
   const icon = document.getElementById("icon") as HTMLLinkElement;
   icon.href = React.useMemo(
     () => (theme.palette.type === "dark" ? DARK_LOGO : LIGHT_LOGO),

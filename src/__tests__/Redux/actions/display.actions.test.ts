@@ -74,13 +74,14 @@ describe("The display actions", () => {
   test("The setSnackbarMessage action", () => {
     const message = "test message";
     const severity = "success";
+    const color = "#ffffff";
 
     const expected: IsetSnackbarMessage = {
       type: SET_SNACKBAR_MESSAGE,
-      payload: { message, severity },
+      payload: { message, severity, color },
     };
 
-    const actual = setSnackbarMessage(message, severity);
+    const actual = setSnackbarMessage(message, severity, color);
 
     expect(actual).toEqual(expected);
   });

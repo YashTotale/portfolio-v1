@@ -42,3 +42,5 @@ export const getIsSnackbarOpen = (state: State) =>
 
 export const getSnackbarSeverity = (state: State) =>
   state.display.snackBar.severity;
+
+export const getSnackbarColor = (state: State) => state.display.snackBar.color;
