@@ -146,7 +146,6 @@ const useClickableStyles = makeStyles((theme: Theme) => ({
     borderRadius: type === "btn" ? "4px" : "initial",
     //User interaction
     cursor: "pointer",
-    userSelect: type === "btn" ? "none" : "auto",
     //Misc
     padding: "2px",
     textDecoration: type === "btn" ? "none" : "underline",
@@ -190,6 +189,7 @@ const Clickable: React.FC<ClickableProps> = ({
         onMouseOver: () => setHovering(true),
         onMouseLeave: () => setHovering(false),
         onClick: onClick,
+        tabIndex: 0,
       })}
       {noSpaceAfter ? null : "\u00A0"}
     </>
