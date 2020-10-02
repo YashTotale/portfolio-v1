@@ -1,12 +1,13 @@
 // React Imports
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 
 // Material UI Imports
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
 import {} from "@material-ui/icons";
 import { EMAIL_REGEX } from "../../Utils/constants";
@@ -45,6 +46,7 @@ type Inputs = {
 
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const { register, handleSubmit, watch, errors } = useForm<Inputs>();
 
@@ -105,6 +107,10 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             },
           })}
         />
+        <ReCAPTCHA
+          sitekey="6Lel4Z4UAAAAAOa8LO1Q9mqKRUiMYl_00o5mXJrR"
+          theme={theme.palette.type}
+        ></ReCAPTCHA>
         <Button
           className={classes.submit}
           color="primary"

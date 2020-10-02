@@ -6,7 +6,7 @@ import { SOURCE_CODE } from "../../Utils/links";
 
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
-import { getIsDarkMode, getIsNavBtnsMenuOpen } from "../../Redux/selectors";
+import { getIsNavBtnsMenuOpen } from "../../Redux/selectors";
 import { toggleDarkModeWMessage } from "../../Redux/thunks";
 import { toggleNavBtnsMenu } from "../../Redux/actions";
 
@@ -53,9 +53,12 @@ const NavBar: React.FC = (props) => {
   const dispatch = useDispatch();
 
   const theme = useTheme();
-  const isSizeSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const isDarkMode = useSelector(getIsDarkMode);
+  const isSizeSmall = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down("sm")
+  );
+
+  const isDarkMode = theme.palette.type === "dark";
 
   const btns: TooltipBtnProps[] = [
     {

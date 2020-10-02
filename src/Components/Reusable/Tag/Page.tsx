@@ -6,10 +6,9 @@ import { TagProps } from "../../../Utils/interfaces";
 import { useSelector } from "react-redux";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import { getIsDarkMode } from "../../../Redux/selectors";
 
 const useStyles = makeStyles((theme) => ({
   tagPage: {
@@ -25,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Page: React.FC<TagProps> = ({ name, icons }) => {
   const classes = useStyles();
-  const isDarkMode = useSelector(getIsDarkMode);
+  const theme = useTheme();
+  const isDarkMode = theme.palette.type === "dark";
   return (
     <div className={classes.tagPage}>
       <Paper className={classes.jumbotron}>
