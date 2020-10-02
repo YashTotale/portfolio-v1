@@ -16,13 +16,18 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     justifySelf: "flex-start",
   },
+  a: {
+    "&:focus": {
+      outline: "none",
+    },
+  },
 }));
 
 const ProfilePic: React.FC = ({}) => {
   const classes = useStyles();
   return (
     <div className={classes.imgDiv}>
-      <ModifiedA tabIndex={-1} href={PROFILE_PIC}>
+      <ModifiedA className={classes.a} tabIndex={-1} href={PROFILE_PIC}>
         <Image ratio={PROFILE_PIC_RATIO} src={PROFILE_PIC} />
       </ModifiedA>
     </div>

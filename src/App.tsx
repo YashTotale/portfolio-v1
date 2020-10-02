@@ -24,6 +24,7 @@ import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
 
 //Router Imports
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import ReCaptcha from "./ReCaptcha";
 
 const useStyles = makeStyles((theme: ThemeProps) => ({
   pageContainer: {
@@ -41,14 +42,16 @@ const App: React.FC = (props) => {
     <Router>
       <Theme>
         <CssBaseline />
-        <Suspense fallback={<Loading />}>
-          <div className={classes.pageContainer}>
-            <NavBar />
-            <Routes />
-            <SnackBar />
-          </div>
-          <Footer />
-        </Suspense>
+        <ReCaptcha>
+          <Suspense fallback={<Loading />}>
+            <div className={classes.pageContainer}>
+              <NavBar />
+              <Routes />
+              <SnackBar />
+            </div>
+            <Footer />
+          </Suspense>
+        </ReCaptcha>
       </Theme>
     </Router>
   );

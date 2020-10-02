@@ -39,6 +39,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-google-recaptcha-v3": "^1.5.5",
     "react-hook-form": "^6.8.6",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",

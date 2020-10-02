@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
 import {} from "@material-ui/icons";
+import { EMAIL_REGEX } from "../../Utils/constants";
 
 interface StyleProps {
   errors: boolean;
@@ -39,6 +40,7 @@ interface ContactFormProps {}
 type Inputs = {
   name: string;
   message: string;
+  email: string;
 };
 
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
@@ -58,7 +60,11 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   return (
     <div>
-      <form className={classes.contact} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={classes.contact}
+        action="https://www.form-data.com/_functions/submit/9r16l9c8dp0gju44zhij9h"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <TextField
           error={Boolean(errors.name)}
           helperText={errors.name?.message}
@@ -83,6 +89,21 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
           multiline
           rows={2}
           rowsMax={20}
+        />
+        <TextField
+          error={Boolean(errors.email)}
+          helperText={errors.email?.message}
+          className={classes.input}
+          variant="outlined"
+          label="Email"
+          name="email"
+          inputRef={register({
+            required: { message: "This field is required", value: true },
+            pattern: {
+              value: EMAIL_REGEX,
+              message: "Enter a valid email address",
+            },
+          })}
         />
         <Button
           className={classes.submit}
