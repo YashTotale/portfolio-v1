@@ -6,18 +6,18 @@ import {
   CHANGE_SHADE,
   SET_SNACKBAR_MESSAGE,
   HANDLE_SNACKBAR_CLOSE,
-  ItoggleDarkMode,
-  ItoggleNavBtnsMenu,
-  IchangeColors,
-  IchangeShade,
-  IsetSnackbarMessage,
-  IhandleSnackbarClose,
+  ToggleDarkModePayload,
+  ToggleNavBtnsMenuPayload,
+  ChangeColorsPayload,
+  ChangeShadePayload,
+  SetSnackbarMessagePayload,
+  HandleSnackbarClosePayload,
 } from "../../../Redux/actions/display.actions";
 import { display as originalState } from "../sampleStore";
 
 describe("The display reducer", () => {
   test("Toggles dark mode", () => {
-    const fakeAction: ItoggleDarkMode = {
+    const fakeAction: ToggleDarkModePayload = {
       type: TOGGLE_DARK_MODE,
       payload: {},
     };
@@ -33,7 +33,7 @@ describe("The display reducer", () => {
   });
 
   test("Toggles Nav Btn Menu Open", () => {
-    const fakeAction1: ItoggleNavBtnsMenu = {
+    const fakeAction1: ToggleNavBtnsMenuPayload = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: {},
     };
@@ -47,7 +47,7 @@ describe("The display reducer", () => {
 
     expect(actual1).toEqual(expected1);
 
-    const fakeAction2: ItoggleNavBtnsMenu = {
+    const fakeAction2: ToggleNavBtnsMenuPayload = {
       type: TOGGLE_NAV_BTNS_MENU,
       payload: { isOpen: true },
     };
@@ -63,7 +63,7 @@ describe("The display reducer", () => {
   });
 
   test("Changes color", () => {
-    const fakeAction: IchangeColors = {
+    const fakeAction: ChangeColorsPayload = {
       type: CHANGE_COLORS,
       payload: {
         scheme: "secondary",
@@ -85,7 +85,7 @@ describe("The display reducer", () => {
   });
 
   test("Changes shade", () => {
-    const fakeAction: IchangeShade = {
+    const fakeAction: ChangeShadePayload = {
       type: CHANGE_SHADE,
       payload: { shade: "A200", scheme: "primary" },
     };
@@ -108,7 +108,7 @@ describe("The display reducer", () => {
     const severity = "error";
     const color = null;
 
-    const fakeAction: IsetSnackbarMessage = {
+    const fakeAction: SetSnackbarMessagePayload = {
       type: SET_SNACKBAR_MESSAGE,
       payload: { message, severity, color },
     };
@@ -129,7 +129,7 @@ describe("The display reducer", () => {
   });
 
   test("Closes the Snackbar", () => {
-    const fakeAction: IhandleSnackbarClose = {
+    const fakeAction: HandleSnackbarClosePayload = {
       type: HANDLE_SNACKBAR_CLOSE,
       payload: {},
     };

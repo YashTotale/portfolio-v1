@@ -5,10 +5,10 @@ import {
   TOGGLE_DARK_MODE,
   CHANGE_SHADE,
   CHANGE_COLORS,
-  IchangeColors,
-  IchangeShade,
-  ItoggleDarkMode,
-  IsetSnackbarMessage,
+  ChangeColorsPayload,
+  ChangeShadePayload,
+  ToggleDarkModePayload,
+  SetSnackbarMessagePayload,
 } from "../../../Redux/actions/display.actions";
 import {
   toggleDarkModeWMessage,
@@ -37,12 +37,12 @@ describe("The display thunks", () => {
     const fakeDispatch = sinon.spy();
     const theme = getIsDarkMode(sampleState) ? "Dark" : "Light";
 
-    const toggleAction: ItoggleDarkMode = {
+    const toggleAction: ToggleDarkModePayload = {
       type: TOGGLE_DARK_MODE,
       payload: {},
     };
 
-    const snackbarAction: IsetSnackbarMessage = {
+    const snackbarAction: SetSnackbarMessagePayload = {
       type: SET_SNACKBAR_MESSAGE,
       payload: {
         message: `${theme} Theme set`,
@@ -63,7 +63,7 @@ describe("The display thunks", () => {
     const scheme: scheme = "primary";
     const cssColor: cssColor = "deepPurple";
 
-    const colorAction: IchangeColors = {
+    const colorAction: ChangeColorsPayload = {
       type: CHANGE_COLORS,
       payload: {
         color: cssColor,
@@ -71,7 +71,7 @@ describe("The display thunks", () => {
       },
     };
 
-    const snackbarAction: IsetSnackbarMessage = {
+    const snackbarAction: SetSnackbarMessagePayload = {
       type: SET_SNACKBAR_MESSAGE,
       payload: {
         message: "Primary Color is now Deep Purple",
@@ -92,12 +92,12 @@ describe("The display thunks", () => {
     const scheme: scheme = "secondary";
     const shade: shade = "A200";
 
-    const shadeAction: IchangeShade = {
+    const shadeAction: ChangeShadePayload = {
       type: CHANGE_SHADE,
       payload: { scheme, shade },
     };
 
-    const snackbarAction: IsetSnackbarMessage = {
+    const snackbarAction: SetSnackbarMessagePayload = {
       type: SET_SNACKBAR_MESSAGE,
       payload: {
         message: "Secondary Shade is now A200",
@@ -119,7 +119,7 @@ describe("The display thunks", () => {
     schemes.forEach((scheme, i) => {
       const x = i === 0 ? 0 : 3;
 
-      const resetColorsAction: IchangeColors = {
+      const resetColorsAction: ChangeColorsPayload = {
         type: CHANGE_COLORS,
         payload: {
           scheme,
@@ -127,7 +127,7 @@ describe("The display thunks", () => {
         },
       };
 
-      const resetShadeAction: IchangeShade = {
+      const resetShadeAction: ChangeShadePayload = {
         type: CHANGE_SHADE,
         payload: {
           scheme,
@@ -135,7 +135,7 @@ describe("The display thunks", () => {
         },
       };
 
-      const snackbarAction: IsetSnackbarMessage = {
+      const snackbarAction: SetSnackbarMessagePayload = {
         type: SET_SNACKBAR_MESSAGE,
         payload: {
           message: resetMessage,
