@@ -141,14 +141,19 @@ const NavButtons: React.FC<NavButtonsProps> = ({ btns, isSizeSmall }) => {
         <div>{tooltipBtns}</div>
       ) : (
         <>
-          <RootRef rootRef={menuBtnEl}>
-            <TooltipBtn
-              title="Menu"
-              icon={<MenuButton />}
-              component="btn"
-              onClick={() => dispatch(toggleNavBtnsMenu())}
-            />
-          </RootRef>
+          {React.useMemo(
+            () => (
+              <RootRef rootRef={menuBtnEl}>
+                <TooltipBtn
+                  title="Menu"
+                  icon={<MenuButton />}
+                  component="btn"
+                  onClick={() => dispatch(toggleNavBtnsMenu())}
+                />
+              </RootRef>
+            ),
+            []
+          )}
           <Menu
             onClose={() => dispatch(toggleNavBtnsMenu(false))}
             anchorEl={menuBtnEl.current}
