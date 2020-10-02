@@ -27,6 +27,10 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 const useStyles = makeStyles((theme: ThemeProps) => ({
   pageContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     paddingBottom: FOOTER_HEIGHT,
   },
 }));

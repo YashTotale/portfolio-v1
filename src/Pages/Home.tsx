@@ -13,9 +13,16 @@ import {
   useMediaQuery,
 } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+interface StyleProps {
+  isSizeXL: boolean;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   home: {
     margin: "0px 20px",
+    [theme.breakpoints.up("lg")]: {
+      width: "80%",
+    },
   },
   projects: {
     margin: "10px 0px",
@@ -27,10 +34,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const HomePage: React.FC = () => {
-  const classes = useStyles();
   const isSizeXL = useMediaQuery((theme: Theme) =>
     theme.breakpoints.only("xl")
   );
+
+  const classes = useStyles({ isSizeXL });
+
   return (
     <div className={classes.home}>
       <AboutMe />
@@ -48,6 +57,8 @@ const HomePage: React.FC = () => {
             );
           })}
         </div>
+        <Typography variant="h4">Contact</Typography>
+        <hr />
         <ContactForm />
       </div>
     </div>
