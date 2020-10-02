@@ -1,6 +1,7 @@
 //React Imports
 import React from "react";
 import AboutMe from "../Components/Custom/AboutMe";
+import ContactForm from "../Components/Custom/ContactForm";
 import ProjectMini from "../Components/Reusable/Overlay";
 import Projects from "../Data/Projects.json";
 
@@ -47,6 +48,7 @@ const HomePage: React.FC = () => {
             );
           })}
         </div>
+        <ContactForm />
       </div>
     </div>
   );
