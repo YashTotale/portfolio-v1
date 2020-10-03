@@ -72,7 +72,8 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
     dispatch(setContact(inputs));
-    const token = await executeRecaptcha?.();
+    console.log(executeRecaptcha);
+    const token = await executeRecaptcha?.("contact_form");
     console.log(token);
     if (token) {
       e?.preventDefault();
