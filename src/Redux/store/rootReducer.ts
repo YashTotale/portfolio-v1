@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
-import { display } from "../reducers";
+import { display, contact } from "../reducers";
 
 const reducers = {
   display,
+  contact,
 };
 
 const rootReducer = combineReducers(reducers);

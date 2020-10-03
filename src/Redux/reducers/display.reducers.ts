@@ -10,7 +10,7 @@ import { AnyAction } from "redux";
 import { defaultColors, defaultShades } from "../../Utils/colors";
 import { Color } from "@material-ui/lab";
 
-export const displayState = {
+export const initialDisplayState = {
   isDarkMode: null,
   isNavBtnsMenuOpen: false,
   colors: defaultColors,
@@ -23,7 +23,10 @@ export const displayState = {
   },
 };
 
-export const display = (state = displayState, action: AnyAction) => {
+export const displayReducer = (
+  state = initialDisplayState,
+  action: AnyAction
+) => {
   const { type, payload } = action;
   switch (type) {
     case TOGGLE_DARK_MODE: {

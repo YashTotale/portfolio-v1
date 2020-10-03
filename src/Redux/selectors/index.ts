@@ -1,7 +1,8 @@
-import { displayState } from "../reducers";
+import { initialContactState, initialDisplayState } from "../reducers";
 
 export interface State {
-  display: typeof displayState;
+  display: typeof initialDisplayState;
+  contact: typeof initialContactState;
 }
 
 export {
@@ -18,3 +19,9 @@ export {
   getSnackbarMessage,
   getSnackbarSeverity,
 } from "./display.selectors";
+export {
+  getContactName,
+  getContactMessage,
+  getContactEmail,
+  getContact,
+} from "./contact.selectors";

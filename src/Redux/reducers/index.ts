@@ -1,23 +1,9 @@
-export { display, displayState } from "./display.reducers";
+export {
+  displayReducer as display,
+  initialDisplayState,
+} from "./display.reducers";
 
-//Redux Reducers
-
-/* 
-
-Example:
-
-import { TEST_ACTION } from "../actions";
-
-export const testReducer = (state = { someInitialStateValues }, action) => {
-  const {type, payload} = action;
-  switch(type) {
-    case TEST_ACTION: {
-      const {sampleValue} = payload;
-      return {...state, sampleValue};
-    }
-    default:
-      return state;
-  }
-}
-
-*/
+export {
+  contactReducer as contact,
+  initialContactState,
+} from "./contact.reducers";
