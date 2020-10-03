@@ -86,7 +86,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
     <div>
       <form
         className={classes.contact}
-        action="https://www.form-data.com/_functions/submit/9r16l9c8dp0gju44zhij9h"
+        action="https://formspree.io/f/mdopkrnb"
         method="POST"
         onSubmit={handleSubmit(onSubmit)}
       >
