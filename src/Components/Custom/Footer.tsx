@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
     top: "auto",
     width: "100%",
     height: FOOTER_HEIGHT,
+    zIndex: 0,
   },
   footerDiv: {
     display: "flex",

@@ -72,33 +72,31 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
     dispatch(setContact(inputs));
-    console.log(executeRecaptcha);
-    const token = await executeRecaptcha?.("contact_form");
-    console.log(token);
-    if (token) {
-      e?.preventDefault();
-      const form = e?.target;
-      const data = new FormData(form);
-      const xhr = new XMLHttpRequest();
-      xhr.open(form.method, form.action);
-      xhr.setRequestHeader("Accept", "application/json");
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState !== XMLHttpRequest.DONE) return;
-        if (xhr.status === 200) {
-          form.reset();
-        } else {
-        }
-      };
-      xhr.send(data);
-    }
+    // const token = await executeRecaptcha?.("contact_form");
+    // if (token) {
+    //   e?.preventDefault();
+    //   const form = e?.target;
+    //   const data = new FormData(form);
+    //   const xhr = new XMLHttpRequest();
+    //   xhr.open(form.method, form.action);
+    //   xhr.setRequestHeader("Accept", "application/json");
+    //   xhr.onreadystatechange = () => {
+    //     if (xhr.readyState !== XMLHttpRequest.DONE) return;
+    //     if (xhr.status === 200) {
+    //       form.reset();
+    //     } else {
+    //     }
+    //   };
+    //   xhr.send(data);
+    // }
   };
 
   return (
     <div>
       <form
         className={classes.contact}
-        action="https://formspree.io/f/mdopkrnb"
-        method="POST"
+        action="https://www.form-data.com/_functions/submit/3vd61rg6b2et6yz506e7le"
+        method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
         <TextField
