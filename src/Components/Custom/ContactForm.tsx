@@ -1,6 +1,10 @@
 // React Imports
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import {
+  GoogleReCaptchaProvider,
+  useGoogleReCaptcha,
+} from "react-google-recaptcha-v3";
 import { EMAIL_REGEX } from "../../Utils/constants";
 
 // Redux Imports
@@ -50,6 +54,8 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const { name, email } = useSelector(getContact);
 
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
   const { register, handleSubmit, errors } = useForm<Inputs>({
     mode: "onTouched",
     defaultValues: {
@@ -64,22 +70,26 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
     errors: errorsBool,
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (inputs, e) => {
+  const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
     dispatch(setContact(inputs));
-    e?.preventDefault();
-    const form = e?.target;
-    const data = new FormData(form);
-    const xhr = new XMLHttpRequest();
-    xhr.open(form.method, form.action);
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== XMLHttpRequest.DONE) return;
-      if (xhr.status === 200) {
-        form.reset();
-      } else {
-      }
-    };
-    xhr.send(data);
+    const token = await executeRecaptcha?.();
+    console.log(token);
+    if (token) {
+      e?.preventDefault();
+      const form = e?.target;
+      const data = new FormData(form);
+      const xhr = new XMLHttpRequest();
+      xhr.open(form.method, form.action);
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE) return;
+        if (xhr.status === 200) {
+          form.reset();
+        } else {
+        }
+      };
+      xhr.send(data);
+    }
   };
 
   return (
@@ -130,14 +140,16 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             },
           })}
         />
-        <Button
-          className={classes.submit}
-          color="primary"
-          variant="outlined"
-          type={errorsBool ? undefined : "submit"}
-        >
-          Submit
-        </Button>
+        <GoogleReCaptchaProvider reCaptchaKey="6LfMMNMZAAAAAGI8NZ5NaRD7GxUy3PF0sWH-emoj">
+          <Button
+            className={classes.submit}
+            color="primary"
+            variant="outlined"
+            type={errorsBool ? undefined : "submit"}
+          >
+            Submit
+          </Button>
+        </GoogleReCaptchaProvider>
       </form>
     </div>
   );
