@@ -50,7 +50,13 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const { name, email } = useSelector(getContact);
 
-  const { register, handleSubmit, errors } = useForm<Inputs>();
+  const { register, handleSubmit, errors } = useForm<Inputs>({
+    mode: "onTouched",
+    defaultValues: {
+      name,
+      email,
+    },
+  });
 
   const errorsBool = Boolean(Object.keys(errors).length);
 
@@ -81,7 +87,6 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
           inputRef={register({
             required: { message: "This field is required", value: true },
           })}
-          defaultValue={name}
         />
         <TextField
           error={Boolean(errors.message)}
@@ -108,10 +113,9 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             required: { message: "This field is required", value: true },
             pattern: {
               value: EMAIL_REGEX,
-              message: "Enter a valid email address",
+              message: "Please enter a valid email address",
             },
           })}
-          defaultValue={email}
         />
         <Button
           className={classes.submit}
