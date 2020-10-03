@@ -1,6 +1,7 @@
 //React Imports
 import { hot } from "react-hot-loader";
 import React, { lazy, Suspense } from "react";
+import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import Loading from "./Components/Reusable/Loading";
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
 const NavBar = lazy(() => import("./Components/Custom/NavBar"));
