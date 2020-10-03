@@ -141,16 +141,14 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             },
           })}
         />
-        <GoogleReCaptchaProvider reCaptchaKey="6LfMMNMZAAAAAGI8NZ5NaRD7GxUy3PF0sWH-emoj">
-          <Button
-            className={classes.submit}
-            color="primary"
-            variant="outlined"
-            type={errorsBool ? undefined : "submit"}
-          >
-            Submit
-          </Button>
-        </GoogleReCaptchaProvider>
+        <Button
+          className={classes.submit}
+          color="primary"
+          variant="outlined"
+          type={errorsBool ? undefined : "submit"}
+        >
+          Submit
+        </Button>
       </form>
     </div>
   );

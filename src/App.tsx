@@ -41,14 +41,16 @@ const App: React.FC = (props) => {
     <Router>
       <Theme>
         <CssBaseline />
-        <Suspense fallback={<Loading />}>
-          <div className={classes.pageContainer}>
-            <NavBar />
-            <Routes />
-            <SnackBar />
-          </div>
-          <Footer />
-        </Suspense>
+        <GoogleReCaptchaProvider reCaptchaKey="6LfMMNMZAAAAAGI8NZ5NaRD7GxUy3PF0sWH-emoj">
+          <Suspense fallback={<Loading />}>
+            <div className={classes.pageContainer}>
+              <NavBar />
+              <Routes />
+              <SnackBar />
+            </div>
+            <Footer />
+          </Suspense>
+        </GoogleReCaptchaProvider>
       </Theme>
     </Router>
   );
