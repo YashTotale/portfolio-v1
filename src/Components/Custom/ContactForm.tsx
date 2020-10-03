@@ -64,9 +64,22 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
     errors: errorsBool,
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(setContact(data));
-    console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (inputs, e) => {
+    dispatch(setContact(inputs));
+    e?.preventDefault();
+    const form = e?.target;
+    const data = new FormData(form);
+    const xhr = new XMLHttpRequest();
+    xhr.open(form.method, form.action);
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== XMLHttpRequest.DONE) return;
+      if (xhr.status === 200) {
+        form.reset();
+      } else {
+      }
+    };
+    xhr.send(data);
   };
 
   return (
@@ -74,7 +87,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
       <form
         className={classes.contact}
         action="https://www.form-data.com/_functions/submit/9r16l9c8dp0gju44zhij9h"
-        method="post"
+        method="POST"
         onSubmit={handleSubmit(onSubmit)}
       >
         <TextField
