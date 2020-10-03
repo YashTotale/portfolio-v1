@@ -3,7 +3,8 @@ import {
   SET_CONTACT_EMAIL,
   SET_CONTACT_MESSAGE,
   SET_CONTACT_NAME,
-} from "../actions/contact.actions";
+  SET_CONTACT,
+} from "../actions/";
 
 export const initialContactState = {
   name: "",
@@ -28,6 +29,10 @@ export const contactReducer = (
     case SET_CONTACT_EMAIL: {
       const { email } = payload;
       return { ...state, email };
+    }
+    case SET_CONTACT: {
+      const { contact } = payload;
+      return contact;
     }
     default: {
       return state;

@@ -1,4 +1,4 @@
-import { display } from "../../../Redux/reducers/display.reducers";
+import { displayReducer as display } from "../../../Redux/reducers/display.reducers";
 import {
   TOGGLE_DARK_MODE,
   TOGGLE_NAV_BTNS_MENU,

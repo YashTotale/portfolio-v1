@@ -1,16 +1,17 @@
 // React Imports
 import React from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import ReCAPTCHA from "react-google-recaptcha";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { EMAIL_REGEX } from "../../Utils/constants";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
+import { getContact } from "../../Redux/selectors";
+import { setContact } from "../../Redux/actions";
 
 // Material UI Imports
-import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
-import { Button, FormHelperText, TextField } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Button, TextField } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import { EMAIL_REGEX } from "../../Utils/constants";
 
 interface StyleProps {
   errors: boolean;
@@ -38,20 +39,18 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
 
 interface ContactFormProps {}
 
-type Inputs = {
+export interface Inputs {
   name: string;
   message: string;
   email: string;
-  recaptcha: string;
-};
+}
 
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
   const dispatch = useDispatch();
-  const theme = useTheme();
 
-  const { register, handleSubmit, errors, control, setError } = useForm<
-    Inputs
-  >();
+  const { name, email } = useSelector(getContact);
+
+  const { register, handleSubmit, errors } = useForm<Inputs>();
 
   const errorsBool = Boolean(Object.keys(errors).length);
 
@@ -59,13 +58,17 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
     errors: errorsBool,
   });
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    dispatch(setContact(data));
+    console.log(data);
+  };
 
   return (
     <div>
       <form
         className={classes.contact}
         action="https://www.form-data.com/_functions/submit/9r16l9c8dp0gju44zhij9h"
+        method="post"
         onSubmit={handleSubmit(onSubmit)}
       >
         <TextField
@@ -78,6 +81,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
           inputRef={register({
             required: { message: "This field is required", value: true },
           })}
+          defaultValue={name}
         />
         <TextField
           error={Boolean(errors.message)}
@@ -107,35 +111,8 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
               message: "Enter a valid email address",
             },
           })}
+          defaultValue={email}
         />
-        <Controller
-          name="recaptcha"
-          control={control}
-          defaultValue={false}
-          rules={{
-            required: {
-              message: "This field is required",
-              value: true,
-            },
-          }}
-          render={({ onChange, value }) => (
-            <ReCAPTCHA
-              sitekey="6Lel4Z4UAAAAAOa8LO1Q9mqKRUiMYl_00o5mXJrR"
-              theme={theme.palette.type}
-              key={theme.palette.type}
-              onChange={onChange}
-              onErrored={() =>
-                setError("recaptcha", {
-                  message: "An error occurred. Please try again.",
-                  type: "required",
-                })
-              }
-            ></ReCAPTCHA>
-          )}
-        ></Controller>
-        {errors.recaptcha && (
-          <FormHelperText error>{errors.recaptcha.message}</FormHelperText>
-        )}
         <Button
           className={classes.submit}
           color="primary"

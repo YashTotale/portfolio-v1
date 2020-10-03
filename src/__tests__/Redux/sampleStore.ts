@@ -1,9 +1,13 @@
-import { displayState } from "../../Redux/reducers";
+import { initialDisplayState, initialContactState } from "../../Redux/reducers";
 
 export const display = {
-  ...displayState,
+  ...initialDisplayState,
 };
 
-const sampleState = { display };
+export const contact = {
+  ...initialContactState,
+};
+
+const sampleState = { display, contact };
 
 export default sampleState;

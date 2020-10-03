@@ -1,3 +1,4 @@
+import { Inputs } from "../../Components/Custom/ContactForm";
 export interface SetContactNamePayload {
   type: typeof SET_CONTACT_NAME;
   payload: {
@@ -37,4 +38,15 @@ export const SET_CONTACT_EMAIL = "SET_CONTACT_EMAIL";
 export const setContactEmail = (email: string): SetContactEmailPayload => ({
   type: SET_CONTACT_EMAIL,
   payload: { email },
+});
+
+export interface SetContactPayload {
+  type: typeof SET_CONTACT;
+  payload: { contact: Inputs };
+}
+
+export const SET_CONTACT = "SET_CONTACT";
+export const setContact = (contact: Inputs): SetContactPayload => ({
+  type: SET_CONTACT,
+  payload: { contact },
 });
