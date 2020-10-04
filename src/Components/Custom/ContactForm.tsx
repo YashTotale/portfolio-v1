@@ -52,7 +52,7 @@ export interface Inputs {
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
   const dispatch = useDispatch();
 
-  const { name, email } = useSelector(getContact);
+  const { name, message, email } = useSelector(getContact);
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -72,33 +72,26 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
     dispatch(setContact(inputs));
-    // const token = await executeRecaptcha?.("contact_form");
-    // if (token) {
-    //   e?.preventDefault();
-    //   const form = e?.target;
-    //   const data = new FormData(form);
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open(form.method, form.action);
-    //   xhr.setRequestHeader("Accept", "application/json");
-    //   xhr.onreadystatechange = () => {
-    //     if (xhr.readyState !== XMLHttpRequest.DONE) return;
-    //     if (xhr.status === 200) {
-    //       form.reset();
-    //     } else {
-    //     }
-    //   };
-    //   xhr.send(data);
-    // }
+    try {
+      const token = await executeRecaptcha?.("contact_form");
+      e?.preventDefault();
+      if (!token) {
+        throw new Error("An error occurred. Please try again.");
+      } else {
+        const response = await fetch(
+          "https://hooks.zapier.com/hooks/catch/8641341/og4nv0l/",
+          {
+            method: "post",
+            body: JSON.stringify(inputs),
+          }
+        );
+      }
+    } catch (err) {}
   };
 
   return (
     <div>
-      <form
-        className={classes.contact}
-        action="https://www.form-data.com/_functions/submit/3vd61rg6b2et6yz506e7le"
-        method="post"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className={classes.contact} onSubmit={handleSubmit(onSubmit)}>
         <TextField
           error={Boolean(errors.name)}
           helperText={errors.name?.message}
