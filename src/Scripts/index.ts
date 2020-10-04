@@ -17,7 +17,7 @@ export const write = (
   fileName: files,
   data: ProjectProps[] | ExperienceProps[] | TagProps[]
 ) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     const location = join(dataFolder, `${fileName}.json`);
     writeFile(location, JSON.stringify(data), "utf8", (err) => {
       if (err) return console.log(err);
@@ -29,11 +29,15 @@ export const write = (
 };
 
 export const gitAdd = (location: string) => {
-  return new Promise((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     exec(`git add ${location} --verbose`, (err, stdout) => {
-      if (err) return console.log(err);
-      console.log(stdout);
-      resolve(stdout);
+      if (err) {
+        console.log(err);
+        reject(err);
+      } else {
+        console.log(stdout);
+        resolve(stdout);
+      }
     });
   });
 };

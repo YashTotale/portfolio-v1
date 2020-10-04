@@ -1,11 +1,12 @@
 // React Imports
-import React, { useEffect } from "react";
+import React from "react";
 import {
   SubmitHandler,
   useForm,
   DeepMap,
   FieldError,
   ValidationRules,
+  Controller,
 } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { EMAIL_REGEX } from "../../Utils/constants";
@@ -26,6 +27,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { CheckCircle, Cancel } from "@material-ui/icons";
+import { Rating } from "@material-ui/lab";
 
 interface StyleProps {
   errors: boolean;
@@ -38,6 +40,13 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+  },
+  rate: {
+    marginTop: 10,
+    marginBottom: 3,
+  },
+  rating: {
+    marginBottom: 10,
   },
   submit: {
     margin: "10px 0px",
@@ -77,20 +86,21 @@ export interface Inputs {
   name: string;
   message: string;
   email: string;
+  rating: number | undefined;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
   const dispatch = useDispatch();
 
-  const inputs: (keyof Inputs)[] = ["name", "message", "email"];
+  const inputs: (keyof Inputs)[] = ["name", "message", "email", "rating"];
 
   const contact = useSelector(getContact);
 
-  const { name, email, message, success } = contact;
+  const { name, email, message, success, rating } = contact;
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const { register, handleSubmit, errors } = useForm<Inputs>({
+  const { register, handleSubmit, errors, control } = useForm<Inputs>({
     mode: "onTouched",
     defaultValues: {
       name,
@@ -127,7 +137,6 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
         }
       }
     } catch (err) {
-      console.log(err);
       dispatch(setContactSuccess(false));
     }
   };
@@ -158,6 +167,14 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
               },
             }}
           />
+          <Typography className={classes.rate} variant="body1">
+            Rate the site?
+          </Typography>
+          <Controller
+            name="rating"
+            control={control}
+            as={<Rating />}
+          ></Controller>
           <Button
             className={classes.submit}
             color="primary"
@@ -183,12 +200,20 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
               : "An error occurred while submitting your response. Please try again. "}
             Here is what was submitted:
           </Typography>
-          {inputs.map((input, i) => (
-            <Typography key={i} className={classes.submitInfo} variant="body1">
-              <strong>{capitalize(input)}: </strong>
-              {contact[input]}
-            </Typography>
-          ))}
+          {inputs.map((input, i) => {
+            return (
+              contact[input] && (
+                <Typography
+                  key={i}
+                  className={classes.submitInfo}
+                  variant="body1"
+                >
+                  <strong>{capitalize(input)}: </strong>
+                  {contact[input]}
+                </Typography>
+              )
+            );
+          })}
           <Button
             color="primary"
             variant="contained"

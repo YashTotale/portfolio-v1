@@ -9,10 +9,4 @@ export const getContactEmail = (state: State) => state.contact.email;
 
 export const getContactSuccess = (state: State) => state.contact.success;
 
-export const getContact = createSelector(
-  getContactName,
-  getContactMessage,
-  getContactEmail,
-  getContactSuccess,
-  (name, message, email, success) => ({ name, message, email, success })
-);
+export const getContact = (state: State) => state.contact;
