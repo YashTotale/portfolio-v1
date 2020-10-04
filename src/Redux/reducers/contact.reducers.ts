@@ -4,12 +4,14 @@ import {
   SET_CONTACT_MESSAGE,
   SET_CONTACT_NAME,
   SET_CONTACT,
+  SET_CONTACT_SUCCESS,
 } from "../actions/";
 
 export const initialContactState = {
   name: "",
   message: "",
   email: "",
+  success: <boolean | null>null,
 };
 
 export const contactReducer = (
@@ -30,9 +32,13 @@ export const contactReducer = (
       const { email } = payload;
       return { ...state, email };
     }
+    case SET_CONTACT_SUCCESS: {
+      const { success } = payload;
+      return { ...state, success };
+    }
     case SET_CONTACT: {
       const { contact } = payload;
-      return contact;
+      return { ...state, ...contact };
     }
     default: {
       return state;

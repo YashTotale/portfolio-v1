@@ -50,3 +50,18 @@ export const setContact = (contact: Inputs): SetContactPayload => ({
   type: SET_CONTACT,
   payload: { contact },
 });
+
+export interface SetContactSuccessPayload {
+  type: typeof SET_CONTACT_SUCCESS;
+  payload: {
+    success: boolean | null;
+  };
+}
+
+export const SET_CONTACT_SUCCESS = "SET_CONTACT_SUCCESS";
+export const setContactSuccess = (
+  success: boolean | null
+): SetContactSuccessPayload => ({
+  type: SET_CONTACT_SUCCESS,
+  payload: { success },
+});

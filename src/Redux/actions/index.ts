@@ -21,4 +21,6 @@ export {
   setContactEmail,
   SET_CONTACT,
   setContact,
+  SET_CONTACT_SUCCESS,
+  setContactSuccess,
 } from "./contact.actions";
