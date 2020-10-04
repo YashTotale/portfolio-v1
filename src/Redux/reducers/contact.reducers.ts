@@ -11,6 +11,7 @@ export const initialContactState = {
   name: "",
   message: "",
   email: "",
+  bugs: "",
   rating: <number | undefined>undefined,
   success: <boolean | null>null,
 };

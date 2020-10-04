@@ -21,6 +21,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Button,
   capitalize,
+  InputProps,
   Paper,
   TextField,
   TextFieldProps,
@@ -86,17 +87,24 @@ export interface Inputs {
   name: string;
   message: string;
   email: string;
+  bugs: string;
   rating: number | undefined;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
   const dispatch = useDispatch();
 
-  const inputs: (keyof Inputs)[] = ["name", "message", "email", "rating"];
+  const inputs: (keyof Inputs)[] = [
+    "name",
+    "message",
+    "email",
+    "bugs",
+    "rating",
+  ];
 
   const contact = useSelector(getContact);
 
-  const { name, email, message, success, rating } = contact;
+  const { name, email, message, bugs, success } = contact;
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -106,6 +114,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
       name,
       email,
       message,
+      bugs,
     },
   });
 
@@ -150,11 +159,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             errors={errors}
             name="message"
             register={register}
-            props={{
-              multiline: true,
-              rows: 2,
-              rowsMax: 20,
-            }}
+            isTextArea
           />
           <InputField
             errors={errors}
@@ -166,6 +171,16 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
                 message: "Please enter a valid email address",
               },
             }}
+          />
+          <InputField
+            errors={errors}
+            name="bugs"
+            register={register}
+            props={{
+              label: "Any Bugs?",
+            }}
+            isTextArea
+            notRequired
           />
           <Typography className={classes.rate} variant="body1">
             Rate the site?
@@ -232,7 +247,6 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 const useInputFieldStyles = makeStyles((theme) => ({
   input: {
     margin: "10px 0px",
-    width: "100%",
   },
 }));
 
@@ -241,7 +255,10 @@ interface InputFieldProps {
   register: (rules?: Partial<ValidationRules>) => (ref: any) => void;
   errors: DeepMap<Inputs, FieldError>;
   props?: TextFieldProps;
+  inputProps?: InputProps;
   rules?: Partial<ValidationRules>;
+  isTextArea?: boolean;
+  notRequired?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -250,6 +267,9 @@ const InputField: React.FC<InputFieldProps> = ({
   register,
   props,
   rules,
+  inputProps,
+  isTextArea,
+  notRequired,
 }) => {
   const classes = useInputFieldStyles();
 
@@ -259,12 +279,23 @@ const InputField: React.FC<InputFieldProps> = ({
       helperText={errors[name]?.message}
       className={classes.input}
       variant="outlined"
-      label={capitalize(name)}
+      label={`${capitalize(name)}${notRequired ? "" : "*"}`}
+      fullWidth
       name={name}
+      {...(isTextArea
+        ? {
+            multiline: true,
+            rows: 2,
+            rowsMax: 20,
+          }
+        : null)}
       inputRef={register({
-        required: { message: "This field is required", value: true },
+        required: notRequired
+          ? false
+          : { message: "This field is required", value: true },
         ...rules,
       })}
+      InputProps={{ ...inputProps }}
       {...props}
     />
   );
