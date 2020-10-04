@@ -1,6 +1,12 @@
 // React Imports
-import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import {
+  SubmitHandler,
+  useForm,
+  DeepMap,
+  FieldError,
+  ValidationRules,
+} from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { EMAIL_REGEX } from "../../Utils/constants";
 
@@ -10,8 +16,15 @@ import { getContact } from "../../Redux/selectors";
 import { setContact, setContactSuccess } from "../../Redux/actions";
 
 // Material UI Imports
-import { makeStyles, Theme, useTheme } from "@material-ui/core/styles";
-import { Button, Paper, TextField, Typography } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import {
+  Button,
+  capitalize,
+  Paper,
+  TextField,
+  TextFieldProps,
+  Typography,
+} from "@material-ui/core";
 import { CheckCircle, Cancel } from "@material-ui/icons";
 
 interface StyleProps {
@@ -25,10 +38,6 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-  },
-  input: {
-    margin: "10px 0px",
-    width: "100%",
   },
   submit: {
     margin: "10px 0px",
@@ -73,7 +82,11 @@ export interface Inputs {
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
   const dispatch = useDispatch();
 
-  const { name, message, email, success } = useSelector(getContact);
+  const inputs: (keyof Inputs)[] = ["name", "message", "email"];
+
+  const contact = useSelector(getContact);
+
+  const { name, email, message, success } = contact;
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -82,6 +95,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
     defaultValues: {
       name,
       email,
+      message,
     },
   });
 
@@ -98,7 +112,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
       const token = await executeRecaptcha?.("contact_form");
       e?.preventDefault();
       if (!token) {
-        throw new Error();
+        throw new Error("ReCaptcha was unable to authorize this response.");
       } else {
         const response = await fetch(
           "https://hooks.zapier.com/hooks/catch/8641341/og4nv0l/",
@@ -113,6 +127,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
         }
       }
     } catch (err) {
+      console.log(err);
       dispatch(setContactSuccess(false));
     }
   };
@@ -121,45 +136,27 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
     <div>
       {success === null ? (
         <form className={classes.contact} onSubmit={handleSubmit(onSubmit)}>
-          <TextField
-            error={Boolean(errors.name)}
-            helperText={errors.name?.message}
-            className={classes.input}
-            variant="outlined"
-            label="Name"
-            name="name"
-            inputRef={register({
-              required: { message: "This field is required", value: true },
-            })}
-          />
-          <TextField
-            error={Boolean(errors.message)}
-            helperText={errors.message?.message}
-            className={classes.input}
-            variant="outlined"
-            label="Message"
+          <InputField errors={errors} name="name" register={register} />
+          <InputField
+            errors={errors}
             name="message"
-            inputRef={register({
-              required: { message: "This field is required", value: true },
-            })}
-            multiline
-            rows={2}
-            rowsMax={20}
+            register={register}
+            props={{
+              multiline: true,
+              rows: 2,
+              rowsMax: 20,
+            }}
           />
-          <TextField
-            error={Boolean(errors.email)}
-            helperText={errors.email?.message}
-            className={classes.input}
-            variant="outlined"
-            label="Email"
+          <InputField
+            errors={errors}
             name="email"
-            inputRef={register({
-              required: { message: "This field is required", value: true },
+            register={register}
+            rules={{
               pattern: {
                 value: EMAIL_REGEX,
                 message: "Please enter a valid email address",
               },
-            })}
+            }}
           />
           <Button
             className={classes.submit}
@@ -186,18 +183,12 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
               : "An error occurred while submitting your response. Please try again. "}
             Here is what was submitted:
           </Typography>
-          <Typography className={classes.submitInfo} variant="body1">
-            <strong>Name: </strong>
-            {name}
-          </Typography>
-          <Typography className={classes.submitInfo} variant="body1">
-            <strong>Email: </strong>
-            {email}
-          </Typography>
-          <Typography className={classes.submitInfo} variant="body1">
-            <strong>Message: </strong>
-            {message}
-          </Typography>
+          {inputs.map((input, i) => (
+            <Typography key={i} className={classes.submitInfo} variant="body1">
+              <strong>{capitalize(input)}: </strong>
+              {contact[input]}
+            </Typography>
+          ))}
           <Button
             color="primary"
             variant="contained"
@@ -209,6 +200,47 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
         </Paper>
       )}
     </div>
+  );
+};
+
+const useInputFieldStyles = makeStyles((theme) => ({
+  input: {
+    margin: "10px 0px",
+    width: "100%",
+  },
+}));
+
+interface InputFieldProps {
+  name: keyof Inputs;
+  register: (rules?: Partial<ValidationRules>) => (ref: any) => void;
+  errors: DeepMap<Inputs, FieldError>;
+  props?: TextFieldProps;
+  rules?: Partial<ValidationRules>;
+}
+
+const InputField: React.FC<InputFieldProps> = ({
+  name,
+  errors,
+  register,
+  props,
+  rules,
+}) => {
+  const classes = useInputFieldStyles();
+
+  return (
+    <TextField
+      error={Boolean(errors[name])}
+      helperText={errors[name]?.message}
+      className={classes.input}
+      variant="outlined"
+      label={capitalize(name)}
+      name={name}
+      inputRef={register({
+        required: { message: "This field is required", value: true },
+        ...rules,
+      })}
+      {...props}
+    />
   );
 };
 
