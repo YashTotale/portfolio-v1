@@ -174,6 +174,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             name="rating"
             control={control}
             as={<Rating />}
+            className={classes.rating}
           ></Controller>
           <Button
             className={classes.submit}
