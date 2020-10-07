@@ -24,5 +24,6 @@ export {
   getContactMessage,
   getContactEmail,
   getContactSuccess,
+  getContactBugs,
   getContact,
 } from "./contact.selectors";

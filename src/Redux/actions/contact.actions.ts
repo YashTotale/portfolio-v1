@@ -40,15 +40,34 @@ export const setContactEmail = (email: string): SetContactEmailPayload => ({
   payload: { email },
 });
 
-export interface SetContactPayload {
-  type: typeof SET_CONTACT;
-  payload: { contact: Inputs };
+export interface SetContactRatingPayload {
+  type: typeof SET_CONTACT_RATING;
+  payload: {
+    rating: number;
+  };
 }
 
-export const SET_CONTACT = "SET_CONTACT";
-export const setContact = (contact: Inputs): SetContactPayload => ({
-  type: SET_CONTACT,
-  payload: { contact },
+export const SET_CONTACT_RATING = "SET_CONTACT_RATING";
+export const setContactRating = (rating: number): SetContactRatingPayload => ({
+  type: SET_CONTACT_RATING,
+  payload: {
+    rating,
+  },
+});
+
+export interface SetContactBugsPayload {
+  type: typeof SET_CONTACT_BUGS;
+  payload: {
+    bugs: string;
+  };
+}
+
+export const SET_CONTACT_BUGS = "SET_CONTACT_BUGS";
+export const setContactBugs = (bugs: string): SetContactBugsPayload => ({
+  type: SET_CONTACT_BUGS,
+  payload: {
+    bugs,
+  },
 });
 
 export interface SetContactSuccessPayload {
@@ -64,4 +83,15 @@ export const setContactSuccess = (
 ): SetContactSuccessPayload => ({
   type: SET_CONTACT_SUCCESS,
   payload: { success },
+});
+
+export interface SetContactPayload {
+  type: typeof SET_CONTACT;
+  payload: { contact: Inputs };
+}
+
+export const SET_CONTACT = "SET_CONTACT";
+export const setContact = (contact: Inputs): SetContactPayload => ({
+  type: SET_CONTACT,
+  payload: { contact },
 });

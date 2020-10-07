@@ -1,3 +1,4 @@
+import { AnyAction } from "redux";
 import {
   TOGGLE_DARK_MODE,
   TOGGLE_NAV_BTNS_MENU,
@@ -5,8 +6,7 @@ import {
   CHANGE_SHADE,
   SET_SNACKBAR_MESSAGE,
   HANDLE_SNACKBAR_CLOSE,
-} from "../actions";
-import { AnyAction } from "redux";
+} from "../actions/display.actions";
 import { defaultColors, defaultShades } from "../../Utils/colors";
 import { Color } from "@material-ui/lab";
 
