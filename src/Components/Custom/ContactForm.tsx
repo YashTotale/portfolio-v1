@@ -104,7 +104,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const contact = useSelector(getContact);
 
-  const { name, email, message, bugs, success } = contact;
+  const { name, email, message, bugs, rating, success } = contact;
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 

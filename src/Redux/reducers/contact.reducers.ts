@@ -1,4 +1,5 @@
 import { AnyAction } from "redux";
+import { Rating } from "../../Utils/types";
 import {
   SET_CONTACT_NAME,
   SET_CONTACT_MESSAGE,
@@ -14,7 +15,7 @@ export const initialContactState = {
   message: "",
   email: "",
   bugs: "",
-  rating: <number | undefined>undefined,
+  rating: <Rating | undefined>undefined,
   success: <boolean | null>null,
 };
 

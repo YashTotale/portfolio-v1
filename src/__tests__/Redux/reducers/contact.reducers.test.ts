@@ -1,11 +1,18 @@
+import { Inputs } from "../../../Components/Custom/ContactForm";
 import {
+  SetContactBugsPayload,
   SetContactEmailPayload,
   SetContactMessagePayload,
   SetContactNamePayload,
+  SetContactPayload,
+  SetContactRatingPayload,
   SetContactSuccessPayload,
+  SET_CONTACT,
+  SET_CONTACT_BUGS,
   SET_CONTACT_EMAIL,
   SET_CONTACT_MESSAGE,
   SET_CONTACT_NAME,
+  SET_CONTACT_RATING,
   SET_CONTACT_SUCCESS,
 } from "../../../Redux/actions/contact.actions";
 import {
@@ -75,6 +82,46 @@ describe("The contact reducer", () => {
     expect(actual).toEqual(expected);
   });
 
+  test("Sets contact bugs", () => {
+    const bugs = "Test bugs";
+
+    const fakeAction: SetContactBugsPayload = {
+      type: SET_CONTACT_BUGS,
+      payload: {
+        bugs,
+      },
+    };
+
+    const expected: typeof initialContactState = {
+      ...originalState,
+      bugs,
+    };
+
+    const actual = contactReducer(originalState, fakeAction);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("Sets contact rating", () => {
+    const rating = 2;
+
+    const fakeAction: SetContactRatingPayload = {
+      type: SET_CONTACT_RATING,
+      payload: {
+        rating,
+      },
+    };
+
+    const expected: typeof initialContactState = {
+      ...originalState,
+      rating,
+    };
+
+    const actual = contactReducer(originalState, fakeAction);
+
+    expect(actual).toEqual(expected);
+  });
+
   test("Sets contact success", () => {
     const values = [true, false, null];
 
@@ -95,5 +142,31 @@ describe("The contact reducer", () => {
 
       expect(actual).toEqual(expected);
     });
+  });
+
+  test("Sets contact", () => {
+    const contact: Inputs = {
+      name: "Test name",
+      message: "Test message",
+      email: "test@email.com",
+      bugs: "Test bugs",
+      rating: undefined,
+    };
+
+    const fakeAction: SetContactPayload = {
+      type: SET_CONTACT,
+      payload: {
+        contact,
+      },
+    };
+
+    const expected = {
+      ...originalState,
+      ...contact,
+    };
+
+    const actual = contactReducer(originalState, fakeAction);
+
+    expect(actual).toEqual(expected);
   });
 });

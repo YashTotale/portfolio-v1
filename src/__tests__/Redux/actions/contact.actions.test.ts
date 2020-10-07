@@ -1,6 +1,8 @@
 import { Inputs } from "../../../Components/Custom/ContactForm";
 import {
   setContact,
+  setContactBugs,
+  SetContactBugsPayload,
   setContactEmail,
   SetContactEmailPayload,
   setContactMessage,
@@ -8,15 +10,19 @@ import {
   setContactName,
   SetContactNamePayload,
   SetContactPayload,
+  setContactRating,
+  SetContactRatingPayload,
   SET_CONTACT,
+  SET_CONTACT_BUGS,
   SET_CONTACT_EMAIL,
   SET_CONTACT_MESSAGE,
   SET_CONTACT_NAME,
+  SET_CONTACT_RATING,
 } from "../../../Redux/actions/contact.actions";
 
 describe("The contact actions", () => {
   test("The setContactName action", () => {
-    const name = "Hello!!";
+    const name = "Test name";
 
     const expected: SetContactNamePayload = {
       type: SET_CONTACT_NAME,
@@ -30,7 +36,7 @@ describe("The contact actions", () => {
   });
 
   test("The setContactMessage action", () => {
-    const message = "Hello!!";
+    const message = "Test message";
 
     const expected: SetContactMessagePayload = {
       type: SET_CONTACT_MESSAGE,
@@ -44,7 +50,7 @@ describe("The contact actions", () => {
   });
 
   test("The setContactEmail action", () => {
-    const email = "hello@gmail.com";
+    const email = "hello@email.com";
 
     const expected: SetContactEmailPayload = {
       type: SET_CONTACT_EMAIL,
@@ -53,6 +59,36 @@ describe("The contact actions", () => {
       },
     };
     const actual = setContactEmail(email);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("The setContactBugs action", () => {
+    const bugs = "Test bugs";
+
+    const expected: SetContactBugsPayload = {
+      type: SET_CONTACT_BUGS,
+      payload: {
+        bugs,
+      },
+    };
+
+    const actual = setContactBugs(bugs);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("The setContactRating action", () => {
+    const rating = 4;
+
+    const expected: SetContactRatingPayload = {
+      type: SET_CONTACT_RATING,
+      payload: {
+        rating,
+      },
+    };
+
+    const actual = setContactRating(rating);
 
     expect(actual).toEqual(expected);
   });

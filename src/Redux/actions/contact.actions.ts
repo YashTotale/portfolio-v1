@@ -1,4 +1,5 @@
 import { Inputs } from "../../Components/Custom/ContactForm";
+import { Rating } from "../../Utils/types";
 export interface SetContactNamePayload {
   type: typeof SET_CONTACT_NAME;
   payload: {
@@ -43,12 +44,12 @@ export const setContactEmail = (email: string): SetContactEmailPayload => ({
 export interface SetContactRatingPayload {
   type: typeof SET_CONTACT_RATING;
   payload: {
-    rating: number;
+    rating: Rating;
   };
 }
 
 export const SET_CONTACT_RATING = "SET_CONTACT_RATING";
-export const setContactRating = (rating: number): SetContactRatingPayload => ({
+export const setContactRating = (rating: Rating): SetContactRatingPayload => ({
   type: SET_CONTACT_RATING,
   payload: {
     rating,
