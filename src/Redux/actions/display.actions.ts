@@ -36,10 +36,10 @@ export const toggleNavBtnsMenu = (
 //Change colors
 
 export interface ChangeColorsPayload {
-  type: string;
+  type: typeof CHANGE_COLORS;
   payload: {
     scheme: scheme;
-    color: string;
+    color: cssColor;
   };
 }
 
@@ -55,7 +55,7 @@ export const changeColors = (
 //Change shade
 
 export interface ChangeShadePayload {
-  type: string;
+  type: typeof CHANGE_SHADE;
   payload: { shade: shade; scheme: scheme };
 }
 
@@ -71,7 +71,7 @@ export const changeShade = (
 //Toggle Snackbar
 
 export interface SetSnackbarMessagePayload {
-  type: string;
+  type: typeof SET_SNACKBAR_MESSAGE;
   payload: { message: string; severity: Color; color: string | null };
 }
 
@@ -88,7 +88,7 @@ export const setSnackbarMessage = (
 //Handle Snackbar close
 
 export interface HandleSnackbarClosePayload {
-  type: string;
+  type: typeof HANDLE_SNACKBAR_CLOSE;
   payload: {};
 }
 

@@ -1,4 +1,7 @@
-import { displayReducer as display } from "../../../Redux/reducers/display.reducers";
+import {
+  displayReducer,
+  initialDisplayState,
+} from "../../../Redux/reducers/display.reducers";
 import {
   TOGGLE_DARK_MODE,
   TOGGLE_NAV_BTNS_MENU,
@@ -22,12 +25,12 @@ describe("The display reducer", () => {
       payload: {},
     };
 
-    const expected = {
+    const expected: typeof initialDisplayState = {
       ...originalState,
       isDarkMode: !originalState.isDarkMode,
     };
 
-    const actual = display(originalState, fakeAction);
+    const actual = displayReducer(originalState, fakeAction);
 
     expect(actual).toEqual(expected);
   });
@@ -38,12 +41,12 @@ describe("The display reducer", () => {
       payload: {},
     };
 
-    const expected1 = {
+    const expected1: typeof initialDisplayState = {
       ...originalState,
       isNavBtnsMenuOpen: !originalState.isNavBtnsMenuOpen,
     };
 
-    const actual1 = display(originalState, fakeAction1);
+    const actual1 = displayReducer(originalState, fakeAction1);
 
     expect(actual1).toEqual(expected1);
 
@@ -52,34 +55,36 @@ describe("The display reducer", () => {
       payload: { isOpen: true },
     };
 
-    const expected2 = {
+    const expected2: typeof initialDisplayState = {
       ...originalState,
       isNavBtnsMenuOpen: true,
     };
 
-    const actual2 = display(originalState, fakeAction2);
+    const actual2 = displayReducer(originalState, fakeAction2);
 
     expect(actual2).toEqual(expected2);
   });
 
   test("Changes color", () => {
+    const color = "deepPurple";
+
     const fakeAction: ChangeColorsPayload = {
       type: CHANGE_COLORS,
       payload: {
         scheme: "secondary",
-        color: "#ffffff",
+        color,
       },
     };
 
-    const expected = {
+    const expected: typeof initialDisplayState = {
       ...originalState,
       colors: {
         primary: originalState.colors.primary,
-        secondary: "#ffffff",
+        secondary: color,
       },
     };
 
-    const actual = display(originalState, fakeAction);
+    const actual = displayReducer(originalState, fakeAction);
 
     expect(actual).toEqual(expected);
   });
@@ -90,7 +95,7 @@ describe("The display reducer", () => {
       payload: { shade: "A200", scheme: "primary" },
     };
 
-    const expected = {
+    const expected: typeof initialDisplayState = {
       ...originalState,
       shades: {
         primary: "A200",
@@ -98,7 +103,7 @@ describe("The display reducer", () => {
       },
     };
 
-    const actual = display(originalState, fakeAction);
+    const actual = displayReducer(originalState, fakeAction);
 
     expect(actual).toEqual(expected);
   });
@@ -113,7 +118,7 @@ describe("The display reducer", () => {
       payload: { message, severity, color },
     };
 
-    const expected = {
+    const expected: typeof initialDisplayState = {
       ...originalState,
       snackBar: {
         isOpen: true,
@@ -123,7 +128,7 @@ describe("The display reducer", () => {
       },
     };
 
-    const actual = display(originalState, fakeAction);
+    const actual = displayReducer(originalState, fakeAction);
 
     expect(actual).toEqual(expected);
   });
@@ -134,12 +139,12 @@ describe("The display reducer", () => {
       payload: {},
     };
 
-    const expected = {
+    const expected: typeof initialDisplayState = {
       ...originalState,
       snackBar: { ...originalState.snackBar, isOpen: false },
     };
 
-    const actual = display(originalState, fakeAction);
+    const actual = displayReducer(originalState, fakeAction);
 
     expect(actual).toEqual(expected);
   });

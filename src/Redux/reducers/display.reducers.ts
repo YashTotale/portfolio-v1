@@ -11,7 +11,7 @@ import { defaultColors, defaultShades } from "../../Utils/colors";
 import { Color } from "@material-ui/lab";
 
 export const initialDisplayState = {
-  isDarkMode: null,
+  isDarkMode: <boolean | null>null,
   isNavBtnsMenuOpen: false,
   colors: defaultColors,
   shades: defaultShades,
@@ -19,14 +19,14 @@ export const initialDisplayState = {
     isOpen: false,
     message: "",
     severity: <Color>"info",
-    color: null,
+    color: <string | null>null,
   },
 };
 
 export const displayReducer = (
   state = initialDisplayState,
   action: AnyAction
-) => {
+): typeof initialDisplayState => {
   const { type, payload } = action;
   switch (type) {
     case TOGGLE_DARK_MODE: {
