@@ -1,5 +1,5 @@
 // React Imports
-import React from "react";
+import React, { ChangeEvent } from "react";
 import {
   SubmitHandler,
   useForm,
@@ -14,7 +14,11 @@ import { EMAIL_REGEX } from "../../Utils/constants";
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 import { getContact } from "../../Redux/selectors";
-import { setContact, setContactSuccess } from "../../Redux/actions";
+import {
+  setContact,
+  setContactName,
+  setContactSuccess,
+} from "../../Redux/actions";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -108,13 +112,14 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const { register, handleSubmit, errors, control } = useForm<Inputs>({
+  const { register, handleSubmit, errors, control, reset } = useForm<Inputs>({
     mode: "onTouched",
     defaultValues: {
       name,
       email,
       message,
       bugs,
+      rating,
     },
   });
 
@@ -190,6 +195,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             control={control}
             as={<Rating />}
             className={classes.rating}
+            defaultValue={rating}
           ></Controller>
           <Button
             className={classes.submit}
@@ -233,7 +239,10 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
           <Button
             color="primary"
             variant="contained"
-            onClick={() => dispatch(setContactSuccess(null))}
+            onClick={() => {
+              reset(contact);
+              dispatch(setContactSuccess(null));
+            }}
             className={classes.submitAnother}
           >
             {success ? "Submit another response" : "Try again"}
@@ -290,9 +299,7 @@ const InputField: React.FC<InputFieldProps> = ({
           }
         : null)}
       inputRef={register({
-        required: notRequired
-          ? false
-          : { message: "This field is required", value: true },
+        required: notRequired ? false : "This field is required",
         ...rules,
       })}
       InputProps={{ ...inputProps }}
