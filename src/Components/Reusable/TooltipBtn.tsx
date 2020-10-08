@@ -1,9 +1,9 @@
 // React Imports
 import React from "react";
-import { Link } from "react-router-dom";
+import ActionButton from "./ActionButton";
 
 // Material UI Imports
-import { Tooltip, IconButton } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 
 export interface TooltipBtnProps {
   title: string;
@@ -16,46 +16,13 @@ export interface TooltipBtnProps {
 }
 
 const TooltipBtn: React.FC<TooltipBtnProps> = (props) => {
-  const tooltipComponent = TooltipComponent(props);
+  const tooltipComponent = ActionButton(props) as React.ReactElement<any, any>;
   const { title, className } = props;
   return (
     <Tooltip className={className} key={title} title={title}>
       {tooltipComponent}
     </Tooltip>
   );
-};
-
-const TooltipComponent = ({
-  component,
-  href,
-  icon,
-  onClick,
-  to,
-}: TooltipBtnProps) => {
-  switch (component) {
-    case "a": {
-      return (
-        <IconButton
-          component="a"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={href}
-        >
-          {icon}
-        </IconButton>
-      );
-    }
-    case "btn": {
-      return <IconButton onClick={onClick}>{icon}</IconButton>;
-    }
-    case "link": {
-      return (
-        <IconButton component={Link} to={`/${to}`}>
-          {icon}
-        </IconButton>
-      );
-    }
-  }
 };
 
 export default TooltipBtn;

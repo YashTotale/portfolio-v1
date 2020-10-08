@@ -126,7 +126,7 @@ const Display: React.FC<ProjectProps> = ({
             icon={<GitHub />}
             component="a"
             href={sourcecode}
-          ></TooltipBtn>
+          />
         ) : null}
         {link ? (
           <TooltipBtn
@@ -135,7 +135,7 @@ const Display: React.FC<ProjectProps> = ({
             icon={<Launch />}
             component="a"
             href={link}
-          ></TooltipBtn>
+          />
         ) : null}
       </Paper>
       <Paper elevation={10} className={classes.projectInfo}>

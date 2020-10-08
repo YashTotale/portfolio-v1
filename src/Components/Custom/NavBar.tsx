@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import TooltipBtn, { TooltipBtnProps } from "../Reusable/TooltipBtn";
+import ListAction, { ListActionProps } from "../Reusable/ListAction";
 import { SOURCE_CODE } from "../../Utils/links";
 
 //Redux Imports
@@ -28,11 +29,10 @@ import {
   Toolbar,
   Tabs,
   Tab,
-  Menu,
   useTheme,
   useMediaQuery,
-  MenuItem,
-  RootRef,
+  Drawer,
+  List,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,50 +44,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   navBtns: {
     position: "absolute",
-    right: `${theme.spacing() * 3}px`,
+    right: theme.spacing() * 3,
+    [theme.breakpoints.down("sm")]: {
+      right: theme.spacing() * 2,
+    },
   },
 }));
 
 const NavBar: React.FC = (props) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const theme = useTheme();
 
   const isSizeSmall = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
   );
-
-  const isDarkMode = theme.palette.type === "dark";
-
-  const btns: TooltipBtnProps[] = [
-    {
-      title: `Toggle ${isDarkMode ? "Light" : "Dark"} Theme`,
-      onClick: () => {
-        dispatch(toggleDarkModeWMessage());
-      },
-      component: "btn",
-      icon: isDarkMode ? <Brightness7 /> : <Brightness4 />,
-    },
-    {
-      title: "Browse Tags",
-      component: "link",
-      to: "tags",
-      icon: <Label />,
-    },
-    {
-      title: "Edit Website Colors",
-      to: "colors",
-      component: "link",
-      icon: <Palette />,
-    },
-    {
-      title: "GitHub Repository",
-      icon: <GitHub />,
-      component: "a",
-      href: SOURCE_CODE,
-    },
-  ];
 
   const location = useLocation();
   const path = location.pathname.split("/")[1];
@@ -118,7 +87,7 @@ const NavBar: React.FC = (props) => {
             );
           })}
         </Tabs>
-        <NavButtons isSizeSmall={isSizeSmall} btns={btns} />
+        <NavButtons isSizeSmall={isSizeSmall} />
       </Toolbar>
     </AppBar>
   );
@@ -127,47 +96,74 @@ const NavBar: React.FC = (props) => {
 export default NavBar;
 
 interface NavButtonsProps {
-  btns: TooltipBtnProps[];
   isSizeSmall: boolean;
 }
 
-const NavButtons: React.FC<NavButtonsProps> = ({ btns, isSizeSmall }) => {
+const NavButtons: React.FC<NavButtonsProps> = ({ isSizeSmall }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const menuBtnEl = useRef(null);
+  const theme = useTheme();
+
   const isMenuOpen = useSelector(getIsNavBtnsMenuOpen);
 
-  const menuBtn = React.useMemo(
-    () => (
-      <RootRef rootRef={menuBtnEl}>
-        <TooltipBtn
-          title="Menu"
-          icon={<MenuButton />}
-          component="btn"
-          onClick={() => dispatch(toggleNavBtnsMenu())}
-        />
-      </RootRef>
-    ),
-    []
-  );
+  const isDarkMode = theme.palette.type === "dark";
 
-  const tooltipBtns = btns.map((props, i) => <TooltipBtn key={i} {...props} />);
+  const btns = [
+    {
+      title: `Toggle ${isDarkMode ? "Light" : "Dark"} Theme`,
+      onClick: () => {
+        dispatch(toggleDarkModeWMessage());
+      },
+      component: "btn",
+      icon: isDarkMode ? <Brightness7 /> : <Brightness4 />,
+    },
+    {
+      title: "Browse Tags",
+      component: "link",
+      to: "tags",
+      icon: <Label />,
+    },
+    {
+      title: "Edit Website Colors",
+      to: "colors",
+      component: "link",
+      icon: <Palette />,
+    },
+    {
+      title: "GitHub Repository",
+      icon: <GitHub />,
+      component: "a",
+      href: SOURCE_CODE,
+    },
+  ];
+
   return (
     <div className={classes.navBtns}>
       {!isSizeSmall ? (
-        <div>{tooltipBtns}</div>
+        <div>
+          {(btns as TooltipBtnProps[]).map((props, i) => (
+            <TooltipBtn key={i} {...props} />
+          ))}
+        </div>
       ) : (
         <>
-          {menuBtn}
-          <Menu
-            onClose={() => dispatch(toggleNavBtnsMenu(false))}
-            anchorEl={menuBtnEl.current}
+          <TooltipBtn
+            icon={<MenuButton />}
+            title="Open Menu"
+            component="btn"
+            onClick={() => dispatch(toggleNavBtnsMenu(true))}
+          />
+          <Drawer
+            anchor="right"
             open={isMenuOpen}
+            onClose={() => dispatch(toggleNavBtnsMenu(false))}
           >
-            {tooltipBtns.map((btn, i) => (
-              <MenuItem key={i}>{btn}</MenuItem>
-            ))}
-          </Menu>
+            <List>
+              {(btns as ListActionProps[]).map((props, i) => (
+                <ListAction {...props} key={i} />
+              ))}
+            </List>
+          </Drawer>
         </>
       )}
     </div>
