@@ -53,6 +53,7 @@ const HomePage: React.FC = () => {
                 {...project}
                 url={`/projects/${project.url}`}
                 key={i}
+                sm={170}
               />
             );
           })}
