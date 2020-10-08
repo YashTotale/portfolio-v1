@@ -1,7 +1,7 @@
 //React Imports
 import React from "react";
 import Tags from "../Data/Tags.json";
-import TagMini from "../Components/Reusable/Overlay";
+import TagOverlay from "../Components/Reusable/Overlay";
 import TagPage from "../Components/Reusable/Tag/Page";
 
 import { useParams } from "react-router-dom";
@@ -34,12 +34,7 @@ const TagsPage: React.FC = () => {
     <div className={classes.tags}>
       {Tags.map(({ url, name, icons }, i) => {
         return (
-          <TagMini
-            key={i}
-            name={name}
-            icons={icons}
-            url={`/tags/${url}`}
-          ></TagMini>
+          <TagOverlay key={i} name={name} icons={icons} url={`/tags/${url}`} />
         );
       })}
     </div>

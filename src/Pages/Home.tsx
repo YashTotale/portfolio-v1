@@ -2,7 +2,7 @@
 import React from "react";
 import AboutMe from "../Components/Custom/AboutMe";
 import ContactForm from "../Components/Custom/ContactForm";
-import ProjectMini from "../Components/Reusable/Overlay";
+import ProjectOverlay from "../Components/Reusable/Overlay";
 import Projects from "../Data/Projects.json";
 
 //Material UI Imports
@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
         <div className={classes.projects}>
           {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
             return (
-              <ProjectMini
+              <ProjectOverlay
                 {...project}
                 url={`/projects/${project.url}`}
                 key={i}
