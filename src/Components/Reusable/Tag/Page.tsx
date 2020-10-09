@@ -1,5 +1,6 @@
 // React Imports
 import React from "react";
+import { Helmet } from "react-helmet";
 import { TagProps } from "../../../Utils/interfaces";
 
 // Redux Imports
@@ -27,11 +28,16 @@ const Page: React.FC<TagProps> = ({ name, icons }) => {
   const theme = useTheme();
   const isDarkMode = theme.palette.type === "dark";
   return (
-    <div className={classes.tagPage}>
-      <Paper className={classes.jumbotron}>
-        <img src={icons[isDarkMode ? 1 : 0]}></img>
-      </Paper>
-    </div>
+    <>
+      <Helmet>
+        <title>{name} - Yash Totale</title>
+      </Helmet>
+      <div className={classes.tagPage}>
+        <Paper className={classes.jumbotron}>
+          <img src={icons[isDarkMode ? 1 : 0]}></img>
+        </Paper>
+      </div>
+    </>
   );
 };
 

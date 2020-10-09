@@ -67,6 +67,9 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
     justifyContent: "center",
     padding: 10,
   },
+  submitTitle: {
+    textAlign: "center",
+  },
   submitIcon: {
     margin: "20px 0px",
     width: 100,
@@ -76,6 +79,7 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
   },
   submitExplanation: {
     marginBottom: 10,
+    textAlign: "center",
   },
   submitInfo: {
     margin: "10px 0px",
@@ -208,7 +212,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
         </form>
       ) : (
         <Paper className={classes.submitPaper}>
-          <Typography variant="h4">
+          <Typography className={classes.submitTitle} variant="h4">
             {success ? "Form submission successful" : "Form submission failed"}
           </Typography>
           {success ? (

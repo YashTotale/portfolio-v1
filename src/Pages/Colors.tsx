@@ -1,5 +1,6 @@
 //React Imports
 import React from "react";
+import { Helmet } from "react-helmet";
 import {
   colors,
   toCssColor,
@@ -89,25 +90,30 @@ const Colors: React.FC = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <div className={classes.root}>
-      <Typography className={classes.header} variant="h4">
-        Customize Website Colors
-      </Typography>
-      <div className={classes.schemes}>
-        {schemes.map((scheme) => (
-          <ColorScheme key={scheme} scheme={scheme} />
-        ))}
+    <>
+      <Helmet>
+        <title>Colors - Yash Totale</title>
+      </Helmet>
+      <div className={classes.root}>
+        <Typography className={classes.header} variant="h4">
+          Customize Website Colors
+        </Typography>
+        <div className={classes.schemes}>
+          {schemes.map((scheme) => (
+            <ColorScheme key={scheme} scheme={scheme} />
+          ))}
+        </div>
+        <div className={classes.resetDiv}>
+          <Button
+            onClick={() => dispatch(resetColors())}
+            variant="contained"
+            color="secondary"
+          >
+            Reset Default Colors
+          </Button>
+        </div>
       </div>
-      <div className={classes.resetDiv}>
-        <Button
-          onClick={() => dispatch(resetColors())}
-          variant="contained"
-          color="secondary"
-        >
-          Reset Default Colors
-        </Button>
-      </div>
-    </div>
+    </>
   );
 };
 

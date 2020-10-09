@@ -24,14 +24,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   mini: {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
     alignItems: "center",
-    position: "relative",
-    borderRadius: "50%",
-    cursor: "pointer",
-    margin: 15,
+    justifySelf: "center",
   },
   link: {
+    position: "relative",
     [theme.breakpoints.down("xl")]: {
       width: ({ xl }) => xl,
       height: ({ xl }) => xl,
@@ -95,9 +92,35 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     height: "inherit",
   },
   caption: {
+    textAlign: "center",
     marginTop: 5,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    [theme.breakpoints.down("xl")]: {
+      width: ({ xl }) => xl,
+    },
+    [theme.breakpoints.down("lg")]: {
+      width: ({ lg }) => lg,
+    },
+    [theme.breakpoints.down("md")]: {
+      width: ({ md }) => md,
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: ({ sm }) => sm,
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: ({ xs }) => xs,
+    },
   },
 }));
+
+export const DefaultOverlaySizes = {
+  xl: 250,
+  lg: 200,
+  md: 180,
+  sm: 160,
+  xs: 150,
+};
 
 interface MiniProps {
   name: string;

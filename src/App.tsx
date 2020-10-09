@@ -1,6 +1,7 @@
 //React Imports
 import { hot } from "react-hot-loader";
 import React, { lazy, Suspense } from "react";
+import { Helmet } from "react-helmet";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import Loading from "./Components/Reusable/Loading";
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
@@ -10,6 +11,7 @@ const Footer = lazy(() => import("./Components/Custom/Footer"));
 //Utils
 import { DARK_LOGO, LIGHT_LOGO } from "./Utils/links";
 import { FOOTER_HEIGHT } from "./Utils/constants";
+import { RECAPTCHA_KEY } from "./Utils/CONFIDENTIAL";
 
 //Pages
 const Home = lazy(() => import("./Pages/Home"));
@@ -42,7 +44,8 @@ const App: React.FC = (props) => {
     <Router>
       <Theme>
         <CssBaseline />
-        <GoogleReCaptchaProvider reCaptchaKey="6LfMMNMZAAAAAGI8NZ5NaRD7GxUy3PF0sWH-emoj">
+        <Head />
+        <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_KEY}>
           <Suspense fallback={<Loading />}>
             <div className={classes.pageContainer}>
               <NavBar />
@@ -57,13 +60,22 @@ const App: React.FC = (props) => {
   );
 };
 
-const Routes: React.FC = (props) => {
+const Head: React.FC = (props) => {
   const theme = useTheme();
-  const icon = document.getElementById("icon") as HTMLLinkElement;
-  icon.href = React.useMemo(
-    () => (theme.palette.type === "dark" ? DARK_LOGO : LIGHT_LOGO),
-    [theme.palette.type, icon]
+  return (
+    <Helmet>
+      <title>Yash Totale</title>
+      <link
+        id="icon"
+        rel="icon"
+        type="image/jpeg"
+        href={theme.palette.type === "dark" ? DARK_LOGO : LIGHT_LOGO}
+      ></link>
+    </Helmet>
   );
+};
+
+const Routes: React.FC = (props) => {
   return (
     <Switch>
       <Route path="/projects/:id?">
