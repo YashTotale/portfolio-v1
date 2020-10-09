@@ -10,6 +10,9 @@ env:
 node_js:
   - node
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_e620454d888c_key -iv $encrypted_e620454d888c_iv -in CONFIDENTIAL.ts.enc -out ./src/Utils/CONFIDENTIAL.ts -d
+
 install:
   - npm install
 

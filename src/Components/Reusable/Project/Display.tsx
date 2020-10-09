@@ -122,7 +122,7 @@ const Display: React.FC<ProjectProps> = ({
         {sourcecode ? (
           <TooltipBtn
             className={classes.projectSourceCode}
-            title={`Source code for ${name}`}
+            title={`Source Code for ${name}`}
             icon={<GitHub />}
             component="a"
             href={sourcecode}
