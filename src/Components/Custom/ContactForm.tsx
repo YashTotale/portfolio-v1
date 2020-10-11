@@ -1,5 +1,5 @@
 // React Imports
-import React, { ChangeEvent } from "react";
+import React from "react";
 import {
   SubmitHandler,
   useForm,
@@ -10,15 +10,12 @@ import {
 } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { EMAIL_REGEX } from "../../Utils/constants";
+import { CONTACT_FORM_ZAPIER_URL } from "../../Utils/CONFIDENTIAL";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 import { getContact } from "../../Redux/selectors";
-import {
-  setContact,
-  setContactName,
-  setContactSuccess,
-} from "../../Redux/actions";
+import { setContact, setContactSuccess } from "../../Redux/actions";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -142,13 +139,10 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
       if (!token) {
         throw new Error("ReCaptcha was unable to authorize this response.");
       } else {
-        const response = await fetch(
-          "https://hooks.zapier.com/hooks/catch/8641341/og4nv0l/",
-          {
-            method: "post",
-            body: JSON.stringify(inputs),
-          }
-        );
+        const response = await fetch(CONTACT_FORM_ZAPIER_URL, {
+          method: "post",
+          body: JSON.stringify(inputs),
+        });
         const json = await response.json();
         if (json.status === "success") {
           dispatch(setContactSuccess(true));

@@ -53,6 +53,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginTop: 5,
   },
+  projectUrl: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   projectSourceCode: {
     position: "absolute",
     top: 2,
@@ -107,18 +113,22 @@ const Display: React.FC<ProjectProps> = ({
   return (
     <div className={classes.projectDiv}>
       <Paper elevation={24} className={classes.projectImgDiv}>
-        <img
-          className={classes.projectImg}
-          src={theme.palette.type === "light" ? icons[0] : icons[1]}
-        ></img>
-        <Typography
-          className={classes.projectTitle}
-          variant={isSizeSmall ? "h5" : "h4"}
+        <StyledLink
+          className={classes.projectUrl}
+          to={`/projects/${url}`}
+          color="primary"
         >
-          <StyledLink to={`/projects/${url}`} color="primary">
+          <img
+            className={classes.projectImg}
+            src={theme.palette.type === "light" ? icons[0] : icons[1]}
+          ></img>
+          <Typography
+            className={classes.projectTitle}
+            variant={isSizeSmall ? "h5" : "h4"}
+          >
             {name}
-          </StyledLink>
-        </Typography>
+          </Typography>
+        </StyledLink>
         {sourcecode ? (
           <TooltipBtn
             className={classes.projectSourceCode}

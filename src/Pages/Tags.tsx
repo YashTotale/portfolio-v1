@@ -18,7 +18,7 @@ const useStyles = makeStyles<Theme, typeof DefaultOverlaySizes>((theme) => ({
     width: "100%",
     display: "grid",
     gap: "25px",
-    marginTop: 15,
+    margin: "15px 10px 0px",
     [theme.breakpoints.down("xl")]: {
       gridTemplateColumns: ({ xl }) => `repeat(auto-fit, minmax(${xl}px, 1fr))`,
     },

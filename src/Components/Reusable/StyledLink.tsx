@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface StyledLinkProps {
   to: string;
+  className?: string;
   color?:
     | "initial"
     | "inherit"
@@ -23,10 +24,15 @@ interface StyledLinkProps {
     | "error";
 }
 
-const StyledLink: React.FC<StyledLinkProps> = ({ to, children, color }) => {
+const StyledLink: React.FC<StyledLinkProps> = ({
+  to,
+  children,
+  color,
+  className,
+}) => {
   const classes = useStyles();
   return (
-    <MuiLink color={color} to={to} component={RouterLink}>
+    <MuiLink className={className} color={color} to={to} component={RouterLink}>
       {children}
     </MuiLink>
   );
