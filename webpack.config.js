@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -45,6 +46,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "public/index.html",
+    }),
+    new WebpackPwaManifest({
+      name: "Yash Totale",
+      description: "Yash Totale's Portfolio Website",
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],

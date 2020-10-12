@@ -4,7 +4,7 @@ import React from "react";
 //Material UI Imports
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { colors, useMediaQuery } from "@material-ui/core";
-import type from "@material-ui/lab/themeAugmentation";
+import "@material-ui/lab/themeAugmentation";
 
 //Redux Imports
 import { useDispatch, useSelector } from "react-redux";

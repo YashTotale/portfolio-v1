@@ -3,7 +3,6 @@ import React from "react";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { useMediaQuery } from "@material-ui/core";
 import {} from "@material-ui/icons";
 import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
 
