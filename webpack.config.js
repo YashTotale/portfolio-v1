@@ -36,7 +36,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, "public/"),
+    contentBase: path.join(__dirname, "build/"),
     //Change the port here if you need to
     port: 3000,
     publicPath: "http://localhost:3000/build/",
@@ -44,7 +44,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "public/template.html",
+      template: "public/index.html",
     }),
     new webpack.HotModuleReplacementPlugin(),
   ],
