@@ -121,6 +121,7 @@ const Display: React.FC<ProjectProps> = ({
           <img
             className={classes.projectImg}
             src={theme.palette.type === "light" ? icons[0] : icons[1]}
+            alt={name}
           ></img>
           <Typography
             className={classes.projectTitle}
@@ -129,7 +130,7 @@ const Display: React.FC<ProjectProps> = ({
             {name}
           </Typography>
         </StyledLink>
-        {sourcecode ? (
+        {sourcecode && (
           <TooltipBtn
             className={classes.projectSourceCode}
             title={`Source Code for ${name}`}
@@ -137,8 +138,8 @@ const Display: React.FC<ProjectProps> = ({
             component="a"
             href={sourcecode}
           />
-        ) : null}
-        {link ? (
+        )}
+        {link && (
           <TooltipBtn
             className={classes.projectLink}
             title={`View ${name}`}
@@ -146,7 +147,7 @@ const Display: React.FC<ProjectProps> = ({
             component="a"
             href={link}
           />
-        ) : null}
+        )}
       </Paper>
       <Paper elevation={10} className={classes.projectInfo}>
         {description.map((desc, i) => (

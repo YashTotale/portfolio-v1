@@ -10,14 +10,10 @@ import {
   useTheme,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
 
-interface StyleProps {
+interface StyleProps extends BreakpointValues {
   hovering: boolean;
-  xl: number;
-  lg: number;
-  md: number;
-  sm: number;
-  xs: number;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({

@@ -34,7 +34,7 @@ const Page: React.FC<TagProps> = ({ name, icons }) => {
       </Helmet>
       <div className={classes.tagPage}>
         <Paper className={classes.jumbotron}>
-          <img src={icons[isDarkMode ? 1 : 0]}></img>
+          <img src={icons[isDarkMode ? 1 : 0]} alt={name}></img>
         </Paper>
       </div>
     </>

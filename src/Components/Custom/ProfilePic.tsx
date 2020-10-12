@@ -28,7 +28,11 @@ const ProfilePic: React.FC = ({}) => {
   return (
     <div className={classes.imgDiv}>
       <ModifiedA className={classes.a} tabIndex={-1} href={PROFILE_PIC}>
-        <Image ratio={PROFILE_PIC_RATIO} src={PROFILE_PIC} />
+        <Image
+          ratio={PROFILE_PIC_RATIO}
+          src={PROFILE_PIC}
+          alt="Profile Picture"
+        />
       </ModifiedA>
     </div>
   );

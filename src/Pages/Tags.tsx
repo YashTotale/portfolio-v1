@@ -12,8 +12,11 @@ import { useParams } from "react-router-dom";
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core";
 import { TagProps } from "../Utils/interfaces";
+import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
 
-const useStyles = makeStyles<Theme, typeof DefaultOverlaySizes>((theme) => ({
+interface StyleProps extends BreakpointValues {}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   tags: {
     width: "100%",
     display: "grid",
@@ -42,7 +45,9 @@ interface Params {
 }
 
 const TagsPage: React.FC = () => {
-  const classes = useStyles({ ...DefaultOverlaySizes });
+  const sizes = { ...DefaultOverlaySizes };
+
+  const classes = useStyles({ ...sizes });
   const { id } = useParams<Params>();
   const tagURLs = React.useMemo(() => Tags.map(({ url }) => url), [Tags]);
 
@@ -62,6 +67,7 @@ const TagsPage: React.FC = () => {
                 name={name}
                 icons={icons}
                 url={`/tags/${url}`}
+                {...sizes}
               />
             );
           })}

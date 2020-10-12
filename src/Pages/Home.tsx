@@ -1,5 +1,6 @@
 //React Imports
 import React from "react";
+import { Helmet } from "react-helmet";
 import AboutMe from "../Components/Custom/AboutMe";
 import ContactForm from "../Components/Custom/ContactForm";
 import ProjectOverlay, {
@@ -14,9 +15,11 @@ import {
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
-import { Helmet } from "react-helmet";
+import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
 
-const useStyles = makeStyles<Theme, typeof DefaultOverlaySizes>((theme) => ({
+interface StyleProps extends BreakpointValues {}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   home: {
     margin: "0px 20px",
     [theme.breakpoints.up("lg")]: {
@@ -50,7 +53,9 @@ const HomePage: React.FC = () => {
     theme.breakpoints.only("xl")
   );
 
-  const classes = useStyles({ ...DefaultOverlaySizes, sm: 170 });
+  const sizes = { ...DefaultOverlaySizes, sm: 170 };
+
+  const classes = useStyles({ ...sizes });
 
   return (
     <>
@@ -69,7 +74,7 @@ const HomePage: React.FC = () => {
                   {...project}
                   url={`/projects/${project.url}`}
                   key={i}
-                  sm={170}
+                  {...sizes}
                 />
               );
             })}

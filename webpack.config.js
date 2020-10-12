@@ -39,7 +39,7 @@ module.exports = {
     contentBase: path.join(__dirname, "build/"),
     //Change the port here if you need to
     port: 3000,
-    publicPath: "http://localhost:3000/build/",
+    publicPath: "http://localhost:3000/",
     hotOnly: true,
   },
   plugins: [
