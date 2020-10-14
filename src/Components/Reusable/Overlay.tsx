@@ -23,30 +23,30 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     alignItems: "center",
     justifySelf: "center",
   },
-  link: {
+  link: ({ xl, lg, md, sm, xs }) => ({
     position: "relative",
     [theme.breakpoints.down("xl")]: {
-      width: ({ xl }) => xl,
-      height: ({ xl }) => xl,
+      width: xl,
+      height: xl,
     },
     [theme.breakpoints.down("lg")]: {
-      width: ({ lg }) => lg,
-      height: ({ lg }) => lg,
+      width: lg,
+      height: lg,
     },
     [theme.breakpoints.down("md")]: {
-      width: ({ md }) => md,
-      height: ({ md }) => md,
+      width: md,
+      height: md,
     },
     [theme.breakpoints.down("sm")]: {
-      width: ({ sm }) => sm,
-      height: ({ sm }) => sm,
+      width: sm,
+      height: sm,
     },
     [theme.breakpoints.down("xs")]: {
-      width: ({ xs }) => xs,
-      height: ({ xs }) => xs,
+      width: xs,
+      height: xs,
     },
-  },
-  overlay: {
+  }),
+  overlay: ({ hovering }) => ({
     position: "absolute",
     borderRadius: 5,
     top: 0,
@@ -54,11 +54,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     left: 0,
     bottom: 0,
     backgroundColor: "#1d1c1c",
-    visibility: ({ hovering }) => (hovering ? "visible" : "hidden"),
-    opacity: ({ hovering }) => (hovering ? 0.7 : 0),
+    visibility: hovering ? "visible" : "hidden",
+    opacity: hovering ? 0.7 : 0,
     transition: "visibility 0.4s, opacity 0.4s",
-  },
-  name: {
+  }),
+  name: ({ hovering }) => ({
     //Positioning
     position: "absolute",
     left: "50%",
@@ -74,10 +74,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     overflowX: "hidden",
     overflowY: "scroll",
     //Transition
-    visibility: ({ hovering }) => (hovering ? "visible" : "hidden"),
-    opacity: ({ hovering }) => (hovering ? 1 : 0),
+    visibility: hovering ? "visible" : "hidden",
+    opacity: hovering ? 1 : 0,
     transition: "visibility 0.4s, opacity 0.4s",
-  },
+  }),
   img: {
     padding: 5,
     border: `4px solid ${
@@ -87,27 +87,27 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     width: "inherit",
     height: "inherit",
   },
-  caption: {
+  caption: ({ xl, lg, md, sm, xs }) => ({
     textAlign: "center",
     marginTop: 5,
     overflow: "hidden",
     textOverflow: "ellipsis",
     [theme.breakpoints.down("xl")]: {
-      width: ({ xl }) => xl,
+      width: xl,
     },
     [theme.breakpoints.down("lg")]: {
-      width: ({ lg }) => lg,
+      width: lg,
     },
     [theme.breakpoints.down("md")]: {
-      width: ({ md }) => md,
+      width: md,
     },
     [theme.breakpoints.down("sm")]: {
-      width: ({ sm }) => sm,
+      width: sm,
     },
     [theme.breakpoints.down("xs")]: {
-      width: ({ xs }) => xs,
+      width: xs,
     },
-  },
+  }),
 }));
 
 export const DefaultOverlaySizes = {

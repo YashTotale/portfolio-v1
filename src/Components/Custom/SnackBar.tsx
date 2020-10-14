@@ -26,10 +26,10 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
-  alert: {
-    backgroundColor: ({ color }) => (color ? color : "auto"),
-    color: ({ color }) => (color ? getTextColor(theme, color) : "auto"),
-  },
+  alert: ({ color }) => ({
+    backgroundColor: color ? color : "auto",
+    color: color ? getTextColor(theme, color) : "auto",
+  }),
 }));
 
 interface SnackBarProps {}

@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     backgroundPositionY: "20%",
     backgroundSize: "cover",
   },
-  overlay: {
+  overlay: ({ hovering }) => ({
     backgroundColor: "#1d1c1c",
     //position
     position: "absolute",
@@ -38,8 +38,8 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     right: 0,
     //fade in/out
     transition: "opacity 0.4s",
-    opacity: ({ hovering }) => (hovering ? 0.5 : 0.8),
-  },
+    opacity: hovering ? 0.5 : 0.8,
+  }),
   content: {
     zIndex: 1,
     width: "100%",

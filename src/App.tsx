@@ -22,7 +22,6 @@ const Colors = lazy(() => import("./Pages/Colors"));
 
 //Material UI Imports
 import Theme from "./Theme";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
 
 //Router Imports
@@ -43,7 +42,6 @@ const App: React.FC = (props) => {
   return (
     <Router>
       <Theme>
-        <CssBaseline />
         <Head />
         <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_KEY}>
           <Suspense fallback={<Loading />}>

@@ -2,8 +2,13 @@
 import React from "react";
 
 //Material UI Imports
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { colors, useMediaQuery } from "@material-ui/core";
+import {
+  colors,
+  useMediaQuery,
+  createMuiTheme,
+  ThemeProvider,
+  CssBaseline,
+} from "@material-ui/core";
 import type LabOverrides from "@material-ui/lab/themeAugmentation";
 
 //Redux Imports
@@ -90,11 +95,17 @@ const Theme: React.FC = ({ children }) => {
             main: colors[secondaryColor][secondaryShade],
           },
         },
+        spacing: 8,
       }),
     [isDarkMode, primaryColor, secondaryColor, primaryShade, secondaryShade]
   );
 
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
 };
 
 export default Theme;

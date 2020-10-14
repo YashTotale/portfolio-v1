@@ -50,10 +50,10 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
   rating: {
     marginBottom: 10,
   },
-  submit: {
+  submit: ({ errors }) => ({
     margin: "10px 0px",
-    cursor: ({ errors }) => (errors ? "not-allowed" : "pointer"),
-  },
+    cursor: errors ? "not-allowed" : "pointer",
+  }),
   submitDisabled: {
     cursor: "not-allowed",
   },
@@ -67,13 +67,12 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
   submitTitle: {
     textAlign: "center",
   },
-  submitIcon: {
+  submitIcon: ({ success }) => ({
     margin: "20px 0px",
     width: 100,
     height: 100,
-    color: ({ success }) =>
-      success ? palette.success.main : palette.error.main,
-  },
+    color: success ? palette.success.main : palette.error.main,
+  }),
   submitExplanation: {
     marginBottom: 10,
     textAlign: "center",
@@ -162,7 +161,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             errors={errors}
             name="message"
             register={register}
-            isTextArea
+            textarea
           />
           <InputField
             errors={errors}
@@ -182,7 +181,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
             props={{
               label: "Any Bugs?",
             }}
-            isTextArea
+            textarea
             notRequired
           />
           <Typography className={classes.rate} variant="body1">
@@ -264,7 +263,7 @@ interface InputFieldProps {
   props?: TextFieldProps;
   inputProps?: InputProps;
   rules?: Partial<ValidationRules>;
-  isTextArea?: boolean;
+  textarea?: boolean;
   notRequired?: boolean;
 }
 
@@ -275,7 +274,7 @@ const InputField: React.FC<InputFieldProps> = ({
   props,
   rules,
   inputProps,
-  isTextArea,
+  textarea,
   notRequired,
 }) => {
   const classes = useInputFieldStyles();
@@ -289,7 +288,7 @@ const InputField: React.FC<InputFieldProps> = ({
       label={`${capitalize(name)}${notRequired ? "" : "*"}`}
       fullWidth
       name={name}
-      {...(isTextArea
+      {...(textarea
         ? {
             multiline: true,
             rows: 2,

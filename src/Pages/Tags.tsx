@@ -17,27 +17,27 @@ import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
 interface StyleProps extends BreakpointValues {}
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
-  tags: {
+  tags: ({ xl, lg, md, sm, xs }) => ({
     width: "100%",
     display: "grid",
     gap: "25px",
     margin: "15px 10px 0px",
     [theme.breakpoints.down("xl")]: {
-      gridTemplateColumns: ({ xl }) => `repeat(auto-fit, minmax(${xl}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${xl}px, 1fr))`,
     },
     [theme.breakpoints.down("lg")]: {
-      gridTemplateColumns: ({ lg }) => `repeat(auto-fit, minmax(${lg}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${lg}px, 1fr))`,
     },
     [theme.breakpoints.down("md")]: {
-      gridTemplateColumns: ({ md }) => `repeat(auto-fit, minmax(${md}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${md}px, 1fr))`,
     },
     [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: ({ sm }) => `repeat(auto-fit, minmax(${sm}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${sm}px, 1fr))`,
     },
     [theme.breakpoints.down("xs")]: {
-      gridTemplateColumns: ({ xs }) => `repeat(auto-fit, minmax(${xs}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${xs}px, 1fr))`,
     },
-  },
+  }),
 }));
 
 interface Params {

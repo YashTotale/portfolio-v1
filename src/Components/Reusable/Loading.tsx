@@ -11,32 +11,99 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    margin: "50px 0px",
   },
-  rectSkeleton: {
-    width: "60%",
+  navSkeleton: {
+    width: "100vw",
+    height: "7vmin",
+    marginBottom: "3%",
+  },
+  mainSkeleton: {
+    width: "80vw",
+    height: "40vmin",
+    marginBottom: "3%",
+  },
+  rowSkeleton: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "80vw",
+    height: "40vmin",
+  },
+  cellSkeleton: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    flexGrow: 1,
+    width: "33%",
+    height: "100%",
+    margin: "0px 10px",
+  },
+  boxSkeleton: {
+    height: "60%",
+    width: "100%",
+  },
+  bioSkeleton: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    marginTop: "5%",
+  },
+  circleSkeleton: {
     height: 0,
     paddingBottom: "20%",
+    marginRight: "2%",
+    width: "20%",
+  },
+  bioTextSkeleton: {
+    flexGrow: 1,
+    height: "50%",
   },
   textSkeleton: {
-    width: "60%",
-    margin: "10px 0px",
+    width: "100%",
+    height: "5%",
+    marginTop: "5%",
   },
 }));
 
 const Loading: React.FC = (props) => {
   const classes = useStyles();
+
   return (
-    <div className={classes.loadingSkeleton}>
-      <Skeleton className={classes.rectSkeleton} variant="rect"></Skeleton>
-      {[...Array(5)].map((x, i) => (
-        <Skeleton
-          key={i}
-          className={classes.textSkeleton}
-          variant="text"
-        ></Skeleton>
-      ))}
-    </div>
+    <>
+      <div className={classes.loadingSkeleton}>
+        <Skeleton variant="rect" className={classes.navSkeleton} />
+        <Skeleton className={classes.mainSkeleton} variant="rect" />
+        <div className={classes.rowSkeleton}>
+          {[...Array(3)].map((x, i) => (
+            <div key={i} className={classes.cellSkeleton}>
+              <Skeleton className={classes.boxSkeleton} variant="rect" />
+              {[...Array(4)].map((x, i) => {
+                return i ? (
+                  <Skeleton
+                    key={i}
+                    variant="text"
+                    className={classes.textSkeleton}
+                  />
+                ) : (
+                  <div key={i} className={classes.bioSkeleton}>
+                    <Skeleton
+                      variant="circle"
+                      className={classes.circleSkeleton}
+                    />
+                    <Skeleton
+                      variant="text"
+                      className={classes.bioTextSkeleton}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 

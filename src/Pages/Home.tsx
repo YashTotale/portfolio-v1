@@ -26,26 +26,26 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
       width: "80%",
     },
   },
-  projects: {
+  projects: ({ xl, lg, md, sm, xs }) => ({
     margin: "15px 0px",
     display: "grid",
     gap: "30px",
     [theme.breakpoints.down("xl")]: {
-      gridTemplateColumns: ({ xl }) => `repeat(auto-fit, minmax(${xl}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${xl}px, 1fr))`,
     },
     [theme.breakpoints.down("lg")]: {
-      gridTemplateColumns: ({ lg }) => `repeat(auto-fit, minmax(${lg}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${lg}px, 1fr))`,
     },
     [theme.breakpoints.down("md")]: {
-      gridTemplateColumns: ({ md }) => `repeat(auto-fit, minmax(${md}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${md}px, 1fr))`,
     },
     [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: ({ sm }) => `repeat(auto-fit, minmax(${sm}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${sm}px, 1fr))`,
     },
     [theme.breakpoints.down("xs")]: {
-      gridTemplateColumns: ({ xs }) => `repeat(auto-fit, minmax(${xs}px, 1fr))`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(${xs}px, 1fr))`,
     },
-  },
+  }),
 }));
 
 const HomePage: React.FC = () => {

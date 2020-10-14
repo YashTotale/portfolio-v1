@@ -11,31 +11,31 @@ interface StyleProps extends BreakpointValues {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
-  img: {
+  img: ({ xl, lg, md, sm, xs, ratio }) => ({
     [theme.breakpoints.down("xl")]: {
-      width: ({ xl }) => xl,
-      height: ({ xl, ratio }) => Math.round(xl * ratio),
+      width: xl,
+      height: Math.round(xl * ratio),
     },
     [theme.breakpoints.down("lg")]: {
-      width: ({ lg }) => lg,
-      height: ({ lg, ratio }) => Math.round(lg * ratio),
+      width: lg,
+      height: Math.round(lg * ratio),
     },
     [theme.breakpoints.down("md")]: {
-      width: ({ md }) => md,
-      height: ({ md, ratio }) => Math.round(md * ratio),
+      width: md,
+      height: Math.round(md * ratio),
     },
     [theme.breakpoints.down("sm")]: {
-      width: ({ sm }) => sm,
-      height: ({ sm, ratio }) => Math.round(sm * ratio),
+      width: sm,
+      height: Math.round(sm * ratio),
     },
     [theme.breakpoints.down("xs")]: {
-      width: ({ xs }) => xs,
-      height: ({ xs, ratio }) => Math.round(xs * ratio),
+      width: xs,
+      height: Math.round(xs * ratio),
     },
     "&:focus": {
       outline: "none",
     },
-  },
+  }),
 }));
 
 interface ImageProps {
