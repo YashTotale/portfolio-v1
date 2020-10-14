@@ -92,7 +92,7 @@ export interface Inputs {
   message: string;
   email: string;
   bugs: string;
-  rating: number | undefined;
+  rating: number | null;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({}) => {
@@ -190,9 +190,15 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
           <Controller
             name="rating"
             control={control}
-            as={<Rating />}
+            render={({ onChange, onBlur, value }) => (
+              <Rating
+                name="rating"
+                value={parseInt(value)}
+                onChange={onChange}
+                onBlur={onBlur}
+              />
+            )}
             className={classes.rating}
-            defaultValue={rating}
           ></Controller>
           <Button
             className={classes.submit}

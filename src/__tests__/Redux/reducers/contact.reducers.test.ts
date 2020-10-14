@@ -150,7 +150,7 @@ describe("The contact reducer", () => {
       message: "Test message",
       email: "test@email.com",
       bugs: "Test bugs",
-      rating: undefined,
+      rating: null,
     };
 
     const fakeAction: SetContactPayload = {

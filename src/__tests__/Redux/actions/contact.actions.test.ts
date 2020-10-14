@@ -99,7 +99,7 @@ describe("The contact actions", () => {
       message: "Goodbye!",
       email: "hello@gmail.com",
       bugs: "",
-      rating: undefined,
+      rating: null,
     };
 
     const expected: SetContactPayload = {
