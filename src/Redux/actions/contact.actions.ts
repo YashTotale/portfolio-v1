@@ -71,6 +71,21 @@ export const setContactBugs = (bugs: string): SetContactBugsPayload => ({
   },
 });
 
+export interface SetContactLoadingPayload {
+  type: typeof SET_CONTACT_LOADING;
+  payload: {
+    loading: boolean;
+  };
+}
+
+export const SET_CONTACT_LOADING = "SET_CONTACT_LOADING";
+export const setContactLoading = (
+  loading: boolean
+): SetContactLoadingPayload => ({
+  type: SET_CONTACT_LOADING,
+  payload: { loading },
+});
+
 export interface SetContactSuccessPayload {
   type: typeof SET_CONTACT_SUCCESS;
   payload: {

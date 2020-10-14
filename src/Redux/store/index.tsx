@@ -1,6 +1,6 @@
 //React Imports
 import React from "react";
-import Loading from "../../Components/Reusable/Loading";
+import Loading from "../../Components/Reusable/Loading/Page";
 
 //Redux Persist Imports
 import { persistStore } from "redux-persist";

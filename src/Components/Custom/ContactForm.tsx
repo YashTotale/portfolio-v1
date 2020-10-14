@@ -15,13 +15,18 @@ import { CONTACT_FORM_ZAPIER_URL } from "../../Utils/CONFIDENTIAL";
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 import { getContact } from "../../Redux/selectors";
-import { setContact, setContactSuccess } from "../../Redux/actions";
+import {
+  setContact,
+  setContactLoading,
+  setContactSuccess,
+} from "../../Redux/actions";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import {
   Button,
   capitalize,
+  CircularProgress,
   InputProps,
   Paper,
   TextField,
@@ -37,6 +42,19 @@ interface StyleProps {
 }
 
 const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
+  formContainer: {
+    minHeight: 459,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "stretch",
+    alignItems: "stretch",
+  },
+  loading: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexGrow: 1,
+  },
   contact: {
     display: "flex",
     flexDirection: "column",
@@ -108,7 +126,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const contact = useSelector(getContact);
 
-  const { name, email, message, bugs, rating, success } = contact;
+  const { name, email, message, bugs, rating, loading, success } = contact;
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -132,6 +150,7 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
     dispatch(setContact(inputs));
+    dispatch(setContactLoading(true));
     try {
       const token = await executeRecaptcha?.("contact_form");
       e?.preventDefault();
@@ -149,12 +168,18 @@ const ContactForm: React.FC<ContactFormProps> = ({}) => {
       }
     } catch (err) {
       dispatch(setContactSuccess(false));
+    } finally {
+      dispatch(setContactLoading(false));
     }
   };
 
   return (
-    <div>
-      {success === null ? (
+    <div className={classes.formContainer}>
+      {loading ? (
+        <div className={classes.loading}>
+          <CircularProgress />
+        </div>
+      ) : success === null ? (
         <form className={classes.contact} onSubmit={handleSubmit(onSubmit)}>
           <InputField errors={errors} name="name" register={register} />
           <InputField

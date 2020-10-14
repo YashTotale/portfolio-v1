@@ -23,7 +23,8 @@ export {
   getContactName,
   getContactMessage,
   getContactEmail,
-  getContactSuccess,
   getContactBugs,
+  getContactLoading,
+  getContactSuccess,
   getContact,
 } from "./contact.selectors";

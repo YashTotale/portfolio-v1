@@ -3,7 +3,7 @@ import { hot } from "react-hot-loader";
 import React, { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
-import Loading from "./Components/Reusable/Loading";
+import Loading from "./Components/Reusable/Loading/Page";
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
 const NavBar = lazy(() => import("./Components/Custom/NavBar"));
 const Footer = lazy(() => import("./Components/Custom/Footer"));

@@ -6,6 +6,7 @@ import {
   SET_CONTACT_EMAIL,
   SET_CONTACT_RATING,
   SET_CONTACT_BUGS,
+  SET_CONTACT_LOADING,
   SET_CONTACT_SUCCESS,
   SET_CONTACT,
 } from "../actions/contact.actions";
@@ -16,6 +17,7 @@ export const initialContactState = {
   email: "",
   bugs: "",
   rating: <Rating | null>null,
+  loading: false,
   success: <boolean | null>null,
 };
 
@@ -44,6 +46,10 @@ export const contactReducer = (
     case SET_CONTACT_BUGS: {
       const { bugs } = payload;
       return { ...state, bugs };
+    }
+    case SET_CONTACT_LOADING: {
+      const { loading } = payload;
+      return { ...state, loading };
     }
     case SET_CONTACT_SUCCESS: {
       const { success } = payload;

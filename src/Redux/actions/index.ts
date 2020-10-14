@@ -23,6 +23,8 @@ export {
   setContactRating,
   SET_CONTACT_BUGS,
   setContactBugs,
+  SET_CONTACT_LOADING,
+  setContactLoading,
   SET_CONTACT_SUCCESS,
   setContactSuccess,
   SET_CONTACT,
