@@ -5,6 +5,8 @@ import {
   SetContactBugsPayload,
   setContactEmail,
   SetContactEmailPayload,
+  setContactLoading,
+  SetContactLoadingPayload,
   setContactMessage,
   SetContactMessagePayload,
   setContactName,
@@ -15,10 +17,12 @@ import {
   SET_CONTACT,
   SET_CONTACT_BUGS,
   SET_CONTACT_EMAIL,
+  SET_CONTACT_LOADING,
   SET_CONTACT_MESSAGE,
   SET_CONTACT_NAME,
   SET_CONTACT_RATING,
 } from "../../../Redux/actions/contact.actions";
+import { Rating } from "../../../Utils/types";
 
 describe("The contact actions", () => {
   test("The setContactName action", () => {
@@ -79,18 +83,37 @@ describe("The contact actions", () => {
   });
 
   test("The setContactRating action", () => {
-    const rating = 4;
+    const ratings: Rating[] = [0, 1, 2, 3, 4, 5];
 
-    const expected: SetContactRatingPayload = {
-      type: SET_CONTACT_RATING,
-      payload: {
-        rating,
-      },
-    };
+    ratings.forEach((rating) => {
+      const expected: SetContactRatingPayload = {
+        type: SET_CONTACT_RATING,
+        payload: {
+          rating,
+        },
+      };
 
-    const actual = setContactRating(rating);
+      const actual = setContactRating(rating);
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  test("The setContactLoading action", () => {
+    const values = [true, false];
+
+    values.forEach((loading) => {
+      const expected: SetContactLoadingPayload = {
+        type: SET_CONTACT_LOADING,
+        payload: {
+          loading,
+        },
+      };
+
+      const actual = setContactLoading(loading);
+
+      expect(actual).toEqual(expected);
+    });
   });
 
   test("The setContact action", () => {
