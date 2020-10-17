@@ -3,16 +3,35 @@ import {
   getContrastRatio,
   Theme,
 } from "@material-ui/core";
+import { Color } from "@material-ui/lab";
 
 export const defaultColors = {
-  primary: <cssColor>"lightBlue",
-  secondary: <cssColor>"amber",
+  primary: "lightBlue" as cssColor,
+  secondary: "amber" as cssColor,
 };
 
 export const defaultShades = {
-  primary: <shade>"500",
-  secondary: <shade>"700",
+  primary: "500" as shade,
+  secondary: "700" as shade,
 };
+
+export type color =
+  | "Red"
+  | "Pink"
+  | "Purple"
+  | "Deep Purple"
+  | "Indigo"
+  | "Blue"
+  | "Light Blue"
+  | "Cyan"
+  | "Teal"
+  | "Green"
+  | "Light Green"
+  | "Lime"
+  | "Yellow"
+  | "Amber"
+  | "Orange"
+  | "Deep Orange";
 
 export const colors: color[] = [
   "Red",
@@ -32,6 +51,59 @@ export const colors: color[] = [
   "Orange",
   "Deep Orange",
 ];
+
+export type cssColor =
+  | "red"
+  | "pink"
+  | "purple"
+  | "deepPurple"
+  | "indigo"
+  | "blue"
+  | "lightBlue"
+  | "cyan"
+  | "teal"
+  | "green"
+  | "lightGreen"
+  | "lime"
+  | "yellow"
+  | "amber"
+  | "orange"
+  | "deepOrange";
+
+export const cssColors: cssColor[] = [
+  "red",
+  "pink",
+  "purple",
+  "deepPurple",
+  "indigo",
+  "blue",
+  "lightBlue",
+  "cyan",
+  "teal",
+  "green",
+  "lightGreen",
+  "lime",
+  "yellow",
+  "amber",
+  "orange",
+  "deepOrange",
+];
+
+export type shade =
+  | "50"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900"
+  | "A100"
+  | "A200"
+  | "A400"
+  | "A700";
 
 export const shades: shade[] = [
   "50",
@@ -54,57 +126,7 @@ export type scheme = "primary" | "secondary";
 
 export const schemes: scheme[] = ["primary", "secondary"];
 
-export type shade =
-  | "50"
-  | "100"
-  | "200"
-  | "300"
-  | "400"
-  | "500"
-  | "600"
-  | "700"
-  | "800"
-  | "900"
-  | "A100"
-  | "A200"
-  | "A400"
-  | "A700";
-
-export type color =
-  | "Red"
-  | "Pink"
-  | "Purple"
-  | "Deep Purple"
-  | "Indigo"
-  | "Blue"
-  | "Light Blue"
-  | "Cyan"
-  | "Teal"
-  | "Green"
-  | "Light Green"
-  | "Lime"
-  | "Yellow"
-  | "Amber"
-  | "Orange"
-  | "Deep Orange";
-
-export type cssColor =
-  | "red"
-  | "pink"
-  | "purple"
-  | "deepPurple"
-  | "indigo"
-  | "blue"
-  | "lightBlue"
-  | "cyan"
-  | "teal"
-  | "green"
-  | "lightGreen"
-  | "lime"
-  | "yellow"
-  | "amber"
-  | "orange"
-  | "deepOrange";
+export const severities: Color[] = ["success", "info", "error", "warning"];
 
 export const resetMessage = "Colors have been reset";
 

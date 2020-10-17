@@ -4,28 +4,28 @@ import React, { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import Loading from "./Components/Reusable/Loading/Page";
-const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
-const NavBar = lazy(() => import("./Components/Custom/NavBar"));
-const Footer = lazy(() => import("./Components/Custom/Footer"));
 
 //Utils
 import { DARK_LOGO, LIGHT_LOGO } from "./Utils/links";
 import { FOOTER_HEIGHT } from "./Utils/constants";
-import { RECAPTCHA_KEY } from "./Utils/CONFIDENTIAL";
-
-//Pages
-const Home = lazy(() => import("./Pages/Home"));
-const Projects = lazy(() => import("./Pages/Projects"));
-const Tags = lazy(() => import("./Pages/Tags"));
-const Experience = lazy(() => import("./Pages/Experience"));
-const Colors = lazy(() => import("./Pages/Colors"));
 
 //Material UI Imports
 import Theme from "./Theme";
 import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
 
 //Router Imports
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+// Lazy Imports
+const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
+const NavBar = lazy(() => import("./Components/Custom/NavBar"));
+const Footer = lazy(() => import("./Components/Custom/Footer"));
+
+const Home = lazy(() => import("./Pages/Home"));
+const Projects = lazy(() => import("./Pages/Projects"));
+const Tags = lazy(() => import("./Pages/Tags"));
+const Experience = lazy(() => import("./Pages/Experience"));
+const Colors = lazy(() => import("./Pages/Colors"));
 
 const useStyles = makeStyles((theme: ThemeProps) => ({
   pageContainer: {
@@ -43,7 +43,9 @@ const App: React.FC = (props) => {
     <Router>
       <Theme>
         <Head />
-        <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_KEY}>
+        <GoogleReCaptchaProvider
+          reCaptchaKey={process.env.REACT_APP_RECAPTCHA_KEY}
+        >
           <Suspense fallback={<Loading />}>
             <div className={classes.pageContainer}>
               <NavBar />

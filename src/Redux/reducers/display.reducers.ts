@@ -10,16 +10,29 @@ import {
 import { defaultColors, defaultShades } from "../../Utils/colors";
 import { Color } from "@material-ui/lab";
 
-export const initialDisplayState = {
-  isDarkMode: <boolean | null>null,
+export interface DisplayState {
+  isDarkMode: boolean | null;
+  isNavBtnsMenuOpen: boolean;
+  colors: typeof defaultColors;
+  shades: typeof defaultShades;
+  snackBar: {
+    isOpen: boolean;
+    message: string;
+    severity: Color;
+    color: string | null;
+  };
+}
+
+export const initialDisplayState: DisplayState = {
+  isDarkMode: null,
   isNavBtnsMenuOpen: false,
   colors: defaultColors,
   shades: defaultShades,
   snackBar: {
     isOpen: false,
     message: "",
-    severity: <Color>"info",
-    color: <string | null>null,
+    severity: "info",
+    color: null,
   },
 };
 
@@ -59,4 +72,8 @@ export const displayReducer = (
       return state;
     }
   }
+};
+
+export const sampleDisplayState: DisplayState = {
+  ...initialDisplayState,
 };

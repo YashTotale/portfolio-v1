@@ -3,13 +3,11 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { Link as MuiLink } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
-const useStyles = makeStyles((theme) => ({
-  // Styles
-}));
+// const useStyles = makeStyles((theme) => ({}));
 
 interface StyledLinkProps {
   to: string;
@@ -30,7 +28,7 @@ const StyledLink: React.FC<StyledLinkProps> = ({
   color,
   className,
 }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <MuiLink className={className} color={color} to={to} component={RouterLink}>
       {children}

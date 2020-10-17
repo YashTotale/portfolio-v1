@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet";
 import { TagProps } from "../../../Utils/interfaces";
 
 // Redux Imports
-import { useSelector } from "react-redux";
 
 // Material UI Imports
 import { makeStyles, useTheme } from "@material-ui/core/styles";

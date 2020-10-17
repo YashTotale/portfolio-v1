@@ -8,23 +8,6 @@
     "url": "https://github.com/YashTotale/YashTotale.github.io/issues",
     "email": "totaleyash@gmail.com"
   },
-  "license": "MIT",
-  "scripts": {
-    "dev": "npx webpack-dev-server --mode development",
-    "build": "npx webpack --mode production",
-    "test": "jest --config .jestconfig.json",
-    "snyk": "snyk test",
-    "data": "ts-node ./src/Scripts/getData",
-    "deploy": "gh-pages -d build",
-    "predeploy": "npm run build",
-    "closeIssue": "ts-node ./src/Scripts/closeGithubIssue"
-  },
-  "keywords": [
-    "React",
-    "Redux",
-    "TypeScript",
-    "Material UI"
-  ],
   "author": {
     "name": "Yash Totale",
     "email": "totaleyash@gmail.com",
@@ -34,8 +17,25 @@
     "url": "https://github.com/YashTotale/YashTotale.github.io",
     "type": "git"
   },
+  "keywords": [
+    "React",
+    "Redux",
+    "TypeScript",
+    "Material UI"
+  ],
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "coverage": "npm run test -- --coverage",
+    "data": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node ./src/Scripts/getData",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build",
+    "snyk": "snyk test",
+    "eject": "react-scripts eject"
+  },
+  "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "^7.12.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
@@ -52,14 +52,11 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/plugin-transform-runtime": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/preset-react": "^7.10.4",
-    "@babel/preset-typescript": "^7.10.4",
-    "@types/history": "^4.7.7",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^26.0.14",
+    "@types/node": "^12.12.68",
     "@types/node-fetch": "^2.5.7",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
@@ -67,25 +64,32 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
     "@types/sinon": "^9.0.8",
-    "babel-loader": "^8.1.0",
     "g-sheets-api": "^1.3.0",
     "gh-pages": "^3.1.0",
-    "html-loader": "^1.3.0",
-    "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
-    "jest": "^26.4.2",
     "node-fetch": "^2.6.1",
     "react-hot-loader": "^4.12.21",
+    "react-scripts": "3.4.3",
     "redux-devtools-extension": "^2.13.8",
     "scrapedin": "^1.0.21",
     "sinon": "^9.2.0",
     "snyk": "^1.386.0",
-    "ts-loader": "^8.0.3",
     "ts-node": "^9.0.0",
-    "typescript": "^4.0.3",
-    "webpack": "^4.44.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-pwa-manifest": "^4.2.0"
+    "typescript": "^4.0.3"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -36,19 +36,19 @@ const ProjectsPage: React.FC = () => {
   const { id } = useParams<Params>();
   const projectURLs = React.useMemo(
     () => Projects.map((project) => project.url),
-    [Projects]
+    []
   );
   const isSizeSmall = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
   );
-  const half = React.useMemo(() => Math.ceil(Projects.length / 2), [Projects]);
+  const half = React.useMemo(() => Math.ceil(Projects.length / 2), []);
   const col1 = React.useMemo(
     () => Projects.slice(0, isSizeSmall ? Projects.length : half),
-    [isSizeSmall, Projects]
+    [isSizeSmall, half]
   );
   const col2 = React.useMemo(() => (isSizeSmall ? [] : Projects.slice(half)), [
     isSizeSmall,
-    Projects,
+    half,
   ]);
 
   return (

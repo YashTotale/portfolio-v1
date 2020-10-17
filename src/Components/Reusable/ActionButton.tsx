@@ -3,13 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
-const useStyles = makeStyles((theme) => ({
-  // Styles
-}));
+// const useStyles = makeStyles((theme) => ({}));
 
 interface ActionButtonProps {
   icon: JSX.Element;
@@ -28,7 +26,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   to,
   className,
 }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   switch (component) {
     case "a": {
       return (

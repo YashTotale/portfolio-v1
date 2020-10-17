@@ -1,5 +1,4 @@
 import { State } from "./index";
-import { createSelector } from "reselect";
 
 export const getContactName = (state: State) => state.contact.name;
 

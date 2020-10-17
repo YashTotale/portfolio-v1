@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfilePic: React.FC = ({}) => {
+const ProfilePic: React.FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.imgDiv}>

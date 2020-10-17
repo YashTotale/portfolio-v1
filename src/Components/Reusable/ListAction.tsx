@@ -2,14 +2,12 @@
 import React from "react";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import {} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
-  // Styles
-}));
+// const useStyles = makeStyles((theme) => ({}));
 
 export interface ListActionProps {
   component: "a" | "btn" | "link";
@@ -22,7 +20,7 @@ export interface ListActionProps {
 }
 
 const ListAction: React.FC<ListActionProps> = (props) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <ListItemComponent

@@ -34,7 +34,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
 
 interface SnackBarProps {}
 
-const SnackBar: React.FC<SnackBarProps> = ({}) => {
+const SnackBar: React.FC<SnackBarProps> = () => {
   const dispatch = useDispatch();
 
   const handleClose = (

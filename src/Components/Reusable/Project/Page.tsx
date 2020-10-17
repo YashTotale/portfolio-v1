@@ -4,16 +4,14 @@ import { Helmet } from "react-helmet";
 import { ProjectProps } from "../../../Utils/interfaces";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import {} from "@material-ui/core";
 import {} from "@material-ui/icons";
 
-const useStyles = makeStyles((theme) => ({
-  // Styles
-}));
+// const useStyles = makeStyles((theme) => ({}));
 
 const Page: React.FC<ProjectProps> = ({ name }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   return (
     <>
       <Helmet>

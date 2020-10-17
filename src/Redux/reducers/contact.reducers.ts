@@ -11,14 +11,24 @@ import {
   SET_CONTACT,
 } from "../actions/contact.actions";
 
-export const initialContactState = {
+export interface ContactState {
+  name: string;
+  message: string;
+  email: string;
+  bugs: string;
+  rating: Rating | null;
+  loading: boolean;
+  success: boolean | null;
+}
+
+export const initialContactState: ContactState = {
   name: "",
   message: "",
   email: "",
   bugs: "",
-  rating: <Rating | null>null,
+  rating: null,
   loading: false,
-  success: <boolean | null>null,
+  success: null,
 };
 
 export const contactReducer = (
@@ -63,4 +73,8 @@ export const contactReducer = (
       return state;
     }
   }
+};
+
+export const sampleContactState: ContactState = {
+  ...initialContactState,
 };

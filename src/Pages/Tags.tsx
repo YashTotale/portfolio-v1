@@ -49,7 +49,7 @@ const TagsPage: React.FC = () => {
 
   const classes = useStyles({ ...sizes });
   const { id } = useParams<Params>();
-  const tagURLs = React.useMemo(() => Tags.map(({ url }) => url), [Tags]);
+  const tagURLs = React.useMemo(() => Tags.map(({ url }) => url), []);
 
   return (
     <>

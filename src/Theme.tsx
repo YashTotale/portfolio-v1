@@ -9,7 +9,7 @@ import {
   ThemeProvider,
   CssBaseline,
 } from "@material-ui/core";
-import type LabOverrides from "@material-ui/lab/themeAugmentation";
+import LabOverrides from "@material-ui/lab/themeAugmentation";
 
 //Redux Imports
 import { useDispatch, useSelector } from "react-redux";
