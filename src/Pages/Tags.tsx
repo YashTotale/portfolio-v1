@@ -67,6 +67,7 @@ const TagsPage: React.FC = () => {
                 name={name}
                 type="Tags"
                 url={`/tags/${url}`}
+                icons={icons}
                 {...sizes}
               />
             );

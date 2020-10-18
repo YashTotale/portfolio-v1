@@ -122,6 +122,7 @@ export const DefaultOverlaySizes = {
 
 interface OverlayProps {
   name: string;
+  icons: string[];
   type: ImageFolder;
   url: string;
   xl?: number;
@@ -134,6 +135,7 @@ interface OverlayProps {
 const Overlay: React.FC<OverlayProps> = ({
   name,
   type,
+  icons,
   url,
   xl = 250,
   lg = 200,
@@ -156,7 +158,12 @@ const Overlay: React.FC<OverlayProps> = ({
         <Typography className={classes.name} variant="h4">
           {name}
         </Typography>
-        <StaticImage name={name} type={type} className={classes.img} />
+        <StaticImage
+          icons={icons}
+          name={name}
+          type={type}
+          className={classes.img}
+        />
       </Link>
       {isSmall && (
         <Typography className={classes.caption} variant="h5">

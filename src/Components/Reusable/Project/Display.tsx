@@ -121,6 +121,7 @@ const Display: React.FC<ProjectProps> = ({
           color="primary"
         >
           <StaticImage
+            icons={icons}
             name={name}
             type="Projects"
             className={classes.projectImg}

@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 interface StaticImageProps {
   name: string;
   type: ImageFolder;
+  icons: string[];
   avatar?: boolean;
   className?: string;
 }
@@ -32,28 +33,33 @@ interface StaticImageProps {
 const StaticImage: React.FC<StaticImageProps> = ({
   name,
   type,
+  icons,
   avatar,
   className,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const [icon, setIcon] = useState(undefined);
+  const [icon, setIcon] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     let mounted = true;
     const getImage = async () => {
-      const val = await import(
-        `../../Images/${type}/${name}/${theme.palette.type}.png`
-      );
-      if (mounted) setIcon(val.default);
+      try {
+        const val = await import(
+          `../../Images/${type}/${name}/${theme.palette.type}.png`
+        );
+        if (mounted) setIcon(val.default);
+      } catch (e) {
+        if (mounted) setIcon(icons[theme.palette.type === "light" ? 0 : 1]);
+      }
     };
     getImage();
 
     return () => {
       mounted = false;
     };
-  }, [theme.palette.type, name, type]);
+  }, [theme.palette.type, name, type, icons]);
 
   return icon ? (
     avatar ? (

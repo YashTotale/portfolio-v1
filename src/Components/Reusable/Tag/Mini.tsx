@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Mini: React.FC<TagProps> = ({ name, url }) => {
+const Mini: React.FC<TagProps> = ({ name, url, icons }) => {
   const classes = useStyles();
   return (
     <Chip
@@ -24,7 +24,7 @@ const Mini: React.FC<TagProps> = ({ name, url }) => {
       size="medium"
       label={name}
       className={classes.tag}
-      avatar={<StaticImage name={name} type="Tags" avatar />}
+      avatar={<StaticImage icons={icons} name={name} type="Tags" avatar />}
       component={Link}
       to={`/tags/${url}`}
       color="secondary"
