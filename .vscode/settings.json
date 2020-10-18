@@ -3,6 +3,14 @@
     {
       "name": "Get Data",
       "script": "npm run data"
+    },
+    {
+      "name": "Deploy",
+      "script": "npm run deploy"
+    },
+    {
+      "name": "Lint",
+      "script": "eslint ."
     }
   ]
 }

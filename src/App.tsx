@@ -14,7 +14,7 @@ import Theme from "./Theme";
 import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
 
 //Router Imports
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 // Lazy Imports
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));

@@ -32,6 +32,7 @@
     "deploy": "gh-pages -d build",
     "predeploy": "npm run build",
     "snyk": "snyk test",
+    "closeIssue": "ts-node ./src/Scripts/closeGithubIssue",
     "eject": "react-scripts eject"
   },
   "license": "MIT",

@@ -2,5 +2,6 @@
   "extends": ["react-app"],
   "rules": {
     "no-control-regex": "off"
-  }
+  },
+  "ignorePatterns": ["node_modules/**", "build/**", "coverage/**"]
 }
