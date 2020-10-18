@@ -11,6 +11,7 @@ import LightLogo from "./Images/Logos/light.png";
 
 //Utils
 import { FOOTER_HEIGHT } from "./Utils/constants";
+import { RECAPTCHA_KEY } from "./Utils/CONFIDENTIAL";
 
 //Material UI Imports
 import Theme from "./Theme";
@@ -46,9 +47,7 @@ const App: React.FC = (props) => {
     <Router>
       <Theme>
         <Head />
-        <GoogleReCaptchaProvider
-          reCaptchaKey={process.env.REACT_APP_RECAPTCHA_KEY}
-        >
+        <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_KEY}>
           <Suspense fallback={<Loading />}>
             <div className={classes.pageContainer}>
               <NavBar />

@@ -2,6 +2,7 @@ import { promises, createWriteStream, existsSync } from "fs";
 import { join } from "path";
 import axios from "axios";
 import rimraf from "rimraf";
+import { gitAdd } from "./index";
 import { ImageFolder } from "../Utils/types";
 
 interface Object {
@@ -36,4 +37,6 @@ export default async function (objects: Object[], type: ImageFolder) {
       data.pipe(createWriteStream(join(folder, `${i ? "dark" : "light"}.png`)));
     });
   });
+
+  await gitAdd(basePath);
 }

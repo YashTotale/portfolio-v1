@@ -10,6 +10,7 @@ import {
 } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { EMAIL_REGEX } from "../../Utils/constants";
+import { CONTACT_FORM_ZAPIER_URL } from "../../Utils/CONFIDENTIAL";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -157,13 +158,10 @@ const ContactForm: React.FC<ContactFormProps> = () => {
       if (!token) {
         throw new Error("ReCaptcha was unable to authorize this response.");
       } else {
-        const response = await fetch(
-          process.env.REACT_APP_CONTACT_FORM_ZAPIER_URL as string,
-          {
-            method: "post",
-            body: JSON.stringify(inputs),
-          }
-        );
+        const response = await fetch(CONTACT_FORM_ZAPIER_URL, {
+          method: "post",
+          body: JSON.stringify(inputs),
+        });
         const json = await response.json();
         if (json.status === "success") {
           dispatch(setContactSuccess(true));

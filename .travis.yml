@@ -10,6 +10,10 @@ env:
 node_js:
   - node
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_e620454d888c_key -iv $encrypted_e620454d888c_iv
+    -in CONFIDENTIAL.ts.enc -out ./src/Utils/CONFIDENTIAL.ts -d
+
 install:
   - npm install
 
@@ -25,8 +29,8 @@ before_deploy:
 
 deploy:
   provider: pages
-  github_token: $GITHUB_TOKEN
-  local_dir: ./build/
+  github_token: "$GITHUB_TOKEN"
+  local_dir: "./build/"
   committer_from_gh: true
   skip_cleanup: true
   keep_history: true

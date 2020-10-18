@@ -41,11 +41,18 @@ const StaticImage: React.FC<StaticImageProps> = ({
   const [icon, setIcon] = useState(undefined);
 
   useEffect(() => {
-    import(`../../Images/${type}/${name}/${theme.palette.type}.png`).then(
-      (val) => {
-        setIcon(val.default);
-      }
-    );
+    let mounted = true;
+    const getImage = async () => {
+      const val = await import(
+        `../../Images/${type}/${name}/${theme.palette.type}.png`
+      );
+      if (mounted) setIcon(val.default);
+    };
+    getImage();
+
+    return () => {
+      mounted = false;
+    };
   }, [theme.palette.type, name, type]);
 
   return icon ? (
