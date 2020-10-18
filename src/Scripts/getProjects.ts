@@ -12,9 +12,9 @@ const projectsRequest = () => {
   });
 };
 
-const cleanProjectData = async (
+const cleanProjectData = (
   projects: ProjectObject[]
-): Promise<[ProjectProps[], string[]]> => {
+): [ProjectProps[], string[]] => {
   const cleanedProjects: ProjectProps[] = [];
   let allTags: string[] = [];
 
@@ -50,14 +50,12 @@ const cleanProjectData = async (
   return [cleanedProjects, allTags];
 };
 
-export const getProjects = () => {
-  return new Promise<string[]>(async (resolve, reject) => {
-    const projects: ProjectObject[] = await projectsRequest();
-    const [cleanedProjects, tags] = await cleanProjectData(projects);
-    await downloadImages(cleanedProjects, "Projects");
-    write("Projects", cleanedProjects);
-    resolve(tags);
-  });
+export const getProjects = async () => {
+  const projects: ProjectObject[] = await projectsRequest();
+  const [cleanedProjects, tags] = cleanProjectData(projects);
+  await write("Projects", cleanedProjects);
+  await downloadImages(cleanedProjects, "Projects");
+  return tags;
 };
 
 export interface ProjectObject {

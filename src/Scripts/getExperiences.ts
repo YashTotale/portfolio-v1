@@ -3,7 +3,7 @@ import reader from "g-sheets-api";
 import { ExperienceProps } from "../Utils/interfaces";
 import { write, baseOptions } from "./index";
 
-const experiencesRequest = () => {
+const experienceRequest = () => {
   return new Promise<ExperienceObject[]>((resolve, reject) => {
     const options = { ...baseOptions, sheetNumber: 2 };
     reader(options, resolve);
@@ -39,13 +39,11 @@ const cleanExperienceData = (
   return [cleanedExperiences, tags];
 };
 
-export const getExperiences = () => {
-  return new Promise<string[]>(async (resolve, reject) => {
-    const experiences: ExperienceObject[] = await experiencesRequest();
-    const [cleanExperiences, tags] = cleanExperienceData(experiences);
-    write("Experience", cleanExperiences);
-    resolve(tags);
-  });
+export const getExperiences = async () => {
+  const experiences: ExperienceObject[] = await experienceRequest();
+  const [cleanExperiences, tags] = cleanExperienceData(experiences);
+  await write("Experience", cleanExperiences);
+  return tags;
 };
 
 export interface ExperienceObject {

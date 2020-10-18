@@ -1,6 +1,5 @@
-import { writeFile } from "fs";
+import { promises, existsSync } from "fs";
 import { join } from "path";
-import { exec } from "child_process";
 import simpleGit, { SimpleGit } from "simple-git";
 
 import { ExperienceProps, ProjectProps, TagProps } from "../Utils/interfaces";
@@ -14,19 +13,25 @@ export const dataFolder = join(__dirname, "..", "Data");
 
 export type files = "Experience" | "Projects" | "Tags" | "LinkedIn";
 
-export const write = (
+export const write = async (
   fileName: files,
   data: ProjectProps[] | ExperienceProps[] | TagProps[]
 ) => {
-  return new Promise<void>((resolve, reject) => {
+  const { writeFile, mkdir } = promises;
+  try {
+    if (!existsSync(dataFolder)) {
+      await mkdir(dataFolder);
+    }
     const location = join(dataFolder, `${fileName}.json`);
-    writeFile(location, JSON.stringify(data), "utf8", (err) => {
-      if (err) return console.log(err);
-      console.log(`\n${fileName}:`);
-      console.log(data);
-      gitAdd(location).then(() => resolve());
+    await writeFile(location, JSON.stringify(data), {
+      encoding: "utf8",
     });
-  });
+    console.log(`\n${fileName} written`);
+    await gitAdd(location);
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 };
 
 export const gitAdd = async (location: string) => {

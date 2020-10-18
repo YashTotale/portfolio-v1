@@ -49,14 +49,12 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): TagProps[] => {
   return tagsObj;
 };
 
-export const getTags = (tags: string[]) => {
-  return new Promise(async (resolve, reject) => {
-    const tagInfos: TagInfo[] = await tagsRequest();
-    const allTags = [...new Set(tags)];
-    const tagsArray = createTags(allTags, tagInfos);
-    downloadImages(tagsArray, "Tags");
-    write("Tags", tagsArray);
-  });
+export const getTags = async (tags: string[]) => {
+  const tagInfos: TagInfo[] = await tagsRequest();
+  const allTags = [...new Set(tags)];
+  const tagsArray = createTags(allTags, tagInfos);
+  await write("Tags", tagsArray);
+  await downloadImages(tagsArray, "Tags");
 };
 
 interface TagInfo {
