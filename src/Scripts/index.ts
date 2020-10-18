@@ -1,4 +1,4 @@
-import { writeFile, existsSync, promises } from "fs";
+import { writeFile } from "fs";
 import { join } from "path";
 import { exec } from "child_process";
 

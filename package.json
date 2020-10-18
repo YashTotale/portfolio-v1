@@ -32,7 +32,7 @@
     "deploy": "gh-pages -d build",
     "predeploy": "npm run build",
     "snyk": "snyk test",
-    "closeIssue": "ts-node ./src/Scripts/closeGithubIssue",
+    "closeIssue": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' ts-node ./src/Scripts/closeGithubIssue",
     "eject": "react-scripts eject"
   },
   "license": "MIT",

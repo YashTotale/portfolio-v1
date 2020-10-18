@@ -15,6 +15,7 @@ export const closeGithubIssue = async (githubToken: string) => {
       issue_number: 4,
       state: "closed",
     });
+    console.log("Issue has been closed");
   } catch (e) {
     console.log(e);
     process.exit(1);
