@@ -18,10 +18,10 @@ before_script:
 
 script:
   - CI=true npm test
-  - CI=false npm run snyk
+  - npm run snyk
 
 before_deploy:
-  - npm run build
+  - CI=false npm run build
 
 deploy:
   provider: pages
