@@ -43,7 +43,7 @@ export default async function (objects: Object[], type: ImageFolder) {
           }
 
           icons.forEach(async (icon, iconIndex) => {
-            const names = ["dark", "light"];
+            const names = ["light", "dark"];
 
             const location = join(folder, `${names[iconIndex]}.png`);
 
