@@ -1,6 +1,11 @@
 import { Octokit } from "@octokit/rest";
+import yargs from "yargs/yargs";
 
-const args = process.argv;
+const args = yargs(process.argv.slice(2))
+  .options({
+    t: { type: "string", alias: "token", demandOption: true },
+  })
+  .parse();
 
 export const closeGithubIssue = async (githubToken: string) => {
   const octockit = new Octokit({
@@ -22,9 +27,4 @@ export const closeGithubIssue = async (githubToken: string) => {
   }
 };
 
-if (args.length < 3) {
-  console.log("Please provide a GitHub OAuth Token");
-  process.exit(1);
-}
-
-closeGithubIssue(args[2]);
+closeGithubIssue(args.t);

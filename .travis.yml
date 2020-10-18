@@ -34,4 +34,4 @@ deploy:
     branch: master
 
 after_deploy:
-  - npm run closeIssue -- $GITHUB_TOKEN
+  - npm run closeIssue -- --t $GITHUB_TOKEN
