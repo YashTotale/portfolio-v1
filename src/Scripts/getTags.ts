@@ -3,6 +3,7 @@ import reader from "g-sheets-api";
 import { write, baseOptions, createURL } from "./index";
 import { TagProps } from "../Utils/interfaces";
 import { DEFAULT_TAG_ICON } from "../Utils/links";
+import downloadImages from "./downloadImages";
 
 const tagsRequest = () => {
   return new Promise<TagInfo[]>((resolve, reject) => {
@@ -53,6 +54,7 @@ export const getTags = (tags: string[]) => {
     const tagInfos: TagInfo[] = await tagsRequest();
     const allTags = [...new Set(tags)];
     const tagsArray = createTags(allTags, tagInfos);
+    downloadImages(tagsArray, "Tags");
     write("Tags", tagsArray);
   });
 };

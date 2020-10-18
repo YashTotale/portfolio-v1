@@ -1,6 +1,7 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { write, baseOptions, createURL } from "./index";
+import downloadImages from "./downloadImages";
 import { DEFAULT_PROJECT_ICON } from "../Utils/links";
 import { ProjectProps } from "../Utils/interfaces";
 
@@ -11,9 +12,9 @@ const projectsRequest = () => {
   });
 };
 
-const cleanProjectData = (
+const cleanProjectData = async (
   projects: ProjectObject[]
-): [ProjectProps[], string[]] => {
+): Promise<[ProjectProps[], string[]]> => {
   const cleanedProjects: ProjectProps[] = [];
   let allTags: string[] = [];
 
@@ -52,7 +53,8 @@ const cleanProjectData = (
 export const getProjects = () => {
   return new Promise<string[]>(async (resolve, reject) => {
     const projects: ProjectObject[] = await projectsRequest();
-    const [cleanedProjects, tags] = cleanProjectData(projects);
+    const [cleanedProjects, tags] = await cleanProjectData(projects);
+    await downloadImages(cleanedProjects, "Projects");
     write("Projects", cleanedProjects);
     resolve(tags);
   });

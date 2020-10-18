@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ProfilePic from "./ProfilePic";
-import { ABOUT_ME_BACKGROUND } from "../../Utils/links";
+import AboutMeBackground from "../../Images/Misc/AboutMe.jpg";
 
 //Redux Imports
 import { toggleDarkModeWMessage } from "../../Redux/thunks";
@@ -23,7 +23,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
     margin: "20px 0px",
     position: "relative",
     //Background
-    backgroundImage: `url(${ABOUT_ME_BACKGROUND})`,
+    backgroundImage: `url(${AboutMeBackground})`,
     backgroundOrigin: "border-box",
     backgroundPositionY: "20%",
     backgroundSize: "cover",

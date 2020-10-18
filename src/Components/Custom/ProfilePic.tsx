@@ -1,8 +1,7 @@
 // React Imports
 import React from "react";
-import ModifiedA from "../Reusable/ModifiedA";
 import Image from "../Reusable/Image";
-import { PROFILE_PIC } from "../../Utils/links";
+import ProfilePicture from "../../Images/Misc/ProfilePicture.jpg";
 import { PROFILE_PIC_RATIO } from "../../Utils/constants";
 
 // Material UI Imports
@@ -16,24 +15,17 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     justifySelf: "flex-start",
   },
-  a: {
-    "&:focus": {
-      outline: "none",
-    },
-  },
 }));
 
 const ProfilePic: React.FC = () => {
   const classes = useStyles();
   return (
     <div className={classes.imgDiv}>
-      <ModifiedA className={classes.a} tabIndex={-1} href={PROFILE_PIC}>
-        <Image
-          ratio={PROFILE_PIC_RATIO}
-          src={PROFILE_PIC}
-          alt="Profile Picture"
-        />
-      </ModifiedA>
+      <Image
+        ratio={PROFILE_PIC_RATIO}
+        src={ProfilePicture}
+        alt="Profile Picture"
+      />
     </div>
   );
 };

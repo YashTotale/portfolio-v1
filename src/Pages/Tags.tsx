@@ -65,7 +65,7 @@ const TagsPage: React.FC = () => {
               <TagOverlay
                 key={i}
                 name={name}
-                icons={icons}
+                type="Tags"
                 url={`/tags/${url}`}
                 {...sizes}
               />

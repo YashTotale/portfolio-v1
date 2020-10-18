@@ -72,6 +72,7 @@ const HomePage: React.FC = () => {
               return (
                 <ProjectOverlay
                   {...project}
+                  type="Projects"
                   url={`/projects/${project.url}`}
                   key={i}
                   {...sizes}

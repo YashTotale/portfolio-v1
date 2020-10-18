@@ -5,6 +5,7 @@ import MiniTag from "../Tag/Mini";
 import Parser from "../Parser";
 import StyledLink from "../StyledLink";
 import Tags from "../../../Data/Tags.json";
+import StaticImage from "../StaticImage";
 import { ProjectProps, TagProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
@@ -110,6 +111,7 @@ const Display: React.FC<ProjectProps> = ({
   const classes = useStyles();
   const theme = useTheme();
   const isSizeSmall = useMediaQuery(theme.breakpoints.only("xs"));
+
   return (
     <div className={classes.projectDiv}>
       <Paper elevation={24} className={classes.projectImgDiv}>
@@ -118,11 +120,11 @@ const Display: React.FC<ProjectProps> = ({
           to={`/projects/${url}`}
           color="primary"
         >
-          <img
+          <StaticImage
+            name={name}
+            type="Projects"
             className={classes.projectImg}
-            src={theme.palette.type === "light" ? icons[0] : icons[1]}
-            alt={name}
-          ></img>
+          />
           <Typography
             className={classes.projectTitle}
             variant={isSizeSmall ? "h5" : "h4"}

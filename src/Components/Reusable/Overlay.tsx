@@ -11,13 +11,15 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
+import StaticImage from "./StaticImage";
+import { ImageFolder } from "../../Utils/types";
 
 interface StyleProps extends BreakpointValues {
   hovering: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
-  mini: {
+  root: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
@@ -118,9 +120,9 @@ export const DefaultOverlaySizes = {
   xs: 150,
 };
 
-interface MiniProps {
+interface OverlayProps {
   name: string;
-  icons: string[];
+  type: ImageFolder;
   url: string;
   xl?: number;
   lg?: number;
@@ -129,9 +131,9 @@ interface MiniProps {
   xs?: number;
 }
 
-const Mini: React.FC<MiniProps> = ({
+const Overlay: React.FC<OverlayProps> = ({
   name,
-  icons,
+  type,
   url,
   xl = 250,
   lg = 200,
@@ -147,18 +149,14 @@ const Mini: React.FC<MiniProps> = ({
     <div
       onMouseOver={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      className={classes.mini}
+      className={classes.root}
     >
       <Link className={classes.link} to={url}>
         <div className={classes.overlay}></div>
         <Typography className={classes.name} variant="h4">
           {name}
         </Typography>
-        <img
-          className={classes.img}
-          src={theme.palette.type === "light" ? icons[0] : icons[1]}
-          alt={name}
-        ></img>
+        <StaticImage name={name} type={type} className={classes.img} />
       </Link>
       {isSmall && (
         <Typography className={classes.caption} variant="h5">
@@ -169,4 +167,4 @@ const Mini: React.FC<MiniProps> = ({
   );
 };
 
-export default Mini;
+export default Overlay;

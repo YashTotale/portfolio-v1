@@ -1,4 +1,4 @@
-import { writeFile } from "fs";
+import { writeFile, existsSync, promises } from "fs";
 import { join } from "path";
 import { exec } from "child_process";
 
@@ -44,4 +44,29 @@ export const gitAdd = (location: string) => {
 
 export const createURL = (value: string): string => {
   return value.toLowerCase().replace(/\s/g, "-");
+};
+
+export const deleteFolderRecursive = async function (path: string) {
+  const { readdir, unlink, lstat, rmdir } = promises;
+
+  if (existsSync(path)) {
+    try {
+      const dir = await readdir(path);
+
+      dir.forEach(async (file) => {
+        const curPath = join(path, file);
+
+        const status = await lstat(curPath);
+
+        if (status.isDirectory()) {
+          await deleteFolderRecursive(curPath);
+        } else {
+          await unlink(curPath);
+        }
+      });
+      await rmdir(path);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 };

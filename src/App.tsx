@@ -5,8 +5,11 @@ import { Helmet } from "react-helmet";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 import Loading from "./Components/Reusable/Loading/Page";
 
+//Images
+import DarkLogo from "./Images/Logos/dark.png";
+import LightLogo from "./Images/Logos/light.png";
+
 //Utils
-import { DARK_LOGO, LIGHT_LOGO } from "./Utils/links";
 import { FOOTER_HEIGHT } from "./Utils/constants";
 
 //Material UI Imports
@@ -69,7 +72,7 @@ const Head: React.FC = (props) => {
         id="icon"
         rel="icon"
         type="image/jpeg"
-        href={theme.palette.type === "dark" ? DARK_LOGO : LIGHT_LOGO}
+        href={theme.palette.type === "dark" ? DarkLogo : LightLogo}
       ></link>
     </Helmet>
   );
