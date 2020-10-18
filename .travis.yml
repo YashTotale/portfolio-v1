@@ -18,7 +18,7 @@ before_script:
 
 script:
   - CI=true npm test
-  - npm run snyk
+  - CI=false npm run snyk
 
 before_deploy:
   - npm run build

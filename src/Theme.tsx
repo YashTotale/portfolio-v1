@@ -75,7 +75,7 @@ const Theme: React.FC = ({ children }) => {
           },
           MuiSlider: {
             root: {
-              ["@media (pointer: coarse)"]: {
+              "@media (pointer: coarse)": {
                 padding: "auto",
               },
             },

@@ -148,11 +148,12 @@ const ContactForm: React.FC<ContactFormProps> = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
+    //
+    // e?.preventDefault();
     dispatch(setContact(inputs));
     dispatch(setContactLoading(true));
     try {
       const token = await executeRecaptcha?.("contact_form");
-      e?.preventDefault();
       if (!token) {
         throw new Error("ReCaptcha was unable to authorize this response.");
       } else {
