@@ -1,7 +1,7 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { ExperienceProps } from "../Utils/interfaces";
-import { write, baseOptions } from "./index";
+import { writeData, baseOptions } from "./index";
 
 const experienceRequest = () => {
   return new Promise<ExperienceObject[]>((resolve, reject) => {
@@ -42,7 +42,7 @@ const cleanExperienceData = (
 export const getExperiences = async () => {
   const experiences: ExperienceObject[] = await experienceRequest();
   const [cleanExperiences, tags] = cleanExperienceData(experiences);
-  await write("Experience", cleanExperiences);
+  await writeData("Experience", cleanExperiences);
   return tags;
 };
 

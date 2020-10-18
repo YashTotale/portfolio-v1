@@ -1,6 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { write, baseOptions, createURL } from "./index";
+import { writeData, baseOptions, createURL } from "./index";
 import { TagProps } from "../Utils/interfaces";
 import { DEFAULT_TAG_ICON } from "../Utils/links";
 import downloadImages from "./downloadImages";
@@ -53,7 +53,7 @@ export const getTags = async (tags: string[]) => {
   const tagInfos: TagInfo[] = await tagsRequest();
   const allTags = [...new Set(tags)];
   const tagsArray = createTags(allTags, tagInfos);
-  await write("Tags", tagsArray);
+  await writeData("Tags", tagsArray);
   await downloadImages(tagsArray, "Tags");
 };
 

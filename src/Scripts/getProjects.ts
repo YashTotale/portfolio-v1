@@ -1,6 +1,6 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { write, baseOptions, createURL } from "./index";
+import { writeData, baseOptions, createURL } from "./index";
 import downloadImages from "./downloadImages";
 import { DEFAULT_PROJECT_ICON } from "../Utils/links";
 import { ProjectProps } from "../Utils/interfaces";
@@ -53,7 +53,7 @@ const cleanProjectData = (
 export const getProjects = async () => {
   const projects: ProjectObject[] = await projectsRequest();
   const [cleanedProjects, tags] = cleanProjectData(projects);
-  await write("Projects", cleanedProjects);
+  await writeData("Projects", cleanedProjects);
   await downloadImages(cleanedProjects, "Projects");
   return tags;
 };

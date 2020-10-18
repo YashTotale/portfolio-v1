@@ -1,16 +1,19 @@
 import { getProjects } from "./getProjects";
 import { getExperiences } from "./getExperiences";
 import { getTags } from "./getTags";
+import { getLinkedInData } from "./getLinkedin";
 
-const projectsAndExperience = async () => {
+const getData = async () => {
   try {
     const projectTags = await getProjects();
     const experienceTags = await getExperiences();
-    return projectTags.concat(experienceTags);
+    await getTags(projectTags.concat(experienceTags));
+    await getLinkedInData();
+    process.exit(0);
   } catch (e) {
     console.log(e);
     process.exit(1);
   }
 };
 
-projectsAndExperience().then(getTags);
+getData();

@@ -13,9 +13,9 @@ export const dataFolder = join(__dirname, "..", "Data");
 
 export type files = "Experience" | "Projects" | "Tags" | "LinkedIn";
 
-export const write = async (
+export const writeData = async (
   fileName: files,
-  data: ProjectProps[] | ExperienceProps[] | TagProps[]
+  data: ProjectProps[] | ExperienceProps[] | TagProps[] | any
 ) => {
   const { writeFile, mkdir } = promises;
   try {

@@ -1,9 +1,8 @@
 //@ts-ignore
 import scrapedin from "scrapedin";
-import { write } from "./index";
+import { writeData } from "./index";
 import { LINKEDIN_URL } from "../Utils/links";
-
-const args = process.argv;
+import { EMAIL, LINKEDIN_PASSWORD } from "../Utils/CONFIDENTIAL";
 
 const cleanData = (data: any): any => {
   const newData = { ...data };
@@ -11,24 +10,16 @@ const cleanData = (data: any): any => {
   return newData;
 };
 
-export const getLinkedInData = async (linkedinPass: string) => {
+export const getLinkedInData = async () => {
   try {
     const profileScraper = await scrapedin({
-      email: "totaleyash@gmail.com",
-      password: linkedinPass,
+      email: EMAIL,
+      password: LINKEDIN_PASSWORD,
     });
     const profile = await profileScraper(LINKEDIN_URL);
-    await write("LinkedIn", cleanData(profile));
-    process.exit(0);
+    await writeData("LinkedIn", cleanData(profile));
   } catch (e) {
     console.log(e);
     process.exit(1);
   }
 };
-
-if (args.length < 3) {
-  console.log("Please provide the LinkedIn password");
-  process.exit(1);
-}
-
-getLinkedInData(args[2]);
