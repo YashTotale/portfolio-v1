@@ -34,9 +34,13 @@ export default async function (objects: Object[], type: ImageFolder) {
         responseType: "stream",
       });
 
-      data.pipe(createWriteStream(join(folder, `${i ? "dark" : "light"}.png`)));
+      data.pipe(
+        createWriteStream(join(folder, `${i ? "dark" : "light"}.png`)).end(
+          async () => {
+            await gitAdd(folder);
+          }
+        )
+      );
     });
   });
-
-  await gitAdd(basePath);
 }

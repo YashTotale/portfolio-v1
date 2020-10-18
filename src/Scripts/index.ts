@@ -1,6 +1,7 @@
 import { writeFile } from "fs";
 import { join } from "path";
 import { exec } from "child_process";
+import simpleGit, { SimpleGit } from "simple-git";
 
 import { ExperienceProps, ProjectProps, TagProps } from "../Utils/interfaces";
 
@@ -17,29 +18,25 @@ export const write = (
   fileName: files,
   data: ProjectProps[] | ExperienceProps[] | TagProps[]
 ) => {
-  return new Promise<string>((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     const location = join(dataFolder, `${fileName}.json`);
     writeFile(location, JSON.stringify(data), "utf8", (err) => {
       if (err) return console.log(err);
       console.log(`\n${fileName}:`);
       console.log(data);
-      gitAdd(location).then(resolve);
+      gitAdd(location).then(() => resolve());
     });
   });
 };
 
-export const gitAdd = (location: string) => {
-  return new Promise<string>((resolve, reject) => {
-    exec(`git add ${location} --verbose`, (err, stdout) => {
-      if (err) {
-        console.log(err);
-        reject(err);
-      } else {
-        console.log(stdout);
-        resolve(stdout);
-      }
-    });
-  });
+export const gitAdd = async (location: string) => {
+  const git: SimpleGit = simpleGit();
+  try {
+    await git.add(location);
+  } catch (e) {
+    console.log(e);
+    process.exit(1);
+  }
 };
 
 export const createURL = (value: string): string => {
