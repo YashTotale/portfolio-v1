@@ -4,7 +4,7 @@ import { ImageFolder } from "../../Utils/types";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { CircularProgress, useTheme } from "@material-ui/core";
+import { Avatar, CircularProgress, useTheme } from "@material-ui/core";
 import {} from "@material-ui/icons";
 import { Skeleton } from "@material-ui/lab";
 
@@ -25,10 +25,16 @@ const useStyles = makeStyles((theme) => ({
 interface StaticImageProps {
   name: string;
   type: ImageFolder;
+  avatar?: boolean;
   className?: string;
 }
 
-const StaticImage: React.FC<StaticImageProps> = ({ name, type, className }) => {
+const StaticImage: React.FC<StaticImageProps> = ({
+  name,
+  type,
+  avatar,
+  className,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
 
@@ -43,7 +49,11 @@ const StaticImage: React.FC<StaticImageProps> = ({ name, type, className }) => {
   }, [theme.palette.type, name, type]);
 
   return icon ? (
-    <img className={className} src={icon} alt={name} />
+    avatar ? (
+      <Avatar className={className} src={icon} alt={name} />
+    ) : (
+      <img className={className} src={icon} alt={name} />
+    )
   ) : (
     <div className={`${classes.loading} ${className}`}>
       <Skeleton variant="rect" className={classes.skeleton} />

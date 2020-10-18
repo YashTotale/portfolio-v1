@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { TagProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
-import { Avatar, Chip, makeStyles, useTheme } from "@material-ui/core";
+import { Chip, makeStyles } from "@material-ui/core";
+import StaticImage from "../StaticImage";
 
 const useStyles = makeStyles((theme) => ({
   tag: {
@@ -15,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Mini: React.FC<TagProps> = ({ name, url, icons }) => {
-  const theme = useTheme();
+const Mini: React.FC<TagProps> = ({ name, url }) => {
   const classes = useStyles();
   return (
     <Chip
@@ -24,11 +24,7 @@ const Mini: React.FC<TagProps> = ({ name, url, icons }) => {
       size="medium"
       label={name}
       className={classes.tag}
-      avatar={
-        icons ? (
-          <Avatar src={icons[theme.palette.type === "light" ? 0 : 1]}></Avatar>
-        ) : undefined
-      }
+      avatar={<StaticImage name={name} type="Tags" avatar />}
       component={Link}
       to={`/tags/${url}`}
       color="secondary"
