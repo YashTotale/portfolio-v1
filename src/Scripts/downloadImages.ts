@@ -21,7 +21,7 @@ const writeImage = (data: any, location: string) => {
 
 export default async function (objects: Object[], type: ImageFolder) {
   return new Promise((resolve, reject) => {
-    const { mkdir, writeFile } = promises;
+    const { mkdir } = promises;
 
     const basePath = join(__dirname, "..", "Images", type);
 

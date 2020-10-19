@@ -1,0 +1,2 @@
+(this["webpackJsonpyash-totale"]=this["webpackJsonpyash-totale"]||[]).push([[18],{234:function(e,t,a){"use strict";a.r(t);var n=a(0),r=a.n(n),l=a(66),c=a(210),o=Object(c.a)((function(e){return{root:{}}}));t.default=function(){var e=o();return r.a.createElement(r.a.Fragment,null,r.a.createElement(l.a,null,r.a.createElement("title",null,"Experience - Yash Totale")),r.a.createElement("div",{className:e.root},"Experience"))}}}]);
+//# sourceMappingURL=18.84a67f9a.chunk.js.map
