@@ -11,6 +11,8 @@ export const baseOptions = {
 
 export const dataFolder = join(__dirname, "..", "Data");
 
+export const imagesFolder = join(__dirname, "..", "Images");
+
 export type files = "Experience" | "Projects" | "Tags" | "LinkedIn";
 
 export const writeData = async (
@@ -27,14 +29,13 @@ export const writeData = async (
       encoding: "utf8",
     });
     console.log(`\n${fileName} written`);
-    await gitAdd(location);
   } catch (e) {
     console.log(e);
     process.exit(1);
   }
 };
 
-export const gitAdd = async (location: string) => {
+export const gitAdd = async (location: string | string[]) => {
   const git: SimpleGit = simpleGit();
   try {
     await git.add(location);

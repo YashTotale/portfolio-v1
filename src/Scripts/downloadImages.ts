@@ -2,9 +2,7 @@ import { promises, createWriteStream, existsSync } from "fs";
 import { join } from "path";
 import axios from "axios";
 import rimraf from "rimraf";
-import { gitAdd } from "./index";
 import { ImageFolder } from "../Utils/types";
-import { resolve } from "dns";
 
 interface Object {
   name: string;
@@ -14,16 +12,16 @@ interface Object {
 
 const writeImage = (data: any, location: string) => {
   return new Promise((resolve, reject) => {
-    const file = createWriteStream(location);
-    data.pipe(file);
-    file.on("finish", resolve);
-    file.on("error", reject);
+    const stream = createWriteStream(location, {});
+    data.pipe(stream);
+    stream.on("finish", resolve);
+    stream.on("error", reject);
   });
 };
 
 export default async function (objects: Object[], type: ImageFolder) {
   return new Promise((resolve, reject) => {
-    const { mkdir } = promises;
+    const { mkdir, writeFile } = promises;
 
     const basePath = join(__dirname, "..", "Images", type);
 
@@ -57,7 +55,6 @@ export default async function (objects: Object[], type: ImageFolder) {
               iconIndex === names.length - 1 &&
               objectIndex === objects.length - 1
             ) {
-              await gitAdd(basePath);
               console.log(`\n${type} images added`);
               resolve();
             }
