@@ -1,6 +1,7 @@
 //React Imports
 import React from "react";
 import { Helmet } from "react-helmet";
+import withScroll from "../Components/Reusable/withScroll";
 import {
   colors,
   toCssColor,
@@ -269,4 +270,4 @@ const ColorBtn: React.FC<ColorBtnProps> = ({
   );
 };
 
-export default Colors;
+export default withScroll(Colors);

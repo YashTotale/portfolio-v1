@@ -1,6 +1,8 @@
 //React Imports
 import React from "react";
 import { Helmet } from "react-helmet";
+import withScroll from "../Components/Reusable/withScroll";
+import StyledLink from "../Components/Reusable/StyledLink";
 import AboutMe from "../Components/Custom/AboutMe";
 import ContactForm from "../Components/Custom/ContactForm";
 import ProjectOverlay, {
@@ -12,6 +14,7 @@ import Projects from "../Data/Projects.json";
 import {
   makeStyles,
   Theme,
+  Tooltip,
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
@@ -25,6 +28,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     [theme.breakpoints.up("lg")]: {
       width: "80%",
     },
+  },
+  projectsHeader: {
+    color: "inherit",
   },
   projects: ({ xl, lg, md, sm, xs }) => ({
     margin: "15px 0px",
@@ -65,7 +71,13 @@ const HomePage: React.FC = () => {
       <div className={classes.home}>
         <AboutMe />
         <div>
-          <Typography variant="h4">Projects</Typography>
+          <StyledLink className={classes.projectsHeader} to={"/projects"}>
+            <Tooltip title="View all projects">
+              <Typography align="center" variant="h4">
+                Projects
+              </Typography>
+            </Tooltip>
+          </StyledLink>
           <hr />
           <div className={classes.projects}>
             {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
@@ -89,4 +101,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default withScroll(HomePage);

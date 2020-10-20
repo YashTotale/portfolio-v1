@@ -2,6 +2,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Tags from "../Data/Tags.json";
+import withScroll from "../Components/Reusable/withScroll";
 import TagOverlay, {
   DefaultOverlaySizes,
 } from "../Components/Reusable/Overlay";
@@ -78,4 +79,4 @@ const TagsPage: React.FC = () => {
   );
 };
 
-export default TagsPage;
+export default withScroll(TagsPage);

@@ -1,13 +1,11 @@
 // React Imports
 import React from "react";
-import { Link } from "react-router-dom";
+import StyledLink from "./StyledLink";
+import ModifiedA from "./ModifiedA";
 
 // Material UI Imports
-// import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import {} from "@material-ui/icons";
-
-// const useStyles = makeStyles((theme) => ({}));
 
 interface ActionButtonProps {
   icon: JSX.Element;
@@ -26,17 +24,10 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   to,
   className,
 }) => {
-  // const classes = useStyles();
   switch (component) {
     case "a": {
       return (
-        <IconButton
-          component="a"
-          target="_blank"
-          rel="noopener noreferrer"
-          href={href}
-          className={className}
-        >
+        <IconButton component={ModifiedA} href={href} className={className}>
           {icon}
         </IconButton>
       );
@@ -50,7 +41,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     }
     case "link": {
       return (
-        <IconButton component={Link} to={`/${to}`} className={className}>
+        <IconButton component={StyledLink} to={`/${to}`} className={className}>
           {icon}
         </IconButton>
       );

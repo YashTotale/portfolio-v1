@@ -1,6 +1,6 @@
 //React Imports
 import React from "react";
-import { Link } from "react-router-dom";
+import StyledLink from "../StyledLink";
 import { TagProps } from "../../../Utils/interfaces";
 
 //Material UI Imports
@@ -25,7 +25,7 @@ const Mini: React.FC<TagProps> = ({ name, url, icons }) => {
       label={name}
       className={classes.tag}
       avatar={<StaticImage icons={icons} name={name} type="Tags" avatar />}
-      component={Link}
+      component={StyledLink}
       to={`/tags/${url}`}
       color="secondary"
       variant="outlined"

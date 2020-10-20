@@ -1,5 +1,8 @@
 //React Imports
 import React, { useState } from "react";
+import StaticImage from "./StaticImage";
+import StyledLink from "./StyledLink";
+import { ImageFolder } from "../../Utils/types";
 
 //Material UI Imports
 import {
@@ -9,10 +12,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
-import StaticImage from "./StaticImage";
-import { ImageFolder } from "../../Utils/types";
 
 interface StyleProps extends BreakpointValues {
   hovering: boolean;
@@ -153,7 +153,7 @@ const Overlay: React.FC<OverlayProps> = ({
       onMouseLeave={() => setHovering(false)}
       className={classes.root}
     >
-      <Link className={classes.link} to={url}>
+      <StyledLink className={classes.link} to={url}>
         <div className={classes.overlay}></div>
         <Typography className={classes.name} variant="h4">
           {name}
@@ -164,7 +164,7 @@ const Overlay: React.FC<OverlayProps> = ({
           type={type}
           className={classes.img}
         />
-      </Link>
+      </StyledLink>
       {isSmall && (
         <Typography className={classes.caption} variant="h5">
           {name}

@@ -1,5 +1,5 @@
 // React Imports
-import React from "react";
+import React, { forwardRef } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 // Material UI Imports
@@ -22,18 +22,38 @@ interface StyledLinkProps {
     | "error";
 }
 
-const StyledLink: React.FC<StyledLinkProps> = ({
-  to,
-  children,
-  color,
-  className,
-}) => {
-  // const classes = useStyles();
-  return (
-    <MuiLink className={className} color={color} to={to} component={RouterLink}>
+const StyledLink: React.FC<StyledLinkProps> = forwardRef<
+  HTMLAnchorElement,
+  StyledLinkProps
+>((props, ref) => {
+  const { to, children, color, className } = props;
+
+  return color ? (
+    <MuiLink
+      {...props}
+      className={className}
+      color={color}
+      to={{ pathname: to, state: { scrollToTop: true } }}
+      component={RouterLink}
+      ref={ref}
+    >
       {children}
     </MuiLink>
+  ) : (
+    <RouterLink
+      {...props}
+      to={{
+        pathname: to,
+        state: {
+          scrollToTop: true,
+        },
+      }}
+      className={className}
+      ref={ref}
+    >
+      {children}
+    </RouterLink>
   );
-};
+});
 
 export default StyledLink;

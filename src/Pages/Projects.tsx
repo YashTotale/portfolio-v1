@@ -2,6 +2,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
+import withScroll from "../Components/Reusable/withScroll";
 import ProjectDisplay from "../Components/Reusable/Project/Display";
 import ProjectPage from "../Components/Reusable/Project/Page";
 import Projects from "../Data/Projects.json";
@@ -75,4 +76,4 @@ const ProjectsPage: React.FC = () => {
   );
 };
 
-export default ProjectsPage;
+export default withScroll(ProjectsPage);

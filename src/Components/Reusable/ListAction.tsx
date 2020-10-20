@@ -1,11 +1,12 @@
 // React Imports
 import React from "react";
+import StyledLink from "./StyledLink";
+import ModifiedA from "./ModifiedA";
 
 // Material UI Imports
 // import { makeStyles } from "@material-ui/core/styles";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import {} from "@material-ui/icons";
-import { Link } from "react-router-dom";
 
 // const useStyles = makeStyles((theme) => ({}));
 
@@ -48,9 +49,7 @@ const ListItemComponent: React.FC<ListActionProps> = ({
       return (
         <ListItem
           children={children}
-          component="a"
-          target="_blank"
-          rel="noopener noreferrer"
+          component={ModifiedA}
           href={href}
           className={className}
           button
@@ -71,7 +70,7 @@ const ListItemComponent: React.FC<ListActionProps> = ({
       return (
         <ListItem
           children={children}
-          component={Link}
+          component={StyledLink}
           to={`/${to}`}
           className={className}
           button

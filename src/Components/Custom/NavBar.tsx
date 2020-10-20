@@ -1,8 +1,9 @@
 //React Imports
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import TooltipBtn, { TooltipBtnProps } from "../Reusable/TooltipBtn";
 import ListAction, { ListActionProps } from "../Reusable/ListAction";
+import StyledLink from "../Reusable/StyledLink";
 import { SOURCE_CODE } from "../../Utils/links";
 
 //Redux Imports
@@ -80,7 +81,7 @@ const NavBar: React.FC = (props) => {
                 key={tab}
                 icon={isSizeSmall ? tabIcons[i] : undefined}
                 value={tab}
-                component={Link}
+                component={StyledLink}
                 to={`/${tab}`}
                 label={isSizeSmall ? null : upperCase}
               ></Tab>

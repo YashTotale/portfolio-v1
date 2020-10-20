@@ -149,8 +149,8 @@ const ContactForm: React.FC<ContactFormProps> = () => {
   });
 
   const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
-    //
-    // e?.preventDefault();
+    //eslint-disable-next-line
+    e?.preventDefault();
     dispatch(setContact(inputs));
     dispatch(setContactLoading(true));
     try {

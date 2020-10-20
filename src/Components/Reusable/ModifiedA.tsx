@@ -1,12 +1,23 @@
-import React from "react";
+import React, {
+  forwardRef,
+  FC,
+  DetailedHTMLProps,
+  AnchorHTMLAttributes,
+} from "react";
 
-const ModifiedA: React.FC<React.DetailedHTMLProps<
-  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+//@ts-ignore
+const ModifiedA: FC<DetailedHTMLProps<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
   HTMLAnchorElement
->> = (props) => (
-  <a {...props} target="_blank" rel="noopener noreferrer">
-    {props.children}
-  </a>
-);
+>> = forwardRef<
+  HTMLAnchorElement,
+  DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
+>((props, ref) => {
+  return (
+    <a {...props} ref={ref} target="_blank" rel="noopener noreferrer">
+      {props.children}
+    </a>
+  );
+});
 
 export default ModifiedA;

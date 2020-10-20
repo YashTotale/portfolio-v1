@@ -1,7 +1,7 @@
 //React Imports
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import ProfilePic from "./ProfilePic";
+import StyledLink from "../Reusable/StyledLink";
 import AboutMeBackground from "../../Images/Misc/AboutMe.jpg";
 
 //Redux Imports
@@ -149,6 +149,7 @@ const useClickableStyles = makeStyles((theme: Theme) => ({
     //Misc
     padding: "2px",
     textDecoration: type === "btn" ? "none" : "underline",
+    outline: "none",
     //Colors
     transition: "background-color 0.2s",
     color: "inherit",
@@ -176,7 +177,7 @@ const Clickable: React.FC<ClickableProps> = ({
   const classes = useClickableStyles({ type, hovering });
   const renderChildren =
     type === "link" ? (
-      <Link to={to ? to : "#/"}>{children}</Link>
+      <StyledLink to={to ?? "/"}>{children}</StyledLink>
     ) : (
       <span>{children}</span>
     );

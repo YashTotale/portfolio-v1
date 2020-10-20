@@ -1,6 +1,7 @@
 //React Imports
 import React from "react";
 import { Helmet } from "react-helmet";
+import withScroll from "../Components/Reusable/withScroll";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -22,4 +23,4 @@ const ExperiencePage: React.FC = () => {
   );
 };
 
-export default ExperiencePage;
+export default withScroll(ExperiencePage);
