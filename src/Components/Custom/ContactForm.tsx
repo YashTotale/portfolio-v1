@@ -1,5 +1,6 @@
 // React Imports
 import React from "react";
+import emailjs from "emailjs-com";
 import {
   SubmitHandler,
   useForm,
@@ -10,7 +11,11 @@ import {
 } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { EMAIL_REGEX } from "../../Utils/constants";
-import { CONTACT_FORM_ZAPIER_URL } from "../../Utils/CONFIDENTIAL";
+import {
+  EMAILJS_USER_ID,
+  SERVICE_ID,
+  TEMPLATE_ID,
+} from "../../Utils/CONFIDENTIAL";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -158,14 +163,9 @@ const ContactForm: React.FC<ContactFormProps> = () => {
       if (!token) {
         throw new Error("ReCaptcha was unable to authorize this response.");
       } else {
-        const response = await fetch(CONTACT_FORM_ZAPIER_URL, {
-          method: "post",
-          body: JSON.stringify(inputs),
-        });
-        const json = await response.json();
-        if (json.status === "success") {
-          dispatch(setContactSuccess(true));
-        }
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, inputs, EMAILJS_USER_ID);
+
+        dispatch(setContactSuccess(true));
       }
     } catch (err) {
       dispatch(setContactSuccess(false));
