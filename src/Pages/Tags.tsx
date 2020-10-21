@@ -2,7 +2,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import Tags from "../Data/Tags.json";
-import withScroll from "../Components/Reusable/withScroll";
+import withScroll from "../Components/HigherOrder/withScroll";
 import TagOverlay, {
   DefaultOverlaySizes,
 } from "../Components/Reusable/Overlay";

@@ -1,7 +1,7 @@
 //React Imports
 import React from "react";
 import { Helmet } from "react-helmet";
-import withScroll from "../Components/Reusable/withScroll";
+import withScroll from "../Components/HigherOrder/withScroll";
 import {
   colors,
   toCssColor,

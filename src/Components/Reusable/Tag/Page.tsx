@@ -9,6 +9,7 @@ import { TagProps } from "../../../Utils/interfaces";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import {} from "@material-ui/icons";
+import StaticImage from "../StaticImage";
 
 const useStyles = makeStyles((theme) => ({
   tagPage: {
@@ -25,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 const Page: React.FC<TagProps> = ({ name, icons }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const isDarkMode = theme.palette.type === "dark";
   return (
     <>
       <Helmet>
@@ -33,7 +33,7 @@ const Page: React.FC<TagProps> = ({ name, icons }) => {
       </Helmet>
       <div className={classes.tagPage}>
         <Paper className={classes.jumbotron}>
-          <img src={icons[isDarkMode ? 1 : 0]} alt={name}></img>
+          <StaticImage icons={icons} name={name} type="Tags" />
         </Paper>
       </div>
     </>
