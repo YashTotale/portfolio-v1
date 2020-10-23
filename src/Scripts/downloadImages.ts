@@ -2,6 +2,7 @@ import { promises, createWriteStream, existsSync } from "fs";
 import { join } from "path";
 import axios from "axios";
 import rimraf from "rimraf";
+import { imagesFolder } from "./index";
 import { ImageFolder } from "../Utils/types";
 
 interface Object {
@@ -23,7 +24,7 @@ export default async function (objects: Object[], type: ImageFolder) {
   return new Promise((resolve, reject) => {
     const { mkdir } = promises;
 
-    const basePath = join(__dirname, "..", "Images", type);
+    const basePath = join(imagesFolder, type);
 
     try {
       rimraf(basePath, async (err) => {
