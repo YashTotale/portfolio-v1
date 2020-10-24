@@ -10,12 +10,17 @@ import DarkLogo from "./Images/Logos/dark.png";
 import LightLogo from "./Images/Logos/light.png";
 
 //Utils
-import { FOOTER_HEIGHT } from "./Utils/constants";
+import { FOOTER_HEIGHT, SIDEBAR_WIDTH } from "./Utils/constants";
 import { RECAPTCHA_KEY } from "./Utils/CONFIDENTIAL";
 
 //Material UI Imports
 import Theme from "./Theme";
-import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
+import {
+  makeStyles,
+  Theme as ThemeProps,
+  useMediaQuery,
+  useTheme,
+} from "@material-ui/core";
 
 //Router Imports
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
@@ -39,11 +44,15 @@ const useStyles = makeStyles((theme: ThemeProps) => ({
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: FOOTER_HEIGHT,
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: SIDEBAR_WIDTH,
+    },
   },
 }));
 
 const App: React.FC = (props) => {
   const classes = useStyles();
+
   return (
     <Router>
       <Theme>

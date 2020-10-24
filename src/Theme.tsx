@@ -83,6 +83,7 @@ const Theme: React.FC = ({ children }) => {
         },
         typography: {
           fontFamily: "Palatino, Georgia, Serif",
+          fontWeightBold: 600,
         },
         palette: {
           type: isDarkMode ? "dark" : "light",

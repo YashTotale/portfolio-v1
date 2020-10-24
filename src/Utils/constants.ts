@@ -2,6 +2,8 @@ export const FOOTER_HEIGHT = "5rem";
 
 export const PROFILE_PIC_RATIO = 1.2776;
 
+export const SIDEBAR_WIDTH = 240;
+
 export const MONTHS = {
   January: 0,
   February: 1,

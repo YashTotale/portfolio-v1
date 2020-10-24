@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("lg")]: {
       display: "none",
     },
   },
@@ -63,7 +63,7 @@ const NavBar: React.FC = (props) => {
   const dispatch = useDispatch();
 
   const isSizeSmall = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("sm")
+    theme.breakpoints.down("md")
   );
 
   const location = useLocation();
@@ -80,13 +80,15 @@ const NavBar: React.FC = (props) => {
   return (
     <AppBar elevation={2} color="transparent" position="static">
       <Toolbar>
-        <TooltipBtn
-          component="btn"
-          icon={<MenuButton />}
-          title="Open Sidebar"
-          onClick={() => dispatch(toggleSidebar(true))}
-          className={classes.menuButton}
-        />
+        {isSizeSmall && (
+          <TooltipBtn
+            component="btn"
+            icon={<MenuButton />}
+            title="Open Sidebar"
+            onClick={() => dispatch(toggleSidebar(true))}
+            className={classes.menuButton}
+          />
+        )}
         <Tabs className={classes.tabs} value={currentTab}>
           {tabs.map((tab, i) => {
             const upperCase = tab.toUpperCase();
