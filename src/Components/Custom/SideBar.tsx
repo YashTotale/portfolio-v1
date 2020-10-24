@@ -1,12 +1,17 @@
 // React Imports
-import React, { useEffect, useState } from "react";
-import useStateCallback from "../../Hooks/useStateCallback";
+import React from "react";
 import { useHistory } from "react-router-dom";
+import useStateCallback from "../../Hooks/useStateCallback";
+import { LocationState } from "../HigherOrder/withScroll";
 import StyledLink from "../Reusable/StyledLink";
 import StaticImage from "../Reusable/StaticImage";
+
+//Data
 import Projects from "../../Data/Projects.json";
 import Experience from "../../Data/Experience.json";
 import Tags from "../../Data/Tags.json";
+
+//Utils
 import { ImageFolder, imageFolders } from "../../Utils/types";
 import { SIDEBAR_WIDTH } from "../../Utils/constants";
 
@@ -21,7 +26,6 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemIcon,
   ListItemText,
   ListItemAvatar,
   Collapse,
@@ -113,7 +117,7 @@ interface CategoryProps {
 }
 
 const Category: React.FC<CategoryProps> = ({ type }) => {
-  const history = useHistory();
+  const history = useHistory<LocationState>();
 
   const [open, setOpen] = useStateCallback<boolean>(false);
 
@@ -127,14 +131,19 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
         button
         onClick={() =>
           setOpen(!open, () => {
-            history.push(url);
+            history.push({
+              pathname: url,
+              state: {
+                scrollToTop: true,
+              },
+            });
           })
         }
       >
         <ListItemText primary={type} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={open} timeout="auto">
         <List component="div" disablePadding>
           {data.map((item, i) => (
             <Item key={i} baseURL={url} type={type} {...item} />

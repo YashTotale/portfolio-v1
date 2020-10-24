@@ -1,6 +1,7 @@
 //React Imports
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useLocation } from "react-router-dom";
 import withScroll from "../Components/HigherOrder/withScroll";
 import StyledLink from "../Components/Reusable/StyledLink";
 import AboutMe from "../Components/Custom/AboutMe";
