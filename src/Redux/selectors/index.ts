@@ -1,8 +1,9 @@
-import { initialContactState, initialDisplayState } from "../reducers";
+import { ContactState, DisplayState, SidebarState } from "../reducers";
 
 export interface State {
-  display: typeof initialDisplayState;
-  contact: typeof initialContactState;
+  display: DisplayState;
+  contact: ContactState;
+  sidebar: SidebarState;
 }
 
 export {
@@ -28,3 +29,4 @@ export {
   getContactSuccess,
   getContact,
 } from "./contact.selectors";
+export { getIsSidebarOpen, getSidebar } from "./sidebar.selectors";

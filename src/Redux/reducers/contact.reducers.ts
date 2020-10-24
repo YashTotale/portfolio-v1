@@ -34,7 +34,7 @@ export const initialContactState: ContactState = {
 export const contactReducer = (
   state = initialContactState,
   action: AnyAction
-): typeof initialContactState => {
+): ContactState => {
   const { type, payload } = action;
   switch (type) {
     case SET_CONTACT_NAME: {

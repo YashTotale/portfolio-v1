@@ -39,7 +39,7 @@ export const initialDisplayState: DisplayState = {
 export const displayReducer = (
   state = initialDisplayState,
   action: AnyAction
-): typeof initialDisplayState => {
+): DisplayState => {
   const { type, payload } = action;
   switch (type) {
     case TOGGLE_DARK_MODE: {

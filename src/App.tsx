@@ -23,6 +23,7 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 // Lazy Imports
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
 const NavBar = lazy(() => import("./Components/Custom/NavBar"));
+const SideBar = lazy(() => import("./Components/Custom/SideBar"));
 const Footer = lazy(() => import("./Components/Custom/Footer"));
 
 const Home = lazy(() => import("./Pages/Home"));
@@ -51,6 +52,7 @@ const App: React.FC = (props) => {
           <Suspense fallback={<Loading />}>
             <div className={classes.pageContainer}>
               <NavBar />
+              <SideBar />
               <Routes />
               <SnackBar />
             </div>

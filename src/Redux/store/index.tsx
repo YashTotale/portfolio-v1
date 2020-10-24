@@ -19,11 +19,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
 //Reducer Imports
-import { display, contact } from "../reducers";
+import { display, contact, sidebar } from "../reducers";
 
 const reducers = {
   display,
   contact,
+  sidebar,
 };
 
 const rootReducer = combineReducers(reducers);

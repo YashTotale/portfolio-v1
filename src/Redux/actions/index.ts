@@ -30,3 +30,4 @@ export {
   SET_CONTACT,
   setContact,
 } from "./contact.actions";
+export { TOGGLE_SIDEBAR, toggleSidebar } from "./sidebar.actions";

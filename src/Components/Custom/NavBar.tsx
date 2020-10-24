@@ -10,7 +10,7 @@ import { SOURCE_CODE } from "../../Utils/links";
 import { useSelector, useDispatch } from "react-redux";
 import { getIsNavBtnsMenuOpen } from "../../Redux/selectors";
 import { toggleDarkModeWMessage } from "../../Redux/thunks";
-import { toggleNavBtnsMenu } from "../../Redux/actions";
+import { toggleNavBtnsMenu, toggleSidebar } from "../../Redux/actions";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -43,6 +43,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
     flexGrow: 1,
   },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
   navBtns: {
     position: "absolute",
     right: theme.spacing() * 3,
@@ -54,6 +60,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const NavBar: React.FC = (props) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const isSizeSmall = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down("sm")
@@ -73,6 +80,13 @@ const NavBar: React.FC = (props) => {
   return (
     <AppBar elevation={2} color="transparent" position="static">
       <Toolbar>
+        <TooltipBtn
+          component="btn"
+          icon={<MenuButton />}
+          title="Open Sidebar"
+          onClick={() => dispatch(toggleSidebar(true))}
+          className={classes.menuButton}
+        />
         <Tabs className={classes.tabs} value={currentTab}>
           {tabs.map((tab, i) => {
             const upperCase = tab.toUpperCase();
