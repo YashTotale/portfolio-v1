@@ -12,6 +12,7 @@ import {} from "@material-ui/icons";
 interface StyledLinkProps {
   to: string;
   className?: string;
+  onClick?: () => any;
   color?:
     | "initial"
     | "inherit"
@@ -26,11 +27,12 @@ const StyledLink: React.FC<StyledLinkProps> = forwardRef<
   HTMLAnchorElement,
   StyledLinkProps
 >((props, ref) => {
-  const { to, children, color, className } = props;
+  const { to, children, color, onClick, className } = props;
 
   return color ? (
     <MuiLink
       {...props}
+      onClick={onClick}
       className={className}
       color={color}
       to={{ pathname: to, state: { scrollToTop: true } }}
@@ -42,6 +44,7 @@ const StyledLink: React.FC<StyledLinkProps> = forwardRef<
   ) : (
     <RouterLink
       {...props}
+      onClick={onClick}
       to={{
         pathname: to,
         state: {

@@ -1,5 +1,8 @@
 // React Imports
-import React from "react";
+import React, { useEffect, useState } from "react";
+import useStateCallback from "../../Hooks/useStateCallback";
+import { useHistory } from "react-router-dom";
+import StyledLink from "../Reusable/StyledLink";
 import StaticImage from "../Reusable/StaticImage";
 import Projects from "../../Data/Projects.json";
 import Experience from "../../Data/Experience.json";
@@ -26,7 +29,7 @@ import {
   Divider,
   useMediaQuery,
 } from "@material-ui/core";
-import { Inbox as InboxIcon, ExpandMore, ExpandLess } from "@material-ui/icons";
+import { ExpandMore, ExpandLess } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -43,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
   },
   nested: {
     paddingLeft: theme.spacing(4),
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none",
   },
 }));
 
@@ -106,23 +113,31 @@ interface CategoryProps {
 }
 
 const Category: React.FC<CategoryProps> = ({ type }) => {
-  const data = type === "Projects" ? Projects : Tags;
+  const history = useHistory();
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useStateCallback<boolean>(false);
+
+  const url = `/${type.toLowerCase()}`;
+
+  const data = type === "Projects" ? Projects : Tags;
 
   return (
     <>
-      <ListItem button onClick={() => setOpen(!open)}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
+      <ListItem
+        button
+        onClick={() =>
+          setOpen(!open, () => {
+            history.push(url);
+          })
+        }
+      >
         <ListItemText primary={type} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {data.map((item, i) => (
-            <Item key={i} type={type} {...item} />
+            <Item key={i} baseURL={url} type={type} {...item} />
           ))}
         </List>
       </Collapse>
@@ -132,6 +147,8 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
 
 interface ItemProps {
   icons: string[];
+  baseURL: string;
+  url: string;
   type: ImageFolder;
   name: string;
 }
@@ -140,12 +157,14 @@ const Item: React.FC<ItemProps> = (props) => {
   const classes = useStyles();
 
   return (
-    <ListItem button className={classes.nested}>
-      <ListItemAvatar>
-        <StaticImage avatar {...props} />
-      </ListItemAvatar>
-      <ListItemText primary={props.name} />
-    </ListItem>
+    <StyledLink className={classes.link} to={`${props.baseURL}/${props.url}`}>
+      <ListItem button className={classes.nested}>
+        <ListItemAvatar>
+          <StaticImage avatar {...props} />
+        </ListItemAvatar>
+        <ListItemText primary={props.name} />
+      </ListItem>
+    </StyledLink>
   );
 };
 

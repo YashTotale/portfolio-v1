@@ -30,6 +30,10 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     },
   },
   projectsHeader: {
+    display: "table",
+    margin: "auto",
+  },
+  projectsLink: {
     color: "inherit",
   },
   projects: ({ xl, lg, md, sm, xs }) => ({
@@ -71,13 +75,17 @@ const HomePage: React.FC = () => {
       <div className={classes.home}>
         <AboutMe />
         <div>
-          <StyledLink className={classes.projectsHeader} to={"/projects"}>
-            <Tooltip title="View all projects">
-              <Typography align="center" variant="h4">
+          <Tooltip title="View all projects">
+            <Typography
+              className={classes.projectsHeader}
+              align="center"
+              variant="h4"
+            >
+              <StyledLink className={classes.projectsLink} to={"/projects"}>
                 Projects
-              </Typography>
-            </Tooltip>
-          </StyledLink>
+              </StyledLink>
+            </Typography>
+          </Tooltip>
           <hr />
           <div className={classes.projects}>
             {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
