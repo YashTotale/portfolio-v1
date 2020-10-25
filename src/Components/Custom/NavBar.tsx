@@ -1,60 +1,93 @@
 //React Imports
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { alternativeFont } from "../../Theme";
 import TooltipBtn, { TooltipBtnProps } from "../Reusable/TooltipBtn";
-import ListAction, { ListActionProps } from "../Reusable/ListAction";
-import StyledLink from "../Reusable/StyledLink";
 import { SOURCE_CODE } from "../../Utils/links";
 
 //Redux Imports
 import { useSelector, useDispatch } from "react-redux";
-import { getIsNavBtnsMenuOpen } from "../../Redux/selectors";
+import {} from "../../Redux/selectors";
 import { toggleDarkModeWMessage } from "../../Redux/thunks";
-import { toggleNavBtnsMenu, toggleSidebar } from "../../Redux/actions";
+import { toggleSidebar } from "../../Redux/actions";
 
 //Material UI Imports
-import { makeStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, Theme, fade } from "@material-ui/core/styles";
 import {
   Brightness7,
   Brightness4,
   GitHub,
   Menu as MenuButton,
-  Palette,
-  Home,
-  DeviceHub,
-  BusinessCenter,
-  Label,
+  Search as SearchIcon,
 } from "@material-ui/icons";
 import {
   AppBar,
   Toolbar,
-  Tabs,
-  Tab,
+  Input,
   useTheme,
   useMediaQuery,
-  Drawer,
-  List,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme: Theme) => ({
-  tabs: {
-    "& div": {
-      justifyContent: "center",
-    },
-    flexGrow: 1,
-  },
+  toolbar: {},
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: 10,
     [theme.breakpoints.up("lg")]: {
       display: "none",
     },
   },
-  navBtns: {
-    position: "absolute",
-    right: theme.spacing() * 3,
-    [theme.breakpoints.down("sm")]: {
-      right: theme.spacing() * 2,
+  root: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    [theme.breakpoints.down("xs")]: {
+      flexGrow: 1,
     },
+    //Margin
+    marginRight: theme.spacing(1),
+    marginLeft: "auto",
+    //Background
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+  },
+  inputRoot: {
+    color: "inherit",
+    width: "100%",
+  },
+  search: {
+    width: theme.spacing(7),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputInput: {
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
+    [theme.breakpoints.up("sm")]: {
+      width: 170,
+      "&:focus": {
+        width: 220,
+      },
+    },
+    [theme.breakpoints.up("md")]: {
+      width: 220,
+      "&:focus": {
+        width: 250,
+      },
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: 250,
+      "&:focus": {
+        width: 280,
+      },
+    },
+    padding: theme.spacing(1, 1, 1, 7),
+    fontFamily: alternativeFont,
+    transition: theme.transitions.create("width"),
   },
 }));
 
@@ -62,70 +95,13 @@ const NavBar: React.FC = (props) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const isSizeSmall = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down("md")
-  );
-
-  const location = useLocation();
-  const path = location.pathname.split("/")[1];
-  const tabs = ["home", "projects", "experience"];
-  const tabIcons = [<Home />, <DeviceHub />, <BusinessCenter />];
-  const excludedTabs = ["colors", "tags"];
-  const currentTab = tabs.includes(path)
-    ? path
-    : excludedTabs.includes(path)
-    ? false
-    : "home";
-
-  return (
-    <AppBar elevation={2} color="transparent" position="static">
-      <Toolbar>
-        {isSizeSmall && (
-          <TooltipBtn
-            component="btn"
-            icon={<MenuButton />}
-            title="Open Sidebar"
-            onClick={() => dispatch(toggleSidebar(true))}
-            className={classes.menuButton}
-          />
-        )}
-        <Tabs className={classes.tabs} value={currentTab}>
-          {tabs.map((tab, i) => {
-            const upperCase = tab.toUpperCase();
-            return (
-              <Tab
-                key={tab}
-                icon={isSizeSmall ? tabIcons[i] : undefined}
-                value={tab}
-                component={StyledLink}
-                to={`/${tab}`}
-                label={isSizeSmall ? null : upperCase}
-              ></Tab>
-            );
-          })}
-        </Tabs>
-        <NavButtons isSizeSmall={isSizeSmall} />
-      </Toolbar>
-    </AppBar>
-  );
-};
-
-export default NavBar;
-
-interface NavButtonsProps {
-  isSizeSmall: boolean;
-}
-
-const NavButtons: React.FC<NavButtonsProps> = ({ isSizeSmall }) => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
   const theme = useTheme();
 
-  const isMenuOpen = useSelector(getIsNavBtnsMenuOpen);
+  const isSizeSmall = useMediaQuery(theme.breakpoints.down("md"));
 
   const isDarkMode = theme.palette.type === "dark";
 
-  const btns = [
+  const btns: TooltipBtnProps[] = [
     {
       title: `Toggle ${isDarkMode ? "Light" : "Dark"} Theme`,
       onClick: () => {
@@ -133,18 +109,6 @@ const NavButtons: React.FC<NavButtonsProps> = ({ isSizeSmall }) => {
       },
       component: "btn",
       icon: isDarkMode ? <Brightness7 /> : <Brightness4 />,
-    },
-    {
-      title: "Browse Tags",
-      component: "link",
-      to: "tags",
-      icon: <Label />,
-    },
-    {
-      title: "Edit Website Colors",
-      to: "colors",
-      component: "link",
-      icon: <Palette />,
     },
     {
       title: "GitHub Repository",
@@ -155,34 +119,42 @@ const NavButtons: React.FC<NavButtonsProps> = ({ isSizeSmall }) => {
   ];
 
   return (
-    <div className={classes.navBtns}>
-      {!isSizeSmall ? (
-        <div>
-          {(btns as TooltipBtnProps[]).map((props, i) => (
-            <TooltipBtn key={i} {...props} />
-          ))}
-        </div>
-      ) : (
-        <>
+    <AppBar elevation={2} color="transparent" position="static">
+      <Toolbar className={classes.toolbar}>
+        {isSizeSmall && (
           <TooltipBtn
-            icon={<MenuButton />}
-            title="Open Menu"
+            size={isSizeSmall ? "small" : "medium"}
             component="btn"
-            onClick={() => dispatch(toggleNavBtnsMenu(true))}
+            icon={<MenuButton />}
+            title="Open Sidebar"
+            onClick={() => dispatch(toggleSidebar(true))}
+            className={classes.menuButton}
           />
-          <Drawer
-            anchor="right"
-            open={isMenuOpen}
-            onClose={() => dispatch(toggleNavBtnsMenu(false))}
-          >
-            <List>
-              {(btns as ListActionProps[]).map((props, i) => (
-                <ListAction {...props} key={i} />
-              ))}
-            </List>
-          </Drawer>
-        </>
-      )}
-    </div>
+        )}
+        <div className={classes.root}>
+          <div className={classes.search}>
+            <SearchIcon />
+          </div>
+          <Input
+            disableUnderline
+            placeholder="Search..."
+            inputProps={{
+              "aria-label": "Search...",
+            }}
+            type="search"
+            // inputRef={inputRef}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+        </div>
+        {btns.map((btn, i) => (
+          <TooltipBtn key={i} {...btn} />
+        ))}
+      </Toolbar>
+    </AppBar>
   );
 };
+
+export default NavBar;

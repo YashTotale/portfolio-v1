@@ -186,6 +186,7 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
                   className={classes.link}
                   to="/home"
                   hash={hash}
+                  withoutScrollToTop
                 >
                   <ListItem button className={classes.nested}>
                     <ListItemText inset primary={readableHomeHashes[i]} />

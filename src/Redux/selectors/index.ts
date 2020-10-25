@@ -14,7 +14,6 @@ export interface State {
 
 export {
   getIsDarkMode,
-  getIsNavBtnsMenuOpen,
   getPrimaryColor,
   getSecondaryColor,
   getColors,

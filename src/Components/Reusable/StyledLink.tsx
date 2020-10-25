@@ -14,6 +14,7 @@ interface StyledLinkProps {
   hash?: string;
   className?: string;
   onClick?: () => any;
+  withoutScrollToTop?: boolean;
   color?:
     | "initial"
     | "inherit"
@@ -28,7 +29,15 @@ const StyledLink = forwardRef<
   HTMLAnchorElement,
   PropsWithChildren<StyledLinkProps>
 >((props, ref) => {
-  const { to, hash, children, color, onClick, className } = props;
+  const {
+    to,
+    hash,
+    children,
+    color,
+    onClick,
+    className,
+    withoutScrollToTop,
+  } = props;
 
   return color ? (
     <MuiLink
@@ -36,7 +45,11 @@ const StyledLink = forwardRef<
       onClick={onClick}
       className={className}
       color={color}
-      to={{ pathname: to, state: { scrollToTop: true }, hash: hash }}
+      to={{
+        pathname: to,
+        state: { scrollToTop: !withoutScrollToTop },
+        hash: hash,
+      }}
       component={RouterLink}
       ref={ref}
     >
@@ -49,7 +62,7 @@ const StyledLink = forwardRef<
       to={{
         pathname: to,
         state: {
-          scrollToTop: true,
+          scrollToTop: !withoutScrollToTop,
         },
         hash: hash,
       }}

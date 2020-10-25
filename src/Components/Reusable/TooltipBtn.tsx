@@ -7,6 +7,7 @@ import { Tooltip } from "@material-ui/core";
 
 export interface TooltipBtnProps {
   title: string;
+  size?: "medium" | "small";
   icon: JSX.Element;
   component: "a" | "btn" | "link";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;

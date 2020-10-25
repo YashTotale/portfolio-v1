@@ -9,6 +9,7 @@ import {} from "@material-ui/icons";
 
 interface ActionButtonProps {
   icon: JSX.Element;
+  size?: "medium" | "small";
   component: "a" | "btn" | "link";
   onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => any;
   href?: string;
@@ -22,26 +23,37 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   icon,
   onClick,
   to,
+  size,
   className,
 }) => {
   switch (component) {
     case "a": {
       return (
-        <IconButton component={ModifiedA} href={href} className={className}>
+        <IconButton
+          size={size}
+          component={ModifiedA}
+          href={href}
+          className={className}
+        >
           {icon}
         </IconButton>
       );
     }
     case "btn": {
       return (
-        <IconButton onClick={onClick} className={className}>
+        <IconButton size={size} onClick={onClick} className={className}>
           {icon}
         </IconButton>
       );
     }
     case "link": {
       return (
-        <IconButton component={StyledLink} to={`/${to}`} className={className}>
+        <IconButton
+          size={size}
+          component={StyledLink}
+          to={`/${to}`}
+          className={className}
+        >
           {icon}
         </IconButton>
       );

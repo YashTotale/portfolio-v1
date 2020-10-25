@@ -2,14 +2,11 @@ import { cssColors, schemes, shades } from "../../Utils/colors";
 import {
   TOGGLE_DARK_MODE,
   toggleDarkMode,
-  TOGGLE_NAV_BTNS_MENU,
-  toggleNavBtnsMenu,
   CHANGE_COLORS,
   changeColors,
   CHANGE_SHADE,
   changeShade,
   ToggleDarkModePayload,
-  ToggleNavBtnsMenuPayload,
   ChangeColorsPayload,
   ChangeShadePayload,
 } from "./display.actions";
@@ -23,22 +20,6 @@ describe("The display actions", () => {
     const actual = toggleDarkMode();
 
     expect(actual).toEqual(expected);
-  });
-
-  test("The toggleNavBtnsMenu action", () => {
-    const values = [true, false, undefined];
-
-    values.forEach((isOpen) => {
-      const expected: ToggleNavBtnsMenuPayload = {
-        type: TOGGLE_NAV_BTNS_MENU,
-        payload: {
-          isOpen,
-        },
-      };
-      const actual = toggleNavBtnsMenu(isOpen);
-
-      expect(actual).toEqual(expected);
-    });
   });
 
   test("The changeColors action", () => {

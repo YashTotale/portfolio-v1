@@ -17,21 +17,6 @@ export const toggleDarkMode = (
   },
 });
 
-//Toggle Nav Btns Menu
-
-export interface ToggleNavBtnsMenuPayload {
-  type: typeof TOGGLE_NAV_BTNS_MENU;
-  payload: { isOpen?: boolean };
-}
-
-export const TOGGLE_NAV_BTNS_MENU = "TOGGLE_NAV_BTNS_MENU";
-export const toggleNavBtnsMenu = (
-  isOpen?: boolean
-): ToggleNavBtnsMenuPayload => ({
-  type: TOGGLE_NAV_BTNS_MENU,
-  payload: { isOpen },
-});
-
 //Change colors
 
 export interface ChangeColorsPayload {

@@ -16,6 +16,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIsDarkMode, getPalette } from "./Redux/selectors";
 import { toggleDarkMode } from "./Redux/actions";
 
+export const alternativeFont = "Arial, sans-serif";
+
 const Theme: React.FC = ({ children }) => {
   const dispatch = useDispatch();
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -37,7 +39,7 @@ const Theme: React.FC = ({ children }) => {
         overrides: {
           MuiTooltip: {
             tooltip: {
-              fontFamily: "Roboto, Arial, sans-serif",
+              fontFamily: alternativeFont,
               fontWeight: 600,
               fontSize: "0.72rem",
               backgroundColor: "rgb(0, 0, 0, 0.76)",
@@ -45,20 +47,20 @@ const Theme: React.FC = ({ children }) => {
           },
           MuiTab: {
             wrapper: {
-              fontFamily: "Roboto, Arial, sans-serif",
+              fontFamily: alternativeFont,
               fontWeight: 600,
               fontSize: "0.9rem",
             },
           },
           MuiButton: {
             label: {
-              fontFamily: "Roboto, Arial, sans-serif",
+              fontFamily: alternativeFont,
               fontWeight: 600,
             },
           },
           MuiAlert: {
             message: {
-              fontFamily: "Roboto, Arial, sans-serif",
+              fontFamily: alternativeFont,
               fontWeight: 600,
             },
           },
