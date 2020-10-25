@@ -1,5 +1,5 @@
 //React Imports
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import ProfilePic from "./ProfilePic";
 import StyledLink from "../Reusable/StyledLink";
 import AboutMeBackground from "../../Images/Misc/AboutMe.jpg";
@@ -74,7 +74,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme: Theme) => ({
   },
 }));
 
-const AboutMe: React.FC = () => {
+interface AboutMeProps {}
+
+const AboutMe = forwardRef<HTMLDivElement, AboutMeProps>((props, ref) => {
   const [hovering, setHovering] = useState(false);
   const dispatch = useDispatch();
 
@@ -85,6 +87,7 @@ const AboutMe: React.FC = () => {
       onMouseOver={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
       className={classes.root}
+      ref={ref}
     >
       <div className={classes.overlay} />
       <div className={classes.content}>
@@ -132,7 +135,7 @@ const AboutMe: React.FC = () => {
       </div>
     </Paper>
   );
-};
+});
 
 interface ClickableStyleProps {
   hovering: boolean;

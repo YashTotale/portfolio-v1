@@ -1,5 +1,5 @@
 // React Imports
-import React from "react";
+import React, { forwardRef } from "react";
 import emailjs from "emailjs-com";
 import {
   SubmitHandler,
@@ -118,169 +118,173 @@ export interface Inputs {
   rating: number | null;
 }
 
-const ContactForm: React.FC<ContactFormProps> = () => {
-  const dispatch = useDispatch();
+const ContactForm = forwardRef<HTMLDivElement, ContactFormProps>(
+  (props, ref) => {
+    const dispatch = useDispatch();
 
-  const inputs: (keyof Inputs)[] = [
-    "name",
-    "message",
-    "email",
-    "bugs",
-    "rating",
-  ];
+    const inputs: (keyof Inputs)[] = [
+      "name",
+      "message",
+      "email",
+      "bugs",
+      "rating",
+    ];
 
-  const contact = useSelector(getContact);
+    const contact = useSelector(getContact);
 
-  const { name, email, message, bugs, rating, loading, success } = contact;
+    const { name, email, message, bugs, rating, loading, success } = contact;
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+    const { executeRecaptcha } = useGoogleReCaptcha();
 
-  const { register, handleSubmit, errors, control, reset } = useForm<Inputs>({
-    mode: "onTouched",
-    defaultValues: {
-      name,
-      email,
-      message,
-      bugs,
-      rating,
-    },
-  });
+    const { register, handleSubmit, errors, control, reset } = useForm<Inputs>({
+      mode: "onTouched",
+      defaultValues: {
+        name,
+        email,
+        message,
+        bugs,
+        rating,
+      },
+    });
 
-  const errorsBool = Boolean(Object.keys(errors).length);
+    const errorsBool = Boolean(Object.keys(errors).length);
 
-  const classes = useStyles({
-    errors: errorsBool,
-    success,
-  });
+    const classes = useStyles({
+      errors: errorsBool,
+      success,
+    });
 
-  const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
-    //eslint-disable-next-line
-    e?.preventDefault();
-    dispatch(setContact(inputs));
-    dispatch(setContactLoading(true));
-    try {
-      const token = await executeRecaptcha?.("contact_form");
-      if (!token) {
-        throw new Error("ReCaptcha was unable to authorize this response.");
-      } else {
-        await emailjs.send(SERVICE_ID, TEMPLATE_ID, inputs, EMAILJS_USER_ID);
+    const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
+      //eslint-disable-next-line
+      e?.preventDefault();
+      dispatch(setContact(inputs));
+      dispatch(setContactLoading(true));
+      try {
+        const token = await executeRecaptcha?.("contact_form");
+        if (!token) {
+          throw new Error("ReCaptcha was unable to authorize this response.");
+        } else {
+          await emailjs.send(SERVICE_ID, TEMPLATE_ID, inputs, EMAILJS_USER_ID);
 
-        dispatch(setContactSuccess(true));
+          dispatch(setContactSuccess(true));
+        }
+      } catch (err) {
+        dispatch(setContactSuccess(false));
+      } finally {
+        dispatch(setContactLoading(false));
       }
-    } catch (err) {
-      dispatch(setContactSuccess(false));
-    } finally {
-      dispatch(setContactLoading(false));
-    }
-  };
+    };
 
-  return (
-    <div className={classes.formContainer}>
-      {loading ? (
-        <div className={classes.loading}>
-          <CircularProgress />
-        </div>
-      ) : success === null ? (
-        <form className={classes.contact} onSubmit={handleSubmit(onSubmit)}>
-          <InputField errors={errors} name="name" register={register} />
-          <InputField
-            errors={errors}
-            name="message"
-            register={register}
-            textarea
-          />
-          <InputField
-            errors={errors}
-            name="email"
-            register={register}
-            rules={{
-              pattern: {
-                value: EMAIL_REGEX,
-                message: "Please enter a valid email address",
-              },
-            }}
-          />
-          <InputField
-            errors={errors}
-            name="bugs"
-            register={register}
-            props={{
-              label: "Any Bugs?",
-            }}
-            textarea
-            notRequired
-          />
-          <Typography className={classes.rate} variant="body1">
-            Rate the site?
-          </Typography>
-          <Controller
-            name="rating"
-            control={control}
-            render={({ onChange, onBlur, value }) => (
-              <Rating
-                name="rating"
-                value={parseInt(value)}
-                onChange={onChange}
-                onBlur={onBlur}
-              />
+    return (
+      <div ref={ref} className={classes.formContainer}>
+        {loading ? (
+          <div className={classes.loading}>
+            <CircularProgress />
+          </div>
+        ) : success === null ? (
+          <form className={classes.contact} onSubmit={handleSubmit(onSubmit)}>
+            <InputField errors={errors} name="name" register={register} />
+            <InputField
+              errors={errors}
+              name="message"
+              register={register}
+              textarea
+            />
+            <InputField
+              errors={errors}
+              name="email"
+              register={register}
+              rules={{
+                pattern: {
+                  value: EMAIL_REGEX,
+                  message: "Please enter a valid email address",
+                },
+              }}
+            />
+            <InputField
+              errors={errors}
+              name="bugs"
+              register={register}
+              props={{
+                label: "Any Bugs?",
+              }}
+              textarea
+              notRequired
+            />
+            <Typography className={classes.rate} variant="body1">
+              Rate the site?
+            </Typography>
+            <Controller
+              name="rating"
+              control={control}
+              render={({ onChange, onBlur, value }) => (
+                <Rating
+                  name="rating"
+                  value={parseInt(value)}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                />
+              )}
+              className={classes.rating}
+            ></Controller>
+            <Button
+              className={classes.submit}
+              color="primary"
+              variant="outlined"
+              type={errorsBool ? undefined : "submit"}
+            >
+              Submit
+            </Button>
+          </form>
+        ) : (
+          <Paper className={classes.submitPaper}>
+            <Typography className={classes.submitTitle} variant="h4">
+              {success
+                ? "Form submission successful"
+                : "Form submission failed"}
+            </Typography>
+            {success ? (
+              <CheckCircle className={classes.submitIcon} />
+            ) : (
+              <Cancel className={classes.submitIcon} />
             )}
-            className={classes.rating}
-          ></Controller>
-          <Button
-            className={classes.submit}
-            color="primary"
-            variant="outlined"
-            type={errorsBool ? undefined : "submit"}
-          >
-            Submit
-          </Button>
-        </form>
-      ) : (
-        <Paper className={classes.submitPaper}>
-          <Typography className={classes.submitTitle} variant="h4">
-            {success ? "Form submission successful" : "Form submission failed"}
-          </Typography>
-          {success ? (
-            <CheckCircle className={classes.submitIcon} />
-          ) : (
-            <Cancel className={classes.submitIcon} />
-          )}
-          <Typography variant="body1" className={classes.submitExplanation}>
-            {success
-              ? "Thanks for your response! I'll try to get back to you within a few days. "
-              : "An error occurred while submitting your response. Please try again. "}
-            Here is what was submitted:
-          </Typography>
-          {inputs.map((input, i) => {
-            return (
-              contact[input] && (
-                <Typography
-                  key={i}
-                  className={classes.submitInfo}
-                  variant="body1"
-                >
-                  <strong>{capitalize(input)}: </strong>
-                  {contact[input]}
-                </Typography>
-              )
-            );
-          })}
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={() => {
-              reset(contact);
-              dispatch(setContactSuccess(null));
-            }}
-            className={classes.submitAnother}
-          >
-            {success ? "Submit another response" : "Try again"}
-          </Button>
-        </Paper>
-      )}
-    </div>
-  );
-};
+            <Typography variant="body1" className={classes.submitExplanation}>
+              {success
+                ? "Thanks for your response! I'll try to get back to you within a few days. "
+                : "An error occurred while submitting your response. Please try again. "}
+              Here is what was submitted:
+            </Typography>
+            {inputs.map((input, i) => {
+              return (
+                contact[input] && (
+                  <Typography
+                    key={i}
+                    className={classes.submitInfo}
+                    variant="body1"
+                  >
+                    <strong>{capitalize(input)}: </strong>
+                    {contact[input]}
+                  </Typography>
+                )
+              );
+            })}
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={() => {
+                reset(contact);
+                dispatch(setContactSuccess(null));
+              }}
+              className={classes.submitAnother}
+            >
+              {success ? "Submit another response" : "Try again"}
+            </Button>
+          </Paper>
+        )}
+      </div>
+    );
+  }
+);
 
 const useInputFieldStyles = makeStyles((theme) => ({
   input: {

@@ -44,7 +44,3 @@ export const gitAdd = async (location: string | string[]) => {
     process.exit(1);
   }
 };
-
-export const createURL = (value: string): string => {
-  return value.toLowerCase().replace(/\s/g, "-");
-};

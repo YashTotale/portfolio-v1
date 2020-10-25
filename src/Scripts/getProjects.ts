@@ -1,9 +1,10 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { writeData, baseOptions, createURL } from "./index";
+import { writeData, baseOptions } from "./index";
 import downloadImages from "./downloadImages";
 import { DEFAULT_PROJECT_ICON } from "../Utils/links";
 import { ProjectProps } from "../Utils/interfaces";
+import { createURL } from "../Utils/funcs";
 
 const projectsRequest = () => {
   return new Promise<ProjectObject[]>((resolve, reject) => {

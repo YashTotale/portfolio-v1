@@ -1,5 +1,5 @@
 //React Imports
-import React from "react";
+import React, { createRef, RefObject, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import withScroll from "../Components/HigherOrder/withScroll";
@@ -59,7 +59,25 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   }),
 }));
 
+export const readableHomeHashes = ["About Me", "Projects", "Contact"];
+
+export const homeHashes = ["about-me", "projects", "contact"] as const;
+
 const HomePage: React.FC = () => {
+  const { hash } = useLocation();
+
+  const refs: Record<typeof homeHashes[number], RefObject<HTMLDivElement>> = {
+    "about-me": createRef<HTMLDivElement>(),
+    contact: createRef<HTMLDivElement>(),
+    projects: createRef<HTMLDivElement>(),
+  };
+
+  useEffect(() => {
+    const section = hash.substring(1) as typeof homeHashes[number];
+    const scrollTo = refs?.[section]?.current?.offsetTop;
+    scrollTo && window.scrollTo({ behavior: "smooth", top: scrollTo, left: 0 });
+  }, [hash, refs]);
+
   const isSizeXL = useMediaQuery((theme: Theme) =>
     theme.breakpoints.only("xl")
   );
@@ -74,36 +92,38 @@ const HomePage: React.FC = () => {
         <title>Home - Yash Totale</title>
       </Helmet>
       <div className={classes.home}>
-        <AboutMe />
+        <AboutMe ref={refs["about-me"]} />
         <div>
-          <Tooltip title="View all projects">
-            <Typography
-              className={classes.projectsHeader}
-              align="center"
-              variant="h4"
-            >
-              <StyledLink className={classes.projectsLink} to={"/projects"}>
-                Projects
-              </StyledLink>
-            </Typography>
-          </Tooltip>
-          <hr />
-          <div className={classes.projects}>
-            {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
-              return (
-                <ProjectOverlay
-                  {...project}
-                  type="Projects"
-                  url={`/projects/${project.url}`}
-                  key={i}
-                  {...sizes}
-                />
-              );
-            })}
+          <div ref={refs.projects}>
+            <Tooltip title="View all projects">
+              <Typography
+                className={classes.projectsHeader}
+                align="center"
+                variant="h4"
+              >
+                <StyledLink className={classes.projectsLink} to={"/projects"}>
+                  Projects
+                </StyledLink>
+              </Typography>
+            </Tooltip>
+            <hr />
+            <div className={classes.projects}>
+              {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
+                return (
+                  <ProjectOverlay
+                    {...project}
+                    type="Projects"
+                    url={`/projects/${project.url}`}
+                    key={i}
+                    {...sizes}
+                  />
+                );
+              })}
+            </div>
           </div>
           <Typography variant="h4">Contact</Typography>
           <hr />
-          <ContactForm />
+          <ContactForm ref={refs.contact} />
         </div>
       </div>
     </>

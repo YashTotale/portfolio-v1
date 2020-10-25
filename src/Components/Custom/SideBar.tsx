@@ -2,6 +2,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import useStateCallback from "../../Hooks/useStateCallback";
+import { homeHashes, readableHomeHashes } from "../../Pages/Home";
 import { LocationState } from "../HigherOrder/withScroll";
 import StyledLink from "../Reusable/StyledLink";
 import StaticImage from "../Reusable/StaticImage";
@@ -28,12 +29,13 @@ import {
   ListItem,
   ListItemText,
   ListItemAvatar,
+  ListItemIcon,
   Collapse,
   Toolbar,
   Divider,
   useMediaQuery,
 } from "@material-ui/core";
-import { ExpandMore, ExpandLess } from "@material-ui/icons";
+import { ExpandLess } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
@@ -48,8 +50,11 @@ const useStyles = makeStyles((theme) => ({
   list: {
     width: SIDEBAR_WIDTH,
   },
+  listItem: {
+    fontWeight: theme.typography.fontWeightBold,
+  },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(3),
   },
   link: {
     color: "inherit",
@@ -84,6 +89,7 @@ const SideBar: React.FC<SideBarProps> = () => {
       ) : (
         <Drawer
           variant="permanent"
+          anchor="left"
           open
           classes={{
             paper: classes.drawerPaper,
@@ -104,22 +110,48 @@ const Contents: React.FC = () => {
       <Toolbar />
       <Divider />
       <List component="nav" className={classes.list}>
+        <Category type="Home" />
         {imageFolders.map((folder, i) => (
           <Category key={i} type={folder} />
         ))}
+        <StyledLink className={classes.link} to="/colors">
+          <ListItem button>
+            <ListItemText className={classes.listItem}>Colors</ListItemText>
+          </ListItem>
+        </StyledLink>
       </List>
     </>
   );
 };
 
-interface CategoryProps {
-  type: ImageFolder;
+interface CategoryStyleProps {
+  open: boolean;
 }
 
-const Category: React.FC<CategoryProps> = ({ type }) => {
-  const history = useHistory<LocationState>();
+const useCategoryStyles = makeStyles<Theme, CategoryStyleProps>((theme) => ({
+  arrow: ({ open }) => ({
+    transform: open ? "rotate(0deg)" : "rotate(180deg)",
+    transition: "0.5s",
+  }),
+  link: {
+    color: "inherit",
+    textDecoration: "none",
+  },
+}));
 
+interface CategoryProps {
+  type: ImageFolder | "Home";
+  collapseItems?: JSX.Element;
+}
+
+const Category: React.FC<CategoryProps> = ({ type, collapseItems }) => {
   const [open, setOpen] = useStateCallback<boolean>(false);
+
+  const classes = useCategoryStyles({
+    open,
+  });
+
+  const history = useHistory<LocationState>();
 
   const url = `/${type.toLowerCase()}`;
 
@@ -141,13 +173,21 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
         }
       >
         <ListItemText primary={type} />
-        {open ? <ExpandLess /> : <ExpandMore />}
+        <ExpandLess className={classes.arrow} />
       </ListItem>
       <Collapse in={open} timeout="auto">
         <List component="div" disablePadding>
-          {data.map((item, i) => (
-            <Item key={i} baseURL={url} type={type} {...item} />
-          ))}
+          {type === "Home"
+            ? homeHashes.map((hash, i) => (
+                <StyledLink className={classes.link} to="/home" hash={hash}>
+                  <ListItem button className={classes.nested}>
+                    <ListItemText inset primary={readableHomeHashes[i]} />
+                  </ListItem>
+                </StyledLink>
+              ))
+            : data.map((item, i) => (
+                <Item key={i} baseURL={url} type={type} {...item} />
+              ))}
         </List>
       </Collapse>
     </>

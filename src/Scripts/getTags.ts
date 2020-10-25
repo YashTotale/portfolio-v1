@@ -1,8 +1,9 @@
 //@ts-ignore
 import reader from "g-sheets-api";
-import { writeData, baseOptions, createURL } from "./index";
+import { writeData, baseOptions } from "./index";
 import { TagProps } from "../Utils/interfaces";
 import { DEFAULT_TAG_ICON } from "../Utils/links";
+import { createURL } from "../Utils/funcs";
 import downloadImages from "./downloadImages";
 
 const tagsRequest = () => {

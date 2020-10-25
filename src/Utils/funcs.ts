@@ -17,3 +17,7 @@ export const findClosestInteger = (num: number, nums: number[]): number => {
 
   return nums.indexOf(closest);
 };
+
+export const createURL = (value: string): string => {
+  return value.toLowerCase().replace(/\s/g, "-");
+};
