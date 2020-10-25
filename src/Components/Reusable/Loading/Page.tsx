@@ -1,5 +1,6 @@
 //React Imports
 import React from "react";
+import { SIDEBAR_WIDTH } from "../../../Utils/constants";
 
 //Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core";
@@ -11,11 +12,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-  },
-  navSkeleton: {
-    width: "100vw",
-    height: "7vmin",
-    marginBottom: "3%",
+    marginTop: 25,
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: SIDEBAR_WIDTH,
+    },
   },
   mainSkeleton: {
     width: "80vw",
@@ -73,7 +73,6 @@ const Loading: React.FC = (props) => {
   return (
     <>
       <div className={classes.loadingSkeleton}>
-        <Skeleton variant="rect" className={classes.navSkeleton} />
         <Skeleton className={classes.mainSkeleton} variant="rect" />
         <div className={classes.rowSkeleton}>
           {[...Array(3)].map((x, i) => (

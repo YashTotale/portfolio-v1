@@ -2,7 +2,7 @@
 import React from "react";
 import TooltipBtn, { TooltipBtnProps } from "../Reusable/TooltipBtn";
 import { LINKEDIN_URL, GITHUB_URL, EMAIL_URL } from "../../Utils/links";
-import { FOOTER_HEIGHT } from "../../Utils/constants";
+import { FOOTER_HEIGHT, SIDEBAR_WIDTH } from "../../Utils/constants";
 
 // Redux Imports
 
@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: FOOTER_HEIGHT,
     zIndex: 0,
+  },
+  toolbar: {
+    marginTop: 10,
+    [theme.breakpoints.up("lg")]: {
+      marginLeft: SIDEBAR_WIDTH,
+    },
   },
   footerDiv: {
     display: "flex",
@@ -66,7 +72,7 @@ const Footer: React.FC = (props) => {
       color="transparent"
       className={classes.footer}
     >
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <div className={classes.footerDiv}>
           <div className={classes.footerBtns}>
             {footerBtns.map((props, i) => (

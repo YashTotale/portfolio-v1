@@ -3,6 +3,8 @@ import { hot } from "react-hot-loader";
 import React, { lazy, Suspense } from "react";
 import { Helmet } from "react-helmet";
 import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+import NavBar from "./Components/Custom/NavBar";
+import SideBar from "./Components/Custom/SideBar";
 import Loading from "./Components/Reusable/Loading/Page";
 
 //Images
@@ -15,20 +17,13 @@ import { RECAPTCHA_KEY } from "./Utils/CONFIDENTIAL";
 
 //Material UI Imports
 import Theme from "./Theme";
-import {
-  makeStyles,
-  Theme as ThemeProps,
-  useMediaQuery,
-  useTheme,
-} from "@material-ui/core";
+import { makeStyles, Theme as ThemeProps, useTheme } from "@material-ui/core";
 
 //Router Imports
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 // Lazy Imports
 const SnackBar = lazy(() => import("./Components/Custom/SnackBar"));
-const NavBar = lazy(() => import("./Components/Custom/NavBar"));
-const SideBar = lazy(() => import("./Components/Custom/SideBar"));
 const Footer = lazy(() => import("./Components/Custom/Footer"));
 
 const Home = lazy(() => import("./Pages/Home"));
@@ -58,10 +53,10 @@ const App: React.FC = (props) => {
       <Theme>
         <Head />
         <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_KEY}>
+          <NavBar />
+          <SideBar />
           <Suspense fallback={<Loading />}>
             <div className={classes.pageContainer}>
-              <NavBar />
-              <SideBar />
               <Routes />
               <SnackBar />
             </div>

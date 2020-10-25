@@ -1,4 +1,9 @@
 {
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
   "terminalAllInOne.scripts": [
     {
       "name": "Get Data",
@@ -9,8 +14,8 @@
       "script": "npm run deploy"
     },
     {
-      "name": "Lint",
-      "script": "eslint ."
+      "name": "Build status",
+      "script": "travis status"
     }
   ]
 }
