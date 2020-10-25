@@ -9,7 +9,7 @@ import {
   getSnackbarColor,
   getSnackbarMessage,
   getSnackbarSeverity,
-} from "../../Redux/selectors/display.selectors";
+} from "../../Redux/selectors";
 import { handleSnackbarClose } from "../../Redux/actions";
 
 // Material UI Imports

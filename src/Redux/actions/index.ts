@@ -7,10 +7,6 @@ export {
   changeColors,
   CHANGE_SHADE,
   changeShade,
-  SET_SNACKBAR_MESSAGE,
-  setSnackbarMessage,
-  HANDLE_SNACKBAR_CLOSE,
-  handleSnackbarClose,
 } from "./display.actions";
 export {
   SET_CONTACT_NAME,
@@ -31,3 +27,9 @@ export {
   setContact,
 } from "./contact.actions";
 export { TOGGLE_SIDEBAR, toggleSidebar } from "./sidebar.actions";
+export {
+  SET_SNACKBAR_MESSAGE,
+  setSnackbarMessage,
+  HANDLE_SNACKBAR_CLOSE,
+  handleSnackbarClose,
+} from "./snackbar.actions";

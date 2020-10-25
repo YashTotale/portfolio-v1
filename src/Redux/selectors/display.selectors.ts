@@ -33,14 +33,3 @@ export const getPalette = createSelector(
   getShades,
   (colors, shades) => [...colors, ...shades]
 );
-
-export const getSnackbarMessage = (state: State) =>
-  state.display.snackBar.message;
-
-export const getIsSnackbarOpen = (state: State) =>
-  state.display.snackBar.isOpen;
-
-export const getSnackbarSeverity = (state: State) =>
-  state.display.snackBar.severity;
-
-export const getSnackbarColor = (state: State) => state.display.snackBar.color;

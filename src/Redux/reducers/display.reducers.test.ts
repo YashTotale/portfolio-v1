@@ -3,14 +3,10 @@ import {
   TOGGLE_NAV_BTNS_MENU,
   CHANGE_COLORS,
   CHANGE_SHADE,
-  SET_SNACKBAR_MESSAGE,
-  HANDLE_SNACKBAR_CLOSE,
   ToggleDarkModePayload,
   ToggleNavBtnsMenuPayload,
   ChangeColorsPayload,
   ChangeShadePayload,
-  SetSnackbarMessagePayload,
-  HandleSnackbarClosePayload,
 } from "../actions/display.actions";
 import {
   displayReducer,
@@ -101,47 +97,6 @@ describe("The display reducer", () => {
         primary: "A200",
         secondary: originalState.shades.secondary,
       },
-    };
-
-    const actual = displayReducer(originalState, fakeAction);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("Sets Snackbar message", () => {
-    const message = "test";
-    const severity = "error";
-    const color = null;
-
-    const fakeAction: SetSnackbarMessagePayload = {
-      type: SET_SNACKBAR_MESSAGE,
-      payload: { message, severity, color },
-    };
-
-    const expected: DisplayState = {
-      ...originalState,
-      snackBar: {
-        isOpen: true,
-        severity,
-        message,
-        color,
-      },
-    };
-
-    const actual = displayReducer(originalState, fakeAction);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("Closes the Snackbar", () => {
-    const fakeAction: HandleSnackbarClosePayload = {
-      type: HANDLE_SNACKBAR_CLOSE,
-      payload: {},
-    };
-
-    const expected: DisplayState = {
-      ...originalState,
-      snackBar: { ...originalState.snackBar, isOpen: false },
     };
 
     const actual = displayReducer(originalState, fakeAction);

@@ -1,9 +1,15 @@
-import { ContactState, DisplayState, SidebarState } from "../reducers";
+import {
+  ContactState,
+  DisplayState,
+  SidebarState,
+  SnackbarState,
+} from "../reducers";
 
 export interface State {
   display: DisplayState;
   contact: ContactState;
   sidebar: SidebarState;
+  snackbar: SnackbarState;
 }
 
 export {
@@ -16,9 +22,6 @@ export {
   getSecondaryShade,
   getShades,
   getPalette,
-  getIsSnackbarOpen,
-  getSnackbarMessage,
-  getSnackbarSeverity,
 } from "./display.selectors";
 export {
   getContactName,
@@ -30,3 +33,9 @@ export {
   getContact,
 } from "./contact.selectors";
 export { getIsSidebarOpen, getSidebar } from "./sidebar.selectors";
+export {
+  getIsSnackbarOpen,
+  getSnackbarColor,
+  getSnackbarMessage,
+  getSnackbarSeverity,
+} from "./snackbar.selectors";

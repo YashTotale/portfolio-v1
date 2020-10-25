@@ -1,6 +1,7 @@
 import { sampleContactState } from "./contact.reducers";
 import { sampleDisplayState } from "./display.reducers";
 import { sampleSidebarState } from "./sidebar.reducers";
+import { sampleSnackbarState } from "./snackbar.reducers";
 
 export {
   displayReducer as display,
@@ -23,8 +24,16 @@ export {
 } from "./sidebar.reducers";
 export type { SidebarState } from "./sidebar.reducers";
 
+export {
+  snackbarReducer as snackbar,
+  initialSnackbarState,
+  sampleSnackbarState,
+} from "./snackbar.reducers";
+export type { SnackbarState } from "./snackbar.reducers";
+
 export const sampleState = {
   display: sampleDisplayState,
   contact: sampleContactState,
   sidebar: sampleSidebarState,
+  snackbar: sampleSnackbarState,
 };

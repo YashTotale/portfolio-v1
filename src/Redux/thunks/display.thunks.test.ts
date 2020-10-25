@@ -1,15 +1,17 @@
 import sinon from "sinon";
 import { sampleState } from "../reducers";
 import {
-  SET_SNACKBAR_MESSAGE,
   TOGGLE_DARK_MODE,
   CHANGE_SHADE,
   CHANGE_COLORS,
   ChangeColorsPayload,
   ChangeShadePayload,
   ToggleDarkModePayload,
-  SetSnackbarMessagePayload,
 } from "../actions/display.actions";
+import {
+  SET_SNACKBAR_MESSAGE,
+  SetSnackbarMessagePayload,
+} from "../actions/snackbar.actions";
 import {
   toggleDarkModeWMessage,
   changeShadeWMessage,

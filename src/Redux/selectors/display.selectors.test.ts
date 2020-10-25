@@ -8,9 +8,6 @@ import {
   getSecondaryShade,
   getShades,
   getPalette,
-  getSnackbarMessage,
-  getIsSnackbarOpen,
-  getSnackbarSeverity,
 } from "./display.selectors";
 import { cssColor, shade } from "../../Utils/colors";
 import { sampleState } from "../reducers";
@@ -73,24 +70,6 @@ describe("The display selectors", () => {
     const fakeShades: shade[] = ["300", "A400"];
     const expected = [...fakeColors, ...fakeShades];
     const actual = getPalette.resultFunc(fakeColors, fakeShades);
-    expect(actual).toEqual(expected);
-  });
-
-  test("The getSnackbarMessage selector", () => {
-    const expected = sampleState.display.snackBar.message;
-    const actual = getSnackbarMessage(sampleState);
-    expect(actual).toEqual(expected);
-  });
-
-  test("The getIsSnackbarOpen selector", () => {
-    const expected = sampleState.display.snackBar.isOpen;
-    const actual = getIsSnackbarOpen(sampleState);
-    expect(actual).toEqual(expected);
-  });
-
-  test("The getSnackbarSeverity selector", () => {
-    const expected = sampleState.display.snackBar.severity;
-    const actual = getSnackbarSeverity(sampleState);
     expect(actual).toEqual(expected);
   });
 });
