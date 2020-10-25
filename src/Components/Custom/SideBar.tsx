@@ -102,7 +102,9 @@ const SideBar: React.FC<SideBarProps> = () => {
   );
 };
 
-const Contents: React.FC = () => {
+interface ContentsProps {}
+
+const Contents: React.FC<ContentsProps> = ({}) => {
   const classes = useStyles();
 
   return (
@@ -141,10 +143,9 @@ const useCategoryStyles = makeStyles<Theme, CategoryStyleProps>((theme) => ({
 
 interface CategoryProps {
   type: ImageFolder | "Home";
-  collapseItems?: JSX.Element;
 }
 
-const Category: React.FC<CategoryProps> = ({ type, collapseItems }) => {
+const Category: React.FC<CategoryProps> = ({ type }) => {
   const [open, setOpen] = useStateCallback<boolean>(false);
 
   const classes = useCategoryStyles({
@@ -155,13 +156,14 @@ const Category: React.FC<CategoryProps> = ({ type, collapseItems }) => {
 
   const url = `/${type.toLowerCase()}`;
 
-  const data = type === "Projects" ? Projects : Tags;
+  const data =
+    type === "Projects" ? Projects : type === "Experience" ? Experience : Tags;
 
   return (
     <>
       <ListItem
         button
-        onClick={() =>
+        onClick={() => {
           setOpen(!open, () => {
             history.push({
               pathname: url,
@@ -169,8 +171,8 @@ const Category: React.FC<CategoryProps> = ({ type, collapseItems }) => {
                 scrollToTop: true,
               },
             });
-          })
-        }
+          });
+        }}
       >
         <ListItemText primary={type} />
         <ExpandLess className={classes.arrow} />
@@ -179,7 +181,12 @@ const Category: React.FC<CategoryProps> = ({ type, collapseItems }) => {
         <List component="div" disablePadding>
           {type === "Home"
             ? homeHashes.map((hash, i) => (
-                <StyledLink className={classes.link} to="/home" hash={hash}>
+                <StyledLink
+                  key={i}
+                  className={classes.link}
+                  to="/home"
+                  hash={hash}
+                >
                   <ListItem button className={classes.nested}>
                     <ListItemText inset primary={readableHomeHashes[i]} />
                   </ListItem>

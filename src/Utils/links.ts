@@ -6,6 +6,8 @@ export const DEFAULT_PROJECT_ICON =
 
 export const DEFAULT_TAG_ICON = "https://i.ibb.co/NK41dGg/image.png";
 
+export const DEFAULT_EXPERIENCE_ICON = "https://i.ibb.co/y0rkqjt/image.png";
+
 export const LINKEDIN_URL = "https://linkedin.com/in/yash-totale";
 
 export const GITHUB_URL = "https://github.com/YashTotale";

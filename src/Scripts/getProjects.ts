@@ -19,7 +19,7 @@ const cleanProjectData = (
   const cleanedProjects: ProjectProps[] = [];
   let allTags: string[] = [];
 
-  projects.forEach((project) => {
+  projects.forEach((project, i) => {
     const { id, description, start, end, icons, tags, name } = project;
     if (!id) {
       const [prevProject] = cleanedProjects.slice(-1);
@@ -43,6 +43,11 @@ const cleanProjectData = (
         tags: [tags],
         url: createURL(name),
       };
+
+      if (i === projects.length - 1) {
+        newProject.icons.push(newProject.icons[0]);
+      }
+
       cleanedProjects.push(newProject);
 
       allTags = allTags.concat(newProject.tags);
