@@ -2,15 +2,11 @@ import { Inputs } from "../../Components/Custom/ContactForm";
 import {
   setContact,
   setContactBugs,
-  SetContactBugsPayload,
   setContactEmail,
-  SetContactEmailPayload,
   setContactLoading,
   SetContactLoadingPayload,
   setContactMessage,
-  SetContactMessagePayload,
   setContactName,
-  SetContactNamePayload,
   SetContactPayload,
   setContactRating,
   SetContactRatingPayload,
@@ -25,61 +21,42 @@ import {
 import { ratings } from "../../Utils/types";
 
 describe("The contact actions", () => {
-  test("The setContactName action", () => {
-    const name = "Test name";
-
-    const expected: SetContactNamePayload = {
+  const stringTests = [
+    {
+      fn: setContactName,
       type: SET_CONTACT_NAME,
-      payload: {
-        name,
-      },
-    };
-    const actual = setContactName(name);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("The setContactMessage action", () => {
-    const message = "Test message";
-
-    const expected: SetContactMessagePayload = {
+      key: "name",
+    },
+    {
+      fn: setContactMessage,
       type: SET_CONTACT_MESSAGE,
-      payload: {
-        message,
-      },
-    };
-    const actual = setContactMessage(message);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("The setContactEmail action", () => {
-    const email = "hello@email.com";
-
-    const expected: SetContactEmailPayload = {
+      key: "message",
+    },
+    {
+      fn: setContactEmail,
       type: SET_CONTACT_EMAIL,
-      payload: {
-        email,
-      },
-    };
-    const actual = setContactEmail(email);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("The setContactBugs action", () => {
-    const bugs = "Test bugs";
-
-    const expected: SetContactBugsPayload = {
+      key: "email",
+    },
+    {
+      fn: setContactBugs,
       type: SET_CONTACT_BUGS,
-      payload: {
-        bugs,
-      },
-    };
+      key: "bugs",
+    },
+  ];
+  stringTests.forEach(({ fn, type, key }) => {
+    test(`The ${fn.name} action`, () => {
+      const value = "Test";
+      const expected = {
+        type,
+        payload: {
+          [key]: value,
+        },
+      };
 
-    const actual = setContactBugs(bugs);
+      const actual = fn(value);
 
-    expect(actual).toEqual(expected);
+      expect(actual).toEqual(expected);
+    });
   });
 
   test("The setContactRating action", () => {
