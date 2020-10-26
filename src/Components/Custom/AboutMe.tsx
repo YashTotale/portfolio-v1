@@ -172,7 +172,7 @@ interface ClickableProps {
 const Clickable: React.FC<ClickableProps> = ({
   children,
   type,
-  to,
+  to = "/",
   onClick,
   noSpaceAfter,
 }) => {
@@ -180,7 +180,7 @@ const Clickable: React.FC<ClickableProps> = ({
   const classes = useClickableStyles({ type, hovering });
   const renderChildren =
     type === "link" ? (
-      <StyledLink to={to ?? "/"}>{children}</StyledLink>
+      <StyledLink to={to}>{children}</StyledLink>
     ) : (
       <span>{children}</span>
     );

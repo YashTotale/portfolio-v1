@@ -39,36 +39,24 @@ const StyledLink = forwardRef<
     withoutScrollToTop,
   } = props;
 
+  const attrs = {
+    onClick: onClick,
+    className: className,
+    color: color,
+    to: {
+      pathname: to,
+      state: { scrollToTop: !withoutScrollToTop },
+      hash: hash,
+    },
+    ref: ref,
+  };
+
   return color ? (
-    <MuiLink
-      {...props}
-      onClick={onClick}
-      className={className}
-      color={color}
-      to={{
-        pathname: to,
-        state: { scrollToTop: !withoutScrollToTop },
-        hash: hash,
-      }}
-      component={RouterLink}
-      ref={ref}
-    >
+    <MuiLink {...props} {...attrs} component={RouterLink}>
       {children}
     </MuiLink>
   ) : (
-    <RouterLink
-      {...props}
-      onClick={onClick}
-      to={{
-        pathname: to,
-        state: {
-          scrollToTop: !withoutScrollToTop,
-        },
-        hash: hash,
-      }}
-      className={className}
-      ref={ref}
-    >
+    <RouterLink {...props} {...attrs}>
       {children}
     </RouterLink>
   );
