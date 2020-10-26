@@ -30,9 +30,16 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     marginLeft: "auto",
     //Background
-    backgroundColor: fade(theme.palette.common.white, 0.15),
+    transition: theme.transitions.create("background-color"),
+    backgroundColor: fade(
+      theme.palette.common[theme.palette.type === "dark" ? "white" : "black"],
+      0.15
+    ),
     "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
+      backgroundColor: fade(
+        theme.palette.common[theme.palette.type === "dark" ? "white" : "black"],
+        0.25
+      ),
     },
   },
   inputRoot: {
