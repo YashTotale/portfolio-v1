@@ -45,7 +45,7 @@
     "fuse.js": "^6.4.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-google-recaptcha-v3": "^1.6.1",
+    "react-google-recaptcha-v3": "^1.7.0",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.9.6",
     "react-redux": "^7.2.2",
