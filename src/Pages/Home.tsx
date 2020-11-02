@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import withScroll from "../Components/HigherOrder/withScroll";
 import StyledLink from "../Components/Reusable/StyledLink";
 import AboutMe from "../Components/Custom/AboutMe";
-import ContactForm from "../Components/Custom/ContactForm";
+import ContactForm from "./Contact";
 import ProjectOverlay, {
   DefaultOverlaySizes,
 } from "../Components/Reusable/Overlay";
@@ -29,13 +29,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     [theme.breakpoints.up("lg")]: {
       width: "80%",
     },
-  },
-  projectsHeader: {
-    display: "table",
-    margin: "auto",
-  },
-  projectsLink: {
-    color: "inherit",
   },
   projects: ({ xl, lg, md, sm, xs }) => ({
     margin: "15px 0px",
@@ -95,18 +88,11 @@ const HomePage: React.FC = () => {
         <AboutMe ref={refs["about-me"]} />
         <div>
           <div ref={refs.projects}>
-            <Tooltip title="View all projects">
-              <Typography
-                className={classes.projectsHeader}
-                align="center"
-                variant="h4"
-              >
-                <StyledLink className={classes.projectsLink} to={"/projects"}>
-                  Projects
-                </StyledLink>
-              </Typography>
-            </Tooltip>
-            <hr />
+            <Header
+              tooltip="View all projects"
+              link="/projects"
+              name="Projects"
+            />
             <div className={classes.projects}>
               {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
                 return (
@@ -121,11 +107,43 @@ const HomePage: React.FC = () => {
               })}
             </div>
           </div>
-          <Typography variant="h4">Contact</Typography>
-          <hr />
-          <ContactForm ref={refs.contact} />
+          <Header tooltip="Visit Contact Page" name="Contact" link="/contact" />
+          <ContactForm component ref={refs.contact} />
         </div>
       </div>
+    </>
+  );
+};
+
+const useHeaderStyles = makeStyles((theme) => ({
+  header: {
+    display: "table",
+    margin: "auto",
+  },
+  link: {
+    color: "inherit",
+  },
+}));
+
+interface HeaderProps {
+  tooltip: string;
+  name: string;
+  link: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ tooltip, name, link }) => {
+  const classes = useHeaderStyles();
+
+  return (
+    <>
+      <Tooltip title={tooltip}>
+        <Typography className={classes.header} align="center" variant="h4">
+          <StyledLink className={classes.link} to={link}>
+            {name}
+          </StyledLink>
+        </Typography>
+      </Tooltip>
+      <hr />
     </>
   );
 };

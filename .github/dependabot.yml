@@ -6,7 +6,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-      time: "7:15"
+      time: "07:15"
       timezone: "America/Los_Angeles"
     labels:
       - "dependencies"

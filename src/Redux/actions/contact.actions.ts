@@ -1,4 +1,4 @@
-import { Inputs } from "../../Components/Custom/ContactForm";
+import { Inputs } from "../../Pages/Contact";
 import { Rating } from "../../Utils/types";
 export interface SetContactNamePayload {
   type: typeof SET_CONTACT_NAME;

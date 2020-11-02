@@ -32,6 +32,7 @@ const Projects = lazy(() => import("./Pages/Projects"));
 const Tags = lazy(() => import("./Pages/Tags"));
 const Experience = lazy(() => import("./Pages/Experience"));
 const Colors = lazy(() => import("./Pages/Colors"));
+const Contact = lazy(() => import("./Pages/Contact"));
 
 const useStyles = makeStyles((theme: ThemeProps) => ({
   pages: {
@@ -97,6 +98,9 @@ const Routes: React.FC = (props) => {
         </Route>
         <Route path="/colors">
           <Colors />
+        </Route>
+        <Route path="/contact">
+          <Contact />
         </Route>
         <Route path="/home">
           <Home />

@@ -10,21 +10,21 @@ import {
   Controller,
 } from "react-hook-form";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { EMAIL_REGEX } from "../../Utils/constants";
+import { EMAIL_REGEX } from "../Utils/constants";
 import {
   EMAILJS_USER_ID,
   SERVICE_ID,
   TEMPLATE_ID,
-} from "../../Utils/CONFIDENTIAL";
+} from "../Utils/CONFIDENTIAL";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
-import { getContact } from "../../Redux/selectors";
+import { getContact } from "../Redux/selectors";
 import {
   setContact,
   setContactLoading,
   setContactSuccess,
-} from "../../Redux/actions";
+} from "../Redux/actions";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
@@ -44,16 +44,19 @@ import { Rating } from "@material-ui/lab";
 interface StyleProps {
   errors: boolean;
   success: boolean | null;
+  component?: boolean;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
-  formContainer: {
+  formContainer: ({ component }) => ({
     minHeight: 459,
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "stretch",
     alignItems: "stretch",
-  },
+    padding: component ? undefined : 20,
+  }),
   loading: {
     display: "flex",
     justifyContent: "center",
@@ -108,7 +111,9 @@ const useStyles = makeStyles<Theme, StyleProps>(({ palette }) => ({
   },
 }));
 
-interface ContactFormProps {}
+interface ContactFormProps {
+  component?: boolean;
+}
 
 export interface Inputs {
   name: string;
@@ -119,7 +124,7 @@ export interface Inputs {
 }
 
 const ContactForm = forwardRef<HTMLDivElement, ContactFormProps>(
-  (props, ref) => {
+  ({ component }, ref) => {
     const dispatch = useDispatch();
 
     const inputs: (keyof Inputs)[] = [
@@ -152,6 +157,7 @@ const ContactForm = forwardRef<HTMLDivElement, ContactFormProps>(
     const classes = useStyles({
       errors: errorsBool,
       success,
+      component,
     });
 
     const onSubmit: SubmitHandler<Inputs> = async (inputs, e) => {
