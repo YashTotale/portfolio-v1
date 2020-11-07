@@ -29,7 +29,9 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 // Page Imports
 const Home = lazy(() => import("./Pages/Home"));
 const Projects = lazy(() => import("./Pages/Projects"));
+const Project = lazy(() => import("./Pages/Project"));
 const Tags = lazy(() => import("./Pages/Tags"));
+const Tag = lazy(() => import("./Pages/Tag"));
 const Experience = lazy(() => import("./Pages/Experience"));
 const Colors = lazy(() => import("./Pages/Colors"));
 const Contact = lazy(() => import("./Pages/Contact"));
@@ -87,14 +89,20 @@ const Routes: React.FC = (props) => {
   return (
     <div className={classes.pages}>
       <Switch>
-        <Route path="/projects/:id?">
+        <Route exact path="/projects">
           <Projects />
+        </Route>
+        <Route path="/projects/:id">
+          <Project />
         </Route>
         <Route path="/experience">
           <Experience />
         </Route>
-        <Route path="/tags/:id?">
+        <Route exact path="/tags">
           <Tags />
+        </Route>
+        <Route path="/tags/:id">
+          <Tag />
         </Route>
         <Route path="/colors">
           <Colors />
