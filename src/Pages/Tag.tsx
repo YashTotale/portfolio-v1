@@ -4,12 +4,13 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Tags from "../Data/Tags.json";
 import StaticImage from "../Components/Reusable/StaticImage";
+
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
-import { Paper } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
+import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   jumbotron: {
     display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 
@@ -32,6 +36,10 @@ interface TagProps {}
 
 const Tag: FC<TagProps> = ({}) => {
   const classes = useStyles();
+
+  const isSizeSmall = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down("sm")
+  );
 
   const { id } = useParams<Params>();
 
@@ -46,6 +54,7 @@ const Tag: FC<TagProps> = ({}) => {
         </Helmet>
         <div className={classes.tagPage}>
           <Paper className={classes.jumbotron}>
+            <Typography variant={isSizeSmall ? "h4" : "h3"}>{name}</Typography>
             <StaticImage icons={icons} name={name} type="Tags" />
           </Paper>
         </div>

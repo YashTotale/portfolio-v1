@@ -6,15 +6,7 @@
   "editor.detectIndentation": false,
   "terminalAllInOne.scripts": [
     {
-      "name": "Get Data",
-      "script": "npm run data"
-    },
-    {
-      "name": "Deploy",
-      "script": "npm run deploy"
-    },
-    {
-      "name": "Build status",
+      "name": "Travis status",
       "script": "travis status"
     }
   ]

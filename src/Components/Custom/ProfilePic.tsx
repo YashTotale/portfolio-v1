@@ -25,6 +25,11 @@ const ProfilePic: React.FC = () => {
         ratio={PROFILE_PIC_RATIO}
         src={ProfilePicture}
         alt="Profile Picture"
+        xs={140}
+        sm={160}
+        md={180}
+        lg={200}
+        xl={220}
       />
     </div>
   );

@@ -52,14 +52,6 @@ const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
   },
-  projectImg: {
-    [theme.breakpoints.only("xs")]: {
-      width: 150,
-      height: 150,
-    },
-    width: 200,
-    height: 200,
-  },
   projectTitle: {
     textAlign: "center",
     marginTop: 5,
@@ -146,7 +138,8 @@ const Display: React.FC<ProjectProps> = ({
               icons={icons}
               name={name}
               type="Projects"
-              className={classes.projectImg}
+              width={200}
+              xs={150}
             />
             <Typography
               className={classes.projectTitle}

@@ -4,9 +4,10 @@ import { ImageFolder } from "../../Utils/types";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { Avatar, CircularProgress, useTheme } from "@material-ui/core";
+import { CircularProgress, useTheme } from "@material-ui/core";
 import {} from "@material-ui/icons";
 import { Skeleton } from "@material-ui/lab";
+import Image from "./Image";
 
 const useStyles = makeStyles((theme) => ({
   loading: {
@@ -28,6 +29,13 @@ interface StaticImageProps {
   icons: string[];
   avatar?: boolean;
   className?: string;
+  ratio?: number;
+  width?: number;
+  xl?: number;
+  lg?: number;
+  md?: number;
+  sm?: number;
+  xs?: number;
 }
 
 const StaticImage: React.FC<StaticImageProps> = ({
@@ -36,6 +44,13 @@ const StaticImage: React.FC<StaticImageProps> = ({
   icons,
   avatar,
   className,
+  ratio,
+  width,
+  xs,
+  sm,
+  md,
+  lg,
+  xl,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -62,11 +77,19 @@ const StaticImage: React.FC<StaticImageProps> = ({
   }, [theme.palette.type, name, type, icons]);
 
   return icon ? (
-    avatar ? (
-      <Avatar className={className} src={icon} alt={name} />
-    ) : (
-      <img className={className} src={icon} alt={name} />
-    )
+    <Image
+      className={className}
+      src={icon}
+      alt={name}
+      avatar={avatar}
+      ratio={ratio}
+      width={width}
+      xs={xs}
+      sm={sm}
+      md={md}
+      lg={lg}
+      xl={xl}
+    />
   ) : (
     <div className={`${classes.loading} ${className}`}>
       <Skeleton variant="rect" className={classes.skeleton} />
