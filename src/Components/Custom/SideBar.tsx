@@ -29,7 +29,6 @@ import {
   ListItem,
   ListItemText,
   ListItemAvatar,
-  ListItemIcon,
   Collapse,
   Toolbar,
   Divider,
@@ -116,13 +115,27 @@ const Contents: React.FC<ContentsProps> = ({}) => {
         {imageFolders.map((folder, i) => (
           <Category key={i} type={folder} />
         ))}
-        <StyledLink className={classes.link} to="/colors">
-          <ListItem button>
-            <ListItemText className={classes.listItem}>Colors</ListItemText>
-          </ListItem>
-        </StyledLink>
+        <ListLink to="/colors" name="Colors" />
+        <ListLink to="/contact" name="Contact" />
       </List>
     </>
+  );
+};
+
+interface ListLinkProps {
+  to: string;
+  name: string;
+}
+
+const ListLink: React.FC<ListLinkProps> = ({ to, name }) => {
+  const classes = useStyles();
+
+  return (
+    <StyledLink className={classes.link} to={to}>
+      <ListItem button>
+        <ListItemText className={classes.listItem}>{name}</ListItemText>
+      </ListItem>
+    </StyledLink>
   );
 };
 

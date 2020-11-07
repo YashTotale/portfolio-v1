@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import withScroll from "../Components/HigherOrder/withScroll";
 import StyledLink from "../Components/Reusable/StyledLink";
+import Grid from "../Components/Reusable/Grid";
 import AboutMe from "../Components/Custom/AboutMe";
 import ContactForm from "./Contact";
 import ProjectOverlay, {
@@ -19,37 +20,18 @@ import {
   Typography,
   useMediaQuery,
 } from "@material-ui/core";
-import { BreakpointValues } from "@material-ui/core/styles/createBreakpoints";
 
-interface StyleProps extends BreakpointValues {}
-
-const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
+const useStyles = makeStyles<Theme>((theme) => ({
   home: {
     margin: "0px 20px",
     [theme.breakpoints.up("lg")]: {
       width: "80%",
     },
   },
-  projects: ({ xl, lg, md, sm, xs }) => ({
+  projects: {
     margin: "15px 0px",
-    display: "grid",
     gap: "30px",
-    [theme.breakpoints.down("xl")]: {
-      gridTemplateColumns: `repeat(auto-fit, minmax(${xl}px, 1fr))`,
-    },
-    [theme.breakpoints.down("lg")]: {
-      gridTemplateColumns: `repeat(auto-fit, minmax(${lg}px, 1fr))`,
-    },
-    [theme.breakpoints.down("md")]: {
-      gridTemplateColumns: `repeat(auto-fit, minmax(${md}px, 1fr))`,
-    },
-    [theme.breakpoints.down("sm")]: {
-      gridTemplateColumns: `repeat(auto-fit, minmax(${sm}px, 1fr))`,
-    },
-    [theme.breakpoints.down("xs")]: {
-      gridTemplateColumns: `repeat(auto-fit, minmax(${xs}px, 1fr))`,
-    },
-  }),
+  },
 }));
 
 export const readableHomeHashes = ["About Me", "Projects", "Contact"];
@@ -58,6 +40,7 @@ export const homeHashes = ["about-me", "projects", "contact"] as const;
 
 const HomePage: React.FC = () => {
   const { hash } = useLocation();
+  const classes = useStyles();
 
   const refs: Record<typeof homeHashes[number], RefObject<HTMLDivElement>> = {
     "about-me": createRef<HTMLDivElement>(),
@@ -77,8 +60,6 @@ const HomePage: React.FC = () => {
 
   const sizes = { ...DefaultOverlaySizes, sm: 170 };
 
-  const classes = useStyles({ ...sizes });
-
   return (
     <>
       <Helmet>
@@ -93,7 +74,7 @@ const HomePage: React.FC = () => {
               link="/projects"
               name="Projects"
             />
-            <div className={classes.projects}>
+            <Grid className={classes.projects} {...sizes}>
               {Projects.slice(0, isSizeXL ? 8 : 6).map((project, i) => {
                 return (
                   <ProjectOverlay
@@ -105,7 +86,7 @@ const HomePage: React.FC = () => {
                   />
                 );
               })}
-            </div>
+            </Grid>
           </div>
           <Header tooltip="Visit Contact Page" name="Contact" link="/contact" />
           <ContactForm component ref={refs.contact} />

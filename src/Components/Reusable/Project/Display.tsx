@@ -20,10 +20,20 @@ import {
 import { GitHub, Launch } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: 10,
+    height: "100%",
+    //Flex
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   projectDiv: {
-    margin: 15,
     position: "relative",
-    maxWidth: "500px",
+    maxWidth: 550,
+    width: "100%",
+    height: "100%",
     // Flex
     display: "flex",
     flexDirection: "column",
@@ -77,9 +87,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    flexGrow: 1,
     // Border Radius
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
+  },
+  projectDescriptions: {
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 2,
   },
   projectDescription: {
     margin: 4,
@@ -90,11 +106,16 @@ const useStyles = makeStyles((theme) => ({
   projectTags: {
     marginTop: 8,
     alignSelf: "center",
+    flexGrow: 2,
   },
-  projectTime: {
-    alignSelf: "center",
-    marginTop: 4,
+  projectFooter: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    flexGrow: 1,
   },
+  projectTime: {},
 }));
 
 const Display: React.FC<ProjectProps> = ({
@@ -113,69 +134,75 @@ const Display: React.FC<ProjectProps> = ({
   const isSizeSmall = useMediaQuery(theme.breakpoints.only("xs"));
 
   return (
-    <div className={classes.projectDiv}>
-      <Paper elevation={24} className={classes.projectImgDiv}>
-        <StyledLink
-          className={classes.projectUrl}
-          to={`/projects/${url}`}
-          color="primary"
-        >
-          <StaticImage
-            icons={icons}
-            name={name}
-            type="Projects"
-            className={classes.projectImg}
-          />
-          <Typography
-            className={classes.projectTitle}
-            variant={isSizeSmall ? "h5" : "h4"}
+    <div className={classes.root}>
+      <div className={classes.projectDiv}>
+        <Paper elevation={24} className={classes.projectImgDiv}>
+          <StyledLink
+            className={classes.projectUrl}
+            to={`/projects/${url}`}
+            color="primary"
           >
-            {name}
-          </Typography>
-        </StyledLink>
-        {sourcecode && (
-          <TooltipBtn
-            className={classes.projectSourceCode}
-            title={`Source Code for ${name}`}
-            icon={<GitHub />}
-            component="a"
-            href={sourcecode}
-          />
-        )}
-        {link && (
-          <TooltipBtn
-            className={classes.projectLink}
-            title={`View ${name}`}
-            icon={<Launch />}
-            component="a"
-            href={link}
-          />
-        )}
-      </Paper>
-      <Paper elevation={10} className={classes.projectInfo}>
-        {description.map((desc, i) => (
-          <Typography
-            key={i}
-            className={classes.projectDescription}
-            variant={isSizeSmall ? "body2" : "body1"}
-          >
-            <Parser original={desc} />
-          </Typography>
-        ))}
-        <Divider className={classes.projectDivider} />
-        <div className={classes.projectTags}>
-          {tags.map((tag, i) => (
-            <MiniTag
-              key={i}
-              {...(Tags.find(({ name }) => tag === name) as TagProps)}
+            <StaticImage
+              icons={icons}
+              name={name}
+              type="Projects"
+              className={classes.projectImg}
             />
-          ))}
-        </div>
-        <Divider className={classes.projectDivider} />
-        <Typography className={classes.projectTime} variant="subtitle1">
-          {start} - {end ?? "Present"}
-        </Typography>
-      </Paper>
+            <Typography
+              className={classes.projectTitle}
+              variant={isSizeSmall ? "h5" : "h4"}
+            >
+              {name}
+            </Typography>
+          </StyledLink>
+          {sourcecode && (
+            <TooltipBtn
+              className={classes.projectSourceCode}
+              title={`Source Code for ${name}`}
+              icon={<GitHub />}
+              component="a"
+              href={sourcecode}
+            />
+          )}
+          {link && (
+            <TooltipBtn
+              className={classes.projectLink}
+              title={`View ${name}`}
+              icon={<Launch />}
+              component="a"
+              href={link}
+            />
+          )}
+        </Paper>
+        <Paper elevation={10} className={classes.projectInfo}>
+          <div className={classes.projectDescriptions}>
+            {description.map((desc, i) => (
+              <Typography
+                key={i}
+                className={classes.projectDescription}
+                variant={isSizeSmall ? "body2" : "body1"}
+              >
+                <Parser original={desc} />
+              </Typography>
+            ))}
+          </div>
+          <Divider className={classes.projectDivider} />
+          <div className={classes.projectTags}>
+            {tags.map((tag, i) => (
+              <MiniTag
+                key={i}
+                {...(Tags.find(({ name }) => tag === name) as TagProps)}
+              />
+            ))}
+          </div>
+          <Divider className={classes.projectDivider} />
+          <div className={classes.projectFooter}>
+            <Typography className={classes.projectTime} variant="subtitle1">
+              {start} - {end ?? "Present"}
+            </Typography>
+          </div>
+        </Paper>
+      </div>
     </div>
   );
 };
