@@ -169,7 +169,7 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
 
   const url = `/${type.toLowerCase()}`;
 
-  const data =
+  const data: { url: string; name: string; icons: string[] }[] =
     type === "Projects" ? Projects : type === "Experience" ? Experience : Tags;
 
   return (
@@ -199,15 +199,22 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
                   className={classes.link}
                   to="/home"
                   hash={hash}
-                  withoutScrollToTop
+                  noScrollToTop
                 >
                   <ListItem button className={classes.nested}>
                     <ListItemText inset primary={readableHomeHashes[i]} />
                   </ListItem>
                 </StyledLink>
               ))
-            : data.map((item, i) => (
-                <Item key={i} baseURL={url} type={type} {...item} />
+            : data.map(({ url, name, icons }, i) => (
+                <Item
+                  key={i}
+                  baseURL={url}
+                  type={type}
+                  url={url}
+                  name={name}
+                  icons={icons}
+                />
               ))}
         </List>
       </Collapse>

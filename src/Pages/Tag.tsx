@@ -21,10 +21,22 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   jumbotron: {
+    margin: 15,
+    padding: 15,
+    //Flex
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+  },
+  tagInfo: {
+    marginTop: 10,
+    //Flex
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
   },
 }));
 
@@ -55,7 +67,16 @@ const Tag: FC<TagProps> = ({}) => {
         <div className={classes.tagPage}>
           <Paper className={classes.jumbotron}>
             <Typography variant={isSizeSmall ? "h4" : "h3"}>{name}</Typography>
-            <StaticImage icons={icons} name={name} type="Tags" />
+            <div className={classes.tagInfo}>
+              <StaticImage
+                width={250}
+                xl={300}
+                xs={175}
+                icons={icons}
+                name={name}
+                type="Tags"
+              />
+            </div>
           </Paper>
         </div>
       </>

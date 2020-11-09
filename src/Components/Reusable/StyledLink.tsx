@@ -14,7 +14,7 @@ interface StyledLinkProps {
   hash?: string;
   className?: string;
   onClick?: () => any;
-  withoutScrollToTop?: boolean;
+  noScrollToTop?: boolean;
   color?:
     | "initial"
     | "inherit"
@@ -25,40 +25,28 @@ interface StyledLinkProps {
     | "error";
 }
 
-const StyledLink = forwardRef<
+const StyledLink: React.FC<StyledLinkProps> = forwardRef<
   HTMLAnchorElement,
   PropsWithChildren<StyledLinkProps>
->((props, ref) => {
-  const {
-    to,
-    hash,
-    children,
-    color,
-    onClick,
-    className,
-    withoutScrollToTop,
-  } = props;
-
+>(({ to, hash, children, color, onClick, className, noScrollToTop }, ref) => {
   const attrs = {
     onClick: onClick,
     className: className,
     color: color,
     to: {
       pathname: to,
-      state: { scrollToTop: !withoutScrollToTop },
+      state: { scrollToTop: !noScrollToTop },
       hash: hash,
     },
     ref: ref,
   };
 
   return color ? (
-    <MuiLink {...props} {...attrs} component={RouterLink}>
+    <MuiLink {...attrs} component={RouterLink}>
       {children}
     </MuiLink>
   ) : (
-    <RouterLink {...props} {...attrs}>
-      {children}
-    </RouterLink>
+    <RouterLink {...attrs}>{children}</RouterLink>
   );
 });
 

@@ -20,23 +20,23 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   img: ({ width, xl, lg, md, sm, xs, ratio }) => ({
     width: width,
     height: width && Math.round(width * ratio),
-    [theme.breakpoints.down("xl")]: xl && {
+    [theme.breakpoints.only("xl")]: xl && {
       width: xl,
       height: Math.round(xl * ratio),
     },
-    [theme.breakpoints.down("lg")]: lg && {
+    [theme.breakpoints.only("lg")]: lg && {
       width: lg,
       height: Math.round(lg * ratio),
     },
-    [theme.breakpoints.down("md")]: md && {
+    [theme.breakpoints.only("md")]: md && {
       width: md,
       height: Math.round(md * ratio),
     },
-    [theme.breakpoints.down("sm")]: sm && {
+    [theme.breakpoints.only("sm")]: sm && {
       width: sm,
       height: Math.round(sm * ratio),
     },
-    [theme.breakpoints.down("xs")]: xs && {
+    [theme.breakpoints.only("xs")]: xs && {
       width: xs,
       height: Math.round(xs * ratio),
     },

@@ -19,9 +19,22 @@ export interface ExperienceProps {
   url: string;
 }
 
-export interface TagProps {
+interface BaseTagProps {
   id: string;
   name: string;
   icons: string[];
   url: string;
 }
+
+interface TagPropsWithDescription extends BaseTagProps {
+  description: string[];
+  sourceName: string[];
+  sourceLink: string[];
+}
+interface TagPropsWithoutDescription extends BaseTagProps {
+  description: undefined;
+  sourceName: undefined;
+  sourceLink: undefined;
+}
+
+export type TagProps = TagPropsWithDescription | TagPropsWithoutDescription;

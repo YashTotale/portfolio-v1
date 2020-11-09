@@ -70,6 +70,7 @@ const App: React.FC = (props) => {
 
 const Head: React.FC = (props) => {
   const theme = useTheme();
+  console.log(theme);
   return (
     <Helmet>
       <title>Yash Totale</title>

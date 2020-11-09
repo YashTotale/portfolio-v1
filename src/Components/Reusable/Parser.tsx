@@ -1,4 +1,5 @@
 // React Imports
+import { Link } from "@material-ui/core";
 import React, { ReactElement, useMemo } from "react";
 import Tags from "../../Data/Tags.json";
 import StyledLink from "./StyledLink";
@@ -11,6 +12,19 @@ const Parser: React.FC<ParserProps> = ({ original }) => {
   return useMemo(() => {
     const regexes = [
       [/\*\*(.*?)\*\*/gi, (match: string) => <strong>{match}</strong>],
+      [
+        /\[([\w\s\d]+)\]\(((?:\/|https?:\/\/)[\w\d./?=#]+)\)/gi,
+        (text: string, url: string) => (
+          <Link
+            color="primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={url}
+          >
+            {text}
+          </Link>
+        ),
+      ],
       ...Tags.map((tag) => [
         new RegExp(`(?<![a-zA-Z])(${tag.name})(?![a-zA-Z])`, "gi"),
         (match: string) => (
@@ -27,9 +41,10 @@ const Parser: React.FC<ParserProps> = ({ original }) => {
       while ((matchArray = (regex[0] as RegExp).exec(original)) !== null) {
         matchArrays.push([
           matchArray,
-          (regex[1] as (match: string) => ReactElement<any, any>)(
-            matchArray[1]
-          ),
+          (regex[1] as (
+            match: string,
+            match2?: string
+          ) => ReactElement<any, any>)(matchArray[1], matchArray[2]),
         ]);
       }
     });
