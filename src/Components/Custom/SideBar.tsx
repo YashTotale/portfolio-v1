@@ -167,7 +167,7 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
 
   const history = useHistory<LocationState>();
 
-  const url = `/${type.toLowerCase()}`;
+  const to = `/${type.toLowerCase()}`;
 
   const data: { url: string; name: string; icons: string[] }[] =
     type === "Projects" ? Projects : type === "Experience" ? Experience : Tags;
@@ -179,7 +179,7 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
         onClick={() => {
           setOpen(!open, () => {
             history.push({
-              pathname: url,
+              pathname: to,
               state: {
                 scrollToTop: true,
               },
@@ -209,7 +209,7 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
             : data.map(({ url, name, icons }, i) => (
                 <Item
                   key={i}
-                  baseURL={url}
+                  baseURL={to}
                   type={type}
                   url={url}
                   name={name}
