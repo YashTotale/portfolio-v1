@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Tags from "../Data/Tags.json";
 import StaticImage from "../Components/Reusable/StaticImage";
+import { TagProps as TagDataProps } from "../Utils/interfaces";
 
 // Redux Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import {} from "@material-ui/icons";
+import Parser from "../Components/Reusable/Parser";
 
 const useStyles = makeStyles((theme) => ({
   tagPage: {
@@ -29,14 +31,30 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
+  tagImage: {
+    margin: 5,
+  },
   tagInfo: {
     marginTop: 10,
     //Flex
     display: "flex",
-    flexDirection: "row",
+    flexFlow: "row wrap",
     justifyContent: "center",
+    alignItems: "stretch",
+  },
+  tagDescriptions: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
     alignItems: "center",
-    flexWrap: "wrap",
+    paddingTop: 10,
+    width: "70%",
+    [theme.breakpoints.down("xs")]: {
+      width: "90%",
+    },
+  },
+  tagDescription: {
+    margin: 5,
   },
 }));
 
@@ -53,12 +71,22 @@ const Tag: FC<TagProps> = ({}) => {
     theme.breakpoints.down("sm")
   );
 
+  const isSizeXS = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down("xs")
+  );
+
   const { id } = useParams<Params>();
 
   const tag = Tags.find((tag) => tag.url === id);
 
   if (tag) {
-    const { name, icons } = tag;
+    const {
+      name,
+      icons,
+      description,
+      sourceLink,
+      sourceName,
+    }: TagDataProps = tag;
     return (
       <>
         <Helmet>
@@ -75,7 +103,25 @@ const Tag: FC<TagProps> = ({}) => {
                 icons={icons}
                 name={name}
                 type="Tags"
+                className={classes.tagImage}
               />
+              {description && (
+                <div className={classes.tagDescriptions}>
+                  {description.map((desc, i) => (
+                    <Parser
+                      key={i}
+                      paragraphProps={{
+                        className: classes.tagDescription,
+                        variant: isSizeXS ? "body2" : "body1",
+                        align: "center",
+                      }}
+                      excludedTags={[name]}
+                    >
+                      {desc}
+                    </Parser>
+                  ))}
+                </div>
+              )}
             </div>
           </Paper>
         </div>

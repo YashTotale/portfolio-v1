@@ -170,13 +170,15 @@ const Display: React.FC<ProjectProps> = ({
         <Paper elevation={10} className={classes.projectInfo}>
           <div className={classes.projectDescriptions}>
             {description.map((desc, i) => (
-              <Typography
+              <Parser
                 key={i}
-                className={classes.projectDescription}
-                variant={isSizeSmall ? "body2" : "body1"}
+                paragraphProps={{
+                  className: classes.projectDescription,
+                  variant: isSizeSmall ? "body2" : "body1",
+                }}
               >
-                <Parser original={desc} />
-              </Typography>
+                {desc}
+              </Parser>
             ))}
           </div>
           <Divider className={classes.projectDivider} />
