@@ -5,6 +5,13 @@ import { ExperienceProps } from "../Utils/interfaces";
 import { DEFAULT_EXPERIENCE_ICON } from "../Utils/links";
 import { writeData, baseOptions } from "./index";
 
+export interface ExperienceObject {
+  id: string;
+  name: string;
+  tags: string;
+  icons: string;
+}
+
 const experienceRequest = () => {
   return new Promise<ExperienceObject[]>((resolve, reject) => {
     const options = { ...baseOptions, sheetNumber: 2 };
@@ -62,10 +69,3 @@ export const getExperiences = async () => {
   await writeData("Experience", cleanExperiences);
   return tags;
 };
-
-export interface ExperienceObject {
-  id: string;
-  name: string;
-  tags: string;
-  icons: string;
-}

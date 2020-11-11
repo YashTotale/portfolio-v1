@@ -21,3 +21,7 @@ export const findClosestInteger = (num: number, nums: number[]): number => {
 export const createURL = (value: string): string => {
   return value.toLowerCase().replace(/\s/g, "-");
 };
+
+export const regexEscape = (str: string): string => {
+  return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+};

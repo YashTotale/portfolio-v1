@@ -2,7 +2,12 @@ import { promises, existsSync } from "fs";
 import { join } from "path";
 import simpleGit, { SimpleGit } from "simple-git";
 
-import { ExperienceProps, ProjectProps, TagProps } from "../Utils/interfaces";
+import {
+  ExperienceProps,
+  ProjectProps,
+  TagProps,
+  TermProps,
+} from "../Utils/interfaces";
 
 export const baseOptions = {
   sheetId: "1fxrZIYJUXx-Vz5TljfoSmv8Vpsmh5viybW3hm4GXT04",
@@ -13,11 +18,11 @@ export const dataFolder = join(__dirname, "..", "Data");
 
 export const imagesFolder = join(__dirname, "..", "Images");
 
-export type files = "Experience" | "Projects" | "Tags" | "LinkedIn";
+export type files = "Experience" | "Projects" | "Tags" | "Terms" | "LinkedIn";
 
 export const writeData = async (
   fileName: files,
-  data: ProjectProps[] | ExperienceProps[] | TagProps[] | any
+  data: ProjectProps[] | ExperienceProps[] | TagProps[] | TermProps[] | any
 ) => {
   const { writeFile, mkdir } = promises;
   try {

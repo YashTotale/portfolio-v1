@@ -19,6 +19,11 @@ export interface ExperienceProps {
   url: string;
 }
 
+export interface TermProps {
+  name: string;
+  link: string;
+}
+
 interface BaseTagProps {
   id: string;
   name: string;

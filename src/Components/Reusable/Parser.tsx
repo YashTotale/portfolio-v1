@@ -2,7 +2,11 @@
 import React, { ElementType, FC, ReactElement, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import StyledLink from "./StyledLink";
+import { regexEscape } from "../../Utils/funcs";
+
+//Data Imports
 import Tags from "../../Data/Tags.json";
+import Terms from "../../Data/Terms.json";
 
 // Material UI Imports
 import {
@@ -22,6 +26,7 @@ interface Parsers {
 interface ParserProps {
   children: string;
   excludedTags?: string[];
+  excludedTerms?: string[];
   tagColor?:
     | "initial"
     | "inherit"
@@ -37,6 +42,7 @@ interface ParserProps {
 const Parser: FC<ParserProps> = ({
   children,
   excludedTags,
+  excludedTerms,
   paragraphProps,
   linkProps,
   tagColor,
@@ -45,9 +51,10 @@ const Parser: FC<ParserProps> = ({
     paragraph: ({ children }) => (
       <Typography {...paragraphProps}>
         {children.map((child, i) => (
-          <TagParser
+          <LinkAdder
             key={i}
             excludedTags={excludedTags}
+            excludedTerms={excludedTerms}
             color={tagColor}
             text={child}
           />
@@ -72,9 +79,10 @@ const Parser: FC<ParserProps> = ({
 
 type Regex = [RegExp, (match: string) => JSX.Element, string];
 
-interface TagParserProps {
+interface LinkAdderProps {
   text: ReactElement;
   excludedTags?: string[];
+  excludedTerms?: string[];
   color?:
     | "initial"
     | "inherit"
@@ -85,16 +93,20 @@ interface TagParserProps {
     | "error";
 }
 
-const TagParser: React.FC<TagParserProps> = ({
+const LinkAdder: React.FC<LinkAdderProps> = ({
   color = "primary",
   text,
   excludedTags,
+  excludedTerms,
 }) => {
-  let tagRegexes = useMemo(
-    () =>
-      Tags.map(
+  const regexes = useMemo(
+    () => [
+      ...Tags.map(
         (tag): Regex => [
-          new RegExp(`(?<![a-zA-Z])(${tag.name})(?![a-zA-Z])`, "gi"),
+          new RegExp(
+            `(?<![a-zA-Z])(${regexEscape(tag.name)})(?![a-zA-Z])`,
+            "gi"
+          ),
           (match: string) => (
             <StyledLink color={color} to={`/tags/${tag.url}`}>
               {match}
@@ -103,7 +115,22 @@ const TagParser: React.FC<TagParserProps> = ({
           tag.name,
         ]
       ).filter((val) => !excludedTags || !excludedTags.includes(val[2])),
-    [color, excludedTags]
+      ...Terms.map(
+        (term): Regex => [
+          new RegExp(
+            `(?<![a-zA-Z])(${regexEscape(term.name)})(?![a-zA-Z])`,
+            "gi"
+          ),
+          (match: string) => (
+            <Link color={color} href={term.link}>
+              {match}
+            </Link>
+          ),
+          term.name,
+        ]
+      ).filter((val) => !excludedTerms || !excludedTerms.includes(val[2])),
+    ],
+    [color, excludedTags, excludedTerms]
   );
 
   return useMemo(() => {
@@ -113,7 +140,7 @@ const TagParser: React.FC<TagParserProps> = ({
 
       const value: string = text.props?.children;
 
-      tagRegexes.forEach((regex) => {
+      regexes.forEach((regex) => {
         let matchArray;
         while ((matchArray = regex[0].exec(value)) !== null) {
           matchArrays.push([matchArray, regex[1](matchArray[1])]);
@@ -133,7 +160,7 @@ const TagParser: React.FC<TagParserProps> = ({
     }
 
     return text;
-  }, [text, tagRegexes]);
+  }, [text, regexes]);
 };
 
 export default Parser;

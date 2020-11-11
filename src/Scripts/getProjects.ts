@@ -6,6 +6,18 @@ import { DEFAULT_PROJECT_ICON } from "../Utils/links";
 import { ProjectProps } from "../Utils/interfaces";
 import { createURL } from "../Utils/funcs";
 
+export interface ProjectObject {
+  id: string;
+  name: string;
+  description: string;
+  tags: string;
+  start: string;
+  end?: string;
+  icons?: string;
+  link?: string;
+  sourcecode?: string;
+}
+
 const projectsRequest = () => {
   return new Promise<ProjectObject[]>((resolve, reject) => {
     const options = { ...baseOptions, sheetNumber: 1 };
@@ -57,21 +69,9 @@ const cleanProjectData = (
 };
 
 export const getProjects = async () => {
-  const projects: ProjectObject[] = await projectsRequest();
+  const projects = await projectsRequest();
   const [cleanedProjects, tags] = cleanProjectData(projects);
   await writeData("Projects", cleanedProjects);
   await downloadImages(cleanedProjects, "Projects");
   return tags;
 };
-
-export interface ProjectObject {
-  id: string;
-  name: string;
-  description: string;
-  tags: string;
-  start: string;
-  end?: string;
-  icons?: string;
-  link?: string;
-  sourcecode?: string;
-}
