@@ -4,7 +4,7 @@ import { writeData, baseOptions } from "./index";
 import { TagProps } from "../Utils/interfaces";
 import { DEFAULT_TAG_ICON } from "../Utils/links";
 import { createURL } from "../Utils/funcs";
-import downloadImages from "./downloadImages";
+import { downloadIcons } from "./downloadImages";
 
 interface BaseTagInfo {
   id: string;
@@ -96,5 +96,5 @@ export const getTags = async (tags: string[]) => {
   const allTags = [...new Set(tags)];
   const tagsArray = createTags(allTags, tagInfos);
   await writeData("Tags", tagsArray);
-  await downloadImages(tagsArray, "Tags");
+  await downloadIcons(tagsArray, "Tags");
 };

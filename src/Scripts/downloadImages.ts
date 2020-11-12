@@ -20,7 +20,7 @@ const writeImage = (data: any, location: string) => {
   });
 };
 
-export default async function (objects: Object[], type: ImageFolder) {
+export const downloadIcons = async (objects: Object[], type: ImageFolder) => {
   return new Promise((resolve, reject) => {
     const { mkdir } = promises;
 
@@ -68,4 +68,4 @@ export default async function (objects: Object[], type: ImageFolder) {
       process.exit(1);
     }
   });
-}
+};

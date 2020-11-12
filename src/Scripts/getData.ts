@@ -5,8 +5,6 @@ import { getTerms } from "./getTerms";
 import { getLinkedInData } from "./getLinkedin";
 import { dataFolder, gitAdd, imagesFolder } from "./index";
 
-import wiki from "wikijs";
-
 const getData = async () => {
   try {
     const projectTags = await getProjects();

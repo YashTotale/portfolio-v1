@@ -13,7 +13,7 @@ import Experience from "../../Data/Experience.json";
 import Tags from "../../Data/Tags.json";
 
 //Utils
-import { ImageFolder, imageFolders } from "../../Utils/types";
+import { ImageFolder } from "../../Utils/types";
 import { SIDEBAR_WIDTH } from "../../Utils/constants";
 
 // Redux Imports
@@ -105,6 +105,8 @@ interface ContentsProps {}
 
 const Contents: React.FC<ContentsProps> = ({}) => {
   const classes = useStyles();
+
+  const imageFolders: ImageFolder[] = ["Projects", "Experience", "Tags"];
 
   return (
     <>

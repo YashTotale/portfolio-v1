@@ -122,7 +122,12 @@ const LinkAdder: React.FC<LinkAdderProps> = ({
             "gi"
           ),
           (match: string) => (
-            <Link color={color} href={term.link}>
+            <Link
+              target="_blank"
+              rel="noopener noreferrer"
+              color={color}
+              href={term.link}
+            >
               {match}
             </Link>
           ),

@@ -1,6 +1,7 @@
 //@ts-ignore
 import reader from "g-sheets-api";
 import { writeData, baseOptions } from "./index";
+import { getPageData } from "./getWikipedia";
 import { TermProps } from "../Utils/interfaces";
 
 interface TermObject {
@@ -15,24 +16,48 @@ const termsRequest = () => {
   });
 };
 
-const cleanTermData = (terms: TermObject[]): TermProps[] => {
-  const cleanedTerms: TermProps[] = [];
+const cleanTermData = async (terms: TermObject[]): Promise<TermProps[]> => {
+  return new Promise((resolve, reject) => {
+    const cleanedTerms: TermProps[] = [];
 
-  terms.forEach(({ name, link }) => {
-    const termArray = name.split("; ");
-    termArray.forEach((split) =>
-      cleanedTerms.push({
-        name: split,
-        link,
-      })
-    );
+    terms.forEach(async ({ name, link }, i) => {
+      let summary: string;
+      let image: string;
+      const isWikipedia = link.includes("en.wikipedia.org");
+
+      if (isWikipedia) {
+        const title = link.split("/").pop();
+        if (title) {
+          console.log(title);
+          try {
+            const data = await getPageData(title);
+            summary = data.summary;
+            image = data.image;
+            link = data.url.toString();
+          } catch (e) {
+            console.log(e);
+            reject(e);
+          }
+        }
+      }
+
+      const termArray = name.split("; ");
+      termArray.forEach((split) =>
+        cleanedTerms.push({
+          name: split,
+          link,
+          summary,
+          image,
+        })
+      );
+
+      if (i === terms.length - 1) resolve(cleanedTerms);
+    });
   });
-
-  return cleanedTerms;
 };
 
 export const getTerms = async () => {
   const terms = await termsRequest();
-  const cleanedTerms = cleanTermData(terms);
+  const cleanedTerms = await cleanTermData(terms);
   await writeData("Terms", cleanedTerms);
 };
