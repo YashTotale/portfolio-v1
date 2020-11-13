@@ -1,7 +1,6 @@
 // React Imports
 import React from "react";
 import StyledLink from "./StyledLink";
-import ModifiedA from "./ModifiedA";
 
 // Material UI Imports
 // import { makeStyles } from "@material-ui/core/styles";
@@ -49,7 +48,9 @@ const ListItemComponent: React.FC<ListActionProps> = ({
       return (
         <ListItem
           children={children}
-          component={ModifiedA}
+          component="a"
+          target="_blank"
+          rel="noopener noreferrer"
           href={href}
           className={className}
           button

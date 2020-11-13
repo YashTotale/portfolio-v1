@@ -1,7 +1,6 @@
 // React Imports
 import React from "react";
 import StyledLink from "./StyledLink";
-import ModifiedA from "./ModifiedA";
 
 // Material UI Imports
 import { IconButton } from "@material-ui/core";
@@ -31,7 +30,9 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       return (
         <IconButton
           size={size}
-          component={ModifiedA}
+          component="a"
+          target="_blank"
+          rel="noopener noreferrer"
           href={href}
           className={className}
         >
