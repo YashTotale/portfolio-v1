@@ -38,15 +38,17 @@ interface ParserProps {
     | "error";
   paragraphProps?: TypographyProps;
   linkProps?: LinkProps;
+  suffix?: React.ReactElement | string;
 }
 
 const Parser: FC<ParserProps> = ({
   children,
   excludedTags,
   excludedTerms,
+  tagColor,
   paragraphProps,
   linkProps,
-  tagColor,
+  suffix,
 }) => {
   const parsers: Parsers = {
     paragraph: ({ children }) => (
@@ -60,6 +62,7 @@ const Parser: FC<ParserProps> = ({
             text={child}
           />
         ))}
+        {suffix}
       </Typography>
     ),
     link: ({ href, children }) => (

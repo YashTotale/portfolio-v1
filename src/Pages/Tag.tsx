@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Paper, Typography, useMediaQuery } from "@material-ui/core";
+import { Link, Paper, Typography, useMediaQuery } from "@material-ui/core";
 import {} from "@material-ui/icons";
 import Parser from "../Components/Reusable/Parser";
 
@@ -77,16 +77,10 @@ const Tag: FC<TagProps> = ({}) => {
 
   const { id } = useParams<Params>();
 
-  const tag = Tags.find((tag) => tag.url === id);
+  const tag = Tags.find((tag) => tag.url === id) as TagDataProps;
 
   if (tag) {
-    const {
-      name,
-      icons,
-      description,
-      sourceLink,
-      sourceName,
-    }: TagDataProps = tag;
+    const { name, icons, description, sourceLink, sourceName } = tag;
     return (
       <>
         <Helmet>
@@ -116,6 +110,22 @@ const Tag: FC<TagProps> = ({}) => {
                         align: "center",
                       }}
                       excludedTags={[name]}
+                      suffix={
+                        <em>
+                          {" "}
+                          (
+                          {
+                            <Link
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={sourceLink && sourceLink[i]}
+                            >
+                              {sourceName && sourceName[i]}
+                            </Link>
+                          }
+                          )
+                        </em>
+                      }
                     >
                       {desc}
                     </Parser>
