@@ -8,7 +8,6 @@ export const getPageData = async (page: string) => {
     },
   }).find(page);
   const summary = await pageObj.summary();
-  const image = await pageObj.mainImage();
   const url = pageObj.url();
-  return { summary, image, url };
+  return { summary, url };
 };

@@ -180,12 +180,14 @@ const Category: React.FC<CategoryProps> = ({ type }) => {
         button
         onClick={() => {
           setOpen(!open, () => {
-            history.push({
-              pathname: to,
-              state: {
-                scrollToTop: true,
-              },
-            });
+            if (!open) {
+              history.push({
+                pathname: to,
+                state: {
+                  scrollToTop: true,
+                },
+              });
+            }
           });
         }}
       >

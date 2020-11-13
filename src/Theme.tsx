@@ -38,6 +38,9 @@ const Theme: React.FC = ({ children }) => {
       createMuiTheme({
         overrides: {
           MuiTooltip: {
+            arrow: {
+              color: "rgb(0, 0, 0, 0.76)",
+            },
             tooltip: {
               fontFamily: alternativeFont,
               fontWeight: 600,

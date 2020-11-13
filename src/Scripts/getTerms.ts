@@ -17,26 +17,24 @@ const termsRequest = () => {
 };
 
 const cleanTermData = async (terms: TermObject[]): Promise<TermProps[]> => {
-  return new Promise((resolve, reject) => {
-    const cleanedTerms: TermProps[] = [];
+  const cleanedTerms: TermProps[] = [];
 
-    terms.forEach(async ({ name, link }, i) => {
+  await Promise.all(
+    terms.map(async ({ name, link }) => {
       let summary: string;
-      let image: string;
       const isWikipedia = link.includes("en.wikipedia.org");
 
       if (isWikipedia) {
         const title = link.split("/").pop();
         if (title) {
-          console.log(title);
           try {
             const data = await getPageData(title);
             summary = data.summary;
-            image = data.image;
+
             link = data.url.toString();
           } catch (e) {
             console.log(e);
-            reject(e);
+            process.exit(1);
           }
         }
       }
@@ -47,13 +45,12 @@ const cleanTermData = async (terms: TermObject[]): Promise<TermProps[]> => {
           name: split,
           link,
           summary,
-          image,
         })
       );
+    })
+  );
 
-      if (i === terms.length - 1) resolve(cleanedTerms);
-    });
-  });
+  return cleanedTerms;
 };
 
 export const getTerms = async () => {

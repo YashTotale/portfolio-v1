@@ -83,7 +83,7 @@ const Image: React.FC<ImageProps> = ({
   return avatar ? (
     <Avatar className={`${classes.img} ${className}`} src={src} alt={alt} />
   ) : (
-    <img className={`${classes.img} ${className}`} src={src} alt={alt}></img>
+    <img className={`${classes.img} ${className}`} src={src} alt={alt} />
   );
 };
 

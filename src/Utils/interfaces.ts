@@ -23,7 +23,6 @@ export interface TermProps {
   name: string;
   link: string;
   summary?: string;
-  image?: string;
 }
 
 interface BaseTagProps {

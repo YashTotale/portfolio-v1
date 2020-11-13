@@ -2,6 +2,7 @@
 import React, { ElementType, FC, ReactElement, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import StyledLink from "./StyledLink";
+import Term from "./Term";
 import { regexEscape } from "../../Utils/funcs";
 
 //Data Imports
@@ -121,16 +122,7 @@ const LinkAdder: React.FC<LinkAdderProps> = ({
             `(?<![a-zA-Z])(${regexEscape(term.name)})(?![a-zA-Z])`,
             "gi"
           ),
-          (match: string) => (
-            <Link
-              target="_blank"
-              rel="noopener noreferrer"
-              color={color}
-              href={term.link}
-            >
-              {match}
-            </Link>
-          ),
+          (name: string) => <Term color={color} {...term} />,
           term.name,
         ]
       ).filter((val) => !excludedTerms || !excludedTerms.includes(val[2])),
