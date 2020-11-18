@@ -10,9 +10,11 @@ import ReduxStore from "./Redux/store";
 import { register } from "./serviceWorker";
 
 ReactDOM.render(
-  <ReduxStore>
-    <App />
-  </ReduxStore>,
+  <React.StrictMode>
+    <ReduxStore>
+      <App />
+    </ReduxStore>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

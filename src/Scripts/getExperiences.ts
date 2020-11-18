@@ -45,6 +45,7 @@ const cleanExperienceData = (
     } else {
       const newExperience: ExperienceProps = {
         ...experience,
+        id: parseInt(id),
         tags: [tags],
         icons: icons ? [icons] : [DEFAULT_EXPERIENCE_ICON],
         url: createURL(name),

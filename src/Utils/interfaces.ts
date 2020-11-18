@@ -1,5 +1,5 @@
 export interface ProjectProps {
-  id: string;
+  id: number;
   name: string;
   description: string[];
   icons: string[];
@@ -12,7 +12,7 @@ export interface ProjectProps {
 }
 
 export interface ExperienceProps {
-  id: string;
+  id: number;
   name: string;
   tags: string[];
   icons: string[];
@@ -23,13 +23,16 @@ export interface TermProps {
   name: string;
   link: string;
   summary?: string;
+  summarySource?: string;
 }
 
 interface BaseTagProps {
-  id: string;
+  id: number;
   name: string;
   icons: string[];
   url: string;
+  website?: string;
+  sourcecode?: string;
 }
 
 interface TagPropsWithDescription extends BaseTagProps {

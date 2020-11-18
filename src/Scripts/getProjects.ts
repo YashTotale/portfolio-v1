@@ -48,6 +48,7 @@ const cleanProjectData = (
     } else {
       const newProject: ProjectProps = {
         ...project,
+        id: parseInt(id),
         description: [description],
         start,
         end,

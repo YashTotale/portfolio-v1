@@ -7,9 +7,11 @@ import { createURL } from "../Utils/funcs";
 import { downloadIcons } from "./downloadImages";
 
 interface BaseTagInfo {
-  id: string;
-  name: string;
+  id?: string | undefined;
+  name?: string;
   icons?: string;
+  website?: string;
+  sourcecode?: string;
 }
 
 interface TagInfoWithDescription extends BaseTagInfo {
@@ -46,8 +48,10 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): TagProps[] => {
     if (typeof tagInfoIndex !== "number") return;
 
     let tagObj: TagProps = {
-      id: tagInfo.id,
-      name: tagInfo.name,
+      id: tagInfo.id ? parseInt(tagInfo.id) : 0,
+      name: tagInfo.name ?? "",
+      website: tagInfo.website,
+      sourcecode: tagInfo.sourcecode,
       icons: tagInfo.icons
         ? [tagInfo.icons]
         : [DEFAULT_TAG_ICON, DEFAULT_TAG_ICON],
@@ -66,26 +70,37 @@ const createTags = (tags: string[], tagInfos: TagInfo[]): TagProps[] => {
       };
     }
 
-    const nextTagInfo =
-      tagInfoIndex < tagInfos.length - 1 && tagInfos[tagInfoIndex + 1];
-
-    if (nextTagInfo && typeof nextTagInfo.id !== "string") {
+    let i = 1;
+    while (
+      tagInfoIndex + i < tagInfos.length &&
+      tagInfos[tagInfoIndex + i].id === undefined
+    ) {
+      const nextTagInfo = tagInfos[tagInfoIndex + i];
       for (const key in nextTagInfo) {
+        let objKey = key;
+
+        if (key === "sourcelink") objKey = "sourceLink";
+
+        if (key === "sourcename") objKey = "sourceName";
+
         //@ts-ignore
-        tagObj[key].push(nextTagInfo[key]);
+        tagObj[objKey].push(nextTagInfo[key]);
       }
+      if (
+        tagObj.description &&
+        tagObj.sourceName.length < tagObj.description.length &&
+        tagObj.sourceLink.length < tagObj.description.length
+      ) {
+        tagObj.sourceName.push(tagObj.sourceName[tagObj.sourceName.length - 1]);
+        tagObj.sourceLink.push(tagObj.sourceLink[tagObj.sourceLink.length - 1]);
+      }
+      i++;
     }
+
     if (tagObj.icons?.length === 1) {
       tagObj.icons.push(tagObj.icons[0]);
     }
-    if (
-      tagObj.description &&
-      tagObj.sourceName.length < tagObj.description.length &&
-      tagObj.sourceLink.length < tagObj.description.length
-    ) {
-      tagObj.sourceName.push(tagObj.sourceName[tagObj.sourceName.length - 1]);
-      tagObj.sourceLink.push(tagObj.sourceLink[tagObj.sourceLink.length - 1]);
-    }
+
     tagsObj.push(tagObj);
   });
   return tagsObj;

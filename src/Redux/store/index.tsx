@@ -45,11 +45,11 @@ const configuredStore = createStore(
 
 const persistor = persistStore(configuredStore);
 
-const ReduxStore: React.FC = (props) => {
+const ReduxStore: React.FC = ({ children }) => {
   return (
     <Provider store={configuredStore}>
       <PersistGate loading={<Loading />} persistor={persistor}>
-        {props.children}
+        {children}
       </PersistGate>
     </Provider>
   );

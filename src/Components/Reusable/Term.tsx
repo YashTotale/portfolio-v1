@@ -16,6 +16,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     maxHeight: 250,
     padding: 0,
   },
+  titleTooltip: {
+    marginTop: 4,
+  },
   a: {
     color: "inherit",
     textDecorationColor: theme.palette.primary.main,
@@ -46,7 +49,7 @@ interface TermProps extends TermDataProps {
     | "error";
 }
 
-const Term: FC<TermProps> = ({ name, summary, link, color }) => {
+const Term: FC<TermProps> = ({ name, summary, summarySource, link, color }) => {
   const classes = useStyles({});
 
   const [expanded, setExpanded] = useState(false);
@@ -57,14 +60,23 @@ const Term: FC<TermProps> = ({ name, summary, link, color }) => {
     </Link>
   );
 
+  const titleComponent = (
+    <a
+      className={classes.a}
+      target="_blank"
+      rel="noopener noreferrer"
+      href={link}
+    >
+      <Typography variant="h6">{name}</Typography>
+    </a>
+  );
+
   if (!summary) return linkComponent;
 
   const paragraphs = summary.split("\n").filter((str) => str.length);
 
   return (
     <Tooltip
-      enterDelay={350}
-      leaveDelay={350}
       interactive
       classes={{
         tooltip: classes.tooltip,
@@ -73,14 +85,19 @@ const Term: FC<TermProps> = ({ name, summary, link, color }) => {
       title={
         <>
           <Paper elevation={20} className={classes.paper}>
-            <a
-              className={classes.a}
-              target="_blank"
-              rel="noopener noreferrer"
-              href={link}
-            >
-              <Typography variant="h6">{name}</Typography>
-            </a>
+            {summarySource ? (
+              <Tooltip
+                classes={{
+                  tooltip: classes.titleTooltip,
+                }}
+                interactive
+                title={`View on ${summarySource}`}
+              >
+                {titleComponent}
+              </Tooltip>
+            ) : (
+              titleComponent
+            )}
             {paragraphs.map((p, i) => (
               <Paragraph key={i} index={i} expanded={expanded}>
                 {p}
@@ -99,9 +116,7 @@ const Term: FC<TermProps> = ({ name, summary, link, color }) => {
         </>
       }
     >
-      <Link target="_blank" rel="noopener noreferrer" color={color} href={link}>
-        {name}
-      </Link>
+      {linkComponent}
     </Tooltip>
   );
 };

@@ -22,15 +22,16 @@ const cleanTermData = async (terms: TermObject[]): Promise<TermProps[]> => {
   await Promise.all(
     terms.map(async ({ name, link }) => {
       let summary: string;
+      let summarySource: string;
       const isWikipedia = link.includes("en.wikipedia.org");
 
       if (isWikipedia) {
+        summarySource = "Wikipedia";
         const title = link.split("/").pop();
         if (title) {
           try {
             const data = await getPageData(title);
             summary = data.summary;
-
             link = data.url.toString();
           } catch (e) {
             console.log(e);
@@ -45,6 +46,7 @@ const cleanTermData = async (terms: TermObject[]): Promise<TermProps[]> => {
           name: split,
           link,
           summary,
+          summarySource,
         })
       );
     })

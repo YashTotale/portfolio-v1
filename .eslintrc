@@ -1,7 +1,9 @@
 {
   "extends": ["react-app"],
   "rules": {
-    "no-control-regex": "off"
+    "no-control-regex": "off",
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": ["off"]
   },
   "ignorePatterns": ["node_modules/**", "build/**", "coverage/**"]
 }

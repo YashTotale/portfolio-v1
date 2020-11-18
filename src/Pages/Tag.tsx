@@ -2,17 +2,16 @@
 import React, { FC } from "react";
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Tags from "../Data/Tags.json";
+import TooltipBtn from "../Components/Reusable/TooltipBtn";
 import StaticImage from "../Components/Reusable/StaticImage";
 import { TagProps as TagDataProps } from "../Utils/interfaces";
 
-// Redux Imports
-import { useDispatch, useSelector } from "react-redux";
+import Tags from "../Data/Tags.json";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Link, Paper, Typography, useMediaQuery } from "@material-ui/core";
-import {} from "@material-ui/icons";
+import { GitHub } from "@material-ui/icons";
 import Parser from "../Components/Reusable/Parser";
 
 const useStyles = makeStyles((theme) => ({
@@ -21,15 +20,26 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+    width: "100%",
+    padding: 15,
   },
   jumbotron: {
-    margin: 15,
+    position: "relative",
     padding: 15,
+    width: "100%",
     //Flex
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
+  },
+  tagTitle: {
+    flexGrow: 1,
+  },
+  tagSourceCode: {
+    position: "absolute",
+    top: theme.spacing(),
+    right: theme.spacing(),
   },
   tagImage: {
     margin: 5,
@@ -80,7 +90,25 @@ const Tag: FC<TagProps> = ({}) => {
   const tag = Tags.find((tag) => tag.url === id) as TagDataProps;
 
   if (tag) {
-    const { name, icons, description, sourceLink, sourceName } = tag;
+    const {
+      name,
+      icons,
+      description,
+      sourceLink,
+      sourceName,
+      sourcecode,
+      website,
+    } = tag;
+
+    const title = (
+      <Typography
+        className={classes.tagTitle}
+        variant={isSizeSmall ? "h4" : "h3"}
+      >
+        {name}
+      </Typography>
+    );
+
     return (
       <>
         <Helmet>
@@ -88,7 +116,22 @@ const Tag: FC<TagProps> = ({}) => {
         </Helmet>
         <div className={classes.tagPage}>
           <Paper className={classes.jumbotron}>
-            <Typography variant={isSizeSmall ? "h4" : "h3"}>{name}</Typography>
+            {sourcecode && (
+              <TooltipBtn
+                className={classes.tagSourceCode}
+                title={`Source Code for ${name}`}
+                icon={<GitHub />}
+                component="a"
+                href={sourcecode}
+              />
+            )}
+            {website ? (
+              <Link target="_blank" rel="noopener noreferrer" href={website}>
+                {title}
+              </Link>
+            ) : (
+              title
+            )}
             <div className={classes.tagInfo}>
               <StaticImage
                 width={250}
@@ -111,10 +154,10 @@ const Tag: FC<TagProps> = ({}) => {
                       }}
                       excludedTags={[name]}
                       suffix={
-                        <em>
+                        <>
                           {" "}
                           (
-                          {
+                          <em>
                             <Link
                               target="_blank"
                               rel="noopener noreferrer"
@@ -122,9 +165,9 @@ const Tag: FC<TagProps> = ({}) => {
                             >
                               {sourceName && sourceName[i]}
                             </Link>
-                          }
+                          </em>
                           )
-                        </em>
+                        </>
                       }
                     >
                       {desc}

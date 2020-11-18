@@ -58,7 +58,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     backgroundColor: "#1d1c1c",
     visibility: hovering ? "visible" : "hidden",
     opacity: hovering ? 0.7 : 0,
-    transition: "visibility 0.4s, opacity 0.4s",
+    transition: theme.transitions.create(["visibility", "opacity"], {
+      duration: "0.4s",
+    }),
   }),
   name: ({ hovering }) => ({
     //Positioning
@@ -78,7 +80,9 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     //Transition
     visibility: hovering ? "visible" : "hidden",
     opacity: hovering ? 1 : 0,
-    transition: "visibility 0.4s, opacity 0.4s",
+    transition: theme.transitions.create(["visibility", "opacity"], {
+      duration: "0.4s",
+    }),
   }),
   img: {
     padding: 5,
@@ -155,7 +159,7 @@ const Overlay: React.FC<OverlayProps> = ({
     >
       <StyledLink className={classes.link} to={url}>
         <div className={classes.overlay}></div>
-        <Typography className={classes.name} variant="h4">
+        <Typography className={classes.name} variant={isSmall ? "h5" : "h4"}>
           {name}
         </Typography>
         <StaticImage

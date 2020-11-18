@@ -5,7 +5,7 @@ import TooltipBtn, { TooltipBtnProps } from "../Reusable/TooltipBtn";
 import { SOURCE_CODE } from "../../Utils/links";
 
 //Redux Imports
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {} from "../../Redux/selectors";
 import { toggleDarkModeWMessage } from "../../Redux/thunks";
 import { toggleSidebar } from "../../Redux/actions";
@@ -62,7 +62,7 @@ const NavBar: React.FC = (props) => {
       <Toolbar className={classes.toolbar}>
         {isSizeSmall && (
           <TooltipBtn
-            size={isSizeSmall ? "small" : "medium"}
+            size="small"
             component="btn"
             icon={<MenuButton />}
             title="Open Sidebar"
