@@ -1,7 +1,7 @@
 // React Imports
 import React, { ElementType, FC, ReactElement, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
-import StyledLink from "./StyledLink";
+import Tag from "./Tag/Preview";
 import Term from "./Term";
 import { regexEscape } from "../../Utils/funcs";
 
@@ -39,6 +39,7 @@ interface ParserProps {
   paragraphProps?: TypographyProps;
   linkProps?: LinkProps;
   suffix?: React.ReactElement | string;
+  noAddedLinks?: boolean;
 }
 
 const Parser: FC<ParserProps> = ({
@@ -49,19 +50,22 @@ const Parser: FC<ParserProps> = ({
   paragraphProps,
   linkProps,
   suffix,
+  noAddedLinks,
 }) => {
   const parsers: Parsers = {
     paragraph: ({ children }) => (
       <Typography {...paragraphProps}>
-        {children.map((child, i) => (
-          <LinkAdder
-            key={i}
-            excludedTags={excludedTags}
-            excludedTerms={excludedTerms}
-            color={tagColor}
-            text={child}
-          />
-        ))}
+        {noAddedLinks
+          ? children
+          : children.map((child, i) => (
+              <LinkAdder
+                key={i}
+                excludedTags={excludedTags}
+                excludedTerms={excludedTerms}
+                color={tagColor}
+                text={child}
+              />
+            ))}
         {suffix}
       </Typography>
     ),
@@ -111,11 +115,7 @@ const LinkAdder: React.FC<LinkAdderProps> = ({
             `(?<![a-zA-Z])(${regexEscape(tag.name)})(?![a-zA-Z])`,
             "gi"
           ),
-          (match: string) => (
-            <StyledLink color={color} to={`/tags/${tag.url}`}>
-              {match}
-            </StyledLink>
-          ),
+          (match: string) => <Tag color={color} {...tag} />,
           tag.name,
         ]
       ).filter((val) => !excludedTags || !excludedTags.includes(val[2])),

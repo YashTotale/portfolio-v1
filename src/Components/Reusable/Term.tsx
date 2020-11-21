@@ -5,10 +5,12 @@ import { TermProps as TermDataProps } from "../../Utils/interfaces";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Link, Paper, Tooltip, Typography } from "@material-ui/core";
+import { Link, Paper, Tooltip, Typography, LinkProps } from "@material-ui/core";
 import { ExpandMore, ExpandLess } from "@material-ui/icons";
 
-interface StyleProps {}
+interface StyleProps {
+  color?: string;
+}
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   tooltip: {
@@ -19,10 +21,11 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   titleTooltip: {
     marginTop: 4,
   },
-  a: {
+  a: ({ color }) => ({
     color: "inherit",
-    textDecorationColor: theme.palette.primary.main,
-  },
+    textDecorationColor:
+      theme.palette[color === "secondary" ? "secondary" : "primary"].main,
+  }),
   paper: {
     maxWidth: 250,
     maxHeight: 250,
@@ -32,7 +35,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    // justifyContent: "center",
   },
   summary: {},
   expand: {},
@@ -50,7 +52,7 @@ interface TermProps extends TermDataProps {
 }
 
 const Term: FC<TermProps> = ({ name, summary, summarySource, link, color }) => {
-  const classes = useStyles({});
+  const classes = useStyles({ color });
 
   const [expanded, setExpanded] = useState(false);
 

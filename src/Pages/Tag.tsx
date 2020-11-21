@@ -10,7 +10,13 @@ import Tags from "../Data/Tags.json";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Link, Paper, Typography, useMediaQuery } from "@material-ui/core";
+import {
+  Link,
+  Paper,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import { GitHub } from "@material-ui/icons";
 import Parser from "../Components/Reusable/Parser";
 
@@ -33,8 +39,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
   },
-  tagTitle: {
-    flexGrow: 1,
+  tagTitleTooltip: {
+    marginTop: 4,
   },
   tagSourceCode: {
     position: "absolute",
@@ -101,12 +107,7 @@ const Tag: FC<TagProps> = ({}) => {
     } = tag;
 
     const title = (
-      <Typography
-        className={classes.tagTitle}
-        variant={isSizeSmall ? "h4" : "h3"}
-      >
-        {name}
-      </Typography>
+      <Typography variant={isSizeSmall ? "h4" : "h3"}>{name}</Typography>
     );
 
     return (
@@ -126,9 +127,14 @@ const Tag: FC<TagProps> = ({}) => {
               />
             )}
             {website ? (
-              <Link target="_blank" rel="noopener noreferrer" href={website}>
-                {title}
-              </Link>
+              <Tooltip
+                classes={{ tooltip: classes.tagTitleTooltip }}
+                title={`View ${name}'s Website`}
+              >
+                <Link target="_blank" rel="noopener noreferrer" href={website}>
+                  {title}
+                </Link>
+              </Tooltip>
             ) : (
               title
             )}
@@ -154,20 +160,10 @@ const Tag: FC<TagProps> = ({}) => {
                       }}
                       excludedTags={[name]}
                       suffix={
-                        <>
-                          {" "}
-                          (
-                          <em>
-                            <Link
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              href={sourceLink && sourceLink[i]}
-                            >
-                              {sourceName && sourceName[i]}
-                            </Link>
-                          </em>
-                          )
-                        </>
+                        <DescriptionSuffix
+                          sourceLink={sourceLink?.[i]}
+                          sourceName={sourceName?.[i]}
+                        />
                       }
                     >
                       {desc}
@@ -181,8 +177,36 @@ const Tag: FC<TagProps> = ({}) => {
       </>
     );
   }
-
   return null;
+};
+
+interface DescriptionSuffixProps {
+  sourceLink?: string;
+  sourceName?: string;
+}
+
+const DescriptionSuffix: React.FC<DescriptionSuffixProps> = ({
+  sourceLink,
+  sourceName,
+}) => {
+  if (!sourceName) return <></>;
+
+  return (
+    <>
+      {" "}
+      (
+      <em>
+        {sourceLink ? (
+          <Link target="_blank" rel="noopener noreferrer" href={sourceLink}>
+            {sourceName}
+          </Link>
+        ) : (
+          sourceName
+        )}
+      </em>
+      )
+    </>
+  );
 };
 
 export default Tag;

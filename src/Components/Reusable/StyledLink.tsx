@@ -28,25 +28,25 @@ interface StyledLinkProps {
 const StyledLink: React.FC<StyledLinkProps> = forwardRef<
   HTMLAnchorElement,
   PropsWithChildren<StyledLinkProps>
->(({ to, hash, children, color, onClick, className, noScrollToTop }, ref) => {
-  const attrs = {
-    onClick: onClick,
-    className: className,
-    color: color,
-    to: {
-      pathname: to,
-      state: { scrollToTop: !noScrollToTop },
-      hash: hash,
-    },
-    ref: ref,
-  };
+>((props, ref) => {
+  const { to, hash, children, color, noScrollToTop } = props;
 
   return color ? (
-    <MuiLink {...attrs} component={RouterLink}>
+    <MuiLink {...props} ref={ref} component={RouterLink}>
       {children}
     </MuiLink>
   ) : (
-    <RouterLink {...attrs}>{children}</RouterLink>
+    <RouterLink
+      {...props}
+      to={{
+        pathname: to,
+        state: { scrollToTop: !noScrollToTop },
+        hash: hash,
+      }}
+      ref={ref}
+    >
+      {children}
+    </RouterLink>
   );
 });
 
