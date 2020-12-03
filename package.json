@@ -82,7 +82,7 @@
     "scrapedin": "^1.0.21",
     "simple-git": "^2.24.0",
     "sinon": "^9.2.1",
-    "snyk": "^1.432.1",
+    "snyk": "^1.434.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.1.2",
     "wikijs": "^6.0.1",
