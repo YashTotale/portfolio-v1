@@ -25,7 +25,7 @@ interface StyledLinkProps {
     | "error";
 }
 
-const StyledLink: React.FC<StyledLinkProps> = forwardRef<
+const StyledLink = forwardRef<
   HTMLAnchorElement,
   PropsWithChildren<StyledLinkProps>
 >((props, ref) => {

@@ -20,7 +20,10 @@ const writeImage = (data: any, location: string) => {
   });
 };
 
-export const downloadIcons = async (objects: Object[], type: ImageFolder) => {
+export const downloadIcons = async (
+  objects: Object[],
+  type: ImageFolder
+): Promise<void> => {
   return new Promise((resolve, reject) => {
     const { mkdir } = promises;
 

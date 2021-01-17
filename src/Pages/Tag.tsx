@@ -180,12 +180,16 @@ const Tag: FC<TagProps> = ({}) => {
   return null;
 };
 
+// interface DescriptionProps {}
+
+// const Description: FC<DescriptionProps> = {};
+
 interface DescriptionSuffixProps {
   sourceLink?: string;
   sourceName?: string;
 }
 
-const DescriptionSuffix: React.FC<DescriptionSuffixProps> = ({
+const DescriptionSuffix: FC<DescriptionSuffixProps> = ({
   sourceLink,
   sourceName,
 }) => {

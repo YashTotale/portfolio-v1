@@ -1,6 +1,6 @@
-# Yash Totale's Portfolio Website
+# Portfolio Website
 
-<p align="center">
+<!-- <p align="center">
     <a href="https://travis-ci.com/github/YashTotale/YashTotale.github.io"><img src="https://img.shields.io/travis/com/YashTotale/YashTotale.github.io/master?logoColor=FFFFFF&style=for-the-badge&labelColor=000000&label=Build&logo=travis-ci" alt="Build"></a>&nbsp;
 </p>
 
@@ -19,4 +19,4 @@
     <a href="https://yashtotale.github.io"><img src="https://img.shields.io/website?down_message=down&up_message=online&url=https%3A%2F%2Fyashtotale.github.io?&labelColor=000000&style=for-the-badge" alt="Website Status"></a>&nbsp;
 </p>
 
----
+--- -->

@@ -10,28 +10,25 @@ import {} from "@material-ui/core";
 import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  imgDiv: {
+  img: {
     margin: "20px 10px",
-    overflow: "hidden",
-    justifySelf: "flex-start",
   },
 }));
 
 const ProfilePic: React.FC = () => {
   const classes = useStyles();
   return (
-    <div className={classes.imgDiv}>
-      <Image
-        ratio={PROFILE_PIC_RATIO}
-        src={ProfilePicture}
-        alt="Profile Picture"
-        xs={140}
-        sm={160}
-        md={180}
-        lg={200}
-        xl={220}
-      />
-    </div>
+    <Image
+      className={classes.img}
+      ratio={PROFILE_PIC_RATIO}
+      src={ProfilePicture}
+      alt="Profile Picture"
+      xs={140}
+      sm={160}
+      md={180}
+      lg={200}
+      xl={220}
+    />
   );
 };
 
