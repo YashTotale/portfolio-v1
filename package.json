@@ -42,7 +42,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.57",
     "emailjs-com": "^2.6.4",
-    "fuse.js": "^6.4.3",
+    "fuse.js": "^6.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-google-recaptcha-v3": "^1.7.0",
