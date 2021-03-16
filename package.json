@@ -80,7 +80,7 @@
     "redux-devtools-extension": "^2.13.8",
     "rimraf": "^3.0.2",
     "scrapedin": "^1.0.21",
-    "simple-git": "^2.34.2",
+    "simple-git": "^2.37.0",
     "sinon": "^9.2.1",
     "snyk": "^1.447.0",
     "ts-node": "^9.1.1",
