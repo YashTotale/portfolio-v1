@@ -57,7 +57,7 @@
     "reselect": "^4.0.0"
   },
   "devDependencies": {
-    "@octokit/rest": "^18.1.0",
+    "@octokit/rest": "^18.5.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.6.3",
